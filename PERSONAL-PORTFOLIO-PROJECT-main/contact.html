@@ -1,0 +1,337 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Contact Shane Vincent Olavario, a Computer Engineering student."
+    />
+
+    <title>Contact | Shane Vincent Olavario</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Header and Navigation -->
+    <header class="header">
+      <nav class="navbar container" aria-label="Main navigation">
+        <a href="index.html" class="logo">
+          <img
+            src="images/school-logo.jpg"
+            alt="Colegio De Montalban Logo"
+            class="navbar-school-logo"
+          />
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li>
+            <a
+              href="contact.html"
+              class="active"
+              aria-current="page"
+            >Contact</a>
+          </li>
+          <li><a href="editor.html">IDE</a></li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Contact Section -->
+      <section class="section section-dark contact-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">LET'S CONNECT</p>
+
+            <h1>Get In <span>Touch</span></h1>
+
+            <p class="heading-description">
+              Have a project idea, question, or just want to say hello?
+              Feel free to contact me through the details below.
+            </p>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="contact-grid">
+            <div class="contact-card contact-email-card">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <h3>Email</h3>
+              <p>shanevincentolavario@gmail.com</p>
+
+              <button
+                type="button"
+                class="copy-email-btn"
+                id="copyEmailBtn"
+              >
+                <i class="fas fa-copy" aria-hidden="true"></i>
+                <span id="copyEmailText">Copy Email</span>
+              </button>
+            </div>
+
+            <a
+              href="https://www.facebook.com/olavs.vincent08"
+              class="contact-card"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-facebook" aria-hidden="true"></i>
+              <h3>Facebook</h3>
+              <p>Shane Vincent Olavario</p>
+            </a>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="contact-socials">
+            <h2>Find Me <span>Online</span></h2>
+
+            <div class="social-links">
+              <a
+                href="https://www.facebook.com/olavs.vincent08"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
+                <i class="fab fa-facebook" aria-hidden="true"></i>
+              </a>
+
+              <a
+                href="https://www.instagram.com/heavencent._"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <i class="fab fa-instagram" aria-hidden="true"></i>
+              </a>
+
+              <a
+                href="mailto:shanevincentolavario@gmail.com"
+                aria-label="Email"
+              >
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-wrapper">
+            <div class="section-heading">
+              <p class="eyebrow">SEND A MESSAGE</p>
+              <h2>Message <span>Me</span></h2>
+              <p class="heading-description">
+                Fill in the details below to prepare your email.
+              </p>
+            </div>
+
+            <form
+              class="contact-form"
+              id="contactForm"
+              novalidate
+            >
+              <div class="form-row">
+                <label for="name">
+                  Name
+                  <input
+                    type="text"
+                    id="name"
+                    name="Name"
+                    placeholder="Your name"
+                    autocomplete="name"
+                    minlength="2"
+                    maxlength="80"
+                    required
+                  />
+                  <small class="field-error" id="nameError"></small>
+                </label>
+
+                <label for="email">
+                  Your Email
+                  <input
+                    type="email"
+                    id="email"
+                    name="Email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    maxlength="254"
+                    required
+                  />
+                  <small class="field-error" id="emailError"></small>
+                </label>
+              </div>
+
+              <label for="subject">
+                Subject
+                <select id="subject" name="Subject" required>
+                  <option value="">Choose a subject</option>
+                  <option value="Project Collaboration">
+                    Project Collaboration
+                  </option>
+                  <option value="School-Related Inquiry">
+                    School-Related Inquiry
+                  </option>
+                  <option value="Website Feedback">
+                    Website Feedback
+                  </option>
+                  <option value="General Question">
+                    General Question
+                  </option>
+                  <option value="Other">Other</option>
+                </select>
+                <small class="field-error" id="subjectError"></small>
+              </label>
+
+              <label for="message">
+                Message
+                <textarea
+                  id="message"
+                  name="Message"
+                  rows="6"
+                  minlength="10"
+                  maxlength="500"
+                  placeholder="Write your message..."
+                  required
+                ></textarea>
+
+                <div class="message-meta">
+                  <small class="field-error" id="messageError"></small>
+                  <small
+                    class="character-counter"
+                    id="characterCounter"
+                    aria-live="polite"
+                  >0 / 500 characters</small>
+                </div>
+              </label>
+
+              <button type="submit" class="btn btn-primary">
+                <span>Prepare Email</span>
+                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+              </button>
+
+              <p
+                class="form-status"
+                id="formStatus"
+                role="status"
+                aria-live="polite"
+              >
+                Your email application will open with your message prepared.
+                You must send the email from that application.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Navigation Search -->
+      <button
+        type="button"
+        class="quick-search-trigger"
+        id="quickSearchTrigger"
+        aria-label="Open quick navigation search"
+      >
+        <span aria-hidden="true">⌕</span>
+        <span>Search</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <div
+        class="quick-search-overlay"
+        id="quickSearchOverlay"
+        aria-hidden="true"
+      >
+        <section
+          class="quick-search-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quickSearchTitle"
+        >
+          <div class="quick-search-input-wrap">
+            <span aria-hidden="true">⌕</span>
+
+            <input
+              type="search"
+              id="quickSearchInput"
+              placeholder="Search pages and sections..."
+              autocomplete="off"
+              aria-label="Search portfolio navigation"
+            />
+
+            <kbd>ESC</kbd>
+          </div>
+
+          <p class="quick-search-heading" id="quickSearchTitle">
+            QUICK NAVIGATION
+          </p>
+
+          <div
+            class="quick-search-results"
+            id="quickSearchResults"
+            role="listbox"
+            aria-label="Navigation results"
+          ></div>
+
+          <div class="quick-search-footer">
+            <span>↑↓ Navigate</span>
+            <span>Enter Open</span>
+            <span>Esc Close</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          &copy; <span id="year"></span>
+          Shane Vincent Olavario. All rights reserved.
+        </p>
+
+        <a href="index.html">Back to Home ↑</a>
+      </div>
+    </footer>
+
+    <!-- Existing Shared JavaScript -->
+    <script src="script.js"></script>
+    <script src="quick-search.js"></script>
+    <script src="contact.js"></script>
+
+
+    <script>
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

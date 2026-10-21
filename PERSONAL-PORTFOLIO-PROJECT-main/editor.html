@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Online HTML, CSS, and JavaScript code editor."
+    />
+
+    <title>Web IDE | Shane Vincent Olavario</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="editor.css" />
+
+    <!-- CodeMirror editor library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+  </head>
+
+  <body>
+    <!-- NAVIGATION -->
+    <header class="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo" aria-label="Home">
+          <img
+            src="images/school-logo.jpg"
+            alt="School Logo"
+            class="navbar-school-logo"
+          />
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html">IDE</a></li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- MAIN IDE -->
+    <main class="ide-page">
+      <section class="ide-intro">
+        <p class="eyebrow">WEB DEVELOPMENT PLAYGROUND</p>
+        <h1>Online Code <span>Editor</span></h1>
+        <p>
+          Write HTML, style it with CSS, add JavaScript, and see your result
+          instantly.
+        </p>
+      </section>
+
+      <!-- TOOLBAR -->
+      <section class="ide-toolbar">
+        <div class="ide-status">
+          <span class="live-dot"></span>
+          Ready to code
+        </div>
+
+        <div class="ide-actions">
+          <button class="ide-btn secondary" id="resetCode">Reset</button>
+
+          <button class="ide-btn secondary" id="downloadCode">
+            Download HTML
+          </button>
+
+          <button class="ide-btn primary" id="runCode">▶ Run Code</button>
+        </div>
+      </section>
+
+      <!-- EDITORS AND PREVIEW -->
+      <section class="ide-workspace">
+        <div class="editor-column">
+          <!-- HTML EDITOR -->
+          <div class="editor-panel">
+            <div class="panel-heading">
+              <span class="file-dot html-dot"></span>
+              <strong>index.html</strong>
+              <span class="language-label">HTML</span>
+            </div>
+
+            <textarea id="htmlCode" aria-label="HTML code editor"></textarea>
+          </div>
+
+          <!-- CSS EDITOR -->
+          <div class="editor-panel">
+            <div class="panel-heading">
+              <span class="file-dot css-dot"></span>
+              <strong>style.css</strong>
+              <span class="language-label">CSS</span>
+            </div>
+
+            <textarea id="cssCode" aria-label="CSS code editor"></textarea>
+          </div>
+
+          <!-- JAVASCRIPT EDITOR -->
+          <div class="editor-panel">
+            <div class="panel-heading">
+              <span class="file-dot js-dot"></span>
+              <strong>script.js</strong>
+              <span class="language-label">JAVASCRIPT</span>
+            </div>
+
+            <textarea
+              id="jsCode"
+              aria-label="JavaScript code editor"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- LIVE PREVIEW -->
+        <div class="preview-panel">
+          <div class="preview-heading">
+            <div>
+              <span class="preview-icon">◫</span>
+              <strong>Live Preview</strong>
+            </div>
+
+            <span class="preview-label">OUTPUT</span>
+          </div>
+
+          <iframe
+            id="previewFrame"
+            title="Live code preview"
+            sandbox="allow-scripts"
+            referrerpolicy="no-referrer"
+          ></iframe>
+
+          <div class="preview-footer">
+            <span class="live-dot"></span>
+            Preview runs in a sandbox
+          </div>
+        </div>
+      </section>
+
+      <p class="ide-note">
+        <strong>Tip:</strong> Edit the code, then click Run Code to see your
+        changes. Use Reset to restore the example, or Download HTML to save your
+        project.
+      </p>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          © <span id="year"></span> Shane Vincent Olavario. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="editor.js"></script>
+  </body>
+</html>

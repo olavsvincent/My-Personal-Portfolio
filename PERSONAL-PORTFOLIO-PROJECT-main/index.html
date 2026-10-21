@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Portfolio of Shane Vincent Olavario, a first-year Computer Engineering student."
+    />
+
+    <title>Home | Shane Vincent Olavario</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo" aria-label="Home">
+          <img
+            src="images/school-logo.jpg"
+            alt="School Logo"
+            class="navbar-school-logo"
+          />
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html">IDE</a></li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO SECTION -->
+      <section class="hero section">
+        <div class="container hero-content">
+          <div class="hero-text">
+            <p class="eyebrow">FIRST-YEAR COMPUTER ENGINEERING STUDENT</p>
+
+            <h1>Hi, I'm <span>Shane Vincent Olavario</span></h1>
+
+            <h2>Future Computer Engineer</h2>
+
+            <p class="hero-description">
+              I am a Computer Engineering student who enjoys learning about
+              technology, building practical projects, and improving my skills
+              one step at a time.
+            </p>
+
+            <div class="hero-buttons">
+              <a href="projects.html" class="btn btn-primary">
+                View My Projects
+              </a>
+
+              <a href="contact.html" class="btn btn-outline">Contact Me</a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="profile-circle">
+              <img
+                src="images/profile.jpg"
+                alt="Photo of Shane Vincent Olavario"
+                class="profile-image"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+
+            <div class="code-window">
+              <div class="code-header">
+                <span></span>
+                <span></span>
+                <span></span>
+                <p>student.py</p>
+              </div>
+
+              <div class="code-content">
+                <p><span class="code-purple">class</span> Student:</p>
+
+                <p class="indent">
+                  <span class="code-purple">def</span> __init__(self):
+                </p>
+
+                <p class="indent-2">
+                  self.name = <span class="code-green">"Vincent"</span>
+                </p>
+
+                <p class="indent-2">
+                  self.course =
+                  <span class="code-green">"Computer Engineering"</span>
+                </p>
+
+                <p class="indent-2">
+                  self.goal = <span class="code-green">"Keep Learning"</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FUTURISTIC DEVELOPER DASHBOARD -->
+      <section class="dev-dashboard-section section" id="developer-dashboard">
+        <div class="container">
+          <div class="dev-dashboard">
+            <div class="dev-dashboard-top">
+              <div>
+                <p class="eyebrow">DEVELOPER CONTROL CENTER</p>
+                <h2 id="devGreeting">Welcome back, <span>Developer.</span></h2>
+                <p class="dev-dashboard-subtitle">
+                  Your space to learn, build, and create something
+                  extraordinary.
+                </p>
+              </div>
+
+              <div class="dev-live-badge">
+                <span class="dev-pulse-dot" aria-hidden="true"></span>
+                SYSTEM ONLINE
+              </div>
+            </div>
+
+            <div class="dev-dashboard-grid">
+              <!-- LIVE CLOCK -->
+              <article class="dev-widget dev-clock-widget">
+                <div class="dev-widget-heading">
+                  <span class="dev-widget-icon" aria-hidden="true">◷</span>
+                  <span>LOCAL TIME</span>
+                </div>
+
+                <p
+                  class="dev-clock"
+                  id="devClock"
+                  aria-label="Current local time"
+                >
+                  --:--:--
+                </p>
+                <p class="dev-date" id="devDate">Loading date...</p>
+                <p class="dev-widget-note">Your local device time</p>
+              </article>
+
+              <!-- SESSION TIMER -->
+              <article class="dev-widget">
+                <div class="dev-widget-heading">
+                  <span class="dev-widget-icon" aria-hidden="true">⌁</span>
+                  <span>SESSION UPTIME</span>
+                </div>
+
+                <p class="dev-metric" id="devSessionTime">00:00:00</p>
+                <p class="dev-widget-note">Time spent on this page</p>
+
+                <div
+                  class="dev-mini-track"
+                  role="progressbar"
+                  aria-label="Session time, with a one-hour reference"
+                  aria-valuemin="0"
+                  aria-valuemax="3600"
+                  aria-valuenow="0"
+                  id="devSessionProgress"
+                >
+                  <span id="devSessionProgressFill"></span>
+                </div>
+              </article>
+
+              <!-- DEVELOPER PROFILE -->
+              <article class="dev-widget">
+                <div class="dev-widget-heading">
+                  <span class="dev-widget-icon" aria-hidden="true">⌘</span>
+                  <span>DEVELOPER PROFILE</span>
+                </div>
+
+                <p class="dev-profile-name">Shane Vincent Olavario</p>
+                <p class="dev-profile-role">Computer Engineering Student</p>
+
+                <div class="dev-tag-list">
+                  <span>LEARNING</span>
+                  <span>BUILDING</span>
+                  <span>IMPROVING</span>
+                </div>
+              </article>
+
+              <!-- LEARNING FOCUS -->
+              <article class="dev-widget dev-focus-widget">
+                <div class="dev-widget-heading">
+                  <span class="dev-widget-icon" aria-hidden="true">⌬</span>
+                  <span>CURRENT MISSION</span>
+                </div>
+
+                <h3>Build. Test. Improve.</h3>
+                <p>
+                  Explore programming, experiment with ideas, and turn what you
+                  learn into practical projects.
+                </p>
+
+                <a href="projects.html" class="dev-widget-link">
+                  Explore projects <span aria-hidden="true">↗</span>
+                </a>
+              </article>
+            </div>
+
+            <div class="dev-dashboard-footer">
+              <span>
+                <span class="dev-footer-dot" aria-hidden="true"></span>
+                INTERFACE READY
+              </span>
+              <span id="devLastUpdated">Initializing dashboard...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE CODING TERMINAL -->
+      <section class="terminal-section section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">A LITTLE SOMETHING EXTRA</p>
+
+            <h2>Explore My <span>Terminal</span></h2>
+
+            <p>
+              Curious about me? Type a command below and explore my portfolio
+              like a developer.
+            </p>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-dots" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <span class="terminal-title">olavario@portfolio:~</span>
+
+              <span class="terminal-status">
+                <span class="status-dot"></span>
+                Interactive
+              </span>
+            </div>
+
+            <div
+              class="terminal-output"
+              id="terminalOutput"
+              role="log"
+              aria-live="polite"
+              aria-relevant="additions"
+            >
+              <p class="terminal-welcome">
+                Welcome to Vincent's Portfolio Terminal!
+              </p>
+              <p>
+                Type <span class="terminal-highlight">help</span>
+                to see available commands.
+              </p>
+            </div>
+
+            <form class="terminal-form" id="terminalForm" autocomplete="off">
+              <label class="terminal-prompt" for="terminalInput">
+                <span>visitor</span><span class="prompt-symbol">@</span
+                ><span>portfolio</span><span class="prompt-symbol">:~$</span>
+              </label>
+
+              <input
+                type="text"
+                id="terminalInput"
+                class="terminal-input"
+                placeholder="Type a command..."
+                aria-label="Enter a terminal command"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+              />
+
+              <button type="submit" class="terminal-submit">Run</button>
+            </form>
+
+            <div class="terminal-shortcuts">
+              <span>Try:</span>
+              <button
+                type="button"
+                class="terminal-command"
+                data-command="help"
+              >
+                help
+              </button>
+              <button
+                type="button"
+                class="terminal-command"
+                data-command="about"
+              >
+                about
+              </button>
+              <button
+                type="button"
+                class="terminal-command"
+                data-command="skills"
+              >
+                skills
+              </button>
+              <button
+                type="button"
+                class="terminal-command"
+                data-command="projects"
+              >
+                projects
+              </button>
+              <button
+                type="button"
+                class="terminal-command"
+                data-command="clear"
+              >
+                clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAME SELECTION -->
+      <section class="game-picker-section section" id="game-picker">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">TAKE A BREAK</p>
+            <h2>Choose Your <span>Game</span></h2>
+            <p>Select one of the games below to start playing.</p>
+          </div>
+
+          <div class="game-picker-grid">
+            <button
+              type="button"
+              class="game-picker-card"
+              data-open-game="memory"
+            >
+              <span class="picker-icon">🧠</span>
+              <span class="picker-title">Memory Challenge</span>
+              <span class="picker-description">
+                Match all eight pairs using your memory.
+              </span>
+              <span class="picker-link">Play Memory Game →</span>
+            </button>
+
+            <button
+              type="button"
+              class="game-picker-card"
+              data-open-game="guess"
+            >
+              <span class="picker-icon">🎯</span>
+              <span class="picker-title">Number Guessing</span>
+              <span class="picker-description">
+                Guess the secret number using helpful hints.
+              </span>
+              <span class="picker-link">Play Number Game →</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- MEMORY GAME -->
+      <section class="memory-section section" id="memory-game" hidden>
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">TAKE A BREAK</p>
+
+            <h2>Memory <span>Challenge</span></h2>
+
+            <p>
+              Match all the pairs using your memory. Try to finish in fewer
+              moves and less time!
+            </p>
+          </div>
+
+          <div class="memory-game-panel">
+            <div class="memory-game-top">
+              <div class="memory-stat">
+                <span class="memory-stat-label">MOVES</span>
+                <strong id="memoryMoves">0</strong>
+              </div>
+
+              <div class="memory-stat">
+                <span class="memory-stat-label">TIME</span>
+                <strong id="memoryTime">00:00</strong>
+              </div>
+
+              <div class="memory-stat">
+                <span class="memory-stat-label">PAIRS</span>
+                <strong id="memoryPairs">0 / 8</strong>
+              </div>
+            </div>
+
+            <div
+              class="memory-grid"
+              id="memoryGrid"
+              aria-label="Memory matching game"
+            ></div>
+
+            <p class="memory-message" id="memoryMessage" aria-live="polite">
+              Press Start Game when you're ready!
+            </p>
+
+            <div class="memory-actions">
+              <button type="button" class="btn btn-primary" id="memoryStart">
+                Start Game
+              </button>
+
+              <button type="button" class="btn btn-outline" id="memoryRestart">
+                Restart
+              </button>
+            </div>
+
+            <p class="memory-best">
+              Best result: <strong id="memoryBest">Not yet recorded</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROGRAMMING QUIZ -->
+      <section class="quiz-section section" id="programming-quiz">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">TEST YOUR KNOWLEDGE</p>
+            <h2>Programming <span>Quiz</span></h2>
+            <p>
+              Challenge yourself with questions about web development and
+              programming basics.
+            </p>
+          </div>
+
+          <div class="quiz-panel" id="quizPanel">
+            <div class="quiz-top">
+              <span id="quizProgress">Question 1 of 8</span>
+              <span id="quizScore">Score: 0</span>
+            </div>
+
+            <div class="quiz-progress-track">
+              <div class="quiz-progress-fill" id="quizProgressFill"></div>
+            </div>
+
+            <h3 class="quiz-question" id="quizQuestion">Loading question...</h3>
+
+            <div class="quiz-options" id="quizOptions"></div>
+
+            <p class="quiz-feedback" id="quizFeedback" aria-live="polite"></p>
+
+            <div class="quiz-actions">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="quizNext"
+                disabled
+              >
+                Next Question
+              </button>
+            </div>
+          </div>
+
+          <div class="quiz-result" id="quizResult" hidden>
+            <div class="quiz-result-icon" id="quizResultIcon">🎯</div>
+            <p class="eyebrow">QUIZ COMPLETED</p>
+            <h3 id="quizResultTitle">Nice work!</h3>
+            <p id="quizResultText"></p>
+            <button type="button" class="btn btn-primary" id="quizRetry">
+              Try Again
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- NUMBER GUESSING GAME -->
+      <section class="guess-section section" id="number-game" hidden>
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">THINK AND GUESS</p>
+            <h2>Number <span>Guessing Game</span></h2>
+            <p>
+              Can you guess the secret number? Use the hints to find the correct
+              answer in as few attempts as possible.
+            </p>
+          </div>
+
+          <div class="guess-panel">
+            <div class="guess-icon">🎯</div>
+
+            <h3>Guess the Number</h3>
+            <p class="guess-description">
+              Choose a difficulty and find the hidden number.
+            </p>
+
+            <div class="guess-difficulty">
+              <label for="guessDifficulty">Difficulty</label>
+              <select id="guessDifficulty">
+                <option value="50">Easy (1–50)</option>
+                <option value="100" selected>Normal (1–100)</option>
+                <option value="500">Hard (1–500)</option>
+              </select>
+            </div>
+
+            <div class="guess-range" id="guessRange">
+              Guess a number from 1 to 100
+            </div>
+
+            <form id="guessForm" class="guess-form">
+              <label for="guessInput" class="visually-hidden">
+                Enter your guess
+              </label>
+
+              <input
+                type="number"
+                id="guessInput"
+                placeholder="Enter your guess"
+                min="1"
+                max="100"
+                required
+              />
+
+              <button type="submit" class="btn btn-primary" id="guessSubmit">
+                Guess
+              </button>
+            </form>
+
+            <p class="guess-message" id="guessMessage" aria-live="polite">
+              Enter your first guess to begin!
+            </p>
+
+            <div class="guess-stats">
+              <div>
+                <span>ATTEMPTS</span>
+                <strong id="guessAttempts">0</strong>
+              </div>
+
+              <div>
+                <span>BEST SCORE</span>
+                <strong id="guessBest">--</strong>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-outline guess-reset"
+              id="guessRestart"
+            >
+              New Game
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          © <span id="year"></span> Shane Vincent Olavario. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- AMBIENT BACKGROUND EFFECTS -->
+    <div class="fx-ambient" aria-hidden="true">
+      <div class="fx-orb fx-orb-one"></div>
+      <div class="fx-orb fx-orb-two"></div>
+    </div>
+
+    <!-- READING PROGRESS -->
+    <div
+      class="fx-reading-progress"
+      id="fxReadingProgress"
+      role="progressbar"
+      aria-label="Page reading progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
+      <span id="fxReadingProgressFill"></span>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button
+      type="button"
+      class="fx-back-to-top"
+      id="fxBackToTop"
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      <span aria-hidden="true">↑</span>
+    </button>
+
+    <!-- FLOATING CHATBOT -->
+    <div class="chatbot-widget" id="chatbotWidget">
+      <button
+        type="button"
+        class="chatbot-launcher"
+        id="chatbotLauncher"
+        aria-label="Open portfolio chatbot"
+        aria-expanded="false"
+        aria-controls="chatbotPanel"
+      >
+        <span class="chatbot-launcher-icon" id="chatbotLauncherIcon">☏</span>
+        <span class="chatbot-launcher-label">Ask me</span>
+      </button>
+
+      <section
+        class="chatbot-panel"
+        id="chatbotPanel"
+        aria-label="Portfolio chatbot"
+        aria-hidden="true"
+      >
+        <div class="chatbot-header">
+          <div class="chatbot-avatar">SV</div>
+
+          <div class="chatbot-heading">
+            <h3>Olavario's Assistant</h3>
+            <p>
+              <span class="chatbot-online-dot"></span>
+              Portfolio assistant
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="chatbot-close"
+            id="chatbotClose"
+            aria-label="Close chatbot"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div
+          class="chatbot-messages"
+          id="chatbotMessages"
+          role="log"
+          aria-live="polite"
+          aria-relevant="additions"
+        >
+          <div class="chat-message bot-message">
+            Hey! I'm Olavario's portfolio assistant. Ask me about his skills,
+            projects, or basic programming.
+          </div>
+        </div>
+
+        <div class="chatbot-quick-replies" id="chatbotQuickReplies">
+          <button type="button" data-chat="Tell me about Vincent">
+            About Vincent
+          </button>
+
+          <button type="button" data-chat="What projects has he made?">
+            Projects
+          </button>
+
+          <button type="button" data-chat="Explain HTML, CSS, and JavaScript">
+            Programming help
+          </button>
+        </div>
+
+        <form class="chatbot-form" id="chatbotForm">
+          <label class="visually-hidden" for="chatbotInput">
+            Message the assistant
+          </label>
+
+          <input
+            id="chatbotInput"
+            type="text"
+            placeholder="Ask me something..."
+            maxlength="300"
+            autocomplete="off"
+            required
+          />
+
+          <button type="submit" aria-label="Send message">➤</button>
+        </form>
+
+        <p class="chatbot-disclaimer">
+          Portfolio assistant · Answers are predefined
+        </p>
+      </section>
+    </div>
+
+    <!-- QUICK NAVIGATION SEARCH -->
+    <button
+      type="button"
+      class="quick-search-trigger"
+      id="quickSearchTrigger"
+      aria-label="Open quick navigation search"
+    >
+      <span aria-hidden="true">⌕</span>
+      <span>Search</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+
+    <div
+      class="quick-search-overlay"
+      id="quickSearchOverlay"
+      aria-hidden="true"
+    >
+      <section
+        class="quick-search-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="quickSearchTitle"
+      >
+        <div class="quick-search-input-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            id="quickSearchInput"
+            placeholder="Search pages and sections..."
+            autocomplete="off"
+            aria-label="Search portfolio navigation"
+          />
+          <kbd>ESC</kbd>
+        </div>
+
+        <p class="quick-search-heading" id="quickSearchTitle">
+          QUICK NAVIGATION
+        </p>
+
+        <div
+          class="quick-search-results"
+          id="quickSearchResults"
+          role="listbox"
+          aria-label="Navigation results"
+        ></div>
+
+        <div class="quick-search-footer">
+          <span>↑↓ Navigate</span>
+          <span>Enter Open</span>
+          <span>Esc Close</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+    <script src="memory-game.js"></script>
+    <script src="programming-quiz.js"></script>
+    <script src="quick-search.js"></script>
+    <script src="number-game.js"></script>
+    <script src="game-selection.js"></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Health Monitoring System project by Shane Vincent Olavario."
+    />
+    <title>Health Monitoring System | Shane Vincent Olavario</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="student_management_system.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo"
+          ><img src="images/school-logo.jpg" alt="Colegio de Montalban Logo"
+        /></a>
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html">IDE</a></li>
+        </ul>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="project-detail-section">
+        <div class="container">
+          <a href="projects.html" class="project-back-link"
+            >← Back to Projects</a
+          >
+          <div class="project-detail-heading">
+            <p class="eyebrow">COMPUTER ENGINEERING PROJECT</p>
+            <h1>Health Monitoring <span>System</span></h1>
+            <p>
+              A proposed monitoring system for heart rate and blood oxygen
+              saturation with real-time updates and emergency alerts.
+            </p>
+          </div>
+
+          <div class="project-detail-grid">
+            <section
+              class="project-gallery"
+              aria-label="Health Monitoring System photo gallery"
+              data-project-gallery="health"
+            >
+              <div class="gallery-main">
+                <img
+                  class="gallery-main-image"
+                  src="images/health-monitoring-1.jpg"
+                  alt="Health Monitoring System project screenshot"
+                />
+                <button
+                  class="gallery-arrow gallery-prev"
+                  type="button"
+                  data-gallery-prev
+                  aria-label="Previous photo"
+                >
+                  ❮
+                </button>
+                <button
+                  class="gallery-arrow gallery-next"
+                  type="button"
+                  data-gallery-next
+                  aria-label="Next photo"
+                >
+                  ❯
+                </button>
+              </div>
+              <div class="gallery-footer">
+                <span data-gallery-counter>1 / 3</span
+                ><span>Project Screenshots</span>
+              </div>
+              <div class="gallery-thumbnails" data-gallery-thumbnails></div>
+            </section>
+
+            <section class="project-detail-info">
+              <p class="project-type">ESP32 · IOT · WEB DASHBOARD</p>
+              <h2>About the Project</h2>
+              <p>
+                This project concept focuses on collecting heart rate and blood
+                oxygen saturation readings and presenting them through a
+                monitoring dashboard. It also proposes emergency alerts to
+                notify a caregiver when needed.
+              </p>
+              <h3>Project Features</h3>
+              <ul class="project-feature-list">
+                <li>Heart rate monitoring</li>
+                <li>Blood oxygen saturation monitoring</li>
+                <li>Display readings on a dashboard</li>
+                <li>Real-time monitoring concept</li>
+                <li>Emergency alert and caregiver notification concept</li>
+              </ul>
+              <h3>Technologies Used</h3>
+              <div class="project-detail-tags">
+                <span>ESP32</span><span>Sensors</span><span>IoT</span
+                ><span>Web Dashboard</span>
+              </div>
+              <div class="project-detail-buttons">
+                <a
+                  href="https://github.com/olavsvincent/health_monitoring_system"
+                  class="project-github-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View Source Code on GitHub ↗</a
+                >
+                <a href="projects.html" class="project-secondary-button"
+                  >More Projects</a
+                >
+              </div>
+            </section>
+          </div>
+
+          <section class="project-about-section">
+            <p class="eyebrow">PROJECT OVERVIEW</p>
+            <h2>Project Goals</h2>
+            <p>
+              The goal is to explore how sensors, embedded systems, and web
+              technologies can be combined to display health readings and help
+              caregivers respond to potential emergencies. This is a project
+              concept and is not a substitute for professional medical
+              equipment.
+            </p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          © <span id="year"></span> Shane Vincent Olavario. All rights reserved.
+        </p>
+        <a href="index.html">Back to Home ↑</a>
+        <a href="project-details.html?project=health-monitoring">
+          View Project Details →
+        </a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="project-gallery.js"></script>
+  </body>
+</html>
