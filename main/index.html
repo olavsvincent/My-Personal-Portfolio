@@ -12,6 +12,7 @@
     <title>Home | Shane Vincent Olavario</title>
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="achievements.css" />
   </head>
 
   <body>
@@ -756,6 +757,95 @@
           <span>Enter Open</span>
           <span>Esc Close</span>
         </div>
+
+        <!-- DEVELOPER ACHIEVEMENTS -->
+        <div class="achievement-widget" id="achievementWidget">
+          <button
+            class="achievement-launcher"
+            id="achievementLauncher"
+            type="button"
+            aria-expanded="false"
+            aria-controls="achievementPanel"
+          >
+            <span class="achievement-launcher-icon">🏆</span>
+            <span class="achievement-launcher-label">Achievements</span>
+            <span class="achievement-level-pill" id="achievementLevelPill">
+              LVL 1
+            </span>
+          </button>
+
+          <section
+            class="achievement-panel"
+            id="achievementPanel"
+            aria-label="Developer achievements"
+            hidden
+          >
+            <div class="achievement-panel-header">
+              <div>
+                <p class="achievement-eyebrow">DEVELOPER PROGRESSION</p>
+                <h2>Achievements</h2>
+              </div>
+
+              <button
+                class="achievement-close"
+                id="achievementClose"
+                type="button"
+                aria-label="Close achievements"
+              >
+                &times;
+              </button>
+            </div>
+
+            <p class="achievement-total-label">TOTAL EXPERIENCE</p>
+            <p class="achievement-total-xp">
+              <span id="achievementXP">0</span> XP
+            </p>
+
+            <p class="achievement-level-text" id="achievementLevelText">
+              Level 1 · Beginner
+            </p>
+
+            <div
+              class="achievement-track"
+              id="achievementProgress"
+              role="progressbar"
+              aria-label="Progress to next level"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            >
+              <div
+                class="achievement-track-fill"
+                id="achievementProgressFill"
+              ></div>
+            </div>
+
+            <p class="achievement-next-level" id="achievementNextLevel"></p>
+
+            <h3 class="achievement-section-title" id="achievementCount">
+              UNLOCKED 0 / 10
+            </h3>
+
+            <div class="achievement-list" id="achievementList"></div>
+          </section>
+        </div>
+
+        <!-- ACHIEVEMENT NOTIFICATION -->
+        <div
+          class="achievement-toast"
+          id="achievementToast"
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+          <span class="achievement-toast-icon" id="achievementToastIcon"
+            >🏆</span
+          >
+          <div>
+            <strong id="achievementToastTitle">Achievement unlocked!</strong>
+            <p id="achievementToastDescription"></p>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -767,5 +857,6 @@
     <script src="quick-search.js"></script>
     <script src="number-game.js"></script>
     <script src="game-selection.js"></script>
+    <script src="achievements.js"></script>
   </body>
 </html>

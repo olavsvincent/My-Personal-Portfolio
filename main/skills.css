@@ -403,3 +403,14 @@ body.dark-mode .skill-detail li,
 body.dark-mode .skill-detail strong {
   color: #f1f5f9 !important;
 }
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* Fix skill filtering */
+.skill-card[hidden],
+.interactive-skill-card[hidden] {
+  display: none !important;
+}

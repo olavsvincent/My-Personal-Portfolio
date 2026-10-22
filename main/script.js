@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   /* ========================================
      1. FOOTER YEAR
@@ -9,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
-
 
   /* ========================================
      2. MOBILE NAVIGATION
@@ -61,20 +59,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   /* ========================================
      3. ACTIVE NAVIGATION LINK
   ======================================== */
 
   const currentPage =
-    window.location.pathname.split("/").pop().toLowerCase() ||
-    "index.html";
+    window.location.pathname.split("/").pop().toLowerCase() || "index.html";
 
   document.querySelectorAll(".nav-links a").forEach((link) => {
     const linkUrl = new URL(link.href, window.location.href);
     const linkPage =
-      linkUrl.pathname.split("/").pop().toLowerCase() ||
-      "index.html";
+      linkUrl.pathname.split("/").pop().toLowerCase() || "index.html";
 
     const samePage = linkPage === currentPage;
     const hasHash = Boolean(linkUrl.hash);
@@ -88,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
       link.removeAttribute("aria-current");
     }
   });
-
 
   /* ========================================
      4. DARK MODE AND LIGHT MODE
@@ -107,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (themeToggle) {
       themeToggle.setAttribute(
         "aria-label",
-        isDark ? "Switch to light mode" : "Switch to dark mode"
+        isDark ? "Switch to light mode" : "Switch to dark mode",
       );
 
       themeToggle.setAttribute("aria-pressed", String(isDark));
@@ -127,7 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
   } else if (savedTheme === "light") {
     document.body.classList.remove("dark-mode");
   } else {
-    const prefersDark = window.matchMedia &&
+    const prefersDark =
+      window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     document.body.classList.toggle("dark-mode", Boolean(prefersDark));
@@ -142,10 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isDark = document.body.classList.contains("dark-mode");
 
       try {
-        localStorage.setItem(
-          "portfolioTheme",
-          isDark ? "dark" : "light"
-        );
+        localStorage.setItem("portfolioTheme", isDark ? "dark" : "light");
       } catch (error) {
         // The theme still works for the current page.
       }
@@ -153,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateThemeButton();
     });
   }
-
 
   /* ========================================
      5. PROJECT MODAL AND IMAGE GALLERY
@@ -192,8 +183,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "images/student-system-2.jpg",
         "images/student-system-3.jpg",
         "images/student-system-4.jpg",
-        "images/student-system-5.jpg"
-      ]
+        "images/student-system-5.jpg",
+      ],
     },
     {
       type: "WEB PROJECT",
@@ -202,10 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "A responsive workout planning website concept that helps users organize exercise routines according to their goals, experience, and available equipment.",
       technologies: ["HTML", "CSS", "JavaScript"],
       github: "https://github.com/olavsvincent/workout-planner",
-      images: [
-        "images/wp1.jpg",
-        "images/wp2.jpg"
-      ]
+      images: ["images/wp1.jpg", "images/wp2.jpg"],
     },
     {
       type: "ENGINEERING PROJECT",
@@ -219,8 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "images/health-monitoring-2.jpg",
         "images/health-monitoring-3.jpg",
         "images/health-monitoring-4.jpg",
-        "images/health-monitoring-5.jpg"
-      ]
+        "images/health-monitoring-5.jpg",
+      ],
     },
     {
       type: "PROGRAMMING PROJECT",
@@ -234,20 +222,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "images/grade-calculator-2.jpg",
         "images/grade-calculator-3.jpg",
         "images/grade-calculator-4.jpg",
-        "images/grade-calculator-5.jpg"
-      ]
+        "images/grade-calculator-5.jpg",
+      ],
     },
     {
       type: "ENGINEERING PROJECT",
       title: "SysVision",
       description:
-       "A system monitoring application built to present system information through a web-based interface.",
+        "A system monitoring application built to present system information through a web-based interface.",
       technologies: ["Python", "Flask", "HTML", "CSS", "JavaScript"],
       github: "YOUR_SYSVISION_GITHUB_URL",
-      images: [
-        "images/sv.jpg",
-       "images/sv2.jpg"
-      ]
+      images: ["images/sv.jpg", "images/sv2.jpg"],
     },
     {
       type: "PROGRAMMING PROJECT",
@@ -261,8 +246,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "images/scientific-calculator-2.jpg",
         "images/scientific-calculator-3.jpg",
         "images/scientific-calculator-4.jpg",
-        "images/scientific-calculator-5.jpg"
-      ]
+        "images/scientific-calculator-5.jpg",
+      ],
     },
     {
       type: "PROGRAMMING PROJECT",
@@ -276,9 +261,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "images/book-management-2.jpg",
         "images/book-management-3.jpg",
         "images/book-management-4.jpg",
-        "images/book-management-5.jpg"
-      ]
-    }
+        "images/book-management-5.jpg",
+      ],
+    },
   ];
 
   function showGalleryImage(index) {
@@ -308,12 +293,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ((index % images.length) + images.length) % images.length;
 
     modalImage.src = images[currentImageIndex];
-    modalImage.alt =
-      `${currentProject.title}, photo ${currentImageIndex + 1}`;
+    modalImage.alt = `${currentProject.title}, photo ${currentImageIndex + 1}`;
 
     if (modalCounter) {
-      modalCounter.textContent =
-        `${currentImageIndex + 1} / ${images.length}`;
+      modalCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
     }
 
     if (modalThumbnails) {
@@ -324,10 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         thumbnail.type = "button";
         thumbnail.className = "gallery-thumbnail";
-        thumbnail.setAttribute(
-          "aria-label",
-          `View photo ${imageIndex + 1}`
-        );
+        thumbnail.setAttribute("aria-label", `View photo ${imageIndex + 1}`);
 
         const isActive = imageIndex === currentImageIndex;
 
@@ -461,7 +441,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   /* ========================================
      6. CONTACT FORM
   ======================================== */
@@ -485,8 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!name || !email || !message) {
         if (formStatus) {
-          formStatus.textContent =
-            "Please complete all fields before sending.";
+          formStatus.textContent = "Please complete all fields before sending.";
         }
 
         return;
@@ -509,12 +487,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const subject = encodeURIComponent(
-        `Portfolio Contact from ${name}`
-      );
+      const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
 
       const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       );
 
       if (formStatus) {
@@ -522,11 +498,9 @@ document.addEventListener("DOMContentLoaded", () => {
           "Opening your email application. Send the message there to complete delivery.";
       }
 
-      window.location.href =
-        `mailto:${recipient}?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
     });
   }
-
 
   /* ========================================
      7. PORTFOLIO TERMINAL
@@ -544,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "projects",
       "contact",
       "whoami",
-      "clear"
+      "clear",
     ];
 
     function addTerminalLine(text, className = "") {
@@ -560,8 +534,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function addCommandLine(command) {
-      addTerminalLine(`visitor@portfolio:~$ ${command}`,
-        "terminal-command-line");
+      addTerminalLine(
+        `visitor@portfolio:~$ ${command}`,
+        "terminal-command-line",
+      );
     }
 
     function runCommand(rawCommand) {
@@ -586,9 +562,13 @@ document.addEventListener("DOMContentLoaded", () => {
         case "about":
           addTerminalLine("ABOUT ME", "terminal-success");
           addTerminalLine("Name: Shane Vincent Olavario");
-          addTerminalLine("Course: Bachelor of Science in Computer Engineering");
+          addTerminalLine(
+            "Course: Bachelor of Science in Computer Engineering",
+          );
           addTerminalLine("Year Level: First-Year College Student");
-          addTerminalLine("Interests: Technology, computers, programming, and problem-solving.");
+          addTerminalLine(
+            "Interests: Technology, computers, programming, and problem-solving.",
+          );
           addTerminalLine("Goal: Keep learning and build useful projects.");
           break;
 
@@ -628,7 +608,7 @@ document.addEventListener("DOMContentLoaded", () => {
         default:
           addTerminalLine(
             `Command not found: ${rawCommand.trim()}`,
-            "terminal-error"
+            "terminal-error",
           );
           addTerminalLine("Type 'help' to see available commands.");
       }
@@ -658,7 +638,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   /* ========================================
      8. KEYBOARD SHORTCUTS
   ======================================== */
@@ -681,7 +660,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 // =============================================
 // PROJECT PAGE FEATURES
 // Search, filters, favorites, statistics, modal
@@ -701,9 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. GET HTML ELEMENTS
   // ---------------------------------------------
 
-  const projects = Array.from(
-    projectsGrid.querySelectorAll("[data-project]")
-  );
+  const projects = Array.from(projectsGrid.querySelectorAll("[data-project]"));
 
   const searchInput = document.getElementById("projectSearch");
   const categoryFilter = document.getElementById("categoryFilter");
@@ -782,19 +758,9 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.value = savedFilters.search;
     }
 
-    const validCategories = [
-      "all",
-      "web",
-      "python",
-      "engineering"
-    ];
+    const validCategories = ["all", "web", "python", "engineering"];
 
-    const validStatuses = [
-      "all",
-      "completed",
-      "progress",
-      "concept"
-    ];
+    const validStatuses = ["all", "completed", "progress", "concept"];
 
     if (validCategories.includes(savedFilters.category)) {
       categoryFilter.value = savedFilters.category;
@@ -816,7 +782,7 @@ document.addEventListener("DOMContentLoaded", () => {
       search: searchInput.value,
       category: categoryFilter.value,
       status: statusFilter.value,
-      favoritesOnly: favoritesOnly
+      favoritesOnly: favoritesOnly,
     });
   }
 
@@ -847,18 +813,15 @@ document.addEventListener("DOMContentLoaded", () => {
         "aria-label",
         `${isFavorite ? "Remove" : "Add"} ${name} ${
           isFavorite ? "from" : "to"
-        } favorites`
+        } favorites`,
       );
     });
 
-    favoritesFilterButton.setAttribute(
-      "aria-pressed",
-      String(favoritesOnly)
-    );
+    favoritesFilterButton.setAttribute("aria-pressed", String(favoritesOnly));
 
     favoritesFilterButton.innerHTML = favoritesOnly
-      ? "<span aria-hidden=\"true\">♥</span> Showing Favorites"
-      : "<span aria-hidden=\"true\">♡</span> Favorites Only";
+      ? '<span aria-hidden="true">♥</span> Showing Favorites'
+      : '<span aria-hidden="true">♡</span> Favorites Only';
 
     updateStatistics();
   }
@@ -913,22 +876,16 @@ document.addEventListener("DOMContentLoaded", () => {
         technologies.includes(searchTerm);
 
       const matchesCategory =
-        selectedCategory === "all" ||
-        category === selectedCategory;
+        selectedCategory === "all" || category === selectedCategory;
 
       const matchesStatus =
-        selectedStatus === "all" ||
-        status === selectedStatus;
+        selectedStatus === "all" || status === selectedStatus;
 
       const matchesFavorite =
-        !favoritesOnly ||
-        favorites.includes(project.dataset.name);
+        !favoritesOnly || favorites.includes(project.dataset.name);
 
       const isVisible =
-        matchesSearch &&
-        matchesCategory &&
-        matchesStatus &&
-        matchesFavorite;
+        matchesSearch && matchesCategory && matchesStatus && matchesFavorite;
 
       project.hidden = !isVisible;
 
@@ -937,8 +894,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    resultCount.textContent =
-      `Showing ${visibleCount} of ${projects.length} projects`;
+    resultCount.textContent = `Showing ${visibleCount} of ${projects.length} projects`;
 
     emptyState.hidden = visibleCount !== 0;
 
@@ -984,10 +940,10 @@ document.addEventListener("DOMContentLoaded", () => {
       technologies: technologySet.size,
 
       completed: projects.filter(
-        (project) => project.dataset.status === "completed"
+        (project) => project.dataset.status === "completed",
       ).length,
 
-      favorites: favorites.length
+      favorites: favorites.length,
     };
   }
 
@@ -1002,9 +958,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Ease-out animation.
       const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-      const currentNumber = Math.round(
-        target * easedProgress
-      );
+      const currentNumber = Math.round(target * easedProgress);
 
       element.textContent = currentNumber;
 
@@ -1111,7 +1065,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusNames = {
       completed: "Completed",
       progress: "In Progress",
-      concept: "Concept"
+      concept: "Concept",
     };
 
     modalStatus.className = "project-status";
@@ -1121,7 +1075,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "status-completed"
         : status === "progress"
           ? "status-progress"
-          : "status-concept"
+          : "status-concept",
     );
 
     modalStatus.textContent = statusNames[status] || "Concept";
@@ -1133,9 +1087,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const demoLink = project.querySelector("[data-demo-link]");
     const githubLink = project.querySelector("[data-github-link]");
 
-    configureModalLink(modalProjectPage, projectPage);
-    configureModalLink(modalDemo, demoLink);
-    configureModalLink(modalGithub, githubLink);
+    if (projectPage) {
+      configureModalLink(modalProjectPage, projectPage);
+    }
+
+    if (demoLink) {
+      configureModalLink(modalDemo, demoLink);
+    } else if (modalDemo) {
+      modalDemo.hidden = true;
+      modalDemo.removeAttribute("href");
+    }
+
+    if (githubLink) {
+      configureModalLink(modalGithub, githubLink);
+    } else if (modalGithub) {
+      modalGithub.hidden = true;
+      modalGithub.removeAttribute("href");
+    }
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
@@ -1163,7 +1131,12 @@ document.addEventListener("DOMContentLoaded", () => {
   projects.forEach((project) => {
     const previewButton = project.querySelector("[data-preview]");
 
-    previewButton.addEventListener("click", () => {
+    if (!previewButton) return;
+
+    previewButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
       openProjectModal(project, previewButton);
     });
   });
@@ -1189,7 +1162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (event.key === "Tab") {
       const focusableElements = modalContent.querySelectorAll(
-        'a[href]:not([hidden]), button:not([disabled]):not([hidden])'
+        "a[href]:not([hidden]), button:not([disabled]):not([hidden])",
       );
 
       if (!focusableElements.length) {
@@ -1202,10 +1175,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (event.shiftKey && document.activeElement === firstElement) {
         event.preventDefault();
         lastElement.focus();
-      } else if (
-        !event.shiftKey &&
-        document.activeElement === lastElement
-      ) {
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
         event.preventDefault();
         firstElement.focus();
       }
@@ -1219,7 +1189,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateFavoriteButtons();
   filterProjects();
   initializeStatistics();
-
 })();
 
 // =====================================
@@ -1241,8 +1210,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "I inspect code by sitting on the keyboard.",
         "Have you tried turning it off and on again?",
         "Purr-gramming is hard work!",
-        "Don't forget to take a break!"
-      ]
+        "Don't forget to take a break!",
+      ],
     },
     {
       emoji: "🐶",
@@ -1252,8 +1221,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "I give this portfolio 10/10 bones!",
         "Who's a good developer? You are!",
         "Let's fetch some bugs!",
-        "Keep chasing your dreams!"
-      ]
+        "Keep chasing your dreams!",
+      ],
     },
     {
       emoji: "🐥",
@@ -1263,9 +1232,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Just waddling through the internet.",
         "Debugging? More like duck-bugging!",
         "You look like you need a quack break!",
-        "Quack happens. Keep going!"
-      ]
-    }
+        "Quack happens. Keep going!",
+      ],
+    },
   ];
 
   let currentPet = 0;
@@ -1311,7 +1280,7 @@ document.addEventListener("DOMContentLoaded", () => {
     petButton.textContent = selectedPet.emoji;
     petButton.setAttribute(
       "aria-label",
-      `Walking ${selectedPet.name.toLowerCase()}. Click to change pet`
+      `Walking ${selectedPet.name.toLowerCase()}. Click to change pet`,
     );
 
     showMessage(selectedPet.messages[currentMessage]);
@@ -1323,8 +1292,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectedPet = pets[currentPet];
 
-    currentMessage =
-      (currentMessage + 1) % selectedPet.messages.length;
+    currentMessage = (currentMessage + 1) % selectedPet.messages.length;
 
     showMessage(selectedPet.messages[currentMessage]);
   });
@@ -1339,7 +1307,7 @@ window.addEventListener("load", () => {
   window.scrollTo({
     top: 0,
     left: 0,
-    behavior: "instant"
+    behavior: "instant",
   });
 });
 
@@ -1359,9 +1327,7 @@ window.addEventListener("load", () => {
 
     document.documentElement.dataset.portfolioEnhancements = "ready";
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     /* ======================================
        1. LIVE DASHBOARD
@@ -1373,7 +1339,7 @@ window.addEventListener("load", () => {
     const sessionTime = document.getElementById("devSessionTime");
     const sessionProgress = document.getElementById("devSessionProgress");
     const sessionProgressFill = document.getElementById(
-      "devSessionProgressFill"
+      "devSessionProgressFill",
     );
     const lastUpdated = document.getElementById("devLastUpdated");
 
@@ -1388,11 +1354,9 @@ window.addEventListener("load", () => {
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = totalSeconds % 60;
 
-      return [
-        padNumber(hours),
-        padNumber(minutes),
-        padNumber(seconds)
-      ].join(":");
+      return [padNumber(hours), padNumber(minutes), padNumber(seconds)].join(
+        ":",
+      );
     }
 
     function updateDashboard() {
@@ -1404,7 +1368,7 @@ window.addEventListener("load", () => {
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
-          hour12: false
+          hour12: false,
         });
       }
 
@@ -1413,7 +1377,7 @@ window.addEventListener("load", () => {
           weekday: "long",
           month: "long",
           day: "numeric",
-          year: "numeric"
+          year: "numeric",
         });
       }
 
@@ -1435,9 +1399,7 @@ window.addEventListener("load", () => {
         greeting.append(greetingText, name);
       }
 
-      const elapsedSeconds = Math.floor(
-        (Date.now() - sessionStartedAt) / 1000
-      );
+      const elapsedSeconds = Math.floor((Date.now() - sessionStartedAt) / 1000);
 
       if (sessionTime) {
         sessionTime.textContent = formatDuration(elapsedSeconds);
@@ -1447,17 +1409,17 @@ window.addEventListener("load", () => {
         const referenceSeconds = 3600;
         const progress = Math.min(
           100,
-          (elapsedSeconds / referenceSeconds) * 100
+          (elapsedSeconds / referenceSeconds) * 100,
         );
 
         sessionProgress.setAttribute(
           "aria-valuenow",
-          String(Math.min(elapsedSeconds, referenceSeconds))
+          String(Math.min(elapsedSeconds, referenceSeconds)),
         );
 
         sessionProgress.setAttribute(
           "aria-valuetext",
-          formatDuration(elapsedSeconds) + " elapsed"
+          formatDuration(elapsedSeconds) + " elapsed",
         );
 
         if (sessionProgressFill) {
@@ -1471,7 +1433,7 @@ window.addEventListener("load", () => {
           now.toLocaleTimeString(undefined, {
             hour: "2-digit",
             minute: "2-digit",
-            second: "2-digit"
+            second: "2-digit",
           });
       }
     }
@@ -1486,18 +1448,14 @@ window.addEventListener("load", () => {
        ====================================== */
 
     const progressBar = document.getElementById("fxReadingProgress");
-    const progressFill = document.getElementById(
-      "fxReadingProgressFill"
-    );
+    const progressFill = document.getElementById("fxReadingProgressFill");
 
     let scrollUpdatePending = false;
 
     function updateScrollEffects() {
       scrollUpdatePending = false;
 
-      const scrollTop =
-        window.scrollY ||
-        document.documentElement.scrollTop;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
       const scrollableHeight =
         document.documentElement.scrollHeight - window.innerHeight;
@@ -1514,12 +1472,12 @@ window.addEventListener("load", () => {
       if (progressBar) {
         progressBar.setAttribute(
           "aria-valuenow",
-          String(Math.round(percentage))
+          String(Math.round(percentage)),
         );
 
         progressBar.setAttribute(
           "aria-valuetext",
-          Math.round(percentage) + "% of page scrolled"
+          Math.round(percentage) + "% of page scrolled",
         );
       }
 
@@ -1546,11 +1504,11 @@ window.addEventListener("load", () => {
           window.requestAnimationFrame(updateScrollEffects);
         }
       },
-      { passive: true }
+      { passive: true },
     );
 
     window.addEventListener("resize", updateScrollEffects, {
-      passive: true
+      passive: true,
     });
 
     updateScrollEffects();
@@ -1561,7 +1519,7 @@ window.addEventListener("load", () => {
       backToTop.addEventListener("click", function () {
         window.scrollTo({
           top: 0,
-          behavior: reducedMotion.matches ? "auto" : "smooth"
+          behavior: reducedMotion.matches ? "auto" : "smooth",
         });
       });
     }
@@ -1580,17 +1538,14 @@ window.addEventListener("load", () => {
       ".quiz-panel",
       ".quiz-result",
       ".memory-game-panel",
-      ".guess-panel"
+      ".guess-panel",
     ];
 
     const revealElements = document.querySelectorAll(
-      revealSelectors.join(", ")
+      revealSelectors.join(", "),
     );
 
-    if (
-      reducedMotion.matches ||
-      !("IntersectionObserver" in window)
-    ) {
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
       // Never leave content hidden if animations are disabled
       // or IntersectionObserver is unsupported.
       revealElements.forEach(function (element) {
@@ -1608,8 +1563,8 @@ window.addEventListener("load", () => {
         },
         {
           threshold: 0.08,
-          rootMargin: "0px 0px -35px 0px"
-        }
+          rootMargin: "0px 0px -35px 0px",
+        },
       );
 
       revealElements.forEach(function (element) {
@@ -1632,9 +1587,7 @@ window.addEventListener("load", () => {
        Desktop mouse/trackpad only.
        ====================================== */
 
-    const finePointer = window.matchMedia(
-      "(hover: hover) and (pointer: fine)"
-    );
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
     if (finePointer.matches && !reducedMotion.matches) {
       const glow = document.createElement("div");
@@ -1669,7 +1622,7 @@ window.addEventListener("load", () => {
             cursorFrame = null;
           });
         },
-        { passive: true }
+        { passive: true },
       );
 
       document.addEventListener("pointerleave", function () {
@@ -1698,16 +1651,13 @@ window.addEventListener("load", () => {
     }
 
     if (typeof reducedMotion.addEventListener === "function") {
-      reducedMotion.addEventListener(
-        "change",
-        handleMotionPreferenceChange
-      );
+      reducedMotion.addEventListener("change", handleMotionPreferenceChange);
     }
   }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", startEnhancements, {
-      once: true
+      once: true,
     });
   } else {
     startEnhancements();

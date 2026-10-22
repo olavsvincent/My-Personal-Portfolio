@@ -8592,3 +8592,28 @@ html[data-theme="light"] .project-detail-info h3 {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Make Quick Preview and Project Page the same size */
+.project-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.project-actions .project-preview-btn,
+.project-actions .view-project {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 6px;
+  margin: 0;
+}
+

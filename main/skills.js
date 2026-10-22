@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let activeFilter = "all";
 
-  // Animate skill progress bars
+  // Animate progress bars
   requestAnimationFrame(() => {
     document.querySelectorAll(".skill-progress").forEach((bar) => {
       bar.classList.add("animated");
@@ -34,14 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let visibleCount = 0;
 
     cards.forEach((card) => {
-      const category = card.dataset.category || "";
-      const name = card.dataset.name || "";
-      const text = `${name} ${card.textContent}`.toLowerCase();
+      const category = (card.dataset.category || "").toLowerCase();
+      const name = (card.dataset.name || "").toLowerCase();
+      const description = (card.dataset.description || "").toLowerCase();
+      const text = card.textContent.toLowerCase();
 
       const matchesCategory =
         activeFilter === "all" || category === activeFilter;
 
-      const matchesSearch = text.includes(query);
+      const matchesSearch =
+        !query ||
+        name.includes(query) ||
+        description.includes(query) ||
+        text.includes(query);
+
       const visible = matchesCategory && matchesSearch;
 
       card.hidden = !visible;
@@ -49,48 +55,45 @@ document.addEventListener("DOMContentLoaded", () => {
       if (visible) visibleCount++;
     });
 
+    // Update active filter buttons
+    filterButtons.forEach((button) => {
+      const selected = button.dataset.filter === activeFilter;
+      button.classList.toggle("active", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+
     if (results) {
-      results.textContent = `Showing ${visibleCount} of ${cards.length} skills`;
+      results.textContent =
+        `Showing ${visibleCount} of ${cards.length} skills`;
     }
 
     if (emptyMessage) {
-      emptyMessage.hidden = visibleCount > 0;
+      emptyMessage.hidden = visibleCount !== 0;
     }
   }
 
+  // Category button clicks
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       activeFilter = button.dataset.filter || "all";
-
-      filterButtons.forEach((item) => {
-        const selected = item === button;
-        item.classList.toggle("active", selected);
-        item.setAttribute("aria-pressed", String(selected));
-      });
-
       filterSkills();
     });
   });
 
+  // Search input
   searchInput.addEventListener("input", filterSkills);
 
+  // Clear search and reset filters
   if (clearButton) {
     clearButton.addEventListener("click", () => {
       searchInput.value = "";
       activeFilter = "all";
-
-      filterButtons.forEach((button) => {
-        const selected = button.dataset.filter === "all";
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-      });
-
       filterSkills();
       searchInput.focus();
     });
   }
 
-  // Open a skill card using a click or keyboard
+  // Open skill details
   function openSkillDetails(card) {
     if (
       !detailPanel ||
@@ -103,12 +106,20 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    detailTitle.textContent = card.querySelector("h3")?.textContent || "Skill";
-    detailDescription.textContent = card.dataset.description || card.querySelector("p")?.textContent || "";
+    detailTitle.textContent =
+      card.querySelector("h3")?.textContent || "Skill";
+
+    detailDescription.textContent =
+      card.dataset.description ||
+      card.querySelector("p")?.textContent ||
+      "";
+
     detailLevel.textContent = card.dataset.level || "Learning";
     detailProjects.replaceChildren();
 
-    const projects = (card.dataset.projects || "No related projects listed yet.")
+    const projects = (
+      card.dataset.projects || "No related projects listed yet."
+    )
       .split(",")
       .map((project) => project.trim())
       .filter(Boolean);
@@ -120,9 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     detailPanel.hidden = false;
-    detailPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    detailPanel.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
   }
 
+  // Card mouse and keyboard interaction
   cards.forEach((card) => {
     card.addEventListener("click", () => openSkillDetails(card));
 
@@ -134,12 +149,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Close details panel
   if (closeDetail && detailPanel) {
     closeDetail.addEventListener("click", () => {
       detailPanel.hidden = true;
     });
   }
 
-  // Initial page state
+  // Initialize page
   filterSkills();
 });
