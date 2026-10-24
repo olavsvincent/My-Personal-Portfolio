@@ -29,6 +29,7 @@ body {
 }
 
 .demo-card {
+  width: 100%;
   max-width: 560px;
   padding: 42px;
   text-align: center;
@@ -104,8 +105,13 @@ const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 const year = document.getElementById("year");
 
+// Stop early if this script is loaded on a page without the IDE.
+if (!htmlArea || !cssArea || !jsArea || !preview) {
+  console.error("IDE initialization failed: required HTML elements are missing.");
+} else {
+
 // =====================================
-// INITIALIZE CODEMIRROR
+// INITIALIZE EDITORS
 // =====================================
 
 htmlArea.value = starterHTML;
@@ -123,7 +129,8 @@ if (window.CodeMirror) {
     lineNumbers: true,
     lineWrapping: true,
     tabSize: 2,
-    indentUnit: 2
+    indentUnit: 2,
+    autoCloseTags: true
   });
 
   cssEditor = CodeMirror.fromTextArea(cssArea, {
@@ -143,6 +150,10 @@ if (window.CodeMirror) {
     tabSize: 2,
     indentUnit: 2
   });
+} else {
+  console.warn(
+    "CodeMirror did not load. The IDE will use regular text areas."
+  );
 }
 
 // =====================================
@@ -159,6 +170,12 @@ function setValue(editor, textarea, value) {
   } else {
     textarea.value = value;
   }
+}
+
+function refreshEditors() {
+  [htmlEditor, cssEditor, jsEditor].forEach((editor) => {
+    if (editor) editor.refresh();
+  });
 }
 
 // =====================================
@@ -191,8 +208,24 @@ function applyTheme(isDark) {
   });
 }
 
-// Read the theme saved by the rest of your portfolio.
-const savedTheme = localStorage.getItem("portfolioTheme");
+function getSavedTheme() {
+  try {
+    return localStorage.getItem("portfolioTheme");
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveTheme(theme) {
+  try {
+    localStorage.setItem("portfolioTheme", theme);
+  } catch (error) {
+    console.warn("The selected theme could not be saved.");
+  }
+}
+
+const savedTheme = getSavedTheme();
+
 const initialDarkMode =
   savedTheme !== null
     ? savedTheme === "dark"
@@ -200,14 +233,18 @@ const initialDarkMode =
 
 applyTheme(initialDarkMode);
 
-// Toggle and save the selected theme.
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
+if (themeToggle && !themeToggle.dataset.editorThemeBound) {
+  themeToggle.dataset.editorThemeBound = "true";
+
+  themeToggle.addEventListener("click", (event) => {
+    // Prevent another theme handler on this button from toggling twice.
+    event.stopImmediatePropagation();
+
     const isDark = !document.body.classList.contains("dark-mode");
 
     applyTheme(isDark);
-    localStorage.setItem("portfolioTheme", isDark ? "dark" : "light");
-  });
+    saveTheme(isDark ? "dark" : "light");
+  }, true);
 }
 
 // =====================================
@@ -215,6 +252,7 @@ if (themeToggle) {
 // =====================================
 
 function createDocument(html, css, js) {
+  // Prevent user code from prematurely closing the style/script elements.
   const safeCSS = css.replace(/<\/style/gi, "<\\/style");
   const safeJS = js.replace(/<\/script/gi, "<\\/script");
 
@@ -280,6 +318,7 @@ function resetCode() {
   setValue(cssEditor, cssArea, starterCSS);
   setValue(jsEditor, jsArea, starterJS);
 
+  refreshEditors();
   runCode();
 }
 
@@ -311,7 +350,7 @@ function downloadHTML() {
   link.click();
   link.remove();
 
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 if (downloadButton) {
@@ -327,7 +366,6 @@ if (menuToggle && navLinks) {
     const isOpen = navLinks.classList.toggle("active");
 
     menuToggle.setAttribute("aria-expanded", String(isOpen));
-
     menuToggle.setAttribute(
       "aria-label",
       isOpen ? "Close navigation menu" : "Open navigation menu"
@@ -356,3 +394,5 @@ if (year) {
 // =====================================
 
 runCode();
+
+}

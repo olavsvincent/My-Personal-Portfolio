@@ -14,35 +14,44 @@
   <body>
     <header class="header">
       <nav class="navbar container">
-        <a href="index.html" class="logo"
-          ><img src="images/school-logo.jpg" alt="Colegio de Montalban Logo"
-        /></a>
+        <a href="index.html" class="logo">
+          <img src="images/school-logo.jpg" alt="Colegio de Montalban Logo" />
+          <span class="school-name">Colegio de Montalban</span>
+        </a>
+
         <button
           class="menu-toggle"
           id="menuToggle"
+          type="button"
           aria-label="Toggle navigation"
           aria-expanded="false"
           aria-controls="navLinks"
         >
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
+
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="skills.html">Skills</a></li>
-          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="projects.html">Projects</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="editor.html">IDE</a></li>
+          <li><a href="editor.html" class="active">IDE</a></li>
+          <li class="nav-theme-item">
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              type="button"
+              aria-label="Switch to dark mode"
+              title="Dark mode"
+            >
+              <span id="themeIcon">🌙</span>
+            </button>
+          </li>
         </ul>
       </nav>
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="Switch to dark mode"
-      >
-        <span id="themeIcon">🌙</span>
-      </button>
     </header>
 
     <main>

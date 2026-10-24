@@ -95,10 +95,12 @@ span {
 
 /* Header and navigation */
 
+
 .header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  position: sticky;
   background: rgba(11, 11, 20, 0.9);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
@@ -8615,5 +8617,62 @@ html[data-theme="light"] .project-detail-info h3 {
   font-size: 12px;
   border-radius: 6px;
   margin: 0;
+} 
+
+/* Scroll Progress Bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 50%, #c084fc 100%);
+  z-index: 999999;
+  pointer-events: none;
+  transition: width 0.08s linear;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar-school-logo {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.navbar .school-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #22c55e;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 480px) {
+  .navbar-school-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .school-name {
+    font-size: 12px;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+}
+
+/* Keep Colegio de Montalban text green in all themes */
+.navbar .school-name,
+body.light-mode .navbar .school-name,
+body.dark-mode .navbar .school-name {
+  color: #22c55e !important;
+}

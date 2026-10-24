@@ -1663,3 +1663,33 @@ window.addEventListener("load", () => {
     startEnhancements();
   }
 })();
+
+/* Scroll Progress Bar */
+document.addEventListener("DOMContentLoaded", () => {
+  let progressBar = document.getElementById("scroll-progress");
+
+  if (!progressBar) {
+    progressBar = document.createElement("div");
+    progressBar.id = "scroll-progress";
+    document.body.prepend(progressBar);
+  }
+
+  function updateScrollProgress() {
+    const scrollTop = window.scrollY;
+    const scrollHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const progress =
+      scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+    progressBar.style.width = `${progress}%`;
+  }
+
+  window.addEventListener("scroll", updateScrollProgress, {
+    passive: true
+  });
+
+  window.addEventListener("resize", updateScrollProgress);
+
+  updateScrollProgress();
+});
