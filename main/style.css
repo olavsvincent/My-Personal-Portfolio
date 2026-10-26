@@ -8676,3 +8676,34 @@ body.light-mode .navbar .school-name,
 body.dark-mode .navbar .school-name {
   color: #22c55e !important;
 }
+
+.finish-portfolio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50vh;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.finish-portfolio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px 30px;
+  color: #fff;
+  background: linear-gradient(135deg, #8b5cf6, #2563eb);
+  border: 1px solid rgba(139, 92, 246, 0.6);
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.finish-portfolio-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.35);
+}

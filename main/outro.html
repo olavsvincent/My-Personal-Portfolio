@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050811">
+<title>Thank You | Shane Vincent Olavario</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --blue: #38bdf8;
+  --purple: #8b5cf6;
+  --bg: #050811;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: #fff;
+  background: var(--bg);
+  font-family: Inter, sans-serif;
+}
+
+.scene {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 440px;
+  width: 100%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(14px, 2.5vh, 25px) clamp(16px, 5vw, 60px);
+  background: radial-gradient(ellipse at center, #111b35, #050811 72%);
+}
+
+#circuits {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(#38bdf810 1px, transparent 1px),
+    linear-gradient(90deg, #38bdf810 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(transparent, black 25%, black 75%, transparent);
+}
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: .18;
+  pointer-events: none;
+}
+
+.glow-a {
+  background: var(--blue);
+  top: 10%;
+  left: -140px;
+}
+
+.glow-b {
+  background: var(--purple);
+  right: -130px;
+  bottom: 0;
+}
+
+header, footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font: 9px Orbitron, sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.brand {
+  color: var(--blue);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9caec9;
+}
+
+.status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 12px #4ade80;
+}
+
+main {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: clamp(12px, 2vh, 24px) 0;
+  text-align: center;
+  animation: appear 1.2s ease both;
+}
+
+.chip {
+  position: relative;
+  width: clamp(54px, 9vh, 82px);
+  height: clamp(54px, 9vh, 82px);
+  display: grid;
+  place-items: center;
+  margin: 0 auto clamp(18px, 3vh, 30px);
+  background: #0a1727;
+  border: 1px solid #38bdf880;
+  box-shadow: 0 0 35px #38bdf830, inset 0 0 20px #38bdf815;
+  animation: pulse 2.5s ease-in-out infinite alternate;
+}
+
+.chip::before, .chip::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid #38bdf840;
+  animation: rotate 12s linear infinite;
+}
+
+.chip::after {
+  inset: -15px;
+  border-color: #8b5cf640;
+  animation-direction: reverse;
+}
+
+.chip svg {
+  width: 55%;
+  height: 55%;
+  stroke: var(--blue);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.kicker {
+  color: var(--blue);
+  font: 10px Orbitron, sans-serif;
+  letter-spacing: 4px;
+  margin-bottom: clamp(12px, 2vh, 20px);
+}
+
+h1 {
+  font: 800 clamp(35px, min(7vw, 8vh), 84px)/1.12 Orbitron, sans-serif;
+  letter-spacing: -1.5px;
+}
+
+h1 span {
+  display: block;
+  color: transparent;
+  background: linear-gradient(90deg, #38bdf8, #a78bfa, #38bdf8);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradient 4s linear infinite;
+}
+
+.name {
+  color: #c4b5fd;
+  font: 500 clamp(10px, 1.6vh, 13px) Orbitron, sans-serif;
+  letter-spacing: clamp(1px, .4vw, 4px);
+  margin-top: clamp(14px, 2vh, 22px);
+}
+
+.message {
+  color: #a5b4cc;
+  font-size: clamp(12px, 1.8vh, 15px);
+  line-height: 1.8;
+  margin-top: clamp(10px, 1.8vh, 18px);
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: clamp(16px, 2.5vh, 27px);
+}
+
+.features span {
+  padding: 9px 12px;
+  background: #071322c9;
+  border: 1px solid #38bdf82b;
+  color: #b4dff5;
+  font: 8px Orbitron, sans-serif;
+  letter-spacing: .7px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(20px, 3vh, 30px);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 22px;
+  min-height: 46px;
+  text-decoration: none;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid #a78bfa70;
+  background: linear-gradient(110deg, #6d28d9, #2563eb);
+  box-shadow: 0 0 25px #6366f125;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.btn.secondary {
+  background: #0b1425c9;
+  border-color: #38bdf860;
+  color: #b4e7ff;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 32px #38bdf830;
+}
+
+.btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+
+footer {
+  color: #657792;
+  font-size: 8px;
+}
+
+footer strong {
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffffff10;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--purple), var(--blue));
+  animation: loading 2s ease forwards;
+}
+
+.fade-out {
+  animation: exit .5s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  to { box-shadow: 0 0 45px #38bdf850, inset 0 0 25px #38bdf825; }
+}
+
+@keyframes gradient {
+  to { background-position: 200%; }
+}
+
+@keyframes loading {
+  to { transform: scaleX(1); }
+}
+
+@keyframes exit {
+  to { opacity: 0; transform: scale(1.03); filter: blur(7px); }
+}
+
+@media (max-height: 700px) {
+  .scene { padding-top: 10px; padding-bottom: 10px; }
+  main { padding: 5px 0; }
+  .chip { width: 42px; height: 42px; margin-bottom: 10px; }
+  .chip::before { inset: -4px; }
+  .chip::after { inset: -7px; }
+  .kicker { margin-bottom: 8px; }
+  .name, .message { margin-top: 7px; }
+  .features { margin-top: 10px; }
+  .actions { margin-top: 12px; }
+  .btn { min-height: 38px; padding: 10px 16px; }
+}
+
+@media (max-width: 600px) {
+  header, footer { font-size: 7px; letter-spacing: .5px; }
+  h1 { font-size: clamp(30px, 8.5vw, 48px); }
+  .name { letter-spacing: 1px; }
+  .features { gap: 6px; }
+  .features span { font-size: 7px; padding: 8px; }
+  .actions { gap: 8px; }
+  .btn { padding: 12px 14px; font-size: 10px; }
+}
+
+@media (max-height: 500px) {
+  .chip { display: none; }
+  .features { margin-top: 7px; }
+  .actions { margin-top: 8px; }
+  .message { line-height: 1.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="scene" id="scene">
+  <canvas id="circuits"></canvas>
+  <div class="grid"></div>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <header>
+    <div class="brand">SV // COMPUTER ENGINEERING</div>
+    <div class="status"><i></i> SESSION COMPLETE</div>
+  </header>
+
+  <main>
+    <div class="chip">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="12" y="12" width="24" height="24" rx="2"/>
+        <path d="M18 4v8 M30 4v8 M18 36v8 M30 36v8 M4 18h8 M4 30h8 M36 18h8 M36 30h8"/>
+        <path d="M18 24l4 4 8-9"/>
+      </svg>
+    </div>
+
+    <div class="kicker">END OF TRANSMISSION</div>
+
+    <h1>
+      THANK YOU
+      <span>FOR VISITING</span>
+    </h1>
+
+    <div class="name">SHANE VINCENT OLAVARIO</div>
+
+    <p class="message">
+      Every great system starts with an idea.<br>
+      Thanks for being part of my journey in Computer Engineering.
+    </p>
+
+    <div class="features">
+      <span>KEEP BUILDING</span>
+      <span>KEEP LEARNING</span>
+      <span>KEEP INNOVATING</span>
+    </div>
+
+    <div class="actions">
+      <a class="btn" href="index.html">BACK TO HOME <span>↗</span></a>
+      <a class="btn secondary" href="projects.html">EXPLORE PROJECTS <span>⌘</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <span>CE // <strong>FUTURE IN DEVELOPMENT</strong></span>
+    <span>01010100 01001000 01011000</span>
+  </footer>
+
+  <div class="progress"><span></span></div>
+</div>
+
+<script>
+const canvas = document.getElementById("circuits");
+const ctx = canvas.getContext("2d");
+const scene = document.getElementById("scene");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let w, h, particles = [], traces = [];
+
+function resize() {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  w = innerWidth;
+  h = innerHeight;
+
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  particles = Array.from({length: 70}, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.5 + .4,
+    speed: Math.random() * .4 + .1
+  }));
+
+  traces = Array.from({length: 32}, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    length: Math.random() * 65 + 20,
+    horizontal: Math.random() > .5,
+    phase: Math.random() * Math.PI * 2
+  }));
+}
+
+function draw(time = 0) {
+  ctx.clearRect(0, 0, w, h);
+
+  traces.forEach((t, i) => {
+    ctx.beginPath();
+    ctx.strokeStyle = i % 2
+      ? "rgba(56,189,248,.16)"
+      : "rgba(139,92,246,.18)";
+    ctx.lineWidth = 1;
+
+    if (t.horizontal) {
+      ctx.moveTo(t.x, t.y);
+      ctx.lineTo(t.x + t.length, t.y);
+      ctx.lineTo(t.x + t.length, t.y + 18);
+    } else {
+      ctx.moveTo(t.x, t.y);
+      ctx.lineTo(t.x, t.y + t.length);
+      ctx.lineTo(t.x + 18, t.y + t.length);
+    }
+
+    ctx.stroke();
+
+    const pulse = (Math.sin(time * .002 + t.phase) + 1) / 2;
+    ctx.fillStyle = `rgba(56,189,248,${pulse * .8})`;
+    ctx.beginPath();
+    ctx.arc(t.x, t.y, 1 + pulse, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  particles.forEach(p => {
+    if (!reduceMotion) {
+      p.y -= p.speed;
+      if (p.y < 0) {
+        p.y = h;
+        p.x = Math.random() * w;
+      }
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(125,211,252,.7)";
+    ctx.fill();
+  });
+
+  ctx.font = "10px monospace";
+  ctx.fillStyle = "rgba(56,189,248,.13)";
+
+  for (let i = 0; i < 12; i++) {
+    ctx.fillText(
+      i % 2 ? "01001010" : "10110100",
+      i * (w / 12),
+      (time * .018 + i * 91) % (h + 30)
+    );
+  }
+
+  if (!reduceMotion) requestAnimationFrame(draw);
+}
+
+window.addEventListener("resize", resize);
+resize();
+draw();
+
+document.querySelectorAll(".btn").forEach(link => {
+  link.addEventListener("click", event => {
+    if (
+      event.button !== 0 ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.altKey
+    ) return;
+
+    const url = new URL(link.href);
+
+    if (url.origin !== location.origin) return;
+
+    event.preventDefault();
+    scene.classList.add("fade-out");
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 450);
+  });
+});
+</script>
+</body>
+</html>
