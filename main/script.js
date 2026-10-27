@@ -1693,3 +1693,142 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateScrollProgress();
 });
+
+(() => {
+  const selectors = [
+    ".project-card",
+    ".project-item",
+    ".skill-card",
+    ".about-card",
+    ".info-card",
+    ".stat-card",
+    "section h2",
+    ".section-title"
+  ];
+
+  const elements = document.querySelectorAll(selectors.join(","));
+
+  elements.forEach((element, index) => {
+    if (element.dataset.motionReady) return;
+
+    element.dataset.motionReady = "true";
+    element.classList.add("motion-reveal");
+    element.style.setProperty(
+      "--motion-delay",
+      `${(index % 4) * 90}ms`
+    );
+  });
+
+  const style = document.createElement("style");
+  style.textContent = `
+    .motion-reveal {
+      opacity: 0;
+      transform: translateY(28px) scale(.985);
+      filter: blur(4px);
+      transition:
+        opacity .7s cubic-bezier(.2,.8,.2,1),
+        transform .7s cubic-bezier(.2,.8,.2,1),
+        filter .7s ease;
+      transition-delay: var(--motion-delay, 0ms);
+    }
+
+    .motion-reveal.motion-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .motion-reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach(element =>
+      element.classList.add("motion-visible")
+    );
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("motion-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -35px 0px"
+  });
+
+  elements.forEach(element => observer.observe(element));
+})();
+
+
+/* =========================================
+   CINEMATIC NAVIGATION + CLICK FEEDBACK
+========================================= */
+
+(() => {
+  // Cross-document View Transitions are handled by the browser.
+  // Use a fade fallback if that feature is unavailable.
+  const supportsPageTransitions =
+    CSS.supports("view-transition-name: root") &&
+    "startViewTransition" in document;
+
+  document.addEventListener("click", event => {
+    const link = event.target.closest("a[href]");
+
+    if (!link) return;
+    if (event.defaultPrevented) return;
+    if (event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey ||
+        event.shiftKey || event.altKey) return;
+    if (link.target && link.target !== "_self") return;
+    if (link.hasAttribute("download")) return;
+
+    const url = new URL(link.href, location.href);
+
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname &&
+        url.search === location.search) return;
+
+    if (supportsPageTransitions) return;
+
+    event.preventDefault();
+    document.body.classList.add("page-leaving");
+
+    window.setTimeout(() => {
+      location.href = url.href;
+    }, 180);
+  });
+
+  // Subtle press feedback for buttons and button-like controls.
+  document.addEventListener("pointerdown", event => {
+    const control = event.target.closest(
+      "button, input[type='button'], input[type='submit'], " +
+      "[role='button'], .btn, .button"
+    );
+
+    if (!control || control.disabled) return;
+
+    control.classList.remove("click-feedback");
+
+    // Restart the small press animation on repeated clicks.
+    void control.offsetWidth;
+    control.classList.add("click-feedback");
+  });
+
+  document.addEventListener("animationend", event => {
+    if (event.animationName === "clickPress") {
+      event.target.classList.remove("click-feedback");
+    }
+  });
+})();

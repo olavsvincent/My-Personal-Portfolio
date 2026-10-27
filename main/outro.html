@@ -4,532 +4,834 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050811">
-<title>Thank You | Shane Vincent Olavario</title>
+<meta name="theme-color" content="#17152d">
+<title>See You Around | Olavario.dev</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
-
 :root {
-  --blue: #38bdf8;
-  --purple: #8b5cf6;
-  --bg: #050811;
+  --pink: #f4a6cf;
+  --lavender: #b8a4ff;
+  --muted: #ded1ee;
+  --night: #17152d;
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
   min-height: 100vh;
-  min-height: 100dvh;
-  overflow: hidden;
-  color: #fff;
-  background: var(--bg);
-  font-family: Inter, sans-serif;
+  background: var(--night);
+  color: #fff8ff;
+  font-family: "Segoe UI", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-.scene {
-  height: 100vh;
-  height: 100dvh;
-  min-height: 440px;
-  width: 100%;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(14px, 2.5vh, 25px) clamp(16px, 5vw, 60px);
-  background: radial-gradient(ellipse at center, #111b35, #050811 72%);
+button, a, input {
+  font: inherit;
 }
 
-#circuits {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.grid {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(#38bdf810 1px, transparent 1px),
-    linear-gradient(90deg, #38bdf810 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(transparent, black 25%, black 75%, transparent);
-}
-
-.glow {
-  position: absolute;
-  z-index: -1;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  filter: blur(110px);
-  opacity: .18;
-  pointer-events: none;
-}
-
-.glow-a {
-  background: var(--blue);
-  top: 10%;
-  left: -140px;
-}
-
-.glow-b {
-  background: var(--purple);
-  right: -130px;
-  bottom: 0;
-}
-
-header, footer {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font: 9px Orbitron, sans-serif;
-  letter-spacing: 1.5px;
-}
-
-.brand {
-  color: var(--blue);
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #9caec9;
-}
-
-.status i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 12px #4ade80;
-}
-
-main {
-  width: 100%;
-  max-width: 1000px;
-  margin: auto;
-  padding: clamp(12px, 2vh, 24px) 0;
-  text-align: center;
-  animation: appear 1.2s ease both;
-}
-
-.chip {
-  position: relative;
-  width: clamp(54px, 9vh, 82px);
-  height: clamp(54px, 9vh, 82px);
-  display: grid;
-  place-items: center;
-  margin: 0 auto clamp(18px, 3vh, 30px);
-  background: #0a1727;
-  border: 1px solid #38bdf880;
-  box-shadow: 0 0 35px #38bdf830, inset 0 0 20px #38bdf815;
-  animation: pulse 2.5s ease-in-out infinite alternate;
-}
-
-.chip::before, .chip::after {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  border: 1px solid #38bdf840;
-  animation: rotate 12s linear infinite;
-}
-
-.chip::after {
-  inset: -15px;
-  border-color: #8b5cf640;
-  animation-direction: reverse;
-}
-
-.chip svg {
-  width: 55%;
-  height: 55%;
-  stroke: var(--blue);
-  fill: none;
-  stroke-width: 1.5;
-}
-
-.kicker {
-  color: var(--blue);
-  font: 10px Orbitron, sans-serif;
-  letter-spacing: 4px;
-  margin-bottom: clamp(12px, 2vh, 20px);
-}
-
-h1 {
-  font: 800 clamp(35px, min(7vw, 8vh), 84px)/1.12 Orbitron, sans-serif;
-  letter-spacing: -1.5px;
-}
-
-h1 span {
-  display: block;
-  color: transparent;
-  background: linear-gradient(90deg, #38bdf8, #a78bfa, #38bdf8);
-  background-size: 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: gradient 4s linear infinite;
-}
-
-.name {
-  color: #c4b5fd;
-  font: 500 clamp(10px, 1.6vh, 13px) Orbitron, sans-serif;
-  letter-spacing: clamp(1px, .4vw, 4px);
-  margin-top: clamp(14px, 2vh, 22px);
-}
-
-.message {
-  color: #a5b4cc;
-  font-size: clamp(12px, 1.8vh, 15px);
-  line-height: 1.8;
-  margin-top: clamp(10px, 1.8vh, 18px);
-}
-
-.features {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: clamp(16px, 2.5vh, 27px);
-}
-
-.features span {
-  padding: 9px 12px;
-  background: #071322c9;
-  border: 1px solid #38bdf82b;
-  color: #b4dff5;
-  font: 8px Orbitron, sans-serif;
-  letter-spacing: .7px;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: clamp(20px, 3vh, 30px);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 14px 22px;
-  min-height: 46px;
-  text-decoration: none;
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  border: 1px solid #a78bfa70;
-  background: linear-gradient(110deg, #6d28d9, #2563eb);
-  box-shadow: 0 0 25px #6366f125;
-  transition: transform .25s, box-shadow .25s;
-}
-
-.btn.secondary {
-  background: #0b1425c9;
-  border-color: #38bdf860;
-  color: #b4e7ff;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 32px #38bdf830;
-}
-
-.btn:focus-visible {
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
   outline: 2px solid white;
   outline-offset: 4px;
 }
 
-footer {
-  color: #657792;
-  font-size: 8px;
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(15,15,40,.15), transparent 55%, #17152d),
+    linear-gradient(110deg, #25234d, #77547f 43%, #e8a0b7 77%, #f9c8b4);
 }
 
-footer strong {
-  color: var(--blue);
-  font-weight: 500;
+.sun {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  right: 15%;
+  top: 39%;
+  border-radius: 50%;
+  background: #ffdec9;
+  box-shadow: 0 0 80px rgba(255,193,201,.65);
 }
 
-.progress {
+.sky::after {
+  content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
   width: 100%;
-  height: 2px;
-  background: #ffffff10;
+  height: 40%;
+  background: linear-gradient(transparent, #17152d);
 }
 
-.progress span {
-  display: block;
-  height: 100%;
+.city {
+  position: absolute;
+  bottom: 12%;
   width: 100%;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: linear-gradient(90deg, var(--purple), var(--blue));
-  animation: loading 2s ease forwards;
+  height: 18%;
+  opacity: .8;
+  background:
+    linear-gradient(to top, #24203b 0 55%, transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 20px,
+      rgba(35,28,58,.9) 21px 48px,
+      transparent 49px 60px
+    );
 }
 
-.fade-out {
-  animation: exit .5s ease forwards;
+.roof {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 14%;
+  background: linear-gradient(#25203b, #0e1022);
+  border-top: 2px solid rgba(255,203,224,.4);
+}
+
+.roof::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  height: 3px;
+  background: rgba(255,220,235,.35);
+}
+
+#petals {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
   pointer-events: none;
+  z-index: 4;
+}
+
+.petal {
+  position: absolute;
+  top: -25px;
+  width: 12px;
+  height: 8px;
+  border-radius: 90% 10% 90% 10%;
+  background: linear-gradient(135deg, #fff3f9, #f2a5ce);
+  box-shadow: 0 0 8px rgba(255,188,221,.3);
+  animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate(0,-5vh) rotate(0deg);
+  }
+  50% {
+    transform: translate(65px,50vh) rotate(220deg);
+  }
+  100% {
+    transform: translate(-35px,110vh) rotate(540deg);
+  }
+}
+
+main {
+  position: relative;
+  z-index: 2;
+  width: min(1150px, calc(100% - 40px));
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  padding: 65px 0 90px;
+}
+
+.message {
+  max-width: 570px;
+  animation: appear 1.2s ease both;
 }
 
 @keyframes appear {
-  from { opacity: 0; transform: translateY(20px); filter: blur(6px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes rotate {
-  to { transform: rotate(360deg); }
+.japanese {
+  font-size: clamp(30px,5vw,55px);
+  font-weight: 300;
+  letter-spacing: 7px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 30px rgba(255,221,244,.2);
 }
 
-@keyframes pulse {
-  to { box-shadow: 0 0 45px #38bdf850, inset 0 0 25px #38bdf825; }
+.english {
+  color: #f3c9e7;
+  font-size: 11px;
+  letter-spacing: 5px;
+  margin-bottom: 28px;
 }
 
-@keyframes gradient {
-  to { background-position: 200%; }
+.description {
+  max-width: 440px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
 }
 
-@keyframes loading {
-  to { transform: scaleX(1); }
+.signature {
+  margin-top: 20px;
+  color: #ffd5eb;
+  font-family: cursive;
+  font-size: 22px;
+  font-style: italic;
 }
 
-@keyframes exit {
-  to { opacity: 0; transform: scale(1.03); filter: blur(7px); }
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 42px;
 }
 
-@media (max-height: 700px) {
-  .scene { padding-top: 10px; padding-bottom: 10px; }
-  main { padding: 5px 0; }
-  .chip { width: 42px; height: 42px; margin-bottom: 10px; }
-  .chip::before { inset: -4px; }
-  .chip::after { inset: -7px; }
-  .kicker { margin-bottom: 8px; }
-  .name, .message { margin-top: 7px; }
-  .features { margin-top: 10px; }
-  .actions { margin-top: 12px; }
-  .btn { min-height: 38px; padding: 10px 16px; }
+.btn {
+  min-height: 46px;
+  padding: 0 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(255,232,250,.5);
+  border-radius: 30px;
+  background: rgba(25,22,55,.4);
+  color: white;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
 }
 
-@media (max-width: 600px) {
-  header, footer { font-size: 7px; letter-spacing: .5px; }
-  h1 { font-size: clamp(30px, 8.5vw, 48px); }
-  .name { letter-spacing: 1px; }
-  .features { gap: 6px; }
-  .features span { font-size: 7px; padding: 8px; }
-  .actions { gap: 8px; }
-  .btn { padding: 12px 14px; font-size: 10px; }
+.btn:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.12);
 }
 
-@media (max-height: 500px) {
-  .chip { display: none; }
-  .features { margin-top: 7px; }
-  .actions { margin-top: 8px; }
-  .message { line-height: 1.5; }
+.btn.primary {
+  background: linear-gradient(110deg,#b8a4ff,#f1a8d1);
+  border-color: transparent;
+  color: #21152f;
+}
+
+.caption {
+  margin-top: 25px;
+  color: #e1cfe9;
+  font: 10px monospace;
+  letter-spacing: 2px;
+}
+
+/* Sound control */
+
+.sound-control {
+  position: fixed;
+  z-index: 30;
+  right: 22px;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,232,250,.3);
+  border-radius: 30px;
+  background: rgba(23,21,45,.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0,0,0,.2);
+}
+
+.sound-toggle {
+  width: 35px;
+  height: 35px;
+  border: 1px solid rgba(255,232,250,.35);
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  color: white;
+  cursor: pointer;
+}
+
+.sound-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sound-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.sound-status {
+  color: #d7c7e5;
+  font-size: 9px;
+}
+
+.sound-volume {
+  width: 65px;
+  accent-color: var(--pink);
+  cursor: pointer;
+}
+
+/* Cinematic transition overlay */
+
+.closing {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background: #fff1fa;
+}
+
+.closing.active {
+  visibility: visible;
+  pointer-events: auto;
+  animation: closingStart .45s ease forwards;
+}
+
+@keyframes closingStart {
+  to { opacity: 1; }
+}
+
+.closing-scene {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,rgba(21,19,54,.05),rgba(25,17,48,.3)),
+    linear-gradient(120deg,#34325f,#b27fae 55%,#ffccce);
+  transform: scale(1.12);
+}
+
+.closing.active .closing-scene {
+  animation: sceneDrift 4s ease-out forwards;
+}
+
+@keyframes sceneDrift {
+  to {
+    transform: scale(1.02);
+  }
+}
+
+.closing-sun {
+  position: absolute;
+  width: min(65vw,400px);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 54%;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#fff6ed,#ffc2dd);
+  box-shadow: 0 0 100px rgba(255,218,238,.6);
+  transform: translate(-50%,-50%) scale(.2);
+  opacity: 0;
+}
+
+.closing.active .closing-sun {
+  animation: sunReveal 1.5s .2s ease-out forwards;
+}
+
+@keyframes sunReveal {
+  to {
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+  }
+}
+
+.closing-text {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 43%;
+  text-align: center;
+  color: white;
+  opacity: 0;
+  transform: translateY(15px);
+  text-shadow: 0 2px 20px rgba(42,25,64,.45);
+}
+
+.closing.active .closing-text {
+  animation: textReveal .8s 1s ease forwards;
+}
+
+.closing-text small {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.closing-text h2 {
+  font-size: clamp(30px,7vw,68px);
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.closing-text p {
+  margin-top: 18px;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+@keyframes textReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.manga-break {
+  position: absolute;
+  inset: -20%;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.manga-break::before,
+.manga-break::after {
+  content: "";
+  position: absolute;
+  width: 160%;
+  height: 2px;
+  background: white;
+  box-shadow: 0 0 25px white;
+  transform: rotate(-14deg) scaleX(0);
+}
+
+.manga-break::after {
+  transform: rotate(14deg) scaleX(0);
+}
+
+.closing.active .manga-break {
+  animation: panelFlash .8s 2.7s ease forwards;
+}
+
+.closing.active .manga-break::before {
+  animation: lineCut .45s 2.8s ease forwards;
+}
+
+.closing.active .manga-break::after {
+  animation: lineCutReverse .45s 2.9s ease forwards;
+}
+
+@keyframes lineCut {
+  to { transform: rotate(-14deg) scaleX(1); }
+}
+
+@keyframes lineCutReverse {
+  to { transform: rotate(14deg) scaleX(1); }
+}
+
+@keyframes panelFlash {
+  0% { opacity: 0; }
+  30% { opacity: 1; background: #fff; }
+  65% { opacity: 1; background: #f8d7ed; }
+  100% { opacity: 0; }
+}
+
+.closing.end {
+  animation: finalFade .7s ease forwards;
+}
+
+@keyframes finalFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 650px) {
+  main {
+    width: calc(100% - 32px);
+    padding: 45px 0 100px;
+  }
+
+  .japanese {
+    font-size: clamp(28px,8vw,45px);
+    letter-spacing: 3px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    max-width: 310px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .sun {
+    width: 130px;
+    right: 8%;
+    top: 28%;
+  }
+
+  .sound-control {
+    right: 12px;
+    bottom: 12px;
+    padding: 8px 10px;
+  }
+
+  .sound-volume {
+    width: 48px;
+  }
+
+  .closing-text small {
+    letter-spacing: 3px;
+  }
+
+  .closing-text p {
+    font-size: 10px;
+    line-height: 1.8;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
+  .petal {
+    animation-duration: 20s;
+  }
+
+  .message {
+    animation: none;
   }
 }
 </style>
 </head>
 
 <body>
-<div class="scene" id="scene">
-  <canvas id="circuits"></canvas>
-  <div class="grid"></div>
-  <div class="glow glow-a"></div>
-  <div class="glow glow-b"></div>
 
-  <header>
-    <div class="brand">SV // COMPUTER ENGINEERING</div>
-    <div class="status"><i></i> SESSION COMPLETE</div>
-  </header>
-
-  <main>
-    <div class="chip">
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <rect x="12" y="12" width="24" height="24" rx="2"/>
-        <path d="M18 4v8 M30 4v8 M18 36v8 M30 36v8 M4 18h8 M4 30h8 M36 18h8 M36 30h8"/>
-        <path d="M18 24l4 4 8-9"/>
-      </svg>
-    </div>
-
-    <div class="kicker">END OF TRANSMISSION</div>
-
-    <h1>
-      THANK YOU
-      <span>FOR VISITING</span>
-    </h1>
-
-    <div class="name">SHANE VINCENT OLAVARIO</div>
-
-    <p class="message">
-      Every great system starts with an idea.<br>
-      Thanks for being part of my journey in Computer Engineering.
-    </p>
-
-    <div class="features">
-      <span>KEEP BUILDING</span>
-      <span>KEEP LEARNING</span>
-      <span>KEEP INNOVATING</span>
-    </div>
-
-    <div class="actions">
-      <a class="btn" href="index.html">BACK TO HOME <span>↗</span></a>
-      <a class="btn secondary" href="projects.html">EXPLORE PROJECTS <span>⌘</span></a>
-    </div>
-  </main>
-
-  <footer>
-    <span>CE // <strong>FUTURE IN DEVELOPMENT</strong></span>
-    <span>01010100 01001000 01011000</span>
-  </footer>
-
-  <div class="progress"><span></span></div>
+<div class="sky">
+  <div class="sun"></div>
+  <div class="city"></div>
+  <div class="roof"></div>
 </div>
 
+<div id="petals"></div>
+
+<main>
+  <section class="message">
+    <div class="japanese">また、どこかで。</div>
+    <div class="english">SEE YOU AROUND.</div>
+
+    <p class="description">
+      Thank you for being part of this journey.<br>
+      Every project, every lesson, every moment<br>
+      brings me closer to the person I want to become.<br>
+      This isn't the end — it's just another chapter.
+    </p>
+
+    <div class="signature">— Olavario</div>
+
+    <div class="buttons">
+      <button class="btn primary" id="playClosing" type="button">
+        ▶ PLAY CLOSING SCENE
+      </button>
+
+      <a class="btn" id="returnHome" href="index.html">
+        RETURN TO PORTFOLIO →
+      </a>
+    </div>
+
+    <div class="caption">END CREDITS · THANK YOU FOR WATCHING</div>
+  </section>
+</main>
+
+<audio id="backgroundMusic" src="music/outro.mp3" loop preload="auto"></audio>
+<audio id="slashSound" src="anime-slash.mp3" preload="auto"></audio>
+
+<div class="sound-control">
+  <button
+    class="sound-toggle"
+    id="soundToggle"
+    type="button"
+    aria-label="Mute soundtrack"
+  >♫</button>
+
+  <div class="sound-info">
+    <span class="sound-label">SOUNDTRACK</span>
+    <span class="sound-status" id="soundStatus">LOADING MUSIC...</span>
+  </div>
+
+  <input
+    class="sound-volume"
+    id="soundVolume"
+    type="range"
+    min="0"
+    max="100"
+    value="35"
+    aria-label="Music volume"
+  >
+</div>
+
+<section class="closing" id="closing" aria-hidden="true">
+  <div class="closing-scene"></div>
+  <div class="closing-sun"></div>
+
+  <div class="closing-text">
+    <small>OLAVARIO.DEV PRESENTS</small>
+    <h2>また、会いましょう。</h2>
+    <p>SEE YOU IN THE NEXT CHAPTER.</p>
+  </div>
+
+  <div class="manga-break"></div>
+</section>
+
 <script>
-const canvas = document.getElementById("circuits");
-const ctx = canvas.getContext("2d");
-const scene = document.getElementById("scene");
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+"use strict";
 
-let w, h, particles = [], traces = [];
+const $ = id => document.getElementById(id);
 
-function resize() {
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  w = innerWidth;
-  h = innerHeight;
+const closing = $("closing");
+const playButton = $("playClosing");
+const returnButton = $("returnHome");
 
-  canvas.width = w * dpr;
-  canvas.height = h * dpr;
-  canvas.style.width = w + "px";
-  canvas.style.height = h + "px";
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+const backgroundMusic = $("backgroundMusic");
+const slashSound = $("slashSound");
 
-  particles = Array.from({length: 70}, () => ({
-    x: Math.random() * w,
-    y: Math.random() * h,
-    r: Math.random() * 1.5 + .4,
-    speed: Math.random() * .4 + .1
-  }));
+const soundToggle = $("soundToggle");
+const soundStatus = $("soundStatus");
+const soundVolume = $("soundVolume");
 
-  traces = Array.from({length: 32}, () => ({
-    x: Math.random() * w,
-    y: Math.random() * h,
-    length: Math.random() * 65 + 20,
-    horizontal: Math.random() > .5,
-    phase: Math.random() * Math.PI * 2
-  }));
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+$("year") && ($("year").textContent = new Date().getFullYear());
+
+let soundEnabled = true;
+let musicStarted = false;
+let busy = false;
+let sceneTimers = [];
+
+backgroundMusic.volume = Number(soundVolume.value) / 100;
+slashSound.volume = 0.85;
+
+// Falling petals
+const petalContainer = $("petals");
+
+for (let i = 0; i < 30; i++) {
+  const petal = document.createElement("span");
+
+  petal.className = "petal";
+  petal.style.left = Math.random() * 100 + "%";
+  petal.style.animationDuration = (7 + Math.random() * 9) + "s";
+  petal.style.animationDelay = (-Math.random() * 15) + "s";
+  petal.style.opacity = 0.35 + Math.random() * 0.6;
+
+  petalContainer.appendChild(petal);
 }
 
-function draw(time = 0) {
-  ctx.clearRect(0, 0, w, h);
+function updateSoundUI() {
+  soundToggle.textContent = soundEnabled ? "♫" : "♪";
 
-  traces.forEach((t, i) => {
-    ctx.beginPath();
-    ctx.strokeStyle = i % 2
-      ? "rgba(56,189,248,.16)"
-      : "rgba(139,92,246,.18)";
-    ctx.lineWidth = 1;
+  soundToggle.setAttribute(
+    "aria-label",
+    soundEnabled ? "Mute soundtrack" : "Enable soundtrack"
+  );
 
-    if (t.horizontal) {
-      ctx.moveTo(t.x, t.y);
-      ctx.lineTo(t.x + t.length, t.y);
-      ctx.lineTo(t.x + t.length, t.y + 18);
-    } else {
-      ctx.moveTo(t.x, t.y);
-      ctx.lineTo(t.x, t.y + t.length);
-      ctx.lineTo(t.x + 18, t.y + t.length);
-    }
+  soundStatus.textContent = !soundEnabled
+    ? "SOUND OFF"
+    : musicStarted
+      ? "NOW PLAYING"
+      : "CLICK TO ENABLE";
+}
 
-    ctx.stroke();
+async function startMusic() {
+  if (!soundEnabled || document.hidden) return;
 
-    const pulse = (Math.sin(time * .002 + t.phase) + 1) / 2;
-    ctx.fillStyle = `rgba(56,189,248,${pulse * .8})`;
-    ctx.beginPath();
-    ctx.arc(t.x, t.y, 1 + pulse, 0, Math.PI * 2);
-    ctx.fill();
-  });
+  backgroundMusic.volume = Number(soundVolume.value) / 100;
 
-  particles.forEach(p => {
-    if (!reduceMotion) {
-      p.y -= p.speed;
-      if (p.y < 0) {
-        p.y = h;
-        p.x = Math.random() * w;
-      }
-    }
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(125,211,252,.7)";
-    ctx.fill();
-  });
-
-  ctx.font = "10px monospace";
-  ctx.fillStyle = "rgba(56,189,248,.13)";
-
-  for (let i = 0; i < 12; i++) {
-    ctx.fillText(
-      i % 2 ? "01001010" : "10110100",
-      i * (w / 12),
-      (time * .018 + i * 91) % (h + 30)
-    );
+  if (backgroundMusic.volume === 0) {
+    soundStatus.textContent = "VOLUME MUTED";
+    return;
   }
 
-  if (!reduceMotion) requestAnimationFrame(draw);
+  try {
+    await backgroundMusic.play();
+    musicStarted = true;
+  } catch (error) {
+    musicStarted = false;
+    soundStatus.textContent = "CLICK TO ENABLE";
+  }
+
+  updateSoundUI();
 }
 
-window.addEventListener("resize", resize);
-resize();
-draw();
+function stopMusic() {
+  backgroundMusic.pause();
+  musicStarted = false;
+  updateSoundUI();
+}
 
-document.querySelectorAll(".btn").forEach(link => {
-  link.addEventListener("click", event => {
-    if (
-      event.button !== 0 ||
-      event.ctrlKey ||
-      event.metaKey ||
-      event.shiftKey ||
-      event.altKey
-    ) return;
+function playSlash() {
+  if (!soundEnabled) return;
 
-    const url = new URL(link.href);
+  slashSound.currentTime = 0;
+  slashSound.volume = 0.85;
 
-    if (url.origin !== location.origin) return;
+  slashSound.play().catch(() => {});
+}
 
-    event.preventDefault();
-    scene.classList.add("fade-out");
+function clearSceneTimers() {
+  sceneTimers.forEach(clearTimeout);
+  sceneTimers = [];
+}
 
-    setTimeout(() => {
-      location.href = url.href;
-    }, 450);
-  });
+function later(callback, delay) {
+  const timer = setTimeout(callback, delay);
+  sceneTimers.push(timer);
+  return timer;
+}
+
+// Attempt autoplay as soon as the page loads.
+// Browsers may require a user interaction first.
+startMusic();
+
+backgroundMusic.addEventListener("playing", () => {
+  musicStarted = true;
+  updateSoundUI();
 });
+
+backgroundMusic.addEventListener("pause", () => {
+  musicStarted = false;
+  updateSoundUI();
+});
+
+// Retry playback on the first user interaction if necessary.
+document.addEventListener("pointerdown", () => {
+  if (soundEnabled && !musicStarted) startMusic();
+}, { once: true });
+
+document.addEventListener("keydown", () => {
+  if (soundEnabled && !musicStarted) startMusic();
+}, { once: true });
+
+// Sound toggle
+soundToggle.addEventListener("click", async () => {
+  soundEnabled = !soundEnabled;
+
+  if (soundEnabled) {
+    await startMusic();
+  } else {
+    stopMusic();
+    slashSound.pause();
+    slashSound.currentTime = 0;
+  }
+
+  updateSoundUI();
+});
+
+// Volume slider
+soundVolume.addEventListener("input", () => {
+  backgroundMusic.volume = Number(soundVolume.value) / 100;
+
+  if (backgroundMusic.volume === 0) {
+    stopMusic();
+  } else if (soundEnabled) {
+    startMusic();
+  }
+
+  updateSoundUI();
+});
+
+// Play the closing animation.
+function playScene(redirect = false) {
+  if (busy) return;
+
+  busy = true;
+  clearSceneTimers();
+
+  closing.classList.remove("active", "end");
+  closing.setAttribute("aria-hidden", "false");
+
+  // Force a clean animation restart.
+  void closing.offsetWidth;
+
+  closing.classList.add("active");
+
+  // Sound effect matches the manga panel impact.
+  later(playSlash, reducedMotion ? 500 : 2800);
+
+  if (redirect) {
+    later(() => {
+      // Stop sounds before leaving the page.
+      backgroundMusic.pause();
+      slashSound.pause();
+
+      window.location.href = "index.html";
+    }, reducedMotion ? 1600 : 3600);
+  } else {
+    later(() => {
+      closing.classList.add("end");
+    }, reducedMotion ? 900 : 3150);
+
+    later(() => {
+      closing.classList.remove("active", "end");
+      closing.setAttribute("aria-hidden", "true");
+      busy = false;
+    }, reducedMotion ? 1600 : 3900);
+  }
+}
+
+playButton.addEventListener("click", async () => {
+  // A click provides a chance to start audio before the animation.
+  if (soundEnabled && !musicStarted) {
+    await startMusic();
+  }
+
+  playScene(false);
+});
+
+returnButton.addEventListener("click", async event => {
+  event.preventDefault();
+
+  if (busy) return;
+
+  if (soundEnabled && !musicStarted) {
+    await startMusic();
+  }
+
+  playScene(true);
+});
+
+// Pause while hidden and resume when visible.
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    backgroundMusic.pause();
+  } else if (soundEnabled) {
+    startMusic();
+  }
+});
+
+window.addEventListener("pagehide", () => {
+  clearSceneTimers();
+  backgroundMusic.pause();
+  slashSound.pause();
+});
+
+updateSoundUI();
 </script>
+
 </body>
 </html>
