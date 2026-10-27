@@ -1,11 +1,10 @@
+
 name: Deploy Portfolio to GitHub Pages
 
 on:
   push:
     branches:
       - main
-    paths:
-      - "main/**"
   workflow_dispatch:
 
 permissions:
@@ -23,12 +22,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configure GitHub Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload website files
