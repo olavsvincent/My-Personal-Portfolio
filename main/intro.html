@@ -125,7 +125,9 @@
         border-radius: 999px;
         background: rgba(8, 8, 18, 0.92);
         color: #ffffff;
-        font: 700 11px/1.4 system-ui, sans-serif;
+        font:
+          700 11px/1.4 system-ui,
+          sans-serif;
         letter-spacing: 0.14em;
         text-align: center;
         box-shadow: 0 0 28px #8b5cf633;
@@ -138,8 +140,12 @@
       }
 
       @keyframes audioPromptPulse {
-        from { opacity: 0.72; }
-        to { opacity: 1; }
+        from {
+          opacity: 0.72;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       /* LOADING SCREEN */
@@ -1296,7 +1302,9 @@
 
         // Show a useful error in the browser console if the file is missing.
         music.addEventListener("error", () => {
-          console.warn("Could not load anime-bg.mp3. Keep it in the same folder as pogiako.html and check the spelling.");
+          console.warn(
+            "Could not load anime-bg.mp3. Keep it in the same folder as pogiako.html and check the spelling.",
+          );
         });
 
         const animeSlashSound = new Audio("music/anime-slash.mp3");
@@ -1313,12 +1321,14 @@
 
           const playAttempt = music.play();
           if (playAttempt && typeof playAttempt.then === "function") {
-            playAttempt.then(() => {
-              audioStartPrompt.classList.add("hidden");
-            }).catch(() => {
-              // Keep the prompt visible until the visitor interacts.
-              audioStartPrompt.classList.remove("hidden");
-            });
+            playAttempt
+              .then(() => {
+                audioStartPrompt.classList.add("hidden");
+              })
+              .catch(() => {
+                // Keep the prompt visible until the visitor interacts.
+                audioStartPrompt.classList.remove("hidden");
+              });
           }
         }
 
@@ -1469,7 +1479,10 @@
             animeSlashSound.pause();
             animeSlashSound.currentTime = 0;
             animeSlashSound.play().catch((error) => {
-              console.warn("Could not play anime-slash.mp3. Check the file name and folder.", error);
+              console.warn(
+                "Could not play anime-slash.mp3. Check the file name and folder.",
+                error,
+              );
             });
           } catch (error) {
             console.warn("Anime slash sound unavailable:", error);
@@ -1504,9 +1517,10 @@
 
           window.setTimeout(
             () => {
-              window.location.href = "index.html";
+              sessionStorage.setItem("portfolioIntroComplete", "true");
+              window.location.replace("index.html");
             },
-            motionEnabled ? 2500 : 2000,
+            motionEnabled ? 900 : 600,
           );
         }
 
