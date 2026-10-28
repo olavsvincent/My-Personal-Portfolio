@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#17152d" />
+    <meta name="description" content="A little thank-you from Olavario.dev." />
+    <title>See You Around | Olavario</title>
+
+    <style>
+      :root {
+        --pink: #f4a6cf;
+        --lavender: #b8a4ff;
+        --muted: #ded1ee;
+        --night: #17152d;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        background: var(--night);
+        color: #fff8ff;
+        font-family: "Segoe UI", Arial, sans-serif;
+        overflow-x: hidden;
+      }
+
+      button,
+      a,
+      input {
+        font: inherit;
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 4px;
+      }
+
+      /* Original sunset background */
+
+      .sky {
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        overflow: hidden;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(15, 15, 40, 0.15),
+            transparent 55%,
+            #17152d
+          ),
+          linear-gradient(110deg, #25234d, #77547f 43%, #e8a0b7 77%, #f9c8b4);
+      }
+
+      .sun {
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        right: 15%;
+        top: 39%;
+        border-radius: 50%;
+        background: #ffdec9;
+        box-shadow: 0 0 80px rgba(255, 193, 201, 0.65);
+      }
+
+      .sky::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(transparent, #17152d);
+      }
+
+      .city {
+        position: absolute;
+        bottom: 12%;
+        width: 100%;
+        height: 18%;
+        opacity: 0.8;
+        background:
+          linear-gradient(to top, #24203b 0 55%, transparent 55%),
+          repeating-linear-gradient(
+            90deg,
+            transparent 0 20px,
+            rgba(35, 28, 58, 0.9) 21px 48px,
+            transparent 49px 60px
+          );
+      }
+
+      .roof {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 14%;
+        background: linear-gradient(#25203b, #0e1022);
+        border-top: 2px solid rgba(255, 203, 224, 0.4);
+      }
+
+      .roof::before {
+        content: "";
+        position: absolute;
+        top: 25%;
+        width: 100%;
+        height: 3px;
+        background: rgba(255, 220, 235, 0.35);
+      }
+
+      /* Original falling petals */
+
+      #petals {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 4;
+      }
+
+      .petal {
+        position: absolute;
+        top: -25px;
+        width: 12px;
+        height: 8px;
+        border-radius: 90% 10% 90% 10%;
+        background: linear-gradient(135deg, #fff3f9, #f2a5ce);
+        box-shadow: 0 0 8px rgba(255, 188, 221, 0.3);
+        animation: petalFall linear infinite;
+      }
+
+      @keyframes petalFall {
+        0% {
+          transform: translate(0, -5vh) rotate(0deg);
+        }
+        50% {
+          transform: translate(65px, 50vh) rotate(220deg);
+        }
+        100% {
+          transform: translate(-35px, 110vh) rotate(540deg);
+        }
+      }
+
+      /* Main message */
+
+      main {
+        position: relative;
+        z-index: 2;
+        width: min(1150px, calc(100% - 40px));
+        min-height: 100vh;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        padding: 65px 0 90px;
+      }
+
+      .message {
+        max-width: 570px;
+        animation: appear 1.2s ease both;
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .japanese {
+        font-size: clamp(30px, 5vw, 55px);
+        font-weight: 300;
+        letter-spacing: 7px;
+        margin-bottom: 14px;
+        text-shadow: 0 0 30px rgba(255, 221, 244, 0.2);
+      }
+
+      .english {
+        color: #f3c9e7;
+        font-size: 11px;
+        letter-spacing: 5px;
+        margin-bottom: 28px;
+      }
+
+      .description {
+        max-width: 440px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 2;
+      }
+
+      .komi-quote {
+        display: block;
+        margin-bottom: 18px;
+        padding-left: 14px;
+        border-left: 2px solid var(--pink);
+        color: #ffe0f0;
+        font-style: italic;
+      }
+
+      .quote-credit {
+        display: block;
+        margin-top: 5px;
+        color: #d5c3e8;
+        font-size: 11px;
+        font-style: normal;
+      }
+
+      .signature {
+        margin-top: 20px;
+        color: #ffd5eb;
+        font-family: cursive;
+        font-size: 22px;
+        font-style: italic;
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 42px;
+      }
+
+      .btn {
+        min-height: 46px;
+        padding: 0 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+        border: 1px solid rgba(255, 232, 250, 0.5);
+        border-radius: 30px;
+        background: rgba(25, 22, 55, 0.4);
+        color: white;
+        text-decoration: none;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .btn.primary {
+        background: linear-gradient(110deg, #b8a4ff, #f1a8d1);
+        border-color: transparent;
+        color: #21152f;
+      }
+
+      .caption {
+        margin-top: 25px;
+        color: #e1cfe9;
+        font: 10px monospace;
+        letter-spacing: 2px;
+      }
+
+      /* Sound control */
+
+      .sound-control {
+        position: fixed;
+        z-index: 30;
+        right: 22px;
+        bottom: 22px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border: 1px solid rgba(255, 232, 250, 0.3);
+        border-radius: 30px;
+        background: rgba(23, 21, 45, 0.88);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .sound-toggle {
+        width: 35px;
+        height: 35px;
+        border: 1px solid rgba(255, 232, 250, 0.35);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        cursor: pointer;
+      }
+
+      .sound-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .sound-label {
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+      }
+
+      .sound-status {
+        color: #d7c7e5;
+        font-size: 9px;
+      }
+
+      .sound-volume {
+        width: 65px;
+        accent-color: var(--pink);
+        cursor: pointer;
+      }
+
+      /* Closing scene overlay */
+
+      .closing {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        overflow: hidden;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        background: #17152d;
+      }
+
+      .closing.active {
+        visibility: visible;
+        pointer-events: auto;
+        animation: closingStart 0.6s ease forwards;
+      }
+
+      @keyframes closingStart {
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Night sky and natural moon */
+
+      .closing-scene {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            ellipse at 75% 35%,
+            rgba(111, 83, 140, 0.3),
+            transparent 38%
+          ),
+          linear-gradient(
+            180deg,
+            #11152f 0%,
+            #292449 43%,
+            #62476f 72%,
+            #bd809e 100%
+          );
+        transform: scale(1.08);
+      }
+
+      .closing.active .closing-scene {
+        animation: nightDrift 5s ease-out forwards;
+      }
+
+      @keyframes nightDrift {
+        to {
+          transform: scale(1);
+        }
+      }
+
+      .stars {
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(1px 1px at 12% 15%, white 99%, transparent),
+          radial-gradient(2px 2px at 25% 28%, #ffe7f7 99%, transparent),
+          radial-gradient(1px 1px at 42% 12%, white 99%, transparent),
+          radial-gradient(1px 1px at 57% 23%, white 99%, transparent),
+          radial-gradient(2px 2px at 88% 15%, #ffe7f7 99%, transparent),
+          radial-gradient(1px 1px at 67% 10%, white 99%, transparent),
+          radial-gradient(1px 1px at 34% 37%, white 99%, transparent),
+          radial-gradient(1px 1px at 94% 42%, white 99%, transparent),
+          radial-gradient(1px 1px at 8% 48%, white 99%, transparent);
+        opacity: 0.75;
+      }
+
+      .closing-moon {
+        position: absolute;
+        width: clamp(90px, 15vw, 175px);
+        aspect-ratio: 1;
+        right: 17%;
+        top: 13%;
+        border-radius: 50%;
+        opacity: 0;
+        background: radial-gradient(
+          circle at 32% 28%,
+          #fffdf9 0%,
+          #f5e9f5 45%,
+          #d6c8e9 78%,
+          #b7a5ce 100%
+        );
+        box-shadow:
+          0 0 25px rgba(255, 240, 255, 0.3),
+          0 0 65px rgba(221, 194, 255, 0.22),
+          0 0 125px rgba(221, 194, 255, 0.12);
+        transform: translateY(12px) scale(0.92);
+      }
+
+      .closing-moon::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background:
+          radial-gradient(
+            ellipse at 30% 35%,
+            rgba(139, 125, 166, 0.22) 0 8%,
+            transparent 9%
+          ),
+          radial-gradient(
+            ellipse at 64% 27%,
+            rgba(139, 125, 166, 0.18) 0 11%,
+            transparent 12%
+          ),
+          radial-gradient(
+            ellipse at 62% 67%,
+            rgba(139, 125, 166, 0.16) 0 14%,
+            transparent 15%
+          ),
+          radial-gradient(
+            ellipse at 32% 72%,
+            rgba(139, 125, 166, 0.13) 0 7%,
+            transparent 8%
+          );
+      }
+
+      .closing.active .closing-moon {
+        animation: moonReveal 1.7s 0.25s ease-out forwards;
+      }
+
+      @keyframes moonReveal {
+        to {
+          opacity: 0.96;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Distant hills */
+
+      .closing-hills {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 36%;
+        background:
+          radial-gradient(
+            ellipse at 15% 100%,
+            #332846 0 25%,
+            transparent 25.5%
+          ),
+          radial-gradient(
+            ellipse at 53% 110%,
+            #3c2b4b 0 35%,
+            transparent 35.5%
+          ),
+          radial-gradient(ellipse at 93% 110%, #30243f 0 30%, transparent 30.5%);
+      }
+
+      .closing-ground {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 13%;
+        background: linear-gradient(180deg, #30243e, #17152d);
+        border-top: 1px solid rgba(255, 211, 237, 0.2);
+      }
+
+      /* Blossom branches */
+
+      .branch {
+        position: absolute;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0;
+        filter: drop-shadow(0 3px 10px rgba(15, 8, 28, 0.2));
+      }
+
+      .branch svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .branch-left {
+        width: min(58vw, 670px);
+        left: -9%;
+        top: -8%;
+        transform: rotate(2deg) translateY(-25px);
+        transform-origin: top left;
+      }
+
+      .branch-right {
+        width: min(43vw, 520px);
+        right: -8%;
+        bottom: 3%;
+        transform: rotate(180deg) translateY(-20px);
+        transform-origin: center;
+      }
+
+      .closing.active .branch-left {
+        animation: branchReveal 1.5s 0.4s ease-out forwards;
+      }
+
+      .closing.active .branch-right {
+        animation: branchReveal 1.5s 0.7s ease-out forwards;
+      }
+
+      @keyframes branchReveal {
+        to {
+          opacity: 1;
+          transform: rotate(0deg) translateY(0);
+        }
+      }
+
+      /* Foreground petals */
+
+      .scene-petals {
+        position: absolute;
+        inset: -10% 0;
+        z-index: 4;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .scene-petal {
+        position: absolute;
+        top: -35px;
+        width: 13px;
+        height: 9px;
+        border-radius: 90% 10% 90% 10%;
+        background: linear-gradient(135deg, #fff2fa, #eaa5ce);
+        box-shadow: 0 0 12px rgba(255, 200, 232, 0.25);
+        opacity: 0;
+      }
+
+      .closing.active .scene-petal {
+        animation: scenePetalFall var(--duration, 8s) var(--delay, 0s) linear
+          infinite;
+        opacity: var(--opacity, 0.75);
+      }
+
+      @keyframes scenePetalFall {
+        0% {
+          transform: translate3d(0, -5vh, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate3d(80px, 50vh, 0) rotate(300deg);
+        }
+        100% {
+          transform: translate3d(-50px, 110vh, 0) rotate(650deg);
+        }
+      }
+
+      /* Closing message */
+
+      .closing-text {
+        position: absolute;
+        z-index: 6;
+        left: 20px;
+        right: 20px;
+        top: 43%;
+        text-align: center;
+        color: white;
+        opacity: 0;
+        transform: translateY(15px);
+        text-shadow: 0 2px 20px rgba(20, 12, 40, 0.65);
+      }
+
+      .closing.active .closing-text {
+        animation: textReveal 0.9s 1s ease forwards;
+      }
+
+      .closing-text small {
+        display: block;
+        margin-bottom: 18px;
+        color: #ffe2f2;
+        font-size: 10px;
+        letter-spacing: 5px;
+      }
+
+      .closing-text h2 {
+        font-size: clamp(30px, 7vw, 68px);
+        font-weight: 400;
+        letter-spacing: 2px;
+      }
+
+      .closing-text p {
+        margin-top: 18px;
+        color: #f8d9ed;
+        font-size: 11px;
+        letter-spacing: 2px;
+        line-height: 1.9;
+      }
+
+      @keyframes textReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Anime-style finishing flash */
+
+      .manga-break {
+        position: absolute;
+        inset: -20%;
+        z-index: 7;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .manga-break::before,
+      .manga-break::after {
+        content: "";
+        position: absolute;
+        width: 160%;
+        height: 2px;
+        background: white;
+        box-shadow: 0 0 25px white;
+        transform: rotate(-14deg) scaleX(0);
+      }
+
+      .manga-break::after {
+        transform: rotate(14deg) scaleX(0);
+      }
+
+      .closing.active .manga-break {
+        animation: panelFlash 0.8s 2.7s ease forwards;
+      }
+
+      .closing.active .manga-break::before {
+        animation: lineCut 0.45s 2.8s ease forwards;
+      }
+
+      .closing.active .manga-break::after {
+        animation: lineCutReverse 0.45s 2.9s ease forwards;
+      }
+
+      @keyframes lineCut {
+        to {
+          transform: rotate(-14deg) scaleX(1);
+        }
+      }
+
+      @keyframes lineCutReverse {
+        to {
+          transform: rotate(14deg) scaleX(1);
+        }
+      }
+
+      @keyframes panelFlash {
+        0% {
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+          background: #fff;
+        }
+        65% {
+          opacity: 1;
+          background: #f8d7ed;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .closing.end {
+        animation: finalFade 0.7s ease forwards;
+      }
+
+      @keyframes finalFade {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      @media (max-width: 650px) {
+        main {
+          width: calc(100% - 32px);
+          padding: 45px 0 100px;
+        }
+
+        .japanese {
+          font-size: clamp(28px, 8vw, 45px);
+          letter-spacing: 3px;
+        }
+
+        .description {
+          font-size: 13px;
+        }
+
+        .buttons {
+          flex-direction: column;
+          max-width: 310px;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .sun {
+          width: 130px;
+          right: 8%;
+          top: 28%;
+        }
+
+        .sound-control {
+          right: 12px;
+          bottom: 12px;
+          padding: 8px 10px;
+        }
+
+        .sound-volume {
+          width: 48px;
+        }
+
+        .closing-moon {
+          width: 105px;
+          right: 12%;
+          top: 12%;
+        }
+
+        .branch-left {
+          width: 85vw;
+          left: -20%;
+          top: -3%;
+        }
+
+        .branch-right {
+          width: 65vw;
+          right: -20%;
+          bottom: 4%;
+        }
+
+        .closing-text {
+          top: 42%;
+        }
+
+        .closing-text small {
+          letter-spacing: 3px;
+        }
+
+        .closing-text p {
+          font-size: 10px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Smooth transition back to the portfolio */
+      body {
+        opacity: 1;
+        transition: opacity 1s ease;
+      }
+
+      body.returning {
+        opacity: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body {
+          transition-duration: 0.2s;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sky">
+      <div class="sun"></div>
+      <div class="city"></div>
+      <div class="roof"></div>
+    </div>
+
+    <div id="petals"></div>
+
+    <main>
+      <section class="message">
+        <div class="japanese">また、どこかで。</div>
+        <div class="english">SEE YOU AROUND.</div>
+
+        <p class="description">
+          <span class="komi-quote">
+            "I want to make 100 friends."
+            <span class="quote-credit"
+              >— Komi Shouko, Komi Can't Communicate</span
+            >
+          </span>
+
+          Thank you for being part of this journey. Every project, every lesson,
+          every moment brings me closer to the person I want to become.
+          <br /><br />
+          Even quiet journeys can lead to beautiful connections.
+        </p>
+
+        <div class="signature">— Olavario</div>
+
+        <div class="buttons">
+          <button class="btn primary" id="playClosing" type="button">
+            ▶ PLAY CLOSING SCENE
+          </button>
+
+          <a class="btn" id="returnHome" href="index.html">
+            RETURN TO PORTFOLIO →
+          </a>
+        </div>
+
+        <div class="caption">END CREDITS · THANK YOU FOR WATCHING</div>
+      </section>
+    </main>
+
+    <audio
+      id="backgroundMusic"
+      src="music/outro.mp3"
+      loop
+      preload="auto"
+    ></audio>
+    <audio id="slashSound" src="anime-slash.mp3" preload="auto"></audio>
+
+    <div class="sound-control">
+      <button
+        class="sound-toggle"
+        id="soundToggle"
+        type="button"
+        aria-label="Mute soundtrack"
+      >
+        ♫
+      </button>
+
+      <div class="sound-info">
+        <span class="sound-label">SOUNDTRACK</span>
+        <span class="sound-status" id="soundStatus">CLICK TO ENABLE</span>
+      </div>
+
+      <input
+        class="sound-volume"
+        id="soundVolume"
+        type="range"
+        min="0"
+        max="100"
+        value="35"
+        aria-label="Music volume"
+      />
+    </div>
+
+    <!-- Sakura night closing scene -->
+    <section class="closing" id="closing" aria-hidden="true">
+      <div class="closing-scene">
+        <div class="stars"></div>
+        <div class="closing-hills"></div>
+        <div class="closing-ground"></div>
+      </div>
+
+      <div class="closing-moon"></div>
+
+      <!-- Blossom branch on the upper-left -->
+      <div class="branch branch-left">
+        <svg
+          viewBox="0 0 700 480"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="woodLeft" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#554052" />
+              <stop offset="1" stop-color="#211c32" />
+            </linearGradient>
+            <radialGradient id="flowerLeft">
+              <stop offset="0" stop-color="#fff1f7" />
+              <stop offset=".65" stop-color="#f5b8d7" />
+              <stop offset="1" stop-color="#d77eaf" />
+            </radialGradient>
+          </defs>
+
+          <g fill="none" stroke="url(#woodLeft)" stroke-linecap="round">
+            <path
+              d="M-35 30 Q90 95 180 150 T350 210 T510 270 T720 290"
+              stroke-width="28"
+            />
+            <path d="M110 112 Q160 55 205 10" stroke-width="12" />
+            <path d="M170 145 Q260 95 315 38" stroke-width="10" />
+            <path d="M245 180 Q295 135 390 115" stroke-width="12" />
+            <path d="M360 215 Q410 155 480 130" stroke-width="9" />
+            <path d="M420 235 Q470 220 535 175" stroke-width="8" />
+            <path d="M520 270 Q565 225 630 230" stroke-width="7" />
+            <path d="M180 150 Q195 205 240 240" stroke-width="7" />
+            <path d="M300 200 Q310 240 345 270" stroke-width="6" />
+          </g>
+
+          <g fill="#8e668e" opacity=".85">
+            <ellipse
+              cx="110"
+              cy="90"
+              rx="22"
+              ry="11"
+              transform="rotate(-35 110 90)"
+            />
+            <ellipse
+              cx="225"
+              cy="90"
+              rx="22"
+              ry="10"
+              transform="rotate(-30 225 90)"
+            />
+            <ellipse
+              cx="300"
+              cy="125"
+              rx="23"
+              ry="11"
+              transform="rotate(-18 300 125)"
+            />
+            <ellipse
+              cx="405"
+              cy="160"
+              rx="22"
+              ry="10"
+              transform="rotate(-30 405 160)"
+            />
+            <ellipse
+              cx="490"
+              cy="225"
+              rx="24"
+              ry="11"
+              transform="rotate(10 490 225)"
+            />
+            <ellipse
+              cx="235"
+              cy="225"
+              rx="22"
+              ry="10"
+              transform="rotate(45 235 225)"
+            />
+            <ellipse
+              cx="340"
+              cy="260"
+              rx="23"
+              ry="10"
+              transform="rotate(40 340 260)"
+            />
+          </g>
+
+          <g fill="url(#flowerLeft)">
+            <g transform="translate(100 100)">
+              <circle cx="0" cy="-13" r="14" />
+              <circle cx="13" cy="-4" r="14" />
+              <circle cx="8" cy="11" r="14" />
+              <circle cx="-8" cy="11" r="14" />
+              <circle cx="-13" cy="-4" r="14" />
+              <circle r="5" fill="#f4df9f" />
+            </g>
+            <g transform="translate(205 45) scale(.85)">
+              <circle cx="0" cy="-13" r="14" />
+              <circle cx="13" cy="-4" r="14" />
+              <circle cx="8" cy="11" r="14" />
+              <circle cx="-8" cy="11" r="14" />
+              <circle cx="-13" cy="-4" r="14" />
+              <circle r="5" fill="#f4df9f" />
+            </g>
+            <g transform="translate(285 85) scale(1.05)">
+              <circle cx="0" cy="-13" r="14" />
+              <circle cx="13" cy="-4" r="14" />
+              <circle cx="8" cy="11" r="14" />
+              <circle cx="-8" cy="11" r="14" />
+              <circle cx="-13" cy="-4" r="14" />
+              <circle r="5" fill="#f4df9f" />
+            </g>
+            <g transform="translate(385 120) scale(.85)">
+              <circle cx="0" cy="-13" r="14" />
+              <circle cx="13" cy="-4" r="14" />
+              <circle cx="8" cy="11" r="14" />
+              <circle cx="-8" cy="11" r="14" />
+              <circle cx="-13" cy="-4" r="14" />
+              <circle r="5" fill="#f4df9f" />
+            </g>
+            <g transform="translate(490 180) scale(1.1)">
+              <circle cx="0" cy="-13" r="14" />
+              <circle cx="13" cy="-4" r="14" />
+              <circle cx="8" cy="11" r="14" />
+              <circle cx="-8" cy="11" r="14" />
+              <circle cx="-13" cy="-4" r="14" />
+              <circle r="5" fill="#f4df9f" />
+            </g>
+            <g transform="translate(235 220) scale(.9)">
+              <circle cx="0" cy="-13" r="14" />
+              <circle cx="13" cy="-4" r="14" />
+              <circle cx="8" cy="11" r="14" />
+              <circle cx="-8" cy="11" r="14" />
+              <circle cx="-13" cy="-4" r="14" />
+              <circle r="5" fill="#f4df9f" />
+            </g>
+            <g transform="translate(350 260) scale(.75)">
+              <circle cx="0" cy="-13" r="14" />
+              <circle cx="13" cy="-4" r="14" />
+              <circle cx="8" cy="11" r="14" />
+              <circle cx="-8" cy="11" r="14" />
+              <circle cx="-13" cy="-4" r="14" />
+              <circle r="5" fill="#f4df9f" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Smaller framing branch at the lower-right -->
+      <div class="branch branch-right">
+        <svg
+          viewBox="0 0 500 350"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="woodRight" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#594053" />
+              <stop offset="1" stop-color="#20192f" />
+            </linearGradient>
+            <radialGradient id="flowerRight">
+              <stop offset="0" stop-color="#fff1f7" />
+              <stop offset=".65" stop-color="#f5b8d7" />
+              <stop offset="1" stop-color="#d77eaf" />
+            </radialGradient>
+          </defs>
+
+          <g fill="none" stroke="url(#woodRight)" stroke-linecap="round">
+            <path
+              d="M-30 300 Q95 250 175 195 T320 110 T520 20"
+              stroke-width="23"
+            />
+            <path d="M100 245 Q130 185 160 150" stroke-width="9" />
+            <path d="M190 185 Q210 130 255 100" stroke-width="8" />
+            <path d="M300 125 Q340 105 370 65" stroke-width="7" />
+            <path d="M370 80 Q405 95 440 82" stroke-width="6" />
+          </g>
+
+          <g fill="#93688f" opacity=".85">
+            <ellipse
+              cx="140"
+              cy="175"
+              rx="20"
+              ry="10"
+              transform="rotate(-50 140 175)"
+            />
+            <ellipse
+              cx="245"
+              cy="112"
+              rx="20"
+              ry="10"
+              transform="rotate(-40 245 112)"
+            />
+            <ellipse
+              cx="355"
+              cy="75"
+              rx="21"
+              ry="10"
+              transform="rotate(-35 355 75)"
+            />
+          </g>
+
+          <g fill="url(#flowerRight)">
+            <g transform="translate(135 190)">
+              <circle cx="0" cy="-12" r="13" />
+              <circle cx="12" cy="-4" r="13" />
+              <circle cx="7" cy="10" r="13" />
+              <circle cx="-7" cy="10" r="13" />
+              <circle cx="-12" cy="-4" r="13" />
+              <circle r="4" fill="#f4df9f" />
+            </g>
+            <g transform="translate(245 110) scale(.9)">
+              <circle cx="0" cy="-12" r="13" />
+              <circle cx="12" cy="-4" r="13" />
+              <circle cx="7" cy="10" r="13" />
+              <circle cx="-7" cy="10" r="13" />
+              <circle cx="-12" cy="-4" r="13" />
+              <circle r="4" fill="#f4df9f" />
+            </g>
+            <g transform="translate(360 65) scale(.8)">
+              <circle cx="0" cy="-12" r="13" />
+              <circle cx="12" cy="-4" r="13" />
+              <circle cx="7" cy="10" r="13" />
+              <circle cx="-7" cy="10" r="13" />
+              <circle cx="-12" cy="-4" r="13" />
+              <circle r="4" fill="#f4df9f" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="scene-petals" id="scenePetals"></div>
+
+      <div class="closing-text">
+        <small>OLAVARIO · THANK YOU</small>
+        <h2>また、どこかで。</h2>
+        <p>
+          THANK YOU FOR BEING PART OF MY JOURNEY.
+          <br />
+          UNTIL OUR PATHS CROSS AGAIN.
+        </p>
+      </div>
+
+      <div class="manga-break"></div>
+    </section>
+
+    <script>
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const closing = $("closing");
+      const playButton = $("playClosing");
+      const returnButton = $("returnHome");
+
+      const backgroundMusic = $("backgroundMusic");
+      const slashSound = $("slashSound");
+
+      const soundToggle = $("soundToggle");
+      const soundStatus = $("soundStatus");
+      const soundVolume = $("soundVolume");
+
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      let soundEnabled = true;
+      let musicStarted = false;
+      let busy = false;
+      let sceneTimers = [];
+
+      backgroundMusic.volume = Number(soundVolume.value) / 100;
+      slashSound.volume = 0.85;
+
+      // Create the original floating petals.
+      const petalContainer = $("petals");
+
+      for (let i = 0; i < 30; i++) {
+        const petal = document.createElement("span");
+
+        petal.className = "petal";
+        petal.style.left = Math.random() * 100 + "%";
+        petal.style.animationDuration = 7 + Math.random() * 9 + "s";
+        petal.style.animationDelay = -Math.random() * 15 + "s";
+        petal.style.opacity = 0.35 + Math.random() * 0.6;
+
+        petalContainer.appendChild(petal);
+      }
+
+      // Add more petals for the closing scene.
+      const scenePetals = $("scenePetals");
+
+      for (let i = 0; i < 34; i++) {
+        const petal = document.createElement("span");
+
+        petal.className = "scene-petal";
+        petal.style.left = Math.random() * 100 + "%";
+        petal.style.setProperty("--duration", 7 + Math.random() * 9 + "s");
+        petal.style.setProperty("--delay", -Math.random() * 14 + "s");
+        petal.style.setProperty("--opacity", 0.35 + Math.random() * 0.55);
+
+        scenePetals.appendChild(petal);
+      }
+
+      function updateSoundUI() {
+        soundToggle.textContent = soundEnabled ? "♫" : "♪";
+
+        soundToggle.setAttribute(
+          "aria-label",
+          soundEnabled ? "Mute soundtrack" : "Enable soundtrack",
+        );
+
+        soundStatus.textContent = !soundEnabled
+          ? "SOUND OFF"
+          : musicStarted
+            ? "NOW PLAYING"
+            : "CLICK TO ENABLE";
+      }
+
+      async function startMusic() {
+        if (!soundEnabled || document.hidden) return;
+
+        backgroundMusic.volume = Number(soundVolume.value) / 100;
+
+        if (backgroundMusic.volume === 0) {
+          soundStatus.textContent = "VOLUME MUTED";
+          return;
+        }
+
+        try {
+          await backgroundMusic.play();
+          musicStarted = true;
+        } catch (error) {
+          musicStarted = false;
+          soundStatus.textContent = "CLICK TO ENABLE";
+        }
+
+        updateSoundUI();
+      }
+
+      function stopMusic() {
+        backgroundMusic.pause();
+        musicStarted = false;
+        updateSoundUI();
+      }
+
+      function playSlash() {
+        if (!soundEnabled) return;
+
+        slashSound.currentTime = 0;
+        slashSound.volume = 0.85;
+        slashSound.play().catch(() => {});
+      }
+
+      function clearSceneTimers() {
+        sceneTimers.forEach(clearTimeout);
+        sceneTimers = [];
+      }
+
+      function later(callback, delay) {
+        const timer = setTimeout(callback, delay);
+        sceneTimers.push(timer);
+        return timer;
+      }
+
+      // Attempt autoplay; browsers may require a user interaction.
+      startMusic();
+
+      backgroundMusic.addEventListener("playing", () => {
+        musicStarted = true;
+        updateSoundUI();
+      });
+
+      backgroundMusic.addEventListener("pause", () => {
+        musicStarted = false;
+        updateSoundUI();
+      });
+
+      document.addEventListener(
+        "pointerdown",
+        () => {
+          if (soundEnabled && !musicStarted) startMusic();
+        },
+        { once: true },
+      );
+
+      document.addEventListener(
+        "keydown",
+        () => {
+          if (soundEnabled && !musicStarted) startMusic();
+        },
+        { once: true },
+      );
+
+      soundToggle.addEventListener("click", async () => {
+        soundEnabled = !soundEnabled;
+
+        if (soundEnabled) {
+          await startMusic();
+        } else {
+          stopMusic();
+          slashSound.pause();
+          slashSound.currentTime = 0;
+        }
+
+        updateSoundUI();
+      });
+
+      soundVolume.addEventListener("input", () => {
+        backgroundMusic.volume = Number(soundVolume.value) / 100;
+
+        if (backgroundMusic.volume === 0) {
+          stopMusic();
+        } else if (soundEnabled) {
+          startMusic();
+        }
+
+        updateSoundUI();
+      });
+
+      function playScene(redirect = false) {
+        if (busy) return;
+
+        busy = true;
+        clearSceneTimers();
+
+        closing.classList.remove("active", "end");
+        closing.setAttribute("aria-hidden", "false");
+
+        void closing.offsetWidth;
+        closing.classList.add("active");
+
+        if (redirect) {
+          later(() => {
+            backgroundMusic.pause();
+            slashSound.pause();
+
+            sessionStorage.setItem("portfolioIntroComplete", "true");
+
+            document.body.classList.add("returning");
+
+            setTimeout(() => {
+              window.location.href = "index.html";
+            }, 1000);
+          }, 2500);
+        } else {
+          later(
+            () => {
+              closing.classList.add("end");
+            },
+            reducedMotion ? 900 : 11500,
+          );
+
+          later(
+            () => {
+              closing.classList.remove("active", "end");
+              closing.setAttribute("aria-hidden", "true");
+              busy = false;
+            },
+            reducedMotion ? 1600 : 12300,
+          );
+        }
+      }
+
+      playButton.addEventListener("click", async () => {
+        if (soundEnabled && !musicStarted) {
+          await startMusic();
+        }
+
+        playScene(false);
+      });
+
+      returnButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        if (busy) return;
+
+        if (soundEnabled && !musicStarted) {
+          await startMusic();
+        }
+
+        playScene(true);
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          backgroundMusic.pause();
+        } else if (soundEnabled) {
+          startMusic();
+        }
+      });
+
+      window.addEventListener("pagehide", () => {
+        clearSceneTimers();
+        backgroundMusic.pause();
+        slashSound.pause();
+      });
+
+      updateSoundUI();
+    </script>
+  </body>
+</html>

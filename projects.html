@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Explore the programming and engineering projects of Shane Vincent Olavario."
+    />
+
+    <title>Projects | Shane Vincent Olavario</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR: PRESERVED -->
+    <header class="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo">
+          <img src="images/school-logo.jpg" alt="Colegio de Montalban Logo" />
+          <span class="school-name">Shane Vincent Olavario</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li>
+            <a href="projects.html" class="active" aria-current="page"
+              >Projects</a
+            >
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html">IDE</a></li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- PROJECTS INTRODUCTION -->
+      <section class="projects-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">WHAT I'VE BUILT</p>
+
+            <h1>My <span>Projects</span></h1>
+
+            <p>
+              Explore my programming projects and engineering concepts. Search,
+              filter, save your favorites, and open a project to learn more
+              about its features and technologies.
+            </p>
+          </div>
+
+          <!-- ANIMATED STATISTICS -->
+          <section
+            class="project-stats"
+            id="projectStats"
+            aria-label="Project statistics"
+          >
+            <article class="stat-card">
+              <span class="stat-icon" aria-hidden="true">▣</span>
+              <p>Total Projects</p>
+              <h2 class="stat-number" data-stat="projects" data-target="6">
+                0
+              </h2>
+            </article>
+
+            <article class="stat-card">
+              <span class="stat-icon" aria-hidden="true">&lt;/&gt;</span>
+              <p>Technologies</p>
+              <h2 class="stat-number" data-stat="technologies" data-target="0">
+                0
+              </h2>
+            </article>
+
+            <article class="stat-card">
+              <span class="stat-icon" aria-hidden="true">✓</span>
+              <p>Completed</p>
+              <h2 class="stat-number" data-stat="completed" data-target="0">
+                0
+              </h2>
+            </article>
+
+            <article class="stat-card">
+              <span class="stat-icon" aria-hidden="true">♡</span>
+              <p>My Favorites</p>
+              <h2 class="stat-number" data-stat="favorites" data-target="0">
+                0
+              </h2>
+            </article>
+          </section>
+
+          <!-- SEARCH AND FILTERS -->
+          <section class="project-toolbar" aria-label="Project filters">
+            <div class="project-search-wrap">
+              <label for="projectSearch">Search projects</label>
+
+              <input
+                type="search"
+                id="projectSearch"
+                placeholder="Search by name or technology..."
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="project-filter-wrap">
+              <label for="categoryFilter">Category</label>
+
+              <select id="categoryFilter">
+                <option value="all">All Categories</option>
+                <option value="web">Web Development</option>
+                <option value="python">Python Projects</option>
+                <option value="engineering">Engineering / IoT</option>
+              </select>
+            </div>
+
+            <div class="project-filter-wrap">
+              <label for="statusFilter">Status</label>
+
+              <select id="statusFilter">
+                <option value="all">All Statuses</option>
+                <option value="completed">Completed</option>
+                <option value="progress">In Progress</option>
+                <option value="concept">Concept</option>
+              </select>
+            </div>
+
+            <button
+              type="button"
+              class="project-reset-btn"
+              id="resetProjectFilters"
+            >
+              Reset
+            </button>
+          </section>
+
+          <!-- FAVORITES FILTER AND RESULT COUNT -->
+          <div class="project-list-heading">
+            <div>
+              <h2>Project Gallery</h2>
+              <p id="projectResultCount" aria-live="polite">
+                Showing 6 projects
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="favorites-filter-btn"
+              id="favoritesFilter"
+              aria-pressed="false"
+            >
+              <span aria-hidden="true">♡</span>
+              Favorites Only
+            </button>
+          </div>
+
+          <!-- PROJECT CARDS -->
+          <div class="projects-grid" id="projectsGrid">
+            <!-- PROJECT 1 -->
+            <article
+              class="project-card"
+              data-project
+              data-name="Student Management System"
+              data-category="python"
+              data-status="completed"
+              data-technologies="Python OOP CLI"
+              data-description="A Python command-line application for adding, viewing, and managing student records."
+              data-features="Add student records|View saved student records|Check duplicate student IDs|Organize student information"
+              data-learning="I practiced Python classes, lists, dictionaries, input validation, and organizing a menu-driven program."
+              data-image="https://placehold.co/800x500/102747/ffffff?text=Student+Management+System"
+              data-image-alt="Student Management System preview"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placehold.co/800x500/102747/ffffff?text=Student+Management+System"
+                  alt="Student Management System preview"
+                  loading="lazy"
+                />
+
+                <span class="project-number">01</span>
+
+                <span class="project-status status-completed"> Completed </span>
+
+                <button
+                  class="project-favorite"
+                  type="button"
+                  aria-label="Add Student Management System to favorites"
+                  aria-pressed="false"
+                  data-favorite
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div class="project-content">
+                <p class="project-type">PYTHON PROJECT</p>
+                <h3>Student Management System</h3>
+
+                <p>
+                  A Python application for adding, viewing, and managing student
+                  records through a simple command-line interface.
+                </p>
+
+                <div class="tags">
+                  <span>Python</span>
+                  <span>OOP</span>
+                  <span>CLI</span>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
+                    Quick Preview ↗
+                  </button>
+
+                  <a href="student_management_system.html" class="view-project"
+                    >Project Page ↗</a
+                  >
+                </div>
+
+                <div class="project-external-links">
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- PROJECT 2 -->
+            <article
+              class="project-card"
+              data-project
+              data-name="Workout Planner"
+              data-category="web"
+              data-status="completed"
+              data-technologies="HTML CSS JavaScript Responsive Design"
+              data-description="A responsive workout planner for organizing exercises according to fitness goals, experience, and available equipment."
+              data-features="Organize workout routines|Display exercise information|Support responsive layouts|Plan workouts around fitness goals"
+              data-learning="I practiced responsive web design, JavaScript interactions, and organizing page content with HTML and CSS."
+              data-image="https://placehold.co/800x500/174b79/ffffff?text=Workout+Planner"
+              data-image-alt="Workout Planner preview"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placehold.co/800x500/174b79/ffffff?text=Workout+Planner"
+                  alt="Workout Planner preview"
+                  loading="lazy"
+                />
+
+                <span class="project-number">02</span>
+
+                <span class="project-status status-completed"> Completed </span>
+
+                <button
+                  class="project-favorite"
+                  type="button"
+                  aria-label="Add Workout Planner to favorites"
+                  aria-pressed="false"
+                  data-favorite
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div class="project-content">
+                <p class="project-type">WEB DEVELOPMENT</p>
+                <h3>Workout Planner</h3>
+
+                <p>
+                  A responsive website for organizing workouts based on fitness
+                  goals, experience, and available equipment.
+                </p>
+
+                <div class="tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
+                    Quick Preview ↗
+                  </button>
+
+                  <a href="workout_planner.html" class="view-project">
+                    Project Page ↗
+                  </a>
+                </div>
+
+                <div class="project-external-links">
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- PROJECT 3 -->
+            <article
+              class="project-card"
+              data-project
+              data-name="Health Monitoring System"
+              data-category="engineering"
+              data-status="completed"
+              data-technologies="ESP32 IoT Web Heart Rate SpO2"
+              data-description="An engineering project concept for monitoring heart rate and blood oxygen saturation with real-time updates and emergency alerts."
+              data-features="Monitor heart rate|Monitor blood oxygen saturation|Display readings on a dashboard|Provide an emergency alert concept"
+              data-learning="This project concept helps me explore embedded systems, sensor integration, web dashboards, and communication between hardware and software."
+              data-image="https://placehold.co/800x500/174b65/ffffff?text=Health+Monitoring+System"
+              data-image-alt="Health Monitoring System concept preview"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placehold.co/800x500/174b65/ffffff?text=Health+Monitoring+System"
+                  alt="Health Monitoring System concept preview"
+                  loading="lazy"
+                />
+
+                <span class="project-number">03</span>
+
+                <span class="project-status status-completed"> Completed </span>
+
+                <button
+                  class="project-favorite"
+                  type="button"
+                  aria-label="Add Health Monitoring System to favorites"
+                  aria-pressed="false"
+                  data-favorite
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div class="project-content">
+                <p class="project-type">ENGINEERING PROJECT</p>
+                <h3>Health Monitoring System</h3>
+
+                <p>
+                  An IoT project concept for monitoring heart rate and blood
+                  oxygen levels with real-time updates and alerts.
+                </p>
+
+                <div class="tags">
+                  <span>ESP32</span>
+                  <span>IoT</span>
+                  <span>Web</span>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
+                    Quick Preview ↗
+                  </button>
+
+                  <a href="health_monitoring_system.html" class="view-project"
+                    >Project Page ↗</a
+                  >
+                </div>
+
+                <div class="project-external-links">
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- PROJECT 4 -->
+            <article
+              class="project-card"
+              data-project
+              data-name="Grade Calculator"
+              data-category="web"
+              data-status="completed"
+              data-technologies="HTML CSS JavaScript Mathematics"
+              data-description="A browser-based grade calculator that processes scores and displays a calculated average."
+              data-features="Enter scores|Calculate the average|Display results immediately|Validate numeric inputs"
+              data-learning="I practiced JavaScript calculations, handling form inputs, validating values, and displaying results on a webpage."
+              data-image="https://placehold.co/800x500/294477/ffffff?text=Grade+Calculator"
+              data-image-alt="Grade Calculator preview"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placehold.co/800x500/294477/ffffff?text=Grade+Calculator"
+                  alt="Grade Calculator preview"
+                  loading="lazy"
+                />
+
+                <span class="project-number">04</span>
+
+                <span class="project-status status-completed"> Completed </span>
+
+                <button
+                  class="project-favorite"
+                  type="button"
+                  aria-label="Add Grade Calculator to favorites"
+                  aria-pressed="false"
+                  data-favorite
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div class="project-content">
+                <p class="project-type">PROGRAMMING PROJECT</p>
+                <h3>Grade Calculator</h3>
+
+                <p>
+                  A program that calculates grades from scores and displays the
+                  resulting average.
+                </p>
+
+                <div class="tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
+                    Quick Preview ↗
+                  </button>
+
+                  <a href="grade_calculator.html" class="view-project">
+                    Project Page ↗
+                  </a>
+                </div>
+
+                <div class="project-external-links">
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- PROJECT 5 -->
+            <article
+              class="project-card"
+              data-project
+              data-name="Scientific Calculator"
+              data-category="web"
+              data-status="completed"
+              data-technologies="HTML CSS JavaScript Trigonometry"
+              data-description="A scientific calculator project for arithmetic, trigonometry, logarithms, square roots, and exponents."
+              data-features="Perform arithmetic operations|Calculate trigonometric functions|Calculate logarithms and square roots|Support exponent calculations"
+              data-learning="I am developing my understanding of JavaScript functions, mathematical expressions, event handling, and calculator interface design."
+              data-image="https://placehold.co/800x500/18365d/ffffff?text=Scientific+Calculator"
+              data-image-alt="Scientific Calculator preview"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placehold.co/800x500/18365d/ffffff?text=Scientific+Calculator"
+                  alt="Scientific Calculator preview"
+                  loading="lazy"
+                />
+
+                <span class="project-number">05</span>
+
+                <span class="project-status status-completed"> Completed </span>
+
+                <button
+                  class="project-favorite"
+                  type="button"
+                  aria-label="Add Scientific Calculator to favorites"
+                  aria-pressed="false"
+                  data-favorite
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div class="project-content">
+                <p class="project-type">PROGRAMMING PROJECT</p>
+                <h3>Scientific Calculator</h3>
+
+                <p>
+                  A calculator for arithmetic, trigonometry, logarithms, square
+                  roots, and exponents.
+                </p>
+
+                <div class="tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
+                    Quick Preview ↗
+                  </button>
+
+                  <a href="calculator.html" class="view-project">
+                    Project Page ↗
+                  </a>
+                </div>
+
+                <div class="project-external-links">
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- PROJECT 6 -->
+            <article
+              class="project-card"
+              data-project
+              data-name="Book Management System"
+              data-category="web"
+              data-status="completed"
+              data-technologies="HTML CSS JavaScript Data Management"
+              data-description="A book management system concept for organizing book records and tracking borrowed and returned books."
+              data-features="Add book records|View the book collection|Track book availability|Record borrowed and returned books"
+              data-learning="This concept gives me a chance to practice data organization, JavaScript arrays, form handling, and basic record management."
+              data-image="https://placehold.co/800x500/22516b/ffffff?text=Book+Management+System"
+              data-image-alt="Book Management System concept preview"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placehold.co/800x500/22516b/ffffff?text=Book+Management+System"
+                  alt="Book Management System concept preview"
+                  loading="lazy"
+                />
+
+                <span class="project-number">06</span>
+
+                <span class="project-status status-completed"> Completed </span>
+
+                <button
+                  class="project-favorite"
+                  type="button"
+                  aria-label="Add Book Management System to favorites"
+                  aria-pressed="false"
+                  data-favorite
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div class="project-content">
+                <p class="project-type">PROGRAMMING PROJECT</p>
+                <h3>Book Management System</h3>
+
+                <p>
+                  A system concept for organizing book records, tracking
+                  availability, and recording borrowed and returned books.
+                </p>
+
+                <div class="tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
+                    Quick Preview ↗
+                  </button>
+
+                  <a href="book_management_system.html" class="view-project"
+                    >Project Page ↗</a
+                  >
+                </div>
+
+                <div class="project-external-links">
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- PROJECT 7: SYSVISION -->
+            <article
+              class="project-card"
+              data-project
+              data-name="SysVision"
+              data-category="engineering"
+              data-status="completed"
+              data-technologies="HTML CSS JavaScript Python Flask Chart.js"
+              data-description="An advanced system monitoring dashboard that visualizes computer performance, resource usage, simulated hardware sensors, diagnostics, and system alerts."
+              data-features="Visualize computer performance|Monitor CPU and memory resource usage|Display simulated hardware sensor readings|View diagnostics and system alerts|Present performance data using charts"
+              data-learning="This project explores dashboard design, Python Flask integration, JavaScript data visualization, and presenting system monitoring information through a web interface."
+              data-image="https://placehold.co/800x500/102747/ffffff?text=SysVision"
+              data-image-alt="SysVision system monitoring dashboard preview"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placehold.co/800x500/102747/ffffff?text=SysVision"
+                  alt="SysVision system monitoring dashboard preview"
+                  loading="lazy"
+                />
+
+                <span class="project-number">07</span>
+
+                <span class="project-status status-completed"> Completed </span>
+
+                <button
+                  class="project-favorite"
+                  type="button"
+                  aria-label="Add SysVision to favorites"
+                  aria-pressed="false"
+                  data-favorite
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div class="project-content">
+                <p class="project-type">WEB APP · PYTHON</p>
+
+                <h3>SysVision</h3>
+
+                <p>
+                  An advanced system monitoring dashboard that visualizes
+                  computer performance, resource usage, simulated hardware
+                  sensors, diagnostics, and system alerts.
+                </p>
+
+                <div class="tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                  <span>Python</span>
+                  <span>Flask</span>
+                  <span>Chart.js</span>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
+                    Quick Preview ↗
+                  </button>
+
+                  <a href="sysvision.html" class="view-project"
+                    >Project Page ↗</a
+                  >
+                </div>
+
+                <div class="project-external-links">
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- NO RESULTS MESSAGE -->
+          <div class="project-empty-state" id="projectEmptyState" hidden>
+            <span aria-hidden="true">⌕</span>
+            <h3>No projects found</h3>
+            <p>Try another search term or change your filters.</p>
+
+            <button
+              type="button"
+              class="project-reset-btn"
+              id="emptyResetFilters"
+            >
+              Clear Filters
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECT DETAILS MODAL -->
+      <div class="project-modal" id="projectModal" aria-hidden="true">
+        <section
+          class="project-modal-content"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalProjectTitle"
+          tabindex="-1"
+        >
+          <button
+            type="button"
+            class="project-modal-close"
+            id="closeProjectModal"
+            aria-label="Close project details"
+          >
+            ×
+          </button>
+
+          <div class="project-modal-image-wrap">
+            <img src="" alt="" id="modalProjectImage" />
+          </div>
+
+          <div class="project-modal-body">
+            <p class="project-type" id="modalProjectCategory"></p>
+
+            <div class="project-modal-title-row">
+              <h2 id="modalProjectTitle"></h2>
+              <span class="project-status" id="modalProjectStatus"></span>
+            </div>
+
+            <p id="modalProjectDescription"></p>
+
+            <h3>Project Features</h3>
+            <ul id="modalProjectFeatures"></ul>
+
+            <h3>Technologies Used</h3>
+            <div class="tags" id="modalProjectTechnologies"></div>
+
+            <h3>What I Learned</h3>
+            <p id="modalProjectLearning"></p>
+
+            <div class="project-modal-actions">
+              <a href="#" class="view-project" id="modalProjectPage"
+                >Open Project Page ↗</a
+              >
+
+              <a
+                href="#"
+                class="project-demo-link"
+                id="modalProjectDemo"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+                >Live Demo ↗</a
+              >
+
+              <a
+                href="#"
+                class="project-github-link"
+                id="modalProjectGithub"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+                >GitHub ↗</a
+              >
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- QUICK NAVIGATION SEARCH: PRESERVED -->
+      <button
+        type="button"
+        class="quick-search-trigger"
+        id="quickSearchTrigger"
+        aria-label="Open quick navigation search"
+      >
+        <span aria-hidden="true">⌕</span>
+        <span>Search</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <div
+        class="quick-search-overlay"
+        id="quickSearchOverlay"
+        aria-hidden="true"
+      >
+        <section
+          class="quick-search-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quickSearchTitle"
+        >
+          <div class="quick-search-input-wrap">
+            <span aria-hidden="true">⌕</span>
+
+            <input
+              type="search"
+              id="quickSearchInput"
+              placeholder="Search pages and sections..."
+              autocomplete="off"
+              aria-label="Search portfolio navigation"
+            />
+
+            <kbd>ESC</kbd>
+          </div>
+
+          <p class="quick-search-heading" id="quickSearchTitle">
+            QUICK NAVIGATION
+          </p>
+
+          <div
+            class="quick-search-results"
+            id="quickSearchResults"
+            role="listbox"
+            aria-label="Navigation results"
+          ></div>
+
+          <div class="quick-search-footer">
+            <span>↑↓ Navigate</span>
+            <span>Enter Open</span>
+            <span>Esc Close</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER: PRESERVED -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          &copy; <span id="year"></span> Shane Vincent Olavario. All rights
+          reserved.
+        </p>
+
+        <a href="index.html">Back to Home ↑</a>
+      </div>
+    </footer>
+
+    <!-- KEEP YOUR EXISTING SCRIPTS -->
+    <script src="script.js"></script>
+    <script src="quick-search.js"></script>
+    <script src="music-player.js"></script>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Grade Calculator project by Shane Vincent Olavario."
+    />
+    <title>Grade Calculator | Shane Vincent Olavario</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="student_management_system.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo">
+          <img src="images/school-logo.jpg" alt="Colegio de Montalban Logo" />
+          <span class="school-name">Shane Vincent Olavario</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html" class="active">IDE</a></li>
+          <li class="nav-theme-item">
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              type="button"
+              aria-label="Switch to dark mode"
+              title="Dark mode"
+            >
+              <span id="themeIcon">🌙</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="project-detail-section">
+        <div class="container">
+          <a href="projects.html" class="project-back-link"
+            >← Back to Projects</a
+          >
+          <div class="project-detail-heading">
+            <p class="eyebrow">PROGRAMMING PROJECT</p>
+            <h1>Grade <span>Calculator</span></h1>
+            <p>
+              A calculator for entering scores, calculating averages, and
+              checking academic performance.
+            </p>
+          </div>
+
+          <div class="project-detail-grid">
+            <section
+              class="project-gallery"
+              aria-label="Grade Calculator photo gallery"
+              data-project-gallery="grade"
+            >
+              <div class="gallery-main">
+                <img
+                  class="gallery-main-image"
+                  src="images/grade-calculator-1.jpg"
+                  alt="Grade Calculator screenshot"
+                />
+                <button
+                  class="gallery-arrow gallery-prev"
+                  type="button"
+                  data-gallery-prev
+                  aria-label="Previous photo"
+                >
+                  ❮
+                </button>
+                <button
+                  class="gallery-arrow gallery-next"
+                  type="button"
+                  data-gallery-next
+                  aria-label="Next photo"
+                >
+                  ❯
+                </button>
+              </div>
+              <div class="gallery-footer">
+                <span data-gallery-counter>1 / 3</span
+                ><span>Project Screenshots</span>
+              </div>
+              <div class="gallery-thumbnails" data-gallery-thumbnails></div>
+            </section>
+
+            <section class="project-detail-info">
+              <p class="project-type">PYTHON · CALCULATIONS</p>
+              <h2>About the Project</h2>
+              <p>
+                The Grade Calculator is a programming project designed to
+                calculate a student's average from entered scores. The interface
+                and grading rules can be adjusted to match the requirements of a
+                particular subject.
+              </p>
+              <h3>Project Features</h3>
+              <ul class="project-feature-list">
+                <li>Enter scores or grades</li>
+                <li>Calculate an average</li>
+                <li>Display the calculated result</li>
+                <li>Validate numeric input</li>
+                <li>Provide clear calculation results</li>
+              </ul>
+              <h3>Technologies Used</h3>
+              <div class="project-detail-tags">
+                <span>Python</span><span>Arithmetic</span
+                ><span>Conditional Statements</span
+                ><span>Input Validation</span>
+              </div>
+              <div class="project-detail-buttons">
+                <a
+                  href="https://github.com/olavsvincent/grade_calculator"
+                  class="project-github-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View Source Code on GitHub ↗</a
+                >
+                <a href="projects.html" class="project-secondary-button"
+                  >More Projects</a
+                >
+              </div>
+            </section>
+          </div>
+
+          <section class="project-about-section">
+            <p class="eyebrow">PROJECT OVERVIEW</p>
+            <h2>What I Learned</h2>
+            <p>
+              This project helps me practice variables, mathematical operations,
+              input validation, and conditional statements while building a
+              useful application.
+            </p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          © <span id="year"></span> Shane Vincent Olavario. All rights reserved.
+        </p>
+        <a href="index.html">Back to Home ↑</a>
+        <a href="project-details.html?project=grade-calculator">
+          View Project Details →
+        </a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="project-gallery.js"></script>
+    <script src="music-player.js"></script>
+  </body>
+</html>

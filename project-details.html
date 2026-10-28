@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Project details from Shane Vincent Olavario's Computer Engineering portfolio."
+    />
+    <title>Project Details | Shane Vincent Olavario</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo" aria-label="Home">
+          <img
+            src="images/school-logo.jpg"
+            alt="School Logo"
+            class="navbar-school-logo"
+          />
+          <span class="school-name">Shane Vincent Olavario</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html">IDE</a></li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="project-detail-page section">
+      <div class="container">
+        <a class="project-back-link" href="projects.html">
+          ← Back to Projects
+        </a>
+
+        <section class="project-detail-hero">
+          <p class="eyebrow" id="detailCategory">PROJECT DETAILS</p>
+          <h1 id="detailTitle">Loading project...</h1>
+          <p class="project-detail-intro" id="detailDescription"></p>
+          <div class="project-detail-tags" id="detailTags"></div>
+        </section>
+
+        <div class="project-detail-layout">
+          <article class="project-detail-card">
+            <h2>About the Project</h2>
+            <p id="detailAbout"></p>
+
+            <h2>Key Features</h2>
+            <ul id="detailFeatures"></ul>
+
+            <h2>What I Learned</h2>
+            <p id="detailLearning"></p>
+          </article>
+
+          <aside class="project-detail-sidebar">
+            <h2>Project Information</h2>
+
+            <div class="detail-info-item">
+              <span>Project Type</span>
+              <strong id="detailType"></strong>
+            </div>
+
+            <div class="detail-info-item">
+              <span>Technologies</span>
+              <strong id="detailTechnology"></strong>
+            </div>
+
+            <div class="detail-info-item">
+              <span>Status</span>
+              <strong id="detailStatus"></strong>
+            </div>
+
+            <a href="projects.html" class="btn btn-primary project-detail-cta">
+              Explore More Projects
+            </a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          © <span id="year"></span> Shane Vincent Olavario. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="project-details.js"></script>
+    <script src="music-player.js"></script>
+
+    <script>
+      const yearElement = document.getElementById("year");
+      if (yearElement) yearElement.textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

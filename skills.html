@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the technical skills of Shane Vincent Olavario, a Computer Engineering student.">
+  <title>My Skills | Shane Vincent Olavario</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="skills.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a href="index.html" class="logo">
+        <img src="images/school-logo.jpg" alt="Colegio De Montalban Logo" class="navbar-school-logo">
+        <span class="school-name">Shane Vincent Olavarioo</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" type="button"
+        aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html" aria-current="page">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="editor.html">IDE</a></li>
+      </ul>
+
+      <button class="theme-toggle" id="themeToggle" type="button"
+        aria-label="Switch to dark mode">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="skills-hero">
+      <div class="container">
+        <p class="eyebrow">WHAT I KNOW</p>
+        <h1>My Technical <span>Skills</span></h1>
+        <p class="skills-intro">
+          The programming languages, technologies, and tools I am learning
+          as I grow as a Computer Engineering student.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">MY EXPERTISE</p>
+          <h2>Technologies I <span>Use</span></h2>
+          <p class="heading-description">
+            Search, filter, and explore the technical skills I am developing.
+          </p>
+        </div>
+
+        <!-- Skill search -->
+        <div class="skills-search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="skillSearch" type="search"
+            placeholder="Search skills... (e.g. Python)"
+            aria-label="Search skills" autocomplete="off">
+          <button id="clearSkillSearch" type="button" aria-label="Clear search">×</button>
+        </div>
+
+        <!-- Category filters -->
+        <div class="skill-filters" role="group" aria-label="Filter skills">
+          <button type="button" class="skill-filter active"
+            data-filter="all" aria-pressed="true">All Skills</button>
+          <button type="button" class="skill-filter"
+            data-filter="web" aria-pressed="false">Web Development</button>
+          <button type="button" class="skill-filter"
+            data-filter="programming" aria-pressed="false">Programming</button>
+          <button type="button" class="skill-filter"
+            data-filter="tools" aria-pressed="false">Tools &amp; Data</button>
+        </div>
+
+        <p class="skills-results" id="skillsResults" aria-live="polite"></p>
+
+        <!-- Skill cards -->
+        <div class="skills-grid" id="skillsGrid">
+
+          <article class="skill-card interactive-skill-card"
+            data-category="web" data-name="html"
+            data-description="I use HTML to structure website content, create forms, organize sections, and build accessible pages."
+            data-level="Practicing"
+            data-projects="Personal Portfolio, Workout Planner"
+            tabindex="0" role="button" aria-label="View HTML skill details">
+            <div class="skill-icon" aria-hidden="true">&lt;/&gt;</div>
+            <h3>HTML</h3>
+            <p>Building structured and accessible web pages.</p>
+            <div class="skill-level-label">
+              <span>Self-assessed level</span><strong>Practicing</strong>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-label="HTML progress"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
+              <div class="skill-progress html" style="--skill-width:75%"></div>
+            </div>
+            <span class="skill-card-hint">Click to explore →</span>
+          </article>
+
+          <article class="skill-card interactive-skill-card"
+            data-category="web" data-name="css"
+            data-description="I practice styling websites with layouts, colors, animations, responsive design, and dark and light themes."
+            data-level="Practicing"
+            data-projects="Personal Portfolio, Workout Planner"
+            tabindex="0" role="button" aria-label="View CSS skill details">
+            <div class="skill-icon" aria-hidden="true">#</div>
+            <h3>CSS</h3>
+            <p>Designing responsive layouts and website interfaces.</p>
+            <div class="skill-level-label">
+              <span>Self-assessed level</span><strong>Practicing</strong>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-label="CSS progress"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
+              <div class="skill-progress css" style="--skill-width:70%"></div>
+            </div>
+            <span class="skill-card-hint">Click to explore →</span>
+          </article>
+
+          <article class="skill-card interactive-skill-card"
+            data-category="web" data-name="javascript js"
+            data-description="I use JavaScript to add interactivity, form validation, search, theme controls, and dynamic website features."
+            data-level="Learning"
+            data-projects="Personal Portfolio, Workout Planner, Grade Calculator"
+            tabindex="0" role="button" aria-label="View JavaScript skill details">
+            <div class="skill-icon" aria-hidden="true">JS</div>
+            <h3>JavaScript</h3>
+            <p>Creating interactive website features.</p>
+            <div class="skill-level-label">
+              <span>Self-assessed level</span><strong>Learning</strong>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-label="JavaScript progress"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <div class="skill-progress javascript" style="--skill-width:50%"></div>
+            </div>
+            <span class="skill-card-hint">Click to explore →</span>
+          </article>
+
+          <article class="skill-card interactive-skill-card"
+            data-category="programming" data-name="python py"
+            data-description="I practice variables, conditions, loops, functions, lists, and basic object-oriented programming."
+            data-level="Learning"
+            data-projects="Student Management System"
+            tabindex="0" role="button" aria-label="View Python skill details">
+            <div class="skill-icon" aria-hidden="true">Py</div>
+            <h3>Python</h3>
+            <p>Practicing programming fundamentals and problem-solving.</p>
+            <div class="skill-level-label">
+              <span>Self-assessed level</span><strong>Learning</strong>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-label="Python progress"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="45">
+              <div class="skill-progress python" style="--skill-width:45%"></div>
+            </div>
+            <span class="skill-card-hint">Click to explore →</span>
+          </article>
+
+          <article class="skill-card interactive-skill-card"
+            data-category="tools" data-name="database sql"
+            data-description="I am learning how databases store, organize, retrieve, and manage information."
+            data-level="Beginner"
+            data-projects="Future database-driven projects"
+            tabindex="0" role="button" aria-label="View database skill details">
+            <div class="skill-icon" aria-hidden="true">DB</div>
+            <h3>Database Management</h3>
+            <p>Learning how to organize, store, and manage data.</p>
+            <div class="skill-level-label">
+              <span>Self-assessed level</span><strong>Beginner</strong>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-label="Database progress"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="25">
+              <div class="skill-progress database" style="--skill-width:25%"></div>
+            </div>
+            <span class="skill-card-hint">Click to explore →</span>
+          </article>
+
+          <article class="skill-card interactive-skill-card"
+            data-category="tools" data-name="git github version control"
+            data-description="I use GitHub to store project code and am learning how version control helps track changes."
+            data-level="Learning"
+            data-projects="Personal Portfolio on GitHub"
+            tabindex="0" role="button" aria-label="View Git and GitHub skill details">
+            <div class="skill-icon" aria-hidden="true">Git</div>
+            <h3>Git &amp; GitHub</h3>
+            <p>Learning version control and code management.</p>
+            <div class="skill-level-label">
+              <span>Self-assessed level</span><strong>Learning</strong>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-label="Git and GitHub progress"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="40">
+              <div class="skill-progress git" style="--skill-width:40%"></div>
+            </div>
+            <span class="skill-card-hint">Click to explore →</span>
+          </article>
+        </div>
+
+        <p class="skills-empty" id="skillsEmpty" hidden>
+          No skills found. Try another keyword or category.
+        </p>
+
+        <!-- Skill details panel -->
+        <section class="skill-detail" id="skillDetail" hidden
+          aria-labelledby="skillDetailTitle">
+          <button type="button" class="skill-detail-close" id="closeSkillDetail"
+            aria-label="Close skill details">×</button>
+          <p class="eyebrow">SKILL DETAILS</p>
+          <h2 id="skillDetailTitle">Skill name</h2>
+          <p id="skillDetailDescription"></p>
+          <p><strong>Current level:</strong> <span id="skillDetailLevel"></span></p>
+          <h3>Related projects</h3>
+          <ul id="skillDetailProjects"></ul>
+          <a href="projects.html" class="btn btn-primary">Explore Projects</a>
+        </section>
+      </div>
+    </section>
+
+    <!-- Learning roadmap -->
+    <section class="section skills-learning" id="learning">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">MY NEXT STEPS</p>
+          <h2>My Learning <span>Roadmap</span></h2>
+          <p class="heading-description">
+            Technologies I want to study as I continue my Computer Engineering journey.
+          </p>
+        </div>
+
+        <div class="learning-roadmap">
+          <article class="roadmap-card">
+            <span class="roadmap-number">01</span>
+            <span class="roadmap-status status-current">Current focus</span>
+            <h3>Web Development</h3>
+            <p>Improve JavaScript, responsive design, accessibility, and website functionality.</p>
+            <div class="roadmap-tags"><span>JavaScript</span><span>CSS</span><span>HTML</span></div>
+          </article>
+
+          <article class="roadmap-card">
+            <span class="roadmap-number">02</span>
+            <span class="roadmap-status">Next to learn</span>
+            <h3>C++ Programming</h3>
+            <p>Build stronger programming fundamentals and understand object-oriented programming.</p>
+            <div class="roadmap-tags"><span>C++</span><span>OOP</span><span>Algorithms</span></div>
+          </article>
+
+          <article class="roadmap-card">
+            <span class="roadmap-number">03</span>
+            <span class="roadmap-status">Future goal</span>
+            <h3>Computer Engineering</h3>
+            <p>Explore electronics, microcontrollers, hardware, and software integration.</p>
+            <div class="roadmap-tags"><span>Electronics</span><span>Hardware</span><span>Microcontrollers</span></div>
+          </article>
+
+          <article class="roadmap-card">
+            <span class="roadmap-number">04</span>
+            <span class="roadmap-status">Future goal</span>
+            <h3>Databases &amp; Systems</h3>
+            <p>Learn SQL, data structures, and how applications store and process information.</p>
+            <div class="roadmap-tags"><span>SQL</span><span>Data Structures</span><span>Systems</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="section skills-learning">
+      <div class="container skills-learning-content">
+        <p class="eyebrow">ALWAYS IMPROVING</p>
+        <h2>Learning One Step <span>at a Time</span></h2>
+        <p>
+          I am improving through coursework, hands-on practice, and personal
+          projects. My goal is to turn what I learn into practical solutions.
+        </p>
+        <div class="hero-buttons">
+          <a href="projects.html" class="btn btn-primary">View My Projects</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick navigation -->
+    <button type="button" class="quick-search-trigger" id="quickSearchTrigger"
+      aria-label="Open quick navigation search">
+      <span aria-hidden="true">⌕</span>
+      <span>Search</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+
+    <div class="quick-search-overlay" id="quickSearchOverlay" aria-hidden="true">
+      <section class="quick-search-dialog" role="dialog" aria-modal="true"
+        aria-labelledby="quickSearchTitle">
+        <div class="quick-search-input-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input type="search" id="quickSearchInput"
+            placeholder="Search pages and sections..." autocomplete="off"
+            aria-label="Search portfolio navigation">
+          <kbd>ESC</kbd>
+        </div>
+        <p class="quick-search-heading" id="quickSearchTitle">QUICK NAVIGATION</p>
+        <div class="quick-search-results" id="quickSearchResults"
+          role="listbox" aria-label="Navigation results"></div>
+        <div class="quick-search-footer">
+          <span>↑↓ Navigate</span>
+          <span>Enter Open</span>
+          <span>Esc Close</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; <span id="year"></span> Shane Vincent Olavario. All rights reserved.</p>
+      <a href="index.html">Back to Home ↑</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  <script src="quick-search.js"></script>
+  <script src="skills.js"></script>
+  <script src="music-player.js"></script>
+</body>
+</html>

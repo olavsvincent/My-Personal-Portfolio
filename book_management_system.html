@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Book Management System project by Shane Vincent Olavario."
+    />
+    <title>Book Management System | Shane Vincent Olavario</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="student_management_system.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo">
+          <img src="images/school-logo.jpg" alt="Colegio de Montalban Logo" />
+          <span class="school-name">Shane Vincent Olavario</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html">IDE</a></li>
+          <li class="nav-theme-item">
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              type="button"
+              aria-label="Switch to dark mode"
+              title="Dark mode"
+            >
+              <span id="themeIcon">🌙</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="project-detail-section">
+        <div class="container">
+          <a href="projects.html" class="project-back-link"
+            >← Back to Projects</a
+          >
+          <div class="project-detail-heading">
+            <p class="eyebrow">PROGRAMMING PROJECT</p>
+            <h1>Book Management <span>System</span></h1>
+            <p>
+              A system for organizing book records and tracking borrowed and
+              returned books.
+            </p>
+          </div>
+
+          <div class="project-detail-grid">
+            <section
+              class="project-gallery"
+              aria-label="Book Management System photo gallery"
+              data-project-gallery="book"
+            >
+              <div class="gallery-main">
+                <img
+                  class="gallery-main-image"
+                  src="images/book-management-1.jpg"
+                  alt="Book Management System screenshot"
+                />
+                <button
+                  class="gallery-arrow gallery-prev"
+                  type="button"
+                  data-gallery-prev
+                  aria-label="Previous photo"
+                >
+                  ❮
+                </button>
+                <button
+                  class="gallery-arrow gallery-next"
+                  type="button"
+                  data-gallery-next
+                  aria-label="Next photo"
+                >
+                  ❯
+                </button>
+              </div>
+              <div class="gallery-footer">
+                <span data-gallery-counter>1 / 3</span
+                ><span>Project Screenshots</span>
+              </div>
+              <div class="gallery-thumbnails" data-gallery-thumbnails></div>
+            </section>
+
+            <section class="project-detail-info">
+              <p class="project-type">RECORD MANAGEMENT · WEB</p>
+              <h2>About the Project</h2>
+              <p>
+                The Book Management System is a project concept for organizing
+                book information and monitoring book availability. Its
+                implementation can be adapted for a personal library or a small
+                lending collection.
+              </p>
+              <h3>Project Features</h3>
+              <ul class="project-feature-list">
+                <li>Add and view book records</li>
+                <li>Store book titles, authors, and IDs</li>
+                <li>Track available and borrowed books</li>
+                <li>Record borrowed and returned books</li>
+                <li>Search for books in the collection</li>
+              </ul>
+              <h3>Technologies Used</h3>
+              <div class="project-detail-tags">
+                <span>JavaScript</span><span>HTML</span><span>CSS</span
+                ><span>Data Management</span>
+              </div>
+              <div class="project-detail-buttons">
+                <a
+                  href="https://github.com/olavsvincent/book_management_system"
+                  class="project-github-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View Source Code on GitHub ↗</a
+                >
+                <a href="projects.html" class="project-secondary-button"
+                  >More Projects</a
+                >
+              </div>
+            </section>
+          </div>
+
+          <section class="project-about-section">
+            <p class="eyebrow">PROJECT OVERVIEW</p>
+            <h2>What I Learned</h2>
+            <p>
+              This project provides practice in organizing records, designing
+              interfaces, handling user input, and keeping information
+              structured and easy to find.
+            </p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          © <span id="year"></span> Shane Vincent Olavario. All rights reserved.
+        </p>
+        <a href="index.html">Back to Home ↑</a>
+        <a href="project-details.html?project=book-management">
+          View Project Details →
+        </a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="project-gallery.js"></script>
+    <script src="music-player.js"></script>
+  </body>
+</html>

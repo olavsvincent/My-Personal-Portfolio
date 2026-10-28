@@ -1,0 +1,1557 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050509" />
+    <title>Initializing | Shane Vincent Olavario</title>
+
+    <style>
+      :root {
+        --bg: #050509;
+        --panel: rgba(17, 16, 30, 0.84);
+        --purple: #a78bfa;
+        --purple-bright: #8b5cf6;
+        --cyan: #38bdf8;
+        --text: #f5f3ff;
+        --muted: #9996b5;
+        --border: rgba(167, 139, 250, 0.2);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+        background: var(--bg);
+      }
+
+      body {
+        min-height: 100vh;
+        overflow: hidden;
+        background: radial-gradient(
+          ellipse at 50% 45%,
+          #17102b 0%,
+          #090811 45%,
+          #050509 78%
+        );
+        color: var(--text);
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 5px;
+      }
+
+      #particles {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .background-grid {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.17;
+        background-image:
+          linear-gradient(rgba(167, 139, 250, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(167, 139, 250, 0.1) 1px, transparent 1px);
+        background-size: 55px 55px;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 25%,
+          black 75%,
+          transparent
+        );
+      }
+
+      .ambient {
+        position: fixed;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.14;
+        pointer-events: none;
+        z-index: 0;
+        animation: ambientFloat 8s ease-in-out infinite alternate;
+      }
+
+      .ambient.one {
+        top: -150px;
+        left: -100px;
+        background: var(--purple-bright);
+      }
+
+      .ambient.two {
+        right: -120px;
+        bottom: -150px;
+        background: var(--cyan);
+        animation-delay: -4s;
+      }
+
+      @keyframes ambientFloat {
+        to {
+          transform: translate(45px, 30px) scale(1.15);
+        }
+      }
+
+      /* AUDIO START PROMPT */
+      #audioStartPrompt {
+        position: fixed;
+        left: 50%;
+        bottom: 84px;
+        z-index: 9000;
+        transform: translateX(-50%);
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        padding: 12px 18px;
+        border: 1px solid #8b5cf6aa;
+        border-radius: 999px;
+        background: rgba(8, 8, 18, 0.92);
+        color: #ffffff;
+        font:
+          700 11px/1.4 system-ui,
+          sans-serif;
+        letter-spacing: 0.14em;
+        text-align: center;
+        box-shadow: 0 0 28px #8b5cf633;
+        animation: audioPromptPulse 1.6s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+
+      #audioStartPrompt.hidden {
+        display: none;
+      }
+
+      @keyframes audioPromptPulse {
+        from {
+          opacity: 0.72;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* LOADING SCREEN */
+
+      #loadingScreen {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0;
+        background: #050509;
+        transition:
+          opacity 0.65s ease,
+          visibility 0.65s ease;
+      }
+
+      #loadingScreen.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .loader-ring {
+        position: relative;
+        width: 78px;
+        height: 78px;
+        border: 2px solid #211a38;
+        border-top-color: var(--purple);
+        border-right-color: var(--cyan);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        box-shadow: 0 0 28px #8b5cf633;
+      }
+
+      .loader-ring::after {
+        content: "";
+        position: absolute;
+        inset: 10px;
+        border: 1px solid #38bdf844;
+        border-bottom-color: var(--cyan);
+        border-radius: 50%;
+        animation: spin 1.4s linear infinite reverse;
+      }
+
+      .loader-title {
+        margin-top: 30px;
+        font-size: 12px;
+        letter-spacing: 5px;
+        color: #d8ccff;
+      }
+
+      .loader-status {
+        margin-top: 13px;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-align: center;
+      }
+
+      .loader-track {
+        width: min(250px, 70vw);
+        height: 3px;
+        margin-top: 25px;
+        background: #211b30;
+        overflow: hidden;
+      }
+
+      .loader-progress {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--purple-bright), var(--cyan));
+        box-shadow: 0 0 15px var(--purple);
+        transition: width 0.12s linear;
+      }
+
+      .loader-percent {
+        margin-top: 11px;
+        color: var(--purple);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .loader-footer {
+        position: absolute;
+        bottom: 28px;
+        color: #5f5b76;
+        font-size: 9px;
+        letter-spacing: 3px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* INTRO LAYOUT */
+
+      .topbar {
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 76px;
+        padding: 0 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+        background: rgba(5, 5, 9, 0.38);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+      }
+
+      .brand-symbol {
+        display: grid;
+        place-items: center;
+        width: 35px;
+        height: 35px;
+        color: var(--cyan);
+        border: 1px solid var(--border);
+        background: #a78bfa0d;
+        box-shadow: 0 0 18px #8b5cf61c;
+      }
+
+      .brand small {
+        display: block;
+        margin-top: 4px;
+        font-size: 9px;
+        color: var(--muted);
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+
+      .top-controls {
+        display: flex;
+        gap: 9px;
+      }
+
+      .icon-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        color: #c8c4dc;
+        border: 1px solid var(--border);
+        background: #100d1c;
+        font-size: 10px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .icon-button:hover {
+        border-color: var(--cyan);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .intro-wrap {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 100px 22px 75px;
+      }
+
+      .intro-card {
+        position: relative;
+        width: min(760px, 100%);
+        padding: clamp(28px, 6vw, 62px);
+        text-align: center;
+        border: 1px solid var(--border);
+        background: linear-gradient(
+          145deg,
+          rgba(19, 16, 33, 0.93),
+          rgba(7, 8, 16, 0.92)
+        );
+        box-shadow:
+          0 25px 100px #0009,
+          inset 0 1px rgba(255, 255, 255, 0.035),
+          0 0 55px #8b5cf60a;
+        backdrop-filter: blur(18px);
+        animation: cardEnter 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+
+      .intro-card::before,
+      .intro-card::after {
+        content: "";
+        position: absolute;
+        width: 65px;
+        height: 2px;
+        background: var(--cyan);
+        box-shadow: 0 0 15px var(--cyan);
+      }
+
+      .intro-card::before {
+        top: -1px;
+        left: 30px;
+      }
+
+      .intro-card::after {
+        right: 30px;
+        bottom: -1px;
+        background: var(--purple);
+        box-shadow: 0 0 15px var(--purple);
+      }
+
+      @keyframes cardEnter {
+        from {
+          opacity: 0;
+          transform: translateY(25px) scale(0.97);
+          filter: blur(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 13px;
+        color: #c4b5fd;
+        border: 1px solid #a78bfa2c;
+        background: #8b5cf610;
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #4ade80;
+        box-shadow: 0 0 12px #4ade80;
+        animation: blink 1.3s infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0.25;
+        }
+      }
+
+      .eyebrow {
+        margin-top: 33px;
+        color: var(--cyan);
+        font-size: 10px;
+        letter-spacing: 5px;
+      }
+
+      h1 {
+        margin-top: 15px;
+        font-size: clamp(34px, 7vw, 65px);
+        font-weight: 900;
+        letter-spacing: -2px;
+        line-height: 1.08;
+      }
+
+      h1 span {
+        display: block;
+        color: transparent;
+        background: linear-gradient(90deg, #c4b5fd, #8b5cf6 45%, #67e8f9);
+        background-clip: text;
+        -webkit-background-clip: text;
+        filter: drop-shadow(0 0 22px #8b5cf626);
+      }
+
+      .description {
+        max-width: 510px;
+        margin: 22px auto 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.9;
+      }
+
+      .system-panel {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 35px;
+        border: 1px solid #a78bfa1a;
+        background: #05050955;
+      }
+
+      .system-stat {
+        padding: 18px 8px;
+      }
+
+      .system-stat + .system-stat {
+        border-left: 1px solid #a78bfa1a;
+      }
+
+      .system-stat strong {
+        display: block;
+        color: #e9ddff;
+        font-size: 20px;
+      }
+
+      .system-stat small {
+        display: block;
+        margin-top: 7px;
+        color: #77738f;
+        font-size: 9px;
+        letter-spacing: 1.5px;
+      }
+
+      .launch-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        min-width: 240px;
+        margin-top: 32px;
+        padding: 17px 25px;
+        overflow: hidden;
+        color: #080711;
+        border: none;
+        background: linear-gradient(100deg, #c4b5fd, #8b5cf6 52%, #67e8f9);
+        box-shadow: 0 0 28px #8b5cf62b;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 3px;
+        cursor: pointer;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+
+      .launch-button::before {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: -40%;
+        width: 35%;
+        height: 300%;
+        background: #ffffff8c;
+        transform: rotate(25deg);
+        transition: left 0.55s;
+      }
+
+      .launch-button:hover::before {
+        left: 120%;
+      }
+
+      .launch-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 38px #8b5cf655;
+      }
+
+      .launch-button:active {
+        transform: scale(0.97);
+      }
+
+      .launch-button span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .skip-button {
+        display: block;
+        margin: 18px auto 0;
+        padding: 8px;
+        color: #77738f;
+        border: none;
+        background: transparent;
+        font-size: 10px;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .skip-button:hover {
+        color: white;
+      }
+
+      .bottom-info {
+        position: absolute;
+        z-index: 3;
+        right: 6%;
+        bottom: 24px;
+        left: 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        color: #68647e;
+        font-size: 9px;
+        letter-spacing: 2px;
+      }
+
+      .bottom-info span:last-child {
+        color: #9e98bb;
+      }
+
+      /* ANIME SLASH TRANSITION */
+
+      #slashTransition {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        overflow: hidden;
+        visibility: hidden;
+        pointer-events: none;
+        background: #030308;
+      }
+
+      #slashTransition.active {
+        visibility: visible;
+      }
+
+      .slash-blade {
+        position: absolute;
+        top: 50%;
+        left: -40%;
+        width: 180%;
+        height: 5px;
+        opacity: 0;
+        transform: rotate(-24deg) scaleX(0);
+        background: white;
+        box-shadow:
+          0 0 8px white,
+          0 0 20px var(--cyan),
+          0 0 45px var(--purple),
+          0 0 90px var(--purple);
+      }
+
+      .slash-blade::before,
+      .slash-blade::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+      }
+
+      .slash-blade::before {
+        top: -12px;
+        background: var(--purple);
+      }
+
+      .slash-blade::after {
+        top: 12px;
+        background: var(--cyan);
+      }
+
+      .slash-flash {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background: white;
+      }
+
+      .slash-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        opacity: 0;
+        color: white;
+        white-space: nowrap;
+        font-size: clamp(17px, 4vw, 42px);
+        font-weight: 900;
+        letter-spacing: 10px;
+        text-shadow:
+          0 0 25px var(--cyan),
+          0 0 50px var(--purple);
+        transform: translate(-50%, -50%) skewX(-15deg);
+      }
+
+      .slash-sparks {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: white;
+        box-shadow:
+          30px -60px 0 var(--cyan),
+          -70px 35px 0 var(--purple),
+          110px 70px 0 white,
+          -130px -80px 0 var(--cyan),
+          160px -30px 0 var(--purple),
+          -170px 20px 0 white;
+        opacity: 0;
+      }
+
+      #slashTransition.active .slash-blade {
+        animation: bladeSlash 0.65s cubic-bezier(0.15, 0.8, 0.2, 1) forwards;
+      }
+
+      #slashTransition.active .slash-flash {
+        animation: slashFlash 0.75s ease-out forwards;
+      }
+
+      #slashTransition.active .slash-label {
+        animation: slashText 0.7s ease forwards;
+      }
+
+      #slashTransition.active .slash-sparks {
+        animation: sparksFlash 0.6s ease-out forwards;
+      }
+
+      @keyframes bladeSlash {
+        0% {
+          opacity: 0;
+          transform: rotate(-24deg) scaleX(0);
+        }
+        20% {
+          opacity: 1;
+          transform: rotate(-24deg) scaleX(1);
+        }
+        65% {
+          opacity: 1;
+          transform: rotate(-24deg) scaleX(1);
+        }
+        100% {
+          opacity: 0;
+          transform: rotate(-24deg) scaleX(1.2);
+        }
+      }
+
+      @keyframes slashFlash {
+        0%,
+        18% {
+          opacity: 0;
+        }
+        25% {
+          opacity: 0.95;
+        }
+        42% {
+          opacity: 0.12;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes slashText {
+        0%,
+        30% {
+          opacity: 0;
+          letter-spacing: 25px;
+        }
+        45% {
+          opacity: 1;
+          letter-spacing: 10px;
+        }
+        75% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes sparksFlash {
+        0% {
+          opacity: 0;
+          transform: scale(0.2);
+        }
+        30% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(4);
+        }
+      }
+
+      body.shake {
+        animation: screenShake 0.3s ease-in-out;
+      }
+
+      @keyframes screenShake {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        20% {
+          transform: translate(-5px, 2px);
+        }
+        40% {
+          transform: translate(5px, -3px);
+        }
+        60% {
+          transform: translate(-3px, -2px);
+        }
+        80% {
+          transform: translate(3px, 2px);
+        }
+      }
+
+      body.motion-off *,
+      body.motion-off *::before,
+      body.motion-off *::after {
+        animation-play-state: paused !important;
+        scroll-behavior: auto !important;
+      }
+
+      @media (max-width: 600px) {
+        .topbar {
+          height: 65px;
+          padding: 0 18px;
+        }
+
+        .brand {
+          gap: 8px;
+          font-size: 10px;
+        }
+
+        .brand-symbol {
+          width: 30px;
+          height: 30px;
+        }
+
+        .icon-button {
+          padding: 9px;
+          font-size: 0;
+        }
+
+        .icon-button span {
+          font-size: 14px;
+        }
+
+        .intro-wrap {
+          padding: 85px 15px 70px;
+        }
+
+        .intro-card {
+          padding: 32px 20px;
+        }
+
+        .eyebrow {
+          font-size: 9px;
+          letter-spacing: 3px;
+        }
+
+        .description {
+          font-size: 13px;
+        }
+
+        .system-stat {
+          padding: 15px 4px;
+        }
+
+        .system-stat strong {
+          font-size: 17px;
+        }
+
+        .system-stat small {
+          font-size: 8px;
+          letter-spacing: 0.7px;
+        }
+
+        .launch-button {
+          min-width: 210px;
+        }
+
+        .bottom-info {
+          font-size: 8px;
+          letter-spacing: 1px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* PORTFOLIO MATCH + RESPONSIVE FIT */
+
+      :root {
+        --bg: #08090d;
+        --panel: rgba(15, 17, 27, 0.94);
+        --purple: #a78bfa;
+        --purple-bright: #8b5cf6;
+        --cyan: #38bdf8;
+      }
+
+      /* Allow scrolling on shorter screens */
+      html {
+        min-height: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      #particles,
+      .background-grid,
+      .ambient {
+        position: fixed;
+        pointer-events: none;
+      }
+
+      /* Keep the header within the screen */
+      .topbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 68px;
+        height: auto;
+        padding: 14px clamp(14px, 4vw, 60px);
+        gap: 12px;
+      }
+
+      .brand {
+        min-width: 0;
+      }
+
+      .top-controls {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      /* Center the intro without cutting off its contents */
+      .intro-wrap {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 100px 20px 76px;
+        align-items: center;
+      }
+
+      .intro-card {
+        width: min(760px, 100%);
+        max-width: 100%;
+        padding: clamp(24px, 5vw, 56px);
+        margin: auto;
+        overflow-wrap: anywhere;
+      }
+
+      h1 {
+        font-size: clamp(30px, 6.5vw, 65px);
+        line-height: 1.12;
+        letter-spacing: clamp(-2px, -0.2vw, -0.5px);
+        overflow-wrap: anywhere;
+      }
+
+      .description {
+        width: 100%;
+        max-width: 510px;
+        font-size: clamp(12px, 1.5vw, 14px);
+        line-height: 1.85;
+      }
+
+      .system-panel {
+        width: 100%;
+      }
+
+      .system-stat {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .launch-button {
+        max-width: 100%;
+        white-space: normal;
+      }
+
+      .bottom-info {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 15px clamp(14px, 4vw, 60px);
+        flex-wrap: wrap;
+      }
+
+      /* Phones */
+      @media (max-width: 600px) {
+        .topbar {
+          min-height: 62px;
+          padding: 12px 14px;
+        }
+
+        .brand {
+          font-size: 9px;
+          letter-spacing: 1px;
+        }
+
+        .brand small {
+          font-size: 8px;
+          letter-spacing: 1px;
+        }
+
+        .top-controls {
+          gap: 5px;
+        }
+
+        .icon-button {
+          padding: 8px;
+          letter-spacing: 0;
+        }
+
+        .intro-wrap {
+          padding: 85px 14px 75px;
+        }
+
+        .intro-card {
+          padding: 28px 18px;
+        }
+
+        .eyebrow {
+          margin-top: 25px;
+          font-size: 9px;
+          letter-spacing: 2px;
+          line-height: 1.8;
+        }
+
+        h1 {
+          font-size: clamp(29px, 8.2vw, 44px);
+          letter-spacing: -1px;
+        }
+
+        .description {
+          margin-top: 17px;
+          font-size: 12px;
+        }
+
+        .system-panel {
+          margin-top: 24px;
+        }
+
+        .system-stat {
+          padding: 13px 4px;
+        }
+
+        .system-stat strong {
+          font-size: 16px;
+        }
+
+        .system-stat small {
+          font-size: 7px;
+          letter-spacing: 0.4px;
+        }
+
+        .launch-button {
+          width: 100%;
+          min-width: 0;
+          margin-top: 24px;
+          padding: 15px 12px;
+          gap: 8px;
+          font-size: 10px;
+          letter-spacing: 2px;
+        }
+
+        .bottom-info {
+          justify-content: center;
+          gap: 8px 14px;
+          font-size: 8px;
+          letter-spacing: 0.7px;
+        }
+      }
+
+      /* Short laptop screens and landscape phones */
+      @media (max-height: 700px) {
+        .intro-wrap {
+          align-items: flex-start;
+          padding-top: 88px;
+          padding-bottom: 65px;
+        }
+
+        .intro-card {
+          padding-top: 22px;
+          padding-bottom: 22px;
+        }
+
+        .eyebrow {
+          margin-top: 18px;
+        }
+
+        .description {
+          margin-top: 12px;
+        }
+
+        .system-panel {
+          margin-top: 18px;
+        }
+
+        .system-stat {
+          padding-top: 12px;
+          padding-bottom: 12px;
+        }
+
+        .launch-button {
+          margin-top: 18px;
+        }
+
+        .skip-button {
+          margin-top: 8px;
+        }
+      }
+
+      /* Very narrow phones */
+      @media (max-width: 360px) {
+        .brand small {
+          display: none;
+        }
+
+        .brand-symbol {
+          width: 27px;
+          height: 27px;
+        }
+
+        .icon-button {
+          padding: 7px 6px;
+        }
+
+        .intro-card {
+          padding-right: 13px;
+          padding-left: 13px;
+        }
+
+        .system-stat small {
+          font-size: 6px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- LOADING SCREEN -->
+    <div id="loadingScreen" role="status" aria-live="polite">
+      <div class="loader-ring"></div>
+      <div class="loader-title">INITIALIZING SYSTEM</div>
+      <div class="loader-status" id="loaderStatus">
+        Loading portfolio assets...
+      </div>
+
+      <div class="loader-track">
+        <div class="loader-progress" id="loaderProgress"></div>
+      </div>
+
+      <div class="loader-percent" id="loaderPercent">0%</div>
+      <div class="loader-footer">SHANE VINCENT OLAVARIO // SYSTEM BOOT</div>
+    </div>
+
+    <div id="audioStartPrompt" role="status" aria-live="polite">
+      ♪ TAP OR CLICK ANYWHERE TO START MUSIC
+    </div>
+
+    <!-- BACKGROUND -->
+    <canvas id="particles"></canvas>
+    <div class="background-grid"></div>
+    <div class="ambient one"></div>
+    <div class="ambient two"></div>
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="brand">
+        <div>
+          <small>PERSONAL PORTFOLIO</small>
+        </div>
+      </div>
+
+      <div class="top-controls">
+        <button
+          class="icon-button"
+          id="motionToggle"
+          type="button"
+          aria-pressed="false"
+        >
+          <span id="motionIcon">✦</span> MOTION: ON
+        </button>
+      </div>
+    </header>
+
+    <!-- INTRO CONTENT -->
+    <main class="intro-wrap">
+      <section class="intro-card">
+        <div class="status">
+          <span class="status-dot"></span>
+          SYSTEM ONLINE
+        </div>
+
+        <p class="eyebrow">WELCOME TO MY DIGITAL SPACE</p>
+
+        <h1>
+          SHANE VINCENT
+          <span>OLAVARIO</span>
+        </h1>
+
+        <p class="description">
+          A Computer Engineering student exploring technology, programming, and
+          creative problem-solving. Every project is another step toward
+          building something meaningful.
+        </p>
+
+        <div class="system-panel">
+          <div class="system-stat">
+            <strong>01</strong>
+            <small>ENGINEERING</small>
+          </div>
+
+          <div class="system-stat">
+            <strong>∞</strong>
+            <small>POSSIBILITIES</small>
+          </div>
+
+          <div class="system-stat">
+            <strong>DEV</strong>
+            <small>IN PROGRESS</small>
+          </div>
+        </div>
+
+        <button class="launch-button" id="launchButton" type="button">
+          <span>ENTER PORTFOLIO</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+
+        <button class="skip-button" id="skipButton" type="button">
+          SKIP INTRO — ENTER NOW
+        </button>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bottom-info">
+      <span>DESIGNED WITH CURIOSITY</span>
+      <span id="clock">00:00:00</span>
+      <span>© <span id="year"></span> PERSONAL PORTFOLIO</span>
+    </footer>
+
+    <!-- ANIME SLASH TRANSITION -->
+    <div id="slashTransition" aria-hidden="true">
+      <div class="slash-flash"></div>
+      <div class="slash-blade"></div>
+      <div class="slash-sparks"></div>
+      <div class="slash-label">SYSTEM BREACHED</div>
+    </div>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const $ = (selector) => document.querySelector(selector);
+
+        const loader = $("#loadingScreen");
+        const progressBar = $("#loaderProgress");
+        const percentText = $("#loaderPercent");
+        const statusText = $("#loaderStatus");
+        const slash = $("#slashTransition");
+        const launchButton = $("#launchButton");
+        const skipButton = $("#skipButton");
+        const motionToggle = $("#motionToggle");
+        const motionIcon = $("#motionIcon");
+        const audioStartPrompt = $("#audioStartPrompt");
+
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        );
+
+        let progress = 0;
+        let launched = false;
+        let motionEnabled = !prefersReducedMotion.matches;
+        let audioContext = null;
+        let loadTimer = null;
+        let loadComplete = false;
+
+        const messages = [
+          "Loading portfolio assets...",
+          "Establishing connection...",
+          "Synchronizing interface...",
+          "Preparing launch sequence...",
+          "System ready.",
+        ];
+
+        /* LOADING PROGRESS */
+
+        function setProgress(value) {
+          progress = Math.max(0, Math.min(100, value));
+          progressBar.style.width = progress + "%";
+          percentText.textContent = Math.floor(progress) + "%";
+
+          const index = Math.min(
+            Math.floor(progress / 25),
+            messages.length - 1,
+          );
+
+          statusText.textContent = messages[index];
+        }
+
+        function finishLoading() {
+          if (loadComplete) return;
+          loadComplete = true;
+
+          clearInterval(loadTimer);
+          setProgress(100);
+          statusText.textContent = "System ready.";
+
+          window.setTimeout(() => {
+            if (!launched) loader.classList.add("hidden");
+          }, 350);
+        }
+
+        function startLoading() {
+          loadTimer = window.setInterval(() => {
+            const increase = Math.floor(Math.random() * 8) + 3;
+            setProgress(progress + increase);
+
+            if (progress >= 100) {
+              finishLoading();
+            }
+          }, 110);
+        }
+
+        /* CLOCK */
+
+        function updateClock() {
+          $("#clock").textContent = new Date().toLocaleTimeString(undefined, {
+            hour12: false,
+          });
+        }
+
+        $("#year").textContent = new Date().getFullYear();
+        updateClock();
+        window.setInterval(updateClock, 1000);
+
+        /* ONLY AUDIO FILES: anime-bg.mp3 and anime-slash.mp3 */
+        const music = new Audio("music/anime-bg.mp3");
+        music.loop = true;
+        music.preload = "auto";
+        music.autoplay = true;
+        music.volume = 1;
+
+        // Show a useful error in the browser console if the file is missing.
+        music.addEventListener("error", () => {
+          console.warn(
+            "Could not load anime-bg.mp3. Keep it in the same folder as pogiako.html and check the spelling.",
+          );
+        });
+
+        const animeSlashSound = new Audio("music/anime-slash.mp3");
+        animeSlashSound.preload = "auto";
+        animeSlashSound.volume = 1;
+
+        // Try to start background music automatically. Browsers may block
+        // autoplay with sound until the visitor interacts with the page.
+        function startBackgroundMusic() {
+          if (!music.paused) {
+            audioStartPrompt.classList.add("hidden");
+            return;
+          }
+
+          const playAttempt = music.play();
+          if (playAttempt && typeof playAttempt.then === "function") {
+            playAttempt
+              .then(() => {
+                audioStartPrompt.classList.add("hidden");
+              })
+              .catch(() => {
+                // Keep the prompt visible until the visitor interacts.
+                audioStartPrompt.classList.remove("hidden");
+              });
+          }
+        }
+
+        // Try autoplay first. If the browser blocks it, any tap, click,
+        // touch, or key press retries playback before the launch button runs.
+        startBackgroundMusic();
+        ["pointerdown", "touchstart", "keydown"].forEach((eventName) => {
+          document.addEventListener(eventName, startBackgroundMusic, {
+            capture: true,
+            passive: true,
+          });
+        });
+
+        music.addEventListener("play", () => {
+          audioStartPrompt.classList.add("hidden");
+        });
+        music.addEventListener("pause", () => {
+          if (!launched) audioStartPrompt.classList.remove("hidden");
+        });
+
+        /* MOTION TOGGLE */
+
+        function applyMotionSetting() {
+          document.body.classList.toggle("motion-off", !motionEnabled);
+          motionToggle.setAttribute("aria-pressed", String(!motionEnabled));
+          motionToggle.innerHTML =
+            `<span id="motionIcon">${motionEnabled ? "✦" : "○"}</span> ` +
+            `MOTION: ${motionEnabled ? "ON" : "OFF"}`;
+
+          if (motionEnabled) {
+            drawParticles();
+          }
+        }
+
+        motionToggle.addEventListener("click", () => {
+          motionEnabled = !motionEnabled;
+          applyMotionSetting();
+        });
+
+        /* PARTICLE NETWORK */
+
+        const canvas = $("#particles");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+        let animationFrame = null;
+        const pointer = { x: -1000, y: -1000 };
+
+        function resizeCanvas() {
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+          canvas.width = window.innerWidth * ratio;
+          canvas.height = window.innerHeight * ratio;
+          canvas.style.width = window.innerWidth + "px";
+          canvas.style.height = window.innerHeight + "px";
+
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+          const count = Math.min(
+            95,
+            Math.floor((window.innerWidth * window.innerHeight) / 15000),
+          );
+
+          particles = Array.from({ length: count }, () => ({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            radius: Math.random() * 1.5 + 0.5,
+          }));
+
+          drawParticles();
+        }
+
+        function drawParticles() {
+          if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+          }
+
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+
+            if (motionEnabled) {
+              p.x += p.vx;
+              p.y += p.vy;
+
+              if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+              if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(196,181,253,0.65)";
+            ctx.fill();
+
+            for (let j = i + 1; j < particles.length; j++) {
+              const q = particles[j];
+              const dx = p.x - q.x;
+              const dy = p.y - q.y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+
+              if (distance < 115) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = `rgba(139,92,246,${(1 - distance / 115) * 0.18})`;
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+              }
+            }
+
+            const dx = p.x - pointer.x;
+            const dy = p.y - pointer.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 140) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(pointer.x, pointer.y);
+              ctx.strokeStyle = `rgba(56,189,248,${(1 - distance / 140) * 0.45})`;
+              ctx.stroke();
+            }
+          }
+
+          if (motionEnabled) {
+            animationFrame = requestAnimationFrame(drawParticles);
+          }
+        }
+
+        window.addEventListener("pointermove", (event) => {
+          pointer.x = event.clientX;
+          pointer.y = event.clientY;
+        });
+
+        window.addEventListener("pointerleave", () => {
+          pointer.x = -1000;
+          pointer.y = -1000;
+        });
+
+        window.addEventListener("resize", resizeCanvas);
+
+        /* CUSTOM ANIME SLASH SOUND */
+
+        function playAnimeSlashSound() {
+          try {
+            animeSlashSound.pause();
+            animeSlashSound.currentTime = 0;
+            animeSlashSound.play().catch((error) => {
+              console.warn(
+                "Could not play anime-slash.mp3. Check the file name and folder.",
+                error,
+              );
+            });
+          } catch (error) {
+            console.warn("Anime slash sound unavailable:", error);
+          }
+        }
+
+        /* ANIME-STYLE LAUNCH */
+
+        function launchWithSlash() {
+          if (launched) return;
+          launched = true;
+
+          clearInterval(loadTimer);
+          setProgress(100);
+          statusText.textContent = "Launching portfolio...";
+
+          loader.classList.add("hidden");
+          slash.classList.add("active");
+
+          // Stop background music immediately when Open Portfolio is clicked.
+          // Keep the one-shot anime slash effect available during the transition.
+          music.pause();
+          music.currentTime = 0;
+          audioStartPrompt.classList.add("hidden");
+          playAnimeSlashSound();
+
+          if (motionEnabled) {
+            document.body.classList.remove("shake");
+            void document.body.offsetWidth;
+            document.body.classList.add("shake");
+          }
+
+          window.setTimeout(
+            () => {
+              sessionStorage.setItem("portfolioIntroComplete", "true");
+              window.location.replace("index.html");
+            },
+            motionEnabled ? 900 : 600,
+          );
+        }
+
+        launchButton.addEventListener("click", launchWithSlash);
+        skipButton.addEventListener("click", launchWithSlash);
+
+        document.addEventListener("keydown", (event) => {
+          if (
+            event.key === "Enter" &&
+            !event.repeat &&
+            !event.target.closest("button, a, input, textarea, select")
+          ) {
+            launchWithSlash();
+          }
+
+          if (event.key === "Escape") {
+            launchWithSlash();
+          }
+        });
+
+        /* INITIALIZE */
+
+        applyMotionSetting();
+        resizeCanvas();
+        startLoading();
+
+        // Keep the loading screen from getting stuck.
+        window.setTimeout(() => {
+          if (!loadComplete) finishLoading();
+        }, 4500);
+      })();
+    </script>
+  </body>
+</html>
