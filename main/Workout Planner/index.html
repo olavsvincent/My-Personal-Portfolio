@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <a href="#" class="logo">WORKOUT<span>LAB.</span></a>
+
+        <p class="side-label">WORKSPACE</p>
+        <a href="#preferences" class="nav-link active">▦ Workout Planner</a>
+        <a href="#schedule" class="nav-link">▤ Weekly Schedule</a>
+        <a href="#exercises" class="nav-link">↗ Exercises</a>
+
+        <div class="sidebar-note">
+            <span>✦</span>
+            <h3>Stay consistent.</h3>
+            <p>Small improvements lead to big results.</p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">YOUR PERSONAL TRAINING SPACE</p>
+                <h1>Workout Planner</h1>
+                <p class="subtitle">
+                    Build a routine that fits your goals and schedule.
+                </p>
+            </div>
+            <span class="status">● PLAN BUILDER</span>
+        </header>
+
+        <section class="panel" id="preferences">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">STEP 01</p>
+                    <h2>Set Your Preferences</h2>
+                </div>
+            </div>
+
+            <label class="field-label">What's your main goal?</label>
+
+            <div class="goal-grid">
+                <button class="goal-card selected" data-goal="Hypertrophy">
+                    <span>↗</span>
+                    <strong>Hypertrophy</strong>
+                    <small>Build muscle size</small>
+                </button>
+
+                <button class="goal-card" data-goal="Strength">
+                    <span>✦</span>
+                    <strong>Strength</strong>
+                    <small>Lift heavier</small>
+                </button>
+
+                <button class="goal-card" data-goal="Endurance">
+                    <span>⌁</span>
+                    <strong>Endurance</strong>
+                    <small>Improve stamina</small>
+                </button>
+
+                <button class="goal-card" data-goal="Weight Loss">
+                    <span>◌</span>
+                    <strong>Weight Loss</strong>
+                    <small>Stay active</small>
+                </button>
+            </div>
+
+            <div class="settings-grid">
+                <div>
+                    <label class="field-label">Experience Level</label>
+                    <div class="segmented-control" id="experience">
+                        <button class="selected" data-level="Beginner">Beginner</button>
+                        <button data-level="Intermediate">Intermediate</button>
+                        <button data-level="Advanced">Advanced</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="field-label" for="split">Weekly Split</label>
+                    <select id="split">
+                        <option>Full Body</option>
+                        <option>Push/Pull/Legs</option>
+                        <option selected>Upper/Lower</option>
+                        <option>3-Day Split</option>
+                    </select>
+                </div>
+            </div>
+
+            <label class="field-label">Available Equipment</label>
+
+            <div class="equipment-grid">
+                <label><input type="checkbox" value="Bodyweight" checked> Bodyweight</label>
+                <label><input type="checkbox" value="Dumbbells" checked> Dumbbells</label>
+                <label><input type="checkbox" value="Barbells"> Barbells</label>
+                <label><input type="checkbox" value="Resistance Bands"> Resistance Bands</label>
+                <label><input type="checkbox" value="Full Gym"> Full Gym</label>
+            </div>
+
+            <div class="config-footer">
+                <p id="summary">Hypertrophy · Beginner · Upper/Lower</p>
+                <button class="primary-button" id="generate">
+                    Generate My Routine ↗
+                </button>
+            </div>
+        </section>
+
+        <section class="section" id="schedule">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">STEP 02</p>
+                    <h2>Your Weekly Schedule</h2>
+                </div>
+                <span class="legend">● Workout &nbsp; ○ Rest Day</span>
+            </div>
+
+            <div class="week-grid" id="week"></div>
+        </section>
+
+        <section class="section">
+            <div class="session-banner">
+                <div>
+                    <p class="eyebrow">YOUR SELECTED SESSION</p>
+                    <h2 id="sessionTitle">Day 1: Upper Focus</h2>
+                    <p id="sessionDescription">
+                        Build a strong foundation with controlled movements.
+                    </p>
+                </div>
+
+                <div class="session-stats">
+                    <div>
+                        <strong id="duration">45 min</strong>
+                        <small>Duration</small>
+                    </div>
+                    <div>
+                        <strong id="exerciseCount">4 exercises</strong>
+                        <small>Movements</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-header" id="exercises">
+                <div>
+                    <h2>Exercise List</h2>
+                    <p class="subtitle">Mark each set as you complete it.</p>
+                </div>
+                <button class="secondary-button" id="reset">↺ Reset Day</button>
+            </div>
+
+            <div class="exercise-list" id="exerciseList"></div>
+
+            <section class="progress-panel">
+                <div class="progress-header">
+                    <div>
+                        <h3>Session Progress</h3>
+                        <p id="progressText">0 of 12 sets completed</p>
+                    </div>
+                    <strong id="percentage">0%</strong>
+                </div>
+
+                <div class="progress-track">
+                    <div id="progressBar"></div>
+                </div>
+
+                <div class="progress-footer">
+                    <p id="progressMessage">
+                        Start with a warm-up before your first exercise.
+                    </p>
+                    <button class="primary-button" id="finish">
+                        Finish Workout ✓
+                    </button>
+                </div>
+            </section>
+
+            <p class="disclaimer">
+                Use proper technique and comfortable weights. Stop if you feel
+                sharp pain, dizziness, or unusual shortness of breath.
+            </p>
+        </section>
+
+        <footer>WORKOUTLAB. · PLAN SMART. TRAIN CONSISTENTLY.</footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

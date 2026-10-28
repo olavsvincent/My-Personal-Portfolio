@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SysVision computer performance and diagnostics dashboard.">
+  <title>SysVision | System Monitor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="SysVision home">
+        <span class="brand-mark">S</span>
+        <span>Sys<span class="brand-light">Vision</span><small>SYSTEM INTELLIGENCE</small></span>
+      </a>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">◫</span> Overview</a>
+        <a class="nav-link" href="#performance"><span class="nav-icon">⌁</span> Performance</a>
+        <a class="nav-link" href="#hardware"><span class="nav-icon">▦</span> Hardware</a>
+        <a class="nav-link" href="#diagnostics"><span class="nav-icon">◇</span> Diagnostics <span class="nav-count" id="navAlertCount">0</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="service-status"><span class="status-dot" id="serviceDot"></span><div><b id="serviceLabel">Connecting</b><small id="serviceSub">Local service</small></div></div>
+        <div class="sidebar-note">LOCAL SYSTEM MONITOR<br><span>SysVision v1.0.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu" id="menuButton" aria-label="Toggle navigation">☰</button>
+          <div><p class="eyebrow">SYSTEM OVERVIEW</p><h1>Command Center</h1></div>
+        </div>
+        <div class="top-actions">
+          <div class="live-pill"><span class="status-dot"></span><span id="modeLabel">Connecting</span></div>
+          <button class="icon-button" id="themeButton" aria-label="Toggle light and dark theme" title="Toggle theme">◐</button>
+          <div class="avatar">SV</div>
+        </div>
+      </header>
+
+      <section class="welcome-row" id="overview">
+        <div><h2>Your system, at a glance.</h2><p>Monitor performance, inspect resources, and spot unusual activity.</p></div>
+        <div class="updated"><span class="pulse-dot"></span><span id="lastUpdated">Waiting for first reading…</span></div>
+      </section>
+
+      <section class="system-banner">
+        <div class="banner-orb"><span>⌘</span></div>
+        <div class="system-info"><p class="eyebrow">CURRENT DEVICE</p><h2 id="deviceName">Detecting your computer…</h2><p id="platformName">Connecting to the local monitoring service</p></div>
+        <div class="banner-divider"></div>
+        <div class="banner-stat"><span>UPTIME</span><b id="uptimeValue">—</b><small>Since last boot</small></div>
+        <div class="banner-stat"><span>DATA SOURCE</span><b id="sourceValue">—</b><small id="sourceDetail">Waiting for connection</small></div>
+      </section>
+
+      <div class="section-heading" id="performance"><div><p class="eyebrow">LIVE TELEMETRY</p><h2>Performance metrics</h2></div><span class="subtle-label"><span class="tiny-live"></span> AUTO REFRESH · 2 SEC</span></div>
+      <section class="metric-grid">
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon blue">⌁</span><span class="metric-tag">LIVE</span></div>
+          <p class="metric-name">CPU utilization</p><div class="metric-value"><strong id="cpuValue">—</strong><span>%</span></div>
+          <div class="progress-track"><div class="progress-fill blue-fill" id="cpuBar"></div></div>
+          <div class="metric-foot"><span>Processor load</span><span id="cpuFoot">Reading sensor</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon violet">▤</span><span class="metric-tag">LIVE</span></div>
+          <p class="metric-name">Memory usage</p><div class="metric-value"><strong id="ramValue">—</strong><span>%</span></div>
+          <div class="progress-track"><div class="progress-fill violet-fill" id="ramBar"></div></div>
+          <div class="metric-foot"><span id="ramDetail">RAM used</span><span id="ramFoot">Reading sensor</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon cyan">▥</span><span class="metric-tag">LIVE</span></div>
+          <p class="metric-name">Disk utilization</p><div class="metric-value"><strong id="diskValue">—</strong><span>%</span></div>
+          <div class="progress-track"><div class="progress-fill cyan-fill" id="diskBar"></div></div>
+          <div class="metric-foot"><span id="diskDetail">Storage used</span><span id="diskFoot">Reading sensor</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon amber">◷</span><span class="metric-tag simulated-tag">SIMULATED</span></div>
+          <p class="metric-name">CPU temperature</p><div class="metric-value"><strong id="tempValue">42</strong><span>°C</span></div>
+          <div class="progress-track"><div class="progress-fill amber-fill" id="tempBar"></div></div>
+          <div class="metric-foot"><span>Illustrative sensor</span><span id="tempFoot">Normal range</span></div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel chart-panel">
+          <div class="panel-heading"><div><p class="eyebrow">RESOURCE ACTIVITY</p><h3>Performance history</h3></div><select id="chartRange" aria-label="Chart time range"><option value="20">Last 20 readings</option><option value="40">Last 40 readings</option><option value="60">Last 60 readings</option></select></div>
+          <div class="chart-legend"><span><i class="legend-dot cpu-legend"></i> CPU</span><span><i class="legend-dot ram-legend"></i> Memory</span></div>
+          <div class="chart-wrap"><canvas id="performanceChart" aria-label="CPU and memory usage history" role="img"></canvas><div id="chartFallback" class="chart-fallback">Charts require an internet connection to load Chart.js. Live metrics still work.</div></div>
+        </article>
+        <article class="panel sensor-panel" id="hardware">
+          <div class="panel-heading"><div><p class="eyebrow">SENSOR SIMULATION</p><h3>Thermal & cooling</h3></div><span class="sim-badge">DEMO DATA</span></div>
+          <div class="sensor-row"><div class="sensor-symbol">◉</div><div class="sensor-copy"><b>GPU temperature</b><small>Graphics processor</small></div><div class="sensor-reading"><strong id="gpuTemp">51°</strong><div class="mini-track"><span id="gpuTempBar"></span></div></div></div>
+          <div class="sensor-row"><div class="sensor-symbol">✣</div><div class="sensor-copy"><b>Fan speed</b><small>Cooling system</small></div><div class="sensor-reading"><strong id="fanSpeed">1,240 <small>RPM</small></strong><div class="mini-track"><span id="fanBar"></span></div></div></div>
+          <div class="sensor-row"><div class="sensor-symbol">ϟ</div><div class="sensor-copy"><b>GPU load</b><small>Graphics workload</small></div><div class="sensor-reading"><strong id="gpuLoad">24%</strong><div class="mini-track"><span id="gpuLoadBar"></span></div></div></div>
+          <div class="sensor-note"><span>ⓘ</span> These sensor readings are simulated, not measured from your physical hardware.</div>
+        </article>
+      </section>
+
+      <section class="bottom-grid" id="diagnostics">
+        <article class="panel diagnostics-panel">
+          <div class="panel-heading"><div><p class="eyebrow">RULE-BASED CHECKS</p><h3>System diagnostics</h3></div><span class="health-badge" id="healthBadge">Checking</span></div>
+          <div id="diagnosticList" class="diagnostic-list"><div class="diagnostic-item"><span class="diagnostic-icon">…</span><div><b>Checking system status</b><small>Waiting for system statistics</small></div><span class="diagnostic-state">PENDING</span></div></div>
+        </article>
+        <article class="panel controls-panel">
+          <div class="panel-heading"><div><p class="eyebrow">TEST ENVIRONMENT</p><h3>Simulation controls</h3></div><span class="sim-badge">DEMO</span></div>
+          <p class="control-description">Adjust simulated workload to test how the diagnostic system reacts.</p>
+          <label class="slider-label" for="workloadSlider"><span>Simulated workload</span><strong id="workloadValue">35%</strong></label>
+          <input type="range" id="workloadSlider" min="0" max="100" value="35">
+          <div class="range-labels"><span>Idle</span><span>Heavy load</span></div>
+          <div class="control-buttons"><button class="primary-button" id="stressButton">Run stress demo</button><button class="secondary-button" id="resetButton">Reset</button></div>
+          <p class="control-hint">This only changes simulated values. It does not stress your actual computer.</p>
+        </article>
+      </section>
+
+      <footer class="footer"><span><b>SysVision</b> · System monitoring concept</span><span>Built for a Computer Engineering portfolio</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

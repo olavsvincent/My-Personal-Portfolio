@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070b14">
+<title>Project Lab | VINCENT.DEV</title>
+<link rel="stylesheet" href="project-demo.css"><script src="project-demo.js" defer></script>
+</head>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="topbar">
+  <a class="brand" href="index.html">VINCENT<span>.DEV</span></a>
+  <div class="top-status"><i></i> PROJECT LAB <span class="status-divider">/</span> LIVE DEMO</div>
+  <a class="back-link" href="projects.html">← Projects</a>
+</header>
+<main class="shell">
+  <section class="hero">
+    <div class="eyebrow"><span class="pulse"></span> INTERACTIVE ENVIRONMENT · 01—07</div>
+    <h1>Enter the <span>Project Lab.</span></h1>
+    <p>Launch a project and use its real interface. Your changes stay in this browser when the project supports local storage.</p>
+    <div class="hero-line"><span>ENVIRONMENT: WEB</span><span id="clock">SYSTEM TIME --:--:--</span><span>STATUS: <b>READY</b></span></div>
+  </section>
+  <section class="lab-layout">
+    <aside class="project-panel">
+      <div class="panel-head"><span>PROJECT DIRECTORY</span><span class="tiny-count">07 MODULES</span></div>
+      <label class="search-label" for="projectSearch">FILTER MODULES</label>
+      <input id="projectSearch" class="search" type="search" placeholder="Search a project...">
+      <nav id="projectList" class="project-list" aria-label="Project modules">
+        <button class="project-choice active" data-app="calculator"><span class="choice-icon">∑</span><span><b>Scientific Calculator</b><small>Math · JavaScript</small></span><span class="arrow">↗</span></button>
+        <button class="project-choice" data-app="grade"><span class="choice-icon">▤</span><span><b>Grade Calculator</b><small>Education · JavaScript</small></span><span class="arrow">↗</span></button>
+        <button class="project-choice" data-app="books"><span class="choice-icon">▥</span><span><b>Book Management</b><small>Library · CRUD</small></span><span class="arrow">↗</span></button>
+        <button class="project-choice" data-app="health"><span class="choice-icon">⌁</span><span><b>Health Monitoring</b><small>Dashboard · Simulation</small></span><span class="arrow">↗</span></button>
+        <button class="project-choice" data-app="workout"><span class="choice-icon">↗</span><span><b>Workout Planner</b><small>Planning · Web</small></span><span class="arrow">↗</span></button>
+        <button class="project-choice" data-app="students"><span class="choice-icon">◎</span><span><b>Student Management</b><small>Records · Demo mode</small></span><span class="arrow">↗</span></button>
+        <button class="project-choice" data-app="sysvision"><span class="choice-icon">⌘</span><span><b>SysVision</b><small>System intelligence · Flask</small></span><span class="arrow">↗</span></button>
+      </nav>
+      <div class="panel-foot"><i></i> LOCAL SESSION ACTIVE</div>
+    </aside>
+    <section class="workspace">
+      <div class="workspace-head">
+        <div><div class="module-tag" id="moduleTag">MODULE / 01</div><h2 id="demoTitle">Scientific Calculator</h2><p id="demoDescription">A precision-focused scientific calculator.</p></div>
+        <div class="window-controls"><span></span><span></span><span></span></div>
+      </div>
+      <div class="workspace-tools"><span><i class="live-dot"></i> INTERACTIVE PREVIEW</span><span id="modulePath">/Calculator/index.html</span><button id="openStandalone" type="button">Open full view ↗</button></div>
+      <div id="demoApp" class="demo-app"><iframe id="appFrame" title="Interactive project preview" src="Calculator/index.html"></iframe></div>
+      <div id="fallback" class="fallback" hidden></div>
+      <div class="workspace-foot"><span>VINCENT.DEV <b>PROJECT LAB</b></span><span>DEMO DATA · USE RESPONSIBLY</span></div>
+    </section>
+  </section>
+  <p class="notice"><b>Note:</b> This lab loads the project files included in this portfolio. Some projects use simulated data, and browser demos cannot directly run Python or Flask backends.</p>
+</main>
+<footer class="footer"><span>© Student Developer Portfolio</span><span>DESIGNED FOR EXPLORATION <b>✦</b></span></footer>
+</body></html>

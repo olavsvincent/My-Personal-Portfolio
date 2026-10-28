@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090d">
+
+    <title>VINCENT.DEV | Project Lab</title>
+
+    <link rel="stylesheet" href="./project-demo.css">
+    <script src="./project-demo.js" defer></script>
+</head>
+<body>
+
+    <header class="demo-nav">
+        <a href="./index.html" class="brand">
+            VINCENT<span></span>
+        </a>
+
+        <a href="./projects.html" class="back-link">
+            ← Back to Projects
+        </a>
+    </header>
+
+    <main class="demo-container">
+
+        <p class="eyebrow">
+            <span class="live-dot"></span>
+            INTERACTIVE PROJECT LAB
+        </p>
+
+        <h1 id="demoTitle">Loading Project...</h1>
+
+        <p id="demoDescription" class="description">
+            Initializing interactive environment...
+        </p>
+
+        <section class="project-layout">
+
+            <aside class="project-sidebar">
+                <h3>PROJECT MODULES</h3>
+
+                <button class="module-btn" data-app="calculator">
+                    <span>01</span> Calculator
+                </button>
+
+                <button class="module-btn" data-app="grade">
+                    <span>02</span> Grade Calculator
+                </button>
+
+                <button class="module-btn" data-app="books">
+                    <span>03</span> Book Management
+                </button>
+
+                <button class="module-btn" data-app="health">
+                    <span>04</span> Health Monitoring
+                </button>
+
+                <button class="module-btn" data-app="students">
+                    <span>05</span> Student Management
+                </button>
+
+                <button class="module-btn" data-app="workout">
+                    <span>06</span> Workout Planner
+                </button>
+            </aside>
+
+            <div class="project-workspace">
+                <div class="workspace-header">
+                    <span class="status-dot"></span>
+                    <span>LIVE ENVIRONMENT</span>
+                    <span class="workspace-label">VINCENT.DEV</span>
+                </div>
+
+                <section id="demoApp" aria-live="polite">
+                    <div class="loading-screen">
+                        <div class="loader"></div>
+                        <p>Initializing project module...</p>
+                    </div>
+                </section>
+            </div>
+
+        </section>
+
+        <p class="notice">
+            Interactive Project Lab · Browser-based demonstration.
+            Data may be stored locally on this device.
+        </p>
+
+    </main>
+
+    <footer class="demo-footer">
+        <span>Student Developer Portfolio</span>
+        <a href="./projects.html">Explore Projects ↗</a>
+    </footer>
+
+</body>
+</html>
