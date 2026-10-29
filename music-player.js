@@ -48,7 +48,7 @@
       src: "music/CHEERUP.mp3",
     },
     {
-      title: "What Is Love?",
+      title: "One Spark",
       artist: "TWICE",
       group: "TWICE",
       src: "music/WHATISLOVE.mp3",
