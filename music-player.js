@@ -51,7 +51,7 @@
       title: "One Spark",
       artist: "TWICE",
       group: "TWICE",
-      src: "music/WHATISLOVE.mp3",
+      src: "music/ONESPARK.mp3",
     },
     {
       title: "Heart Shaker",
