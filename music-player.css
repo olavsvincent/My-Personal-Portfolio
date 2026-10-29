@@ -845,3 +845,77 @@
 #portfolioMusicPlayer .mp-shell.mp-expanded .mp-track-subtitle {
   color: #cbd5e1 !important;
 }
+
+/* FIX: Keep Music Player Fixed on the Left Side */
+
+#portfolioMusicPlayer {
+  position: fixed !important;
+  left: 24px !important;
+  right: auto !important;
+  bottom: 24px !important;
+  top: auto !important;
+  z-index: 99999 !important;
+  width: auto;
+  max-width: calc(100vw - 30px);
+}
+
+/* Keep the floating logo compact */
+#portfolioMusicPlayer .mp-shell.mp-collapsed {
+  width: 58px;
+  height: 58px;
+}
+
+/* Expanded player stays on the left */
+#portfolioMusicPlayer .mp-shell.mp-expanded {
+  width: 320px;
+  max-width: calc(100vw - 30px);
+}
+
+/* Mobile positioning */
+@media (max-width: 600px) {
+  #portfolioMusicPlayer {
+    left: 12px !important;
+    right: auto !important;
+    bottom: 12px !important;
+  }
+
+  #portfolioMusicPlayer .mp-shell.mp-expanded {
+    width: min(320px, calc(100vw - 24px));
+  }
+}
+
+/* Music Player: Upper-Left Navbar Position */
+#portfolioMusicPlayer {
+  position: fixed !important;
+  top: 20px !important;
+  left: 24px !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 99999 !important;
+  width: auto !important;
+  max-width: calc(100vw - 30px);
+}
+
+/* Keep the floating logo compact */
+#portfolioMusicPlayer .mp-shell.mp-collapsed {
+  width: 58px;
+  height: 58px;
+}
+
+/* Expanded player */
+#portfolioMusicPlayer .mp-shell.mp-expanded {
+  width: 320px;
+  max-width: calc(100vw - 30px);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #portfolioMusicPlayer {
+    top: 12px !important;
+    left: 12px !important;
+  }
+
+  #portfolioMusicPlayer .mp-shell.mp-expanded {
+    width: min(320px, calc(100vw - 24px));
+  }
+}

@@ -3,25 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050509" />
-    <title>Initializing | Shane Vincent Olavario</title>
+    <meta name="theme-color" content="#05070d" />
+    <meta
+      name="description"
+      content="Project Omega secure portfolio access portal."
+    />
+    <title>Project Omega | Secure Access</title>
 
     <style>
       :root {
-        --bg: #050509;
-        --panel: rgba(17, 16, 30, 0.84);
-        --purple: #a78bfa;
-        --purple-bright: #8b5cf6;
-        --cyan: #38bdf8;
-        --text: #f5f3ff;
-        --muted: #9996b5;
-        --border: rgba(167, 139, 250, 0.2);
+        color-scheme: dark;
+        --bg: #05070d;
+        --panel: rgba(12, 18, 32, 0.9);
+        --panel-light: rgba(20, 30, 49, 0.8);
+        --cyan: #38e8ff;
+        --purple: #8b5cf6;
+        --text: #f1f5ff;
+        --muted: #8594ad;
+        --border: rgba(125, 165, 210, 0.2);
+        --success: #58ffc5;
+        --danger: #ff5c8a;
       }
 
       * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
       }
 
       html {
@@ -31,34 +38,39 @@
 
       body {
         min-height: 100vh;
-        overflow: hidden;
-        background: radial-gradient(
-          ellipse at 50% 45%,
-          #17102b 0%,
-          #090811 45%,
-          #050509 78%
-        );
-        color: var(--text);
+        min-height: 100dvh;
+        overflow-x: hidden;
         font-family: Inter, "Segoe UI", Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            ellipse at 50% 40%,
+            rgba(28, 69, 115, 0.17),
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse at 85% 15%,
+            rgba(139, 92, 246, 0.1),
+            transparent 40%
+          ),
+          var(--bg);
       }
 
-      button {
+      button,
+      input {
         font: inherit;
       }
-
-      button:focus-visible,
-      a:focus-visible {
-        outline: 2px solid var(--cyan);
-        outline-offset: 5px;
+      button {
+        -webkit-tap-highlight-color: transparent;
       }
-
-      #particles {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 4px;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
       }
 
       .background-grid {
@@ -66,201 +78,53 @@
         inset: 0;
         z-index: 0;
         pointer-events: none;
-        opacity: 0.17;
+        opacity: 0.18;
         background-image:
-          linear-gradient(rgba(167, 139, 250, 0.1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(167, 139, 250, 0.1) 1px, transparent 1px);
-        background-size: 55px 55px;
-        mask-image: linear-gradient(
-          to bottom,
-          transparent,
-          black 25%,
-          black 75%,
-          transparent
-        );
+          linear-gradient(rgba(56, 232, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(56, 232, 255, 0.08) 1px, transparent 1px);
+        background-size: 46px 46px;
+        mask-image: linear-gradient(to bottom, black, transparent 95%);
       }
 
-      .ambient {
+      .ambient-glow {
         position: fixed;
-        width: 340px;
-        height: 340px;
+        width: 360px;
+        height: 360px;
         border-radius: 50%;
         filter: blur(100px);
-        opacity: 0.14;
+        opacity: 0.12;
         pointer-events: none;
         z-index: 0;
-        animation: ambientFloat 8s ease-in-out infinite alternate;
+        animation: glowDrift 10s ease-in-out infinite alternate;
       }
-
-      .ambient.one {
-        top: -150px;
-        left: -100px;
-        background: var(--purple-bright);
-      }
-
-      .ambient.two {
-        right: -120px;
-        bottom: -150px;
+      .glow-one {
+        top: 5%;
+        left: -180px;
         background: var(--cyan);
+      }
+      .glow-two {
+        right: -180px;
+        bottom: 0;
+        background: var(--purple);
         animation-delay: -4s;
       }
-
-      @keyframes ambientFloat {
-        to {
-          transform: translate(45px, 30px) scale(1.15);
-        }
-      }
-
-      /* AUDIO START PROMPT */
-      #audioStartPrompt {
-        position: fixed;
-        left: 50%;
-        bottom: 84px;
-        z-index: 9000;
-        transform: translateX(-50%);
-        width: max-content;
-        max-width: calc(100vw - 32px);
-        padding: 12px 18px;
-        border: 1px solid #8b5cf6aa;
-        border-radius: 999px;
-        background: rgba(8, 8, 18, 0.92);
-        color: #ffffff;
-        font:
-          700 11px/1.4 system-ui,
-          sans-serif;
-        letter-spacing: 0.14em;
-        text-align: center;
-        box-shadow: 0 0 28px #8b5cf633;
-        animation: audioPromptPulse 1.6s ease-in-out infinite alternate;
-        pointer-events: none;
-      }
-
-      #audioStartPrompt.hidden {
-        display: none;
-      }
-
-      @keyframes audioPromptPulse {
-        from {
-          opacity: 0.72;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      /* LOADING SCREEN */
-
-      #loadingScreen {
+      #particles {
         position: fixed;
         inset: 0;
-        z-index: 99999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 0;
-        background: #050509;
-        transition:
-          opacity 0.65s ease,
-          visibility 0.65s ease;
-      }
-
-      #loadingScreen.hidden {
-        opacity: 0;
-        visibility: hidden;
+        z-index: 0;
         pointer-events: none;
       }
 
-      .loader-ring {
-        position: relative;
-        width: 78px;
-        height: 78px;
-        border: 2px solid #211a38;
-        border-top-color: var(--purple);
-        border-right-color: var(--cyan);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-        box-shadow: 0 0 28px #8b5cf633;
-      }
-
-      .loader-ring::after {
-        content: "";
-        position: absolute;
-        inset: 10px;
-        border: 1px solid #38bdf844;
-        border-bottom-color: var(--cyan);
-        border-radius: 50%;
-        animation: spin 1.4s linear infinite reverse;
-      }
-
-      .loader-title {
-        margin-top: 30px;
-        font-size: 12px;
-        letter-spacing: 5px;
-        color: #d8ccff;
-      }
-
-      .loader-status {
-        margin-top: 13px;
-        color: var(--muted);
-        font-size: 11px;
-        letter-spacing: 1.5px;
-        text-align: center;
-      }
-
-      .loader-track {
-        width: min(250px, 70vw);
-        height: 3px;
-        margin-top: 25px;
-        background: #211b30;
-        overflow: hidden;
-      }
-
-      .loader-progress {
-        width: 0%;
-        height: 100%;
-        background: linear-gradient(90deg, var(--purple-bright), var(--cyan));
-        box-shadow: 0 0 15px var(--purple);
-        transition: width 0.12s linear;
-      }
-
-      .loader-percent {
-        margin-top: 11px;
-        color: var(--purple);
-        font-size: 12px;
-        font-variant-numeric: tabular-nums;
-      }
-
-      .loader-footer {
-        position: absolute;
-        bottom: 28px;
-        color: #5f5b76;
-        font-size: 9px;
-        letter-spacing: 3px;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* INTRO LAYOUT */
-
       .topbar {
-        position: absolute;
-        z-index: 5;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 76px;
-        padding: 0 6%;
+        position: relative;
+        z-index: 3;
+        width: min(1120px, calc(100% - 40px));
+        margin: auto;
+        padding: 27px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid rgba(167, 139, 250, 0.1);
-        background: rgba(5, 5, 9, 0.38);
-        backdrop-filter: blur(14px);
+        gap: 16px;
       }
 
       .brand {
@@ -269,566 +133,818 @@
         gap: 12px;
         font-size: 12px;
         font-weight: 800;
-        letter-spacing: 2px;
+        letter-spacing: 2.5px;
       }
-
-      .brand-symbol {
+      .brand-mark {
+        width: 36px;
+        height: 36px;
         display: grid;
         place-items: center;
-        width: 35px;
-        height: 35px;
+        border: 1px solid rgba(56, 232, 255, 0.55);
         color: var(--cyan);
-        border: 1px solid var(--border);
-        background: #a78bfa0d;
-        box-shadow: 0 0 18px #8b5cf61c;
+        background: rgba(56, 232, 255, 0.06);
+        clip-path: polygon(
+          25% 0,
+          75% 0,
+          100% 25%,
+          100% 75%,
+          75% 100%,
+          25% 100%,
+          0 75%,
+          0 25%
+        );
+        font-size: 17px;
       }
-
       .brand small {
         display: block;
         margin-top: 4px;
-        font-size: 9px;
         color: var(--muted);
+        font-size: 9px;
         font-weight: 500;
         letter-spacing: 2px;
       }
-
-      .top-controls {
+      .topbar-actions {
         display: flex;
-        gap: 9px;
+        align-items: center;
+        gap: 10px;
       }
 
-      .icon-button {
+      .status-pill {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 10px 12px;
-        color: #c8c4dc;
+        padding: 9px 12px;
         border: 1px solid var(--border);
-        background: #100d1c;
-        font-size: 10px;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: 0.25s;
+        border-radius: 4px;
+        color: var(--muted);
+        font-size: 9px;
+        letter-spacing: 1.3px;
       }
-
-      .icon-button:hover {
-        border-color: var(--cyan);
-        color: white;
-        transform: translateY(-2px);
-      }
-
-      .intro-wrap {
-        position: relative;
-        z-index: 2;
-        display: grid;
-        place-items: center;
-        min-height: 100vh;
-        padding: 100px 22px 75px;
-      }
-
-      .intro-card {
-        position: relative;
-        width: min(760px, 100%);
-        padding: clamp(28px, 6vw, 62px);
-        text-align: center;
-        border: 1px solid var(--border);
-        background: linear-gradient(
-          145deg,
-          rgba(19, 16, 33, 0.93),
-          rgba(7, 8, 16, 0.92)
-        );
-        box-shadow:
-          0 25px 100px #0009,
-          inset 0 1px rgba(255, 255, 255, 0.035),
-          0 0 55px #8b5cf60a;
-        backdrop-filter: blur(18px);
-        animation: cardEnter 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-      }
-
-      .intro-card::before,
-      .intro-card::after {
-        content: "";
-        position: absolute;
-        width: 65px;
-        height: 2px;
-        background: var(--cyan);
-        box-shadow: 0 0 15px var(--cyan);
-      }
-
-      .intro-card::before {
-        top: -1px;
-        left: 30px;
-      }
-
-      .intro-card::after {
-        right: 30px;
-        bottom: -1px;
-        background: var(--purple);
-        box-shadow: 0 0 15px var(--purple);
-      }
-
-      @keyframes cardEnter {
-        from {
-          opacity: 0;
-          transform: translateY(25px) scale(0.97);
-          filter: blur(8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-          filter: blur(0);
-        }
-      }
-
-      .status {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 9px 13px;
-        color: #c4b5fd;
-        border: 1px solid #a78bfa2c;
-        background: #8b5cf610;
-        font-size: 10px;
-        letter-spacing: 2px;
-      }
-
       .status-dot {
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: #4ade80;
-        box-shadow: 0 0 12px #4ade80;
-        animation: blink 1.3s infinite;
+        background: var(--success);
+        box-shadow: 0 0 12px rgba(88, 255, 197, 0.75);
+        animation: pulse 1.8s infinite;
       }
 
-      @keyframes blink {
-        50% {
-          opacity: 0.25;
-        }
+      .icon-button {
+        width: 37px;
+        height: 37px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.025);
+        color: var(--text);
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .icon-button:hover {
+        border-color: var(--cyan);
+        background: rgba(56, 232, 255, 0.08);
       }
 
+      main {
+        position: relative;
+        z-index: 2;
+        width: min(1120px, calc(100% - 40px));
+        min-height: calc(100vh - 115px);
+        min-height: calc(100dvh - 115px);
+        margin: auto;
+        padding: 30px 0 55px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(330px, 0.8fr);
+        align-items: center;
+        gap: clamp(35px, 7vw, 100px);
+      }
+
+      .intro-copy {
+        animation: fadeUp 0.9s both;
+      }
       .eyebrow {
-        margin-top: 33px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
         color: var(--cyan);
         font-size: 10px;
-        letter-spacing: 5px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--cyan);
+        box-shadow: 0 0 8px var(--cyan);
       }
 
       h1 {
-        margin-top: 15px;
-        font-size: clamp(34px, 7vw, 65px);
-        font-weight: 900;
-        letter-spacing: -2px;
-        line-height: 1.08;
+        margin: 24px 0 18px;
+        font-size: clamp(43px, 6vw, 78px);
+        font-weight: 850;
+        letter-spacing: -4px;
+        line-height: 0.98;
       }
-
       h1 span {
         display: block;
+        margin-top: 9px;
         color: transparent;
-        background: linear-gradient(90deg, #c4b5fd, #8b5cf6 45%, #67e8f9);
+        background: linear-gradient(
+          95deg,
+          var(--cyan),
+          #a6b9ff 50%,
+          var(--purple)
+        );
         background-clip: text;
         -webkit-background-clip: text;
-        filter: drop-shadow(0 0 22px #8b5cf626);
       }
 
-      .description {
-        max-width: 510px;
-        margin: 22px auto 0;
-        color: var(--muted);
+      .intro-description {
+        max-width: 450px;
+        color: #9ba9bf;
         font-size: 14px;
         line-height: 1.9;
       }
 
-      .system-panel {
+      .system-info {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 460px;
         margin-top: 35px;
-        border: 1px solid #a78bfa1a;
-        background: #05050955;
       }
-
-      .system-stat {
-        padding: 18px 8px;
+      .info-item {
+        padding: 15px 12px;
+        border-top: 1px solid var(--border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.025),
+          transparent
+        );
       }
-
-      .system-stat + .system-stat {
-        border-left: 1px solid #a78bfa1a;
-      }
-
-      .system-stat strong {
+      .info-item span {
         display: block;
-        color: #e9ddff;
-        font-size: 20px;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 8px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
       }
-
-      .system-stat small {
-        display: block;
-        margin-top: 7px;
-        color: #77738f;
-        font-size: 9px;
-        letter-spacing: 1.5px;
-      }
-
-      .launch-button {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        min-width: 240px;
-        margin-top: 32px;
-        padding: 17px 25px;
-        overflow: hidden;
-        color: #080711;
-        border: none;
-        background: linear-gradient(100deg, #c4b5fd, #8b5cf6 52%, #67e8f9);
-        box-shadow: 0 0 28px #8b5cf62b;
+      .info-item strong {
+        color: #dce8ff;
         font-size: 11px;
-        font-weight: 900;
-        letter-spacing: 3px;
-        cursor: pointer;
-        transition:
-          transform 0.25s,
-          box-shadow 0.25s;
+        font-weight: 650;
       }
 
-      .launch-button::before {
+      .access-panel {
+        position: relative;
+        width: 100%;
+        max-width: 440px;
+        justify-self: end;
+        padding: clamp(23px, 4vw, 36px);
+        border: 1px solid rgba(112, 159, 206, 0.25);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 25px 100px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(20px);
+        animation: fadeUp 0.9s 0.15s both;
+        transition:
+          box-shadow 0.3s,
+          border-color 0.3s;
+      }
+      .access-panel:focus-within {
+        border-color: rgba(56, 232, 255, 0.38);
+      }
+      .access-panel::before,
+      .access-panel::after {
         content: "";
         position: absolute;
-        top: -100%;
-        left: -40%;
-        width: 35%;
-        height: 300%;
-        background: #ffffff8c;
-        transform: rotate(25deg);
-        transition: left 0.55s;
+        width: 38px;
+        height: 38px;
+        pointer-events: none;
+      }
+      .access-panel::before {
+        top: -1px;
+        left: -1px;
+        border-top: 2px solid var(--cyan);
+        border-left: 2px solid var(--cyan);
+        border-top-left-radius: 8px;
+      }
+      .access-panel::after {
+        right: -1px;
+        bottom: -1px;
+        border-right: 2px solid var(--purple);
+        border-bottom: 2px solid var(--purple);
+        border-bottom-right-radius: 8px;
       }
 
-      .launch-button:hover::before {
-        left: 120%;
+      .panel-heading {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 28px;
+      }
+      .panel-heading h2 {
+        margin-bottom: 8px;
+        font-size: 19px;
+        font-weight: 750;
+        letter-spacing: -0.5px;
+      }
+      .panel-heading p {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.6;
+      }
+      .lock-symbol {
+        color: var(--cyan);
+        font-size: 24px;
+        filter: drop-shadow(0 0 8px rgba(56, 232, 255, 0.4));
       }
 
-      .launch-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 38px #8b5cf655;
-      }
-
-      .launch-button:active {
-        transform: scale(0.97);
-      }
-
-      .launch-button span {
-        position: relative;
-        z-index: 1;
-      }
-
-      .skip-button {
+      .pin-label {
         display: block;
-        margin: 18px auto 0;
-        padding: 8px;
-        color: #77738f;
-        border: none;
-        background: transparent;
+        margin-bottom: 13px;
+        color: #a9b7cc;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+      .pin-display {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 17px;
+      }
+      .pin-cell {
+        height: 58px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(125, 165, 210, 0.22);
+        border-radius: 4px;
+        background: rgba(3, 8, 18, 0.7);
+        color: var(--cyan);
+        font-size: 23px;
+        font-weight: 700;
+        transition:
+          border-color 0.2s,
+          background 0.2s,
+          transform 0.2s;
+      }
+      .pin-cell.filled {
+        border-color: rgba(56, 232, 255, 0.6);
+        background: rgba(56, 232, 255, 0.07);
+      }
+      .pin-cell.invalid {
+        border-color: var(--danger);
+        color: var(--danger);
+        animation: shake 0.35s;
+      }
+      .pin-cell.success {
+        border-color: var(--success);
+        color: var(--success);
+        background: rgba(88, 255, 197, 0.08);
+      }
+
+      .keypad {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .key {
+        min-height: 45px;
+        border: 1px solid rgba(125, 165, 210, 0.17);
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.025);
+        color: #dce7fa;
+        font-size: 15px;
+        cursor: pointer;
+        transition:
+          background 0.18s,
+          border-color 0.18s,
+          transform 0.18s;
+      }
+      .key:hover:not(:disabled) {
+        border-color: rgba(56, 232, 255, 0.55);
+        background: rgba(56, 232, 255, 0.09);
+      }
+      .key:active:not(:disabled) {
+        transform: scale(0.96);
+      }
+      .key.utility {
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+      }
+
+      .message {
+        min-height: 35px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.5;
+      }
+      .message::before {
+        content: "";
+        flex: 0 0 auto;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--cyan);
+      }
+      .message.error {
+        color: var(--danger);
+      }
+      .message.error::before {
+        background: var(--danger);
+      }
+      .message.success {
+        color: var(--success);
+      }
+      .message.success::before {
+        background: var(--success);
+      }
+
+      .authenticate-button {
+        position: relative;
+        width: 100%;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 17px;
+        overflow: hidden;
+        border: 1px solid var(--cyan);
+        border-radius: 4px;
+        background: linear-gradient(
+          105deg,
+          rgba(56, 232, 255, 0.13),
+          rgba(139, 92, 246, 0.13)
+        );
+        color: #e9fcff;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.4px;
+        cursor: pointer;
+        transition:
+          background 0.25s,
+          box-shadow 0.25s,
+          transform 0.2s;
+      }
+      .authenticate-button:hover:not(:disabled) {
+        background: linear-gradient(
+          105deg,
+          rgba(56, 232, 255, 0.24),
+          rgba(139, 92, 246, 0.2)
+        );
+        box-shadow: 0 0 25px rgba(56, 232, 255, 0.1);
+      }
+      .authenticate-button:active:not(:disabled) {
+        transform: scale(0.99);
+      }
+      .authenticate-button .arrow {
+        color: var(--cyan);
+        font-size: 19px;
+      }
+
+      .panel-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(125, 165, 210, 0.12);
+        color: #65758d;
+        font-size: 8px;
+        letter-spacing: 0.8px;
+      }
+
+      .footer {
+        position: relative;
+        z-index: 2;
+        width: min(1120px, calc(100% - 40px));
+        margin: auto;
+        padding: 0 0 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        color: #596a83;
+        font-size: 9px;
+        letter-spacing: 0.8px;
+      }
+
+      .startup {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: grid;
+        place-items: center;
+        padding: 25px;
+        background: #03050a;
+        transition:
+          opacity 0.65s ease,
+          visibility 0.65s ease;
+      }
+      .startup.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .startup-content {
+        width: min(460px, 100%);
+        text-align: center;
+      }
+      .startup-logo {
+        width: 72px;
+        height: 72px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 27px;
+        border: 1px solid rgba(56, 232, 255, 0.65);
+        color: var(--cyan);
+        font-size: 30px;
+        box-shadow:
+          0 0 35px rgba(56, 232, 255, 0.1),
+          inset 0 0 20px rgba(56, 232, 255, 0.06);
+        animation: logoPulse 2s ease-in-out infinite;
+      }
+      .startup-title {
+        margin-bottom: 12px;
+        font-size: clamp(24px, 5vw, 35px);
+        font-weight: 850;
+        letter-spacing: 4px;
+      }
+      .startup-description {
+        margin-bottom: 35px;
+        color: var(--muted);
         font-size: 10px;
         letter-spacing: 2px;
-        cursor: pointer;
-        transition: color 0.2s;
+      }
+      .loading-track {
+        width: 100%;
+        height: 3px;
+        overflow: hidden;
+        background: rgba(125, 165, 210, 0.12);
+      }
+      .loading-bar {
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg, var(--cyan), var(--purple));
+        box-shadow: 0 0 12px var(--cyan);
+        transition: width 0.12s linear;
+      }
+      .loading-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 12px;
+        color: #7d8da5;
+        font-size: 9px;
+        letter-spacing: 1px;
       }
 
-      .skip-button:hover {
-        color: white;
+      .settings-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 11000;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.72);
+        backdrop-filter: blur(8px);
       }
-
-      .bottom-info {
-        position: absolute;
-        z-index: 3;
-        right: 6%;
-        bottom: 24px;
-        left: 6%;
+      .settings-overlay[hidden] {
+        display: none;
+      }
+      .settings-panel {
+        width: min(390px, 100%);
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 25px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: #0b111e;
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+      }
+      .settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 23px;
+      }
+      .settings-header h2 {
+        font-size: 17px;
+      }
+      .setting-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 15px;
-        color: #68647e;
-        font-size: 9px;
-        letter-spacing: 2px;
+        padding: 15px 0;
+        border-top: 1px solid var(--border);
       }
-
-      .bottom-info span:last-child {
-        color: #9e98bb;
+      .setting-row strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 12px;
       }
-
-      /* ANIME SLASH TRANSITION */
-
-      #slashTransition {
-        position: fixed;
-        inset: 0;
-        z-index: 100000;
-        overflow: hidden;
-        visibility: hidden;
-        pointer-events: none;
-        background: #030308;
+      .setting-row small {
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.5;
       }
-
-      #slashTransition.active {
-        visibility: visible;
+      .toggle {
+        width: 42px;
+        height: 23px;
+        position: relative;
+        flex: 0 0 auto;
+        border: 1px solid #40516b;
+        border-radius: 20px;
+        background: #172236;
+        cursor: pointer;
       }
-
-      .slash-blade {
-        position: absolute;
-        top: 50%;
-        left: -40%;
-        width: 180%;
-        height: 5px;
-        opacity: 0;
-        transform: rotate(-24deg) scaleX(0);
-        background: white;
-        box-shadow:
-          0 0 8px white,
-          0 0 20px var(--cyan),
-          0 0 45px var(--purple),
-          0 0 90px var(--purple);
-      }
-
-      .slash-blade::before,
-      .slash-blade::after {
+      .toggle::after {
         content: "";
         position: absolute;
-        left: 0;
-        width: 100%;
-        height: 2px;
+        top: 3px;
+        left: 3px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #8291aa;
+        transition:
+          transform 0.2s,
+          background 0.2s;
       }
-
-      .slash-blade::before {
-        top: -12px;
-        background: var(--purple);
+      .toggle[aria-pressed="true"] {
+        border-color: var(--cyan);
+        background: rgba(56, 232, 255, 0.12);
       }
-
-      .slash-blade::after {
-        top: 12px;
+      .toggle[aria-pressed="true"]::after {
+        transform: translateX(19px);
         background: var(--cyan);
       }
+      .volume-control {
+        width: 100%;
+        margin-top: 12px;
+        accent-color: var(--cyan);
+        cursor: pointer;
+      }
+      .volume-label {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .settings-done {
+        width: 100%;
+        margin-top: 17px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        background: var(--panel-light);
+        color: var(--text);
+        cursor: pointer;
+      }
 
-      .slash-flash {
-        position: absolute;
+      .slash-transition {
+        position: fixed;
         inset: 0;
-        opacity: 0;
-        background: white;
+        z-index: 20000;
+        overflow: hidden;
+        pointer-events: none;
+        visibility: hidden;
       }
-
-      .slash-label {
+      .slash-transition::before,
+      .slash-transition::after {
+        content: "";
         position: absolute;
-        top: 50%;
-        left: 50%;
+        inset: -50%;
         opacity: 0;
-        color: white;
-        white-space: nowrap;
-        font-size: clamp(17px, 4vw, 42px);
-        font-weight: 900;
-        letter-spacing: 10px;
-        text-shadow:
-          0 0 25px var(--cyan),
-          0 0 50px var(--purple);
-        transform: translate(-50%, -50%) skewX(-15deg);
+        transform: translateX(-130%) rotate(-25deg);
+      }
+      .slash-transition::before {
+        background: linear-gradient(
+          90deg,
+          transparent 35%,
+          rgba(56, 232, 255, 0.08) 44%,
+          rgba(56, 232, 255, 0.95) 49%,
+          #fff 50%,
+          rgba(139, 92, 246, 0.9) 51%,
+          rgba(139, 92, 246, 0.08) 56%,
+          transparent 65%
+        );
+      }
+      .slash-transition::after {
+        background: linear-gradient(
+          90deg,
+          transparent 45%,
+          rgba(255, 255, 255, 0.12) 49%,
+          #fff 50%,
+          rgba(56, 232, 255, 0.08) 52%,
+          transparent 57%
+        );
+      }
+      body.unlocking {
+        overflow: hidden;
+      }
+      body.unlocking .slash-transition {
+        visibility: visible;
+      }
+      body.unlocking .slash-transition::before {
+        animation: slashOne 1.15s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+      }
+      body.unlocking .slash-transition::after {
+        animation: slashTwo 1.25s 0.1s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+      }
+      body.unlocking main,
+      body.unlocking .topbar,
+      body.unlocking .footer {
+        animation: portalExit 1.4s ease forwards;
+      }
+      body.unlocking .access-panel {
+        box-shadow: 0 0 60px rgba(56, 232, 255, 0.25);
       }
 
-      .slash-sparks {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: white;
-        box-shadow:
-          30px -60px 0 var(--cyan),
-          -70px 35px 0 var(--purple),
-          110px 70px 0 white,
-          -130px -80px 0 var(--cyan),
-          160px -30px 0 var(--purple),
-          -170px 20px 0 white;
-        opacity: 0;
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-
-      #slashTransition.active .slash-blade {
-        animation: bladeSlash 0.65s cubic-bezier(0.15, 0.8, 0.2, 1) forwards;
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.45;
+        }
       }
-
-      #slashTransition.active .slash-flash {
-        animation: slashFlash 0.75s ease-out forwards;
+      @keyframes glowDrift {
+        from {
+          transform: translate(0, 0) scale(1);
+        }
+        to {
+          transform: translate(35px, -25px) scale(1.15);
+        }
       }
-
-      #slashTransition.active .slash-label {
-        animation: slashText 0.7s ease forwards;
+      @keyframes logoPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 25px rgba(56, 232, 255, 0.08);
+        }
+        50% {
+          box-shadow: 0 0 45px rgba(56, 232, 255, 0.24);
+        }
       }
-
-      #slashTransition.active .slash-sparks {
-        animation: sparksFlash 0.6s ease-out forwards;
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        75% {
+          transform: translateX(5px);
+        }
       }
-
-      @keyframes bladeSlash {
+      @keyframes slashOne {
         0% {
           opacity: 0;
-          transform: rotate(-24deg) scaleX(0);
+          transform: translateX(-130%) rotate(-25deg);
         }
-        20% {
+        25% {
           opacity: 1;
-          transform: rotate(-24deg) scaleX(1);
         }
         65% {
           opacity: 1;
-          transform: rotate(-24deg) scaleX(1);
         }
         100% {
           opacity: 0;
-          transform: rotate(-24deg) scaleX(1.2);
+          transform: translateX(130%) rotate(-25deg);
         }
       }
-
-      @keyframes slashFlash {
-        0%,
-        18% {
-          opacity: 0;
-        }
-        25% {
-          opacity: 0.95;
-        }
-        42% {
-          opacity: 0.12;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-
-      @keyframes slashText {
-        0%,
-        30% {
-          opacity: 0;
-          letter-spacing: 25px;
-        }
-        45% {
-          opacity: 1;
-          letter-spacing: 10px;
-        }
-        75% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-
-      @keyframes sparksFlash {
+      @keyframes slashTwo {
         0% {
           opacity: 0;
-          transform: scale(0.2);
+          transform: translateX(-130%) rotate(-25deg);
         }
         30% {
-          opacity: 1;
-          transform: scale(1.5);
+          opacity: 0.9;
+        }
+        70% {
+          opacity: 0.7;
         }
         100% {
           opacity: 0;
-          transform: scale(4);
+          transform: translateX(130%) rotate(-25deg);
         }
       }
-
-      body.shake {
-        animation: screenShake 0.3s ease-in-out;
-      }
-
-      @keyframes screenShake {
-        0%,
+      @keyframes portalExit {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
         100% {
-          transform: translate(0, 0);
-        }
-        20% {
-          transform: translate(-5px, 2px);
-        }
-        40% {
-          transform: translate(5px, -3px);
-        }
-        60% {
-          transform: translate(-3px, -2px);
-        }
-        80% {
-          transform: translate(3px, 2px);
+          opacity: 0;
+          transform: scale(1.025);
         }
       }
 
-      body.motion-off *,
-      body.motion-off *::before,
-      body.motion-off *::after {
-        animation-play-state: paused !important;
-        scroll-behavior: auto !important;
+      @media (max-width: 800px) {
+        main {
+          grid-template-columns: 1fr;
+          gap: 38px;
+          padding-top: 28px;
+        }
+        .intro-copy {
+          text-align: center;
+        }
+        .eyebrow {
+          justify-content: center;
+        }
+        h1 {
+          font-size: clamp(43px, 10vw, 68px);
+          letter-spacing: -2.5px;
+        }
+        .intro-description {
+          margin-inline: auto;
+        }
+        .system-info {
+          margin-inline: auto;
+        }
+        .access-panel {
+          justify-self: center;
+          max-width: 460px;
+        }
+        .footer {
+          padding-top: 5px;
+        }
       }
-
-      @media (max-width: 600px) {
+      @media (max-width: 480px) {
+        .topbar,
+        main,
+        .footer {
+          width: calc(100% - 30px);
+        }
         .topbar {
-          height: 65px;
-          padding: 0 18px;
+          padding-top: 18px;
         }
-
         .brand {
           gap: 8px;
           font-size: 10px;
+          letter-spacing: 1.6px;
         }
-
-        .brand-symbol {
-          width: 30px;
-          height: 30px;
+        .brand-mark {
+          width: 32px;
+          height: 32px;
         }
-
-        .icon-button {
-          padding: 9px;
-          font-size: 0;
-        }
-
-        .icon-button span {
-          font-size: 14px;
-        }
-
-        .intro-wrap {
-          padding: 85px 15px 70px;
-        }
-
-        .intro-card {
-          padding: 32px 20px;
-        }
-
-        .eyebrow {
-          font-size: 9px;
-          letter-spacing: 3px;
-        }
-
-        .description {
-          font-size: 13px;
-        }
-
-        .system-stat {
-          padding: 15px 4px;
-        }
-
-        .system-stat strong {
-          font-size: 17px;
-        }
-
-        .system-stat small {
+        .status-pill {
+          padding: 8px;
           font-size: 8px;
+        }
+        main {
+          padding-top: 24px;
+          gap: 32px;
+        }
+        .system-info {
+          gap: 5px;
+        }
+        .info-item {
+          padding: 12px 6px;
+        }
+        .info-item span {
+          font-size: 7px;
           letter-spacing: 0.7px;
         }
-
-        .launch-button {
-          min-width: 210px;
+        .info-item strong {
+          font-size: 10px;
         }
-
-        .bottom-info {
+        .access-panel {
+          padding: 23px 18px;
+        }
+        .pin-cell {
+          height: 51px;
+        }
+        .key {
+          min-height: 43px;
+        }
+        .footer {
           font-size: 8px;
-          letter-spacing: 1px;
         }
       }
-
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -838,719 +954,662 @@
           scroll-behavior: auto !important;
         }
       }
-
-      /* PORTFOLIO MATCH + RESPONSIVE FIT */
-
-      :root {
-        --bg: #08090d;
-        --panel: rgba(15, 17, 27, 0.94);
-        --purple: #a78bfa;
-        --purple-bright: #8b5cf6;
-        --cyan: #38bdf8;
-      }
-
-      /* Allow scrolling on shorter screens */
-      html {
-        min-height: 100%;
-        overflow-x: hidden;
-      }
-
-      body {
-        min-height: 100vh;
-        min-height: 100dvh;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-
-      #particles,
-      .background-grid,
-      .ambient {
-        position: fixed;
-        pointer-events: none;
-      }
-
-      /* Keep the header within the screen */
-      .topbar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        min-height: 68px;
-        height: auto;
-        padding: 14px clamp(14px, 4vw, 60px);
-        gap: 12px;
-      }
-
-      .brand {
-        min-width: 0;
-      }
-
-      .top-controls {
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      /* Center the intro without cutting off its contents */
-      .intro-wrap {
-        min-height: 100vh;
-        min-height: 100dvh;
-        padding: 100px 20px 76px;
-        align-items: center;
-      }
-
-      .intro-card {
-        width: min(760px, 100%);
-        max-width: 100%;
-        padding: clamp(24px, 5vw, 56px);
-        margin: auto;
-        overflow-wrap: anywhere;
-      }
-
-      h1 {
-        font-size: clamp(30px, 6.5vw, 65px);
-        line-height: 1.12;
-        letter-spacing: clamp(-2px, -0.2vw, -0.5px);
-        overflow-wrap: anywhere;
-      }
-
-      .description {
-        width: 100%;
-        max-width: 510px;
-        font-size: clamp(12px, 1.5vw, 14px);
-        line-height: 1.85;
-      }
-
-      .system-panel {
-        width: 100%;
-      }
-
-      .system-stat {
-        min-width: 0;
-        overflow-wrap: anywhere;
-      }
-
-      .launch-button {
-        max-width: 100%;
-        white-space: normal;
-      }
-
-      .bottom-info {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding: 15px clamp(14px, 4vw, 60px);
-        flex-wrap: wrap;
-      }
-
-      /* Phones */
-      @media (max-width: 600px) {
-        .topbar {
-          min-height: 62px;
-          padding: 12px 14px;
-        }
-
-        .brand {
-          font-size: 9px;
-          letter-spacing: 1px;
-        }
-
-        .brand small {
-          font-size: 8px;
-          letter-spacing: 1px;
-        }
-
-        .top-controls {
-          gap: 5px;
-        }
-
-        .icon-button {
-          padding: 8px;
-          letter-spacing: 0;
-        }
-
-        .intro-wrap {
-          padding: 85px 14px 75px;
-        }
-
-        .intro-card {
-          padding: 28px 18px;
-        }
-
-        .eyebrow {
-          margin-top: 25px;
-          font-size: 9px;
-          letter-spacing: 2px;
-          line-height: 1.8;
-        }
-
-        h1 {
-          font-size: clamp(29px, 8.2vw, 44px);
-          letter-spacing: -1px;
-        }
-
-        .description {
-          margin-top: 17px;
-          font-size: 12px;
-        }
-
-        .system-panel {
-          margin-top: 24px;
-        }
-
-        .system-stat {
-          padding: 13px 4px;
-        }
-
-        .system-stat strong {
-          font-size: 16px;
-        }
-
-        .system-stat small {
-          font-size: 7px;
-          letter-spacing: 0.4px;
-        }
-
-        .launch-button {
-          width: 100%;
-          min-width: 0;
-          margin-top: 24px;
-          padding: 15px 12px;
-          gap: 8px;
-          font-size: 10px;
-          letter-spacing: 2px;
-        }
-
-        .bottom-info {
-          justify-content: center;
-          gap: 8px 14px;
-          font-size: 8px;
-          letter-spacing: 0.7px;
-        }
-      }
-
-      /* Short laptop screens and landscape phones */
-      @media (max-height: 700px) {
-        .intro-wrap {
-          align-items: flex-start;
-          padding-top: 88px;
-          padding-bottom: 65px;
-        }
-
-        .intro-card {
-          padding-top: 22px;
-          padding-bottom: 22px;
-        }
-
-        .eyebrow {
-          margin-top: 18px;
-        }
-
-        .description {
-          margin-top: 12px;
-        }
-
-        .system-panel {
-          margin-top: 18px;
-        }
-
-        .system-stat {
-          padding-top: 12px;
-          padding-bottom: 12px;
-        }
-
-        .launch-button {
-          margin-top: 18px;
-        }
-
-        .skip-button {
-          margin-top: 8px;
-        }
-      }
-
-      /* Very narrow phones */
-      @media (max-width: 360px) {
-        .brand small {
-          display: none;
-        }
-
-        .brand-symbol {
-          width: 27px;
-          height: 27px;
-        }
-
-        .icon-button {
-          padding: 7px 6px;
-        }
-
-        .intro-card {
-          padding-right: 13px;
-          padding-left: 13px;
-        }
-
-        .system-stat small {
-          font-size: 6px;
-        }
+      body.reduce-motion *,
+      body.reduce-motion *::before,
+      body.reduce-motion *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     </style>
   </head>
 
   <body>
-    <!-- LOADING SCREEN -->
-    <div id="loadingScreen" role="status" aria-live="polite">
-      <div class="loader-ring"></div>
-      <div class="loader-title">INITIALIZING SYSTEM</div>
-      <div class="loader-status" id="loaderStatus">
-        Loading portfolio assets...
-      </div>
+    <div class="background-grid" aria-hidden="true"></div>
+    <div class="ambient-glow glow-one" aria-hidden="true"></div>
+    <div class="ambient-glow glow-two" aria-hidden="true"></div>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div class="slash-transition" aria-hidden="true"></div>
 
-      <div class="loader-track">
-        <div class="loader-progress" id="loaderProgress"></div>
-      </div>
-
-      <div class="loader-percent" id="loaderPercent">0%</div>
-      <div class="loader-footer">SHANE VINCENT OLAVARIO // SYSTEM BOOT</div>
-    </div>
-
-    <div id="audioStartPrompt" role="status" aria-live="polite">
-      ♪ TAP OR CLICK ANYWHERE TO START MUSIC
-    </div>
-
-    <!-- BACKGROUND -->
-    <canvas id="particles"></canvas>
-    <div class="background-grid"></div>
-    <div class="ambient one"></div>
-    <div class="ambient two"></div>
-
-    <!-- HEADER -->
-    <header class="topbar">
-      <div class="brand">
-        <div>
-          <small>PERSONAL PORTFOLIO</small>
+    <section class="startup" id="startup" aria-label="System startup">
+      <div class="startup-content">
+        <div class="startup-logo" aria-hidden="true">Ω</div>
+        <h2 class="startup-title">PROJECT OMEGA</h2>
+        <p class="startup-description" id="startupDescription">
+          INITIALIZING SECURE PORTAL
+        </p>
+        <div class="loading-track">
+          <div class="loading-bar" id="loadingBar"></div>
+        </div>
+        <div class="loading-meta">
+          <span id="loadingStatus">BOOTING SYSTEM...</span>
+          <span id="loadingPercent">0%</span>
         </div>
       </div>
+    </section>
 
-      <div class="top-controls">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">Ω</div>
+        <div>PROJECT OMEGA<small>SECURE PORTAL SYSTEM</small></div>
+      </div>
+      <div class="topbar-actions">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span id="systemStatus">SYSTEM ONLINE</span>
+        </div>
         <button
           class="icon-button"
-          id="motionToggle"
+          id="settingsButton"
           type="button"
-          aria-pressed="false"
+          aria-label="Open settings"
+          title="Settings"
         >
-          <span id="motionIcon">✦</span> MOTION: ON
+          ⚙
         </button>
       </div>
     </header>
 
-    <!-- INTRO CONTENT -->
-    <main class="intro-wrap">
-      <section class="intro-card">
-        <div class="status">
-          <span class="status-dot"></span>
-          SYSTEM ONLINE
+    <main>
+      <section class="intro-copy">
+        <div class="eyebrow">Personal portfolio interface</div>
+        <h1>BEYOND THE<span>ORDINARY.</span></h1>
+        <p class="intro-description">
+          Every line of code opens a new possibility. Enter the portal to
+          explore my projects, technical skills, and journey into computer
+          engineering.
+        </p>
+        <div class="system-info">
+          <div class="info-item">
+            <span>System</span><strong>OMEGA-01</strong>
+          </div>
+          <div class="info-item">
+            <span>Security</span><strong>PIN PROTECTED</strong>
+          </div>
+          <div class="info-item">
+            <span>Destination</span><strong>PORTFOLIO</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="access-panel" aria-labelledby="accessTitle">
+        <div class="panel-heading">
+          <div>
+            <h2 id="accessTitle">Identity Verification</h2>
+            <p>Enter the four-digit access code to continue.</p>
+          </div>
+          <div class="lock-symbol" aria-hidden="true">⌑</div>
         </div>
 
-        <p class="eyebrow">WELCOME TO MY DIGITAL SPACE</p>
+        <span class="pin-label">ACCESS CODE</span>
+        <div class="pin-display" id="pinDisplay" aria-label="PIN entry">
+          <div class="pin-cell" data-cell="0"></div>
+          <div class="pin-cell" data-cell="1"></div>
+          <div class="pin-cell" data-cell="2"></div>
+          <div class="pin-cell" data-cell="3"></div>
+        </div>
 
-        <h1>
-          SHANE VINCENT
-          <span>OLAVARIO</span>
-        </h1>
+        <div class="keypad" id="keypad" aria-label="Number keypad">
+          <button class="key" type="button" data-digit="1">1</button>
+          <button class="key" type="button" data-digit="2">2</button>
+          <button class="key" type="button" data-digit="3">3</button>
+          <button class="key" type="button" data-digit="4">4</button>
+          <button class="key" type="button" data-digit="5">5</button>
+          <button class="key" type="button" data-digit="6">6</button>
+          <button class="key" type="button" data-digit="7">7</button>
+          <button class="key" type="button" data-digit="8">8</button>
+          <button class="key" type="button" data-digit="9">9</button>
+          <button class="key utility" id="clearPin" type="button">CLEAR</button>
+          <button class="key" type="button" data-digit="0">0</button>
+          <button class="key utility" id="deletePin" type="button">
+            DELETE
+          </button>
+        </div>
 
-        <p class="description">
-          A Computer Engineering student exploring technology, programming, and
-          creative problem-solving. Every project is another step toward
-          building something meaningful.
+        <p class="message" id="message" role="status" aria-live="polite">
+          Awaiting authentication credentials.
         </p>
 
-        <div class="system-panel">
-          <div class="system-stat">
-            <strong>01</strong>
-            <small>ENGINEERING</small>
-          </div>
+        <button class="authenticate-button" id="unlockButton" type="button">
+          <span>AUTHENTICATE ACCESS ↗</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>
 
-          <div class="system-stat">
-            <strong>∞</strong>
-            <small>POSSIBILITIES</small>
-          </div>
-
-          <div class="system-stat">
-            <strong>DEV</strong>
-            <small>IN PROGRESS</small>
-          </div>
+        <div class="panel-footer">
+          <span id="gatewayState">GATEWAY LOCKED</span>
+          <span>OMEGA SECURE CONNECTION</span>
         </div>
-
-        <button class="launch-button" id="launchButton" type="button">
-          <span>ENTER PORTFOLIO</span>
-          <span aria-hidden="true">↗</span>
-        </button>
-
-        <button class="skip-button" id="skipButton" type="button">
-          SKIP INTRO — ENTER NOW
-        </button>
       </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bottom-info">
-      <span>DESIGNED WITH CURIOSITY</span>
-      <span id="clock">00:00:00</span>
-      <span>© <span id="year"></span> PERSONAL PORTFOLIO</span>
+    <footer class="footer">
+      <span>PROJECT OMEGA // PERSONAL PORTFOLIO</span>
+      <span id="footerTime">SYSTEM READY</span>
     </footer>
 
-    <!-- ANIME SLASH TRANSITION -->
-    <div id="slashTransition" aria-hidden="true">
-      <div class="slash-flash"></div>
-      <div class="slash-blade"></div>
-      <div class="slash-sparks"></div>
-      <div class="slash-label">SYSTEM BREACHED</div>
+    <div class="settings-overlay" id="settingsOverlay" hidden>
+      <section
+        class="settings-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settingsTitle"
+      >
+        <div class="settings-header">
+          <h2 id="settingsTitle">System Settings</h2>
+          <button
+            class="icon-button"
+            id="closeSettings"
+            type="button"
+            aria-label="Close settings"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Motion Effects</strong
+            ><small>Enable the portal and particle animations.</small>
+          </div>
+          <button
+            class="toggle"
+            id="motionToggle"
+            type="button"
+            aria-label="Toggle motion effects"
+            aria-pressed="true"
+          ></button>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Sound Effects</strong
+            ><small>Enable interface clicks and authentication sounds.</small>
+          </div>
+          <button
+            class="toggle"
+            id="soundToggle"
+            type="button"
+            aria-label="Toggle sound effects"
+            aria-pressed="false"
+          ></button>
+        </div>
+
+        <div class="setting-row">
+          <div style="width: 100%">
+            <div class="volume-label">
+              <span>Sound volume</span><span id="volumeValue">35%</span>
+            </div>
+            <input
+              class="volume-control"
+              id="volumeSlider"
+              type="range"
+              min="0"
+              max="100"
+              value="35"
+              aria-label="Sound volume"
+            />
+          </div>
+        </div>
+
+        <button class="settings-done" id="settingsDone" type="button">
+          SAVE SETTINGS
+        </button>
+      </section>
     </div>
 
     <script>
       (() => {
         "use strict";
 
+        const ACCESS_PIN = "0208";
+        const PORTFOLIO_URL = new URL("./index.html", window.location.href)
+          .href;
+
         const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => [...document.querySelectorAll(selector)];
 
-        const loader = $("#loadingScreen");
-        const progressBar = $("#loaderProgress");
-        const percentText = $("#loaderPercent");
-        const statusText = $("#loaderStatus");
-        const slash = $("#slashTransition");
-        const launchButton = $("#launchButton");
-        const skipButton = $("#skipButton");
+        const startup = $("#startup");
+        const loadingBar = $("#loadingBar");
+        const loadingPercent = $("#loadingPercent");
+        const loadingStatus = $("#loadingStatus");
+        const startupDescription = $("#startupDescription");
+
+        const pinCells = $$(".pin-cell");
+        const keypadButtons = $$("#keypad [data-digit]");
+        const unlockButton = $("#unlockButton");
+        const clearPinButton = $("#clearPin");
+        const deletePinButton = $("#deletePin");
+
+        const message = $("#message");
+        const systemStatus = $("#systemStatus");
+        const gatewayState = $("#gatewayState");
+        const footerTime = $("#footerTime");
+
+        const settingsButton = $("#settingsButton");
+        const settingsOverlay = $("#settingsOverlay");
+        const closeSettings = $("#closeSettings");
+        const settingsDone = $("#settingsDone");
         const motionToggle = $("#motionToggle");
-        const motionIcon = $("#motionIcon");
-        const audioStartPrompt = $("#audioStartPrompt");
+        const soundToggle = $("#soundToggle");
+        const volumeSlider = $("#volumeSlider");
+        const volumeValue = $("#volumeValue");
 
-        const prefersReducedMotion = window.matchMedia(
+        let pin = "";
+        let isNavigating = false;
+        let motionEnabled = !window.matchMedia(
           "(prefers-reduced-motion: reduce)",
-        );
-
-        let progress = 0;
-        let launched = false;
-        let motionEnabled = !prefersReducedMotion.matches;
+        ).matches;
+        let soundEnabled = false;
+        let soundVolume = 0.35;
+        let introTimer = null;
+        let clockTimer = null;
+        let particleFrame = null;
         let audioContext = null;
-        let loadTimer = null;
-        let loadComplete = false;
+        let lastSettingsFocus = null;
 
-        const messages = [
-          "Loading portfolio assets...",
-          "Establishing connection...",
-          "Synchronizing interface...",
-          "Preparing launch sequence...",
-          "System ready.",
-        ];
-
-        /* LOADING PROGRESS */
-
-        function setProgress(value) {
-          progress = Math.max(0, Math.min(100, value));
-          progressBar.style.width = progress + "%";
-          percentText.textContent = Math.floor(progress) + "%";
-
-          const index = Math.min(
-            Math.floor(progress / 25),
-            messages.length - 1,
-          );
-
-          statusText.textContent = messages[index];
+        function setMessage(text, type = "") {
+          message.textContent = text;
+          message.className = "message";
+          if (type) message.classList.add(type);
         }
 
-        function finishLoading() {
-          if (loadComplete) return;
-          loadComplete = true;
-
-          clearInterval(loadTimer);
-          setProgress(100);
-          statusText.textContent = "System ready.";
-
-          window.setTimeout(() => {
-            if (!launched) loader.classList.add("hidden");
-          }, 350);
-        }
-
-        function startLoading() {
-          loadTimer = window.setInterval(() => {
-            const increase = Math.floor(Math.random() * 8) + 3;
-            setProgress(progress + increase);
-
-            if (progress >= 100) {
-              finishLoading();
-            }
-          }, 110);
-        }
-
-        /* CLOCK */
-
-        function updateClock() {
-          $("#clock").textContent = new Date().toLocaleTimeString(undefined, {
-            hour12: false,
+        function renderPin() {
+          pinCells.forEach((cell, index) => {
+            cell.textContent = index < pin.length ? "●" : "";
+            cell.classList.toggle("filled", index < pin.length);
+            cell.classList.remove("invalid", "success");
           });
         }
 
-        $("#year").textContent = new Date().getFullYear();
-        updateClock();
-        window.setInterval(updateClock, 1000);
+        function playTone(frequency = 600, duration = 0.06, level = 0.6) {
+          if (!soundEnabled || soundVolume <= 0) return;
 
-        /* ONLY AUDIO FILES: anime-bg.mp3 and anime-slash.mp3 */
-        const music = new Audio("music/anime-bg.mp3");
-        music.loop = true;
-        music.preload = "auto";
-        music.autoplay = true;
-        music.volume = 1;
+          try {
+            const AudioContextClass =
+              window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return;
+            if (!audioContext) audioContext = new AudioContextClass();
 
-        // Show a useful error in the browser console if the file is missing.
-        music.addEventListener("error", () => {
-          console.warn(
-            "Could not load anime-bg.mp3. Keep it in the same folder as pogiako.html and check the spelling.",
+            if (audioContext.state === "suspended") {
+              audioContext.resume().catch(() => {});
+            }
+
+            const oscillator = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            const now = audioContext.currentTime;
+            const peak = Math.max(0.0001, soundVolume * 0.055 * level);
+
+            oscillator.type = "sine";
+            oscillator.frequency.setValueAtTime(frequency, now);
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(peak, now + 0.008);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+            oscillator.connect(gain);
+            gain.connect(audioContext.destination);
+            oscillator.start(now);
+            oscillator.stop(now + duration + 0.02);
+          } catch {
+            // Audio must never prevent authentication or navigation.
+          }
+        }
+
+        function playTap() {
+          playTone(570, 0.045, 0.45);
+        }
+        function playError() {
+          playTone(190, 0.15, 0.8);
+        }
+
+        function playSuccess() {
+          playTone(600, 0.12, 0.7);
+          window.setTimeout(() => playTone(850, 0.18, 0.7), 110);
+          window.setTimeout(() => playTone(1100, 0.2, 0.55), 230);
+        }
+
+        function addDigit(digit) {
+          if (isNavigating || pin.length >= 4) return;
+          pin += digit;
+          renderPin();
+          playTap();
+
+          setMessage(
+            pin.length === 4
+              ? "Access code entered. Authenticate to continue."
+              : `Enter access code. ${4 - pin.length} digits remaining.`,
           );
-        });
+        }
 
-        const animeSlashSound = new Audio("music/anime-slash.mp3");
-        animeSlashSound.preload = "auto";
-        animeSlashSound.volume = 1;
+        function clearPin() {
+          if (isNavigating) return;
+          pin = "";
+          renderPin();
+          setMessage("Access code cleared.");
+          playTap();
+        }
 
-        // Try to start background music automatically. Browsers may block
-        // autoplay with sound until the visitor interacts with the page.
-        function startBackgroundMusic() {
-          if (!music.paused) {
-            audioStartPrompt.classList.add("hidden");
+        function deleteDigit() {
+          if (isNavigating || pin.length === 0) return;
+          pin = pin.slice(0, -1);
+          renderPin();
+          setMessage("Last digit removed.");
+          playTap();
+        }
+
+        function setControlsDisabled(disabled) {
+          [
+            ...keypadButtons,
+            unlockButton,
+            clearPinButton,
+            deletePinButton,
+          ].forEach((button) => (button.disabled = disabled));
+        }
+
+        function stopBackgroundTasks() {
+          if (introTimer !== null) {
+            window.clearInterval(introTimer);
+            introTimer = null;
+          }
+          if (clockTimer !== null) {
+            window.clearInterval(clockTimer);
+            clockTimer = null;
+          }
+          if (particleFrame !== null) {
+            cancelAnimationFrame(particleFrame);
+            particleFrame = null;
+          }
+        }
+
+        function redirectToPortfolio() {
+          if (isNavigating) return;
+
+          isNavigating = true;
+          stopBackgroundTasks();
+          setControlsDisabled(true);
+
+          systemStatus.textContent = "ACCESS GRANTED";
+          gatewayState.textContent = "ACCESS GRANTED";
+          unlockButton.querySelector("span").textContent = "ACCESS GRANTED";
+
+          pinCells.forEach((cell) => {
+            cell.classList.remove("invalid");
+            cell.classList.add("success");
+          });
+
+          setMessage("Identity confirmed. Opening portfolio...", "success");
+          playSuccess();
+
+          sessionStorage.setItem("portfolioIntroComplete", "true");
+
+          if (motionEnabled) {
+            document.body.classList.add("unlocking");
+
+            window.setTimeout(() => {
+              window.location.replace("./index.html");
+            }, 1250);
+          } else {
+            window.location.replace("./index.html");
+          }
+        }
+        function checkPin() {
+          if (isNavigating) return;
+
+          if (pin.length !== 4) {
+            setMessage("Enter all four digits before authenticating.", "error");
+            pinCells.forEach((cell, index) => {
+              if (index >= pin.length) cell.classList.add("invalid");
+            });
+            window.setTimeout(() => {
+              pinCells.forEach((cell) => cell.classList.remove("invalid"));
+            }, 450);
+            playError();
             return;
           }
 
-          const playAttempt = music.play();
-          if (playAttempt && typeof playAttempt.then === "function") {
-            playAttempt
-              .then(() => {
-                audioStartPrompt.classList.add("hidden");
-              })
-              .catch(() => {
-                // Keep the prompt visible until the visitor interacts.
-                audioStartPrompt.classList.remove("hidden");
-              });
+          if (pin === ACCESS_PIN) {
+            redirectToPortfolio();
+            return;
           }
+
+          setMessage("Access denied. Incorrect access code.", "error");
+          pinCells.forEach((cell) => cell.classList.add("invalid"));
+          playError();
+
+          window.setTimeout(() => {
+            if (isNavigating) return;
+            pin = "";
+            renderPin();
+            setMessage("Try again. Enter the correct access code.");
+          }, 700);
         }
 
-        // Try autoplay first. If the browser blocks it, any tap, click,
-        // touch, or key press retries playback before the launch button runs.
-        startBackgroundMusic();
-        ["pointerdown", "touchstart", "keydown"].forEach((eventName) => {
-          document.addEventListener(eventName, startBackgroundMusic, {
-            capture: true,
-            passive: true,
-          });
-        });
+        function finishStartup() {
+          if (!startup || startup.classList.contains("hidden")) return;
 
-        music.addEventListener("play", () => {
-          audioStartPrompt.classList.add("hidden");
-        });
-        music.addEventListener("pause", () => {
-          if (!launched) audioStartPrompt.classList.remove("hidden");
-        });
-
-        /* MOTION TOGGLE */
-
-        function applyMotionSetting() {
-          document.body.classList.toggle("motion-off", !motionEnabled);
-          motionToggle.setAttribute("aria-pressed", String(!motionEnabled));
-          motionToggle.innerHTML =
-            `<span id="motionIcon">${motionEnabled ? "✦" : "○"}</span> ` +
-            `MOTION: ${motionEnabled ? "ON" : "OFF"}`;
-
-          if (motionEnabled) {
-            drawParticles();
+          if (introTimer !== null) {
+            window.clearInterval(introTimer);
+            introTimer = null;
           }
+
+          loadingBar.style.width = "100%";
+          loadingPercent.textContent = "100%";
+          loadingStatus.textContent = "PORTAL READY";
+          startupDescription.textContent = "SYSTEM INITIALIZATION COMPLETE";
+          startup.classList.add("hidden");
+          playTap();
         }
 
-        motionToggle.addEventListener("click", () => {
-          motionEnabled = !motionEnabled;
-          applyMotionSetting();
-        });
+        function startStartup() {
+          let progress = 0;
+          let messageIndex = 0;
 
-        /* PARTICLE NETWORK */
+          const messages = [
+            "BOOTING SYSTEM...",
+            "LOADING INTERFACE MODULES...",
+            "VERIFYING SYSTEM STATUS...",
+            "ESTABLISHING CONNECTION...",
+            "PORTAL READY",
+          ];
 
-        const canvas = $("#particles");
-        const ctx = canvas.getContext("2d");
-        let particles = [];
-        let animationFrame = null;
-        const pointer = { x: -1000, y: -1000 };
+          introTimer = window.setInterval(
+            () => {
+              if (isNavigating || startup.classList.contains("hidden")) {
+                window.clearInterval(introTimer);
+                introTimer = null;
+                return;
+              }
 
-        function resizeCanvas() {
-          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+              progress = Math.min(
+                progress + Math.floor(Math.random() * 9) + 5,
+                100,
+              );
+              loadingBar.style.width = `${progress}%`;
+              loadingPercent.textContent = `${progress}%`;
 
-          canvas.width = window.innerWidth * ratio;
-          canvas.height = window.innerHeight * ratio;
-          canvas.style.width = window.innerWidth + "px";
-          canvas.style.height = window.innerHeight + "px";
+              const nextIndex = Math.min(
+                messages.length - 1,
+                Math.floor(progress / 20),
+              );
+              if (nextIndex !== messageIndex) {
+                messageIndex = nextIndex;
+                loadingStatus.textContent = messages[messageIndex];
+              }
 
-          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+              if (progress >= 100) {
+                window.clearInterval(introTimer);
+                introTimer = null;
+                startupDescription.textContent = "WELCOME TO PROJECT OMEGA";
 
-          const count = Math.min(
-            95,
-            Math.floor((window.innerWidth * window.innerHeight) / 15000),
+                window.setTimeout(
+                  () => {
+                    if (!isNavigating) startup.classList.add("hidden");
+                  },
+                  motionEnabled ? 450 : 0,
+                );
+              }
+            },
+            motionEnabled ? 140 : 35,
           );
-
-          particles = Array.from({ length: count }, () => ({
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            radius: Math.random() * 1.5 + 0.5,
-          }));
-
-          drawParticles();
         }
 
-        function drawParticles() {
-          if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-            animationFrame = null;
+        function openSettings() {
+          if (isNavigating) return;
+          lastSettingsFocus = document.activeElement;
+          settingsOverlay.hidden = false;
+          closeSettings.focus();
+        }
+
+        function hideSettings() {
+          settingsOverlay.hidden = true;
+          if (
+            lastSettingsFocus &&
+            typeof lastSettingsFocus.focus === "function"
+          ) {
+            lastSettingsFocus.focus();
+          } else {
+            settingsButton.focus();
+          }
+        }
+
+        function updateMotionSetting() {
+          motionEnabled = motionToggle.getAttribute("aria-pressed") !== "true";
+          motionToggle.setAttribute("aria-pressed", String(motionEnabled));
+          document.body.classList.toggle("reduce-motion", !motionEnabled);
+          playTap();
+        }
+
+        function updateSoundSetting() {
+          soundEnabled = soundToggle.getAttribute("aria-pressed") !== "true";
+          soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+          if (soundEnabled) playTone(700, 0.1, 0.7);
+        }
+
+        function updateVolume() {
+          soundVolume = Number(volumeSlider.value) / 100;
+          volumeValue.textContent = `${volumeSlider.value}%`;
+          playTone(720, 0.06, 0.6);
+        }
+
+        function updateClock() {
+          footerTime.textContent = new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          });
+        }
+
+        function setupParticles() {
+          const canvas = $("#particles");
+          const ctx = canvas.getContext("2d");
+          if (!ctx) return;
+
+          let width = 0;
+          let height = 0;
+          let particles = [];
+
+          function resizeCanvas() {
+            const ratio = Math.min(window.devicePixelRatio || 1, 2);
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width * ratio;
+            canvas.height = height * ratio;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+            const count = Math.min(65, Math.floor((width * height) / 18000));
+            particles = Array.from({ length: count }, () => ({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              radius: Math.random() * 1.4 + 0.3,
+              speed: Math.random() * 0.25 + 0.08,
+              opacity: Math.random() * 0.45 + 0.12,
+            }));
           }
 
-          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          function drawParticles() {
+            particleFrame = null;
+            if (isNavigating) return;
 
-          for (let i = 0; i < particles.length; i++) {
-            const p = particles[i];
+            ctx.clearRect(0, 0, width, height);
 
             if (motionEnabled) {
-              p.x += p.vx;
-              p.y += p.vy;
-
-              if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
-              if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
-            }
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(196,181,253,0.65)";
-            ctx.fill();
-
-            for (let j = i + 1; j < particles.length; j++) {
-              const q = particles[j];
-              const dx = p.x - q.x;
-              const dy = p.y - q.y;
-              const distance = Math.sqrt(dx * dx + dy * dy);
-
-              if (distance < 115) {
+              for (const particle of particles) {
+                particle.y -= particle.speed;
+                if (particle.y < -5) {
+                  particle.y = height + 5;
+                  particle.x = Math.random() * width;
+                }
                 ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(q.x, q.y);
-                ctx.strokeStyle = `rgba(139,92,246,${(1 - distance / 115) * 0.18})`;
-                ctx.lineWidth = 0.7;
-                ctx.stroke();
+                ctx.arc(
+                  particle.x,
+                  particle.y,
+                  particle.radius,
+                  0,
+                  Math.PI * 2,
+                );
+                ctx.fillStyle = `rgba(100,210,255,${particle.opacity})`;
+                ctx.fill();
               }
             }
 
-            const dx = p.x - pointer.x;
-            const dy = p.y - pointer.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < 140) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(pointer.x, pointer.y);
-              ctx.strokeStyle = `rgba(56,189,248,${(1 - distance / 140) * 0.45})`;
-              ctx.stroke();
-            }
+            particleFrame = requestAnimationFrame(drawParticles);
           }
 
-          if (motionEnabled) {
-            animationFrame = requestAnimationFrame(drawParticles);
-          }
+          resizeCanvas();
+          window.addEventListener("resize", resizeCanvas);
+          particleFrame = requestAnimationFrame(drawParticles);
         }
 
-        window.addEventListener("pointermove", (event) => {
-          pointer.x = event.clientX;
-          pointer.y = event.clientY;
-        });
-
-        window.addEventListener("pointerleave", () => {
-          pointer.x = -1000;
-          pointer.y = -1000;
-        });
-
-        window.addEventListener("resize", resizeCanvas);
-
-        /* CUSTOM ANIME SLASH SOUND */
-
-        function playAnimeSlashSound() {
-          try {
-            animeSlashSound.pause();
-            animeSlashSound.currentTime = 0;
-            animeSlashSound.play().catch((error) => {
-              console.warn(
-                "Could not play anime-slash.mp3. Check the file name and folder.",
-                error,
-              );
-            });
-          } catch (error) {
-            console.warn("Anime slash sound unavailable:", error);
-          }
-        }
-
-        /* ANIME-STYLE LAUNCH */
-
-        function launchWithSlash() {
-          if (launched) return;
-          launched = true;
-
-          clearInterval(loadTimer);
-          setProgress(100);
-          statusText.textContent = "Launching portfolio...";
-
-          loader.classList.add("hidden");
-          slash.classList.add("active");
-
-          // Stop background music immediately when Open Portfolio is clicked.
-          // Keep the one-shot anime slash effect available during the transition.
-          music.pause();
-          music.currentTime = 0;
-          audioStartPrompt.classList.add("hidden");
-          playAnimeSlashSound();
-
-          if (motionEnabled) {
-            document.body.classList.remove("shake");
-            void document.body.offsetWidth;
-            document.body.classList.add("shake");
-          }
-
-          window.setTimeout(
-            () => {
-              sessionStorage.setItem("portfolioIntroComplete", "true");
-              window.location.replace("index.html");
-            },
-            motionEnabled ? 900 : 600,
+        keypadButtons.forEach((button) => {
+          button.addEventListener("click", () =>
+            addDigit(button.dataset.digit),
           );
-        }
+        });
 
-        launchButton.addEventListener("click", launchWithSlash);
-        skipButton.addEventListener("click", launchWithSlash);
+        clearPinButton.addEventListener("click", clearPin);
+        deletePinButton.addEventListener("click", deleteDigit);
+        unlockButton.addEventListener("click", checkPin);
 
         document.addEventListener("keydown", (event) => {
-          if (
-            event.key === "Enter" &&
-            !event.repeat &&
-            !event.target.closest("button, a, input, textarea, select")
-          ) {
-            launchWithSlash();
+          if (!settingsOverlay.hidden) {
+            if (event.key === "Escape") hideSettings();
+            return;
           }
 
-          if (event.key === "Escape") {
-            launchWithSlash();
+          if (isNavigating) return;
+
+          if (/^\d$/.test(event.key)) {
+            addDigit(event.key);
+          } else if (event.key === "Backspace") {
+            event.preventDefault();
+            deleteDigit();
+          } else if (event.key === "Escape") {
+            clearPin();
+          } else if (event.key === "Enter") {
+            checkPin();
           }
         });
 
-        /* INITIALIZE */
+        settingsButton.addEventListener("click", openSettings);
+        closeSettings.addEventListener("click", hideSettings);
+        settingsDone.addEventListener("click", hideSettings);
 
-        applyMotionSetting();
-        resizeCanvas();
-        startLoading();
+        settingsOverlay.addEventListener("click", (event) => {
+          if (event.target === settingsOverlay) hideSettings();
+        });
 
-        // Keep the loading screen from getting stuck.
-        window.setTimeout(() => {
-          if (!loadComplete) finishLoading();
-        }, 4500);
+        motionToggle.addEventListener("click", updateMotionSetting);
+        soundToggle.addEventListener("click", updateSoundSetting);
+        volumeSlider.addEventListener("input", updateVolume);
+
+        motionToggle.setAttribute("aria-pressed", String(motionEnabled));
+        soundToggle.setAttribute("aria-pressed", "false");
+        document.body.classList.toggle("reduce-motion", !motionEnabled);
+
+        updateClock();
+        clockTimer = window.setInterval(updateClock, 1000);
+        setupParticles();
+        startStartup();
       })();
     </script>
   </body>

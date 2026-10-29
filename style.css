@@ -10662,3 +10662,354 @@ dialog,
     transition: none;
   }
 }
+
+/* CENTER THE ENTIRE NAVBAR GROUP */
+
+.header .navbar.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 76px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.header .navbar > .logo {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Navigation links */
+.header .navbar > .nav-links {
+  position: static;
+  inset: auto;
+  transform: none;
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Link alignment */
+.header .navbar > .nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Customizer and theme buttons */
+.header .navbar .tc-trigger,
+.header .navbar > .theme-toggle {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Hide the hamburger on desktop */
+.header .navbar #menuToggle {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .header .navbar.container {
+    gap: 12px;
+  }
+
+  .header .navbar #menuToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 42px;
+  }
+
+  .header .navbar > .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 16px 20px;
+    background: #0b1020;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .header .navbar > .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .header .navbar > .nav-links a {
+    justify-content: flex-start;
+    padding: 12px;
+  }
+}
+
+/* ==========================================
+   CENTER THE ENTIRE NAVBAR GROUP
+========================================== */
+
+.header .navbar.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 76px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.header .navbar > .logo {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Navigation links */
+.header .navbar > .nav-links {
+  position: static;
+  inset: auto;
+  transform: none;
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Link alignment */
+.header .navbar > .nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   THEME CUSTOMIZATION PALETTE ONLY
+   Light/dark toggle remains in normal flow
+========================================== */
+
+.header .navbar .tc-trigger:not(.tc-floating) {
+  position: absolute;
+  top: 8px;
+  right: 72px;
+  z-index: 10;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Keep the light/dark toggle where it belongs */
+.header .navbar > .theme-toggle {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Hide hamburger on desktop */
+.header .navbar #menuToggle {
+  display: none;
+}
+
+/* ==========================================
+   MOBILE NAVIGATION
+========================================== */
+
+@media (max-width: 900px) {
+  .header .navbar.container {
+    gap: 12px;
+  }
+
+  .header .navbar #menuToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 42px;
+  }
+
+  .header .navbar > .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 16px 20px;
+    background: #0b1020;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .header .navbar > .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .header .navbar > .nav-links a {
+    justify-content: flex-start;
+    padding: 12px;
+  }
+
+  /* Move only the palette on mobile */
+  .header .navbar .tc-trigger:not(.tc-floating) {
+    top: 8px;
+    right: 64px;
+  }
+}
+
+/* ==========================================
+   SMALL PHONES
+========================================== */
+
+@media (max-width: 480px) {
+  .header .navbar.container {
+    gap: 8px;
+    padding: 8px 10px;
+  }
+}
+
+/* THEME CUSTOMIZATION BUTTON - CONSISTENT ON ALL PAGES */
+
+.header .navbar .tc-trigger:not(.tc-floating) {
+  position: fixed !important;
+  top: 16px !important;
+  right: 68px !important;
+  z-index: 2147483000 !important;
+
+  width: 42px;
+  height: 42px;
+  margin: 0 !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ========================================
+   NAVBAR: CDM LOGO + MUSIC PLAYER + THEME
+======================================== */
+
+/* Preserve the existing light/dark toggle */
+.header .navbar .theme-toggle {
+  position: relative;
+  z-index: 1002;
+  flex-shrink: 0;
+}
+
+/* Navbar layout */
+.header .navbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Music player beside the navbar logo */
+#portfolioMusicPlayer {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  z-index: 1001 !important;
+  width: auto !important;
+  max-width: 320px;
+  flex-shrink: 0;
+  margin: 0 8px;
+}
+
+/* Compact music-player icon */
+#portfolioMusicPlayer .mp-shell.mp-collapsed {
+  width: 42px !important;
+  height: 42px !important;
+}
+
+/* Expanded music player */
+#portfolioMusicPlayer .mp-shell.mp-expanded {
+  width: 300px !important;
+  max-width: min(300px, calc(100vw - 24px)) !important;
+}
+
+/* Theme customization trigger */
+.header .navbar .tc-trigger:not(.tc-floating) {
+  flex-shrink: 0;
+}
+
+/* Mobile navbar */
+@media (max-width: 760px) {
+  .header .navbar {
+    gap: 8px;
+  }
+
+  #portfolioMusicPlayer {
+    margin: 0 4px;
+    max-width: 48px;
+  }
+
+  #portfolioMusicPlayer .mp-shell.mp-collapsed {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  #portfolioMusicPlayer .mp-shell.mp-expanded {
+    position: fixed !important;
+    top: 64px !important;
+    left: 12px !important;
+    width: min(300px, calc(100vw - 24px)) !important;
+    max-width: calc(100vw - 24px) !important;
+    z-index: 10010 !important;
+  }
+
+  .header .navbar .tc-trigger:not(.tc-floating) {
+    top: 12px !important;
+    right: 60px !important;
+    width: 38px;
+    height: 38px;
+  }
+}
