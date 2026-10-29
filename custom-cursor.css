@@ -1,0 +1,319 @@
+
+/* =========================================
+   CUSTOM CURSOR SYSTEM
+   Edit these values to customize defaults.
+   ========================================= */
+
+:root {
+  --cc-color: #38bdf8;
+  --cc-size: 28px;
+  --cc-glow: 14px;
+  --cc-glow-opacity: 0.75;
+  --cc-trail-opacity: 0.5;
+  --cc-panel-bg: rgba(10, 15, 30, 0.96);
+  --cc-panel-border: rgba(56, 189, 248, 0.35);
+}
+
+/* Only enable custom cursor on desktop-like pointers */
+@media (pointer: fine) and (hover: hover) {
+  html.cc-enabled,
+  html.cc-enabled body,
+  html.cc-enabled body * {
+    cursor: none !important;
+  }
+
+  /* Keep text editing functional */
+  html.cc-enabled input,
+  html.cc-enabled textarea,
+  html.cc-enabled select,
+  html.cc-enabled [contenteditable="true"] {
+    cursor: text !important;
+  }
+
+  html.cc-enabled .cc-settings-panel,
+  html.cc-enabled .cc-settings-panel *,
+  html.cc-enabled .cc-settings-toggle {
+    cursor: auto !important;
+  }
+
+  html.cc-enabled .cc-settings-panel button,
+  html.cc-enabled .cc-settings-toggle,
+  html.cc-enabled .cc-settings-panel input[type="checkbox"],
+  html.cc-enabled .cc-settings-panel input[type="range"],
+  html.cc-enabled .cc-settings-panel input[type="color"],
+  html.cc-enabled .cc-settings-panel select {
+    cursor: pointer !important;
+  }
+}
+
+.cc-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483646;
+  width: var(--cc-size);
+  height: var(--cc-size);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0);
+  will-change: transform;
+  transition: opacity 0.18s ease;
+}
+
+.cc-cursor.cc-visible {
+  opacity: 1;
+}
+
+.cc-cursor-arrow {
+  position: absolute;
+  inset: 0;
+  background: var(--cc-color);
+  clip-path: polygon(
+    3% 0%,
+    3% 94%,
+    29% 70%,
+    43% 100%,
+    57% 94%,
+    43% 65%,
+    78% 65%
+  );
+  filter:
+    drop-shadow(0 0 var(--cc-glow) var(--cc-color));
+  opacity: 0.98;
+  transition:
+    background 0.2s ease,
+    filter 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cc-cursor.cc-hover .cc-cursor-arrow {
+  transform: scale(0.85);
+}
+
+.cc-cursor.cc-click .cc-cursor-arrow {
+  transform: scale(0.72);
+}
+
+.cc-cursor.cc-pulse .cc-cursor-arrow {
+  animation: cc-pulse 1.2s ease-in-out infinite;
+}
+
+.cc-cursor.cc-no-glow .cc-cursor-arrow {
+  filter: none;
+}
+
+.cc-cursor.cc-no-animation .cc-cursor-arrow {
+  animation: none !important;
+  transition: none;
+}
+
+@keyframes cc-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+/* Optional cursor trail particles */
+.cc-trail-dot {
+  position: fixed;
+  z-index: 2147483645;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cc-color);
+  pointer-events: none;
+  opacity: var(--cc-trail-opacity);
+  box-shadow: 0 0 10px var(--cc-color);
+  animation: cc-trail-fade 0.48s ease-out forwards;
+}
+
+@keyframes cc-trail-fade {
+  to {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+}
+
+/* Customization launcher */
+.cc-settings-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483000;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--cc-panel-border);
+  border-radius: 50%;
+  background: var(--cc-panel-bg);
+  color: var(--cc-color);
+  font: 700 21px/1 system-ui, sans-serif;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--cc-color) 20%, transparent);
+  backdrop-filter: blur(16px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cc-settings-toggle:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--cc-color) 38%, transparent);
+}
+
+/* Settings panel */
+.cc-settings-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  z-index: 2147483000;
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(75vh, 560px);
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid var(--cc-panel-border);
+  border-radius: 18px;
+  background: var(--cc-panel-bg);
+  color: #f1f5f9;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(20px);
+  font: 14px/1.5 system-ui, sans-serif;
+}
+
+.cc-settings-panel[hidden] {
+  display: none !important;
+}
+
+.cc-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.cc-settings-header h3 {
+  margin: 0;
+  font-size: 17px;
+  color: var(--cc-color);
+}
+
+.cc-settings-close {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 24px;
+  line-height: 1;
+  padding: 2px 6px;
+}
+
+.cc-setting {
+  display: grid;
+  gap: 7px;
+  margin: 14px 0;
+}
+
+.cc-setting-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.cc-setting input[type="color"] {
+  width: 48px;
+  height: 32px;
+  padding: 2px;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.cc-setting input[type="range"] {
+  width: 100%;
+  accent-color: var(--cc-color);
+}
+
+.cc-setting select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #475569;
+  border-radius: 9px;
+  background: #111827;
+  color: #f8fafc;
+}
+
+.cc-setting input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--cc-color);
+}
+
+.cc-setting output {
+  color: #cbd5e1;
+  font-weight: 400;
+}
+
+.cc-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cc-settings-actions {
+  display: flex;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.cc-settings-actions button {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--cc-panel-border);
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.12);
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.cc-settings-actions button:hover {
+  background: rgba(56, 189, 248, 0.24);
+}
+
+.cc-settings-note {
+  margin: 12px 0 0;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+@media (max-width: 600px), (pointer: coarse) {
+  .cc-cursor,
+  .cc-trail-dot {
+    display: none !important;
+  }
+
+  .cc-settings-toggle {
+    right: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .cc-settings-panel {
+    right: 12px;
+    bottom: 68px;
+    max-height: 70vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-cursor-arrow,
+  .cc-trail-dot,
+  .cc-settings-toggle {
+    animation: none !important;
+    transition: none !important;
+  }
+}
