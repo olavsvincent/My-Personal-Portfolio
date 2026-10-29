@@ -10454,3 +10454,211 @@ dialog,
         pointer-events: none;
     }
 }
+
+/* ========================================
+   OMEGA-STYLE FUTURISTIC ICON NAVBAR
+======================================== */
+
+.navbar {
+  gap: 20px;
+}
+
+.navbar > .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navbar-school-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 13px;
+  padding: 3px;
+  background: rgba(139, 92, 246, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.12);
+  transition: 0.3s ease;
+}
+
+.navbar > .logo:hover .navbar-school-logo {
+  border-color: #38bdf8;
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.35),
+    0 0 25px rgba(139, 92, 246, 0.18);
+  transform: rotate(-4deg) scale(1.06);
+}
+
+/* NAVIGATION CONTAINER */
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ICON + LABEL LINKS */
+.nav-links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 43px;
+  padding: 0 14px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* ICONS */
+.nav-links a i {
+  position: relative;
+  z-index: 1;
+  font-size: 17px;
+  width: 20px;
+  text-align: center;
+  color: #38bdf8;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.18));
+  transition:
+    color 0.25s ease,
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+/* LABELS */
+.nav-links a span {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* HOVER EFFECT */
+.nav-links a:hover {
+  transform: translateY(-2px);
+  background: rgba(56, 189, 248, 0.07);
+  border-color: rgba(56, 189, 248, 0.22);
+  box-shadow: 0 5px 20px rgba(56, 189, 248, 0.08);
+}
+
+.nav-links a:hover i {
+  color: #a78bfa;
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 7px rgba(167, 139, 250, 0.65));
+}
+
+/* ACTIVE PAGE */
+.nav-links a.active {
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.13),
+    rgba(139, 92, 246, 0.15)
+  );
+  border-color: rgba(139, 92, 246, 0.38);
+  box-shadow:
+    inset 0 0 12px rgba(139, 92, 246, 0.06),
+    0 0 14px rgba(139, 92, 246, 0.08);
+}
+
+.nav-links a.active i {
+  color: #a78bfa;
+  filter: drop-shadow(0 0 7px rgba(167, 139, 250, 0.45));
+}
+
+/* THEME BUTTON */
+.theme-toggle {
+  width: 43px;
+  height: 43px;
+  min-width: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 13px;
+  background: rgba(56, 189, 248, 0.06);
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) rotate(4deg);
+  border-color: #a78bfa;
+  background: rgba(139, 92, 246, 0.13);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.17);
+}
+
+#themeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+#themeIcon i {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover #themeIcon i {
+  transform: rotate(25deg);
+}
+
+/* KEYBOARD ACCESSIBILITY */
+.nav-links a:focus-visible,
+.theme-toggle:focus-visible,
+.navbar > .logo:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 4px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .navbar {
+    gap: 12px;
+  }
+
+  .navbar-school-logo {
+    width: 41px;
+    height: 41px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-links a {
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 46px;
+    padding: 0 15px;
+  }
+
+  .nav-links a i {
+    width: 23px;
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-school-logo,
+  .nav-links a,
+  .nav-links a i,
+  .theme-toggle,
+  #themeIcon i {
+    transition: none;
+  }
+}

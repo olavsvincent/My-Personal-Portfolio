@@ -13,14 +13,21 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="theme-customizer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
 
   <body>
-    <!-- NAVBAR: PRESERVED -->
     <header class="header">
       <nav class="navbar container">
-        <a href="index.html" class="logo">
-          <img src="images/school-logo.jpg" alt="Colegio de Montalban Logo" />
+        <a href="index.html" class="logo" aria-label="Home">
+          <img
+            src="images/school-logo.jpg"
+            alt="School Logo"
+            class="navbar-school-logo"
+          />
           <span class="school-name">Shane Vincent Olavario</span>
         </a>
 
@@ -28,7 +35,7 @@
           class="menu-toggle"
           id="menuToggle"
           type="button"
-          aria-label="Toggle navigation"
+          aria-label="Open navigation menu"
           aria-expanded="false"
           aria-controls="navLinks"
         >
@@ -38,14 +45,47 @@
         </button>
 
         <ul class="nav-links" id="navLinks">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="skills.html">Skills</a></li>
           <li>
-            <a href="projects.html" class="active" aria-current="page">Projects</a>
+            <a href="index.html" class="active" aria-label="Home">
+              <i class="fa-solid fa-house" aria-hidden="true"></i>
+              <span>Home</span>
+            </a>
           </li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="editor.html">IDE</a></li>
+
+          <li>
+            <a href="about.html" aria-label="About">
+              <i class="fa-solid fa-user-astronaut" aria-hidden="true"></i>
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="skills.html" aria-label="Skills">
+              <i class="fa-solid fa-code" aria-hidden="true"></i>
+              <span>Skills</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="projects.html" aria-label="Projects">
+              <i class="fa-solid fa-cubes" aria-hidden="true"></i>
+              <span>Projects</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="contact.html" aria-label="Contact">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="editor.html" aria-label="IDE">
+              <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+              <span>IDE</span>
+            </a>
+          </li>
         </ul>
 
         <button
@@ -53,8 +93,11 @@
           id="themeToggle"
           type="button"
           aria-label="Switch to dark mode"
+          title="Toggle theme"
         >
-          <span id="themeIcon">🌙</span>
+          <span id="themeIcon">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+          </span>
         </button>
       </nav>
     </header>
@@ -84,25 +127,33 @@
             <article class="stat-card">
               <span class="stat-icon" aria-hidden="true">▣</span>
               <p>Total Projects</p>
-              <h2 class="stat-number" data-stat="projects" data-target="7">0</h2>
+              <h2 class="stat-number" data-stat="projects" data-target="7">
+                0
+              </h2>
             </article>
 
             <article class="stat-card">
               <span class="stat-icon" aria-hidden="true">&lt;/&gt;</span>
               <p>Technologies</p>
-              <h2 class="stat-number" data-stat="technologies" data-target="0">0</h2>
+              <h2 class="stat-number" data-stat="technologies" data-target="0">
+                0
+              </h2>
             </article>
 
             <article class="stat-card">
               <span class="stat-icon" aria-hidden="true">✓</span>
               <p>Completed</p>
-              <h2 class="stat-number" data-stat="completed" data-target="0">0</h2>
+              <h2 class="stat-number" data-stat="completed" data-target="0">
+                0
+              </h2>
             </article>
 
             <article class="stat-card">
               <span class="stat-icon" aria-hidden="true">♡</span>
               <p>My Favorites</p>
-              <h2 class="stat-number" data-stat="favorites" data-target="0">0</h2>
+              <h2 class="stat-number" data-stat="favorites" data-target="0">
+                0
+              </h2>
             </article>
           </section>
 
@@ -141,7 +192,11 @@
               </select>
             </div>
 
-            <button type="button" class="project-reset-btn" id="resetProjectFilters">
+            <button
+              type="button"
+              class="project-reset-btn"
+              id="resetProjectFilters"
+            >
               Reset
             </button>
           </section>
@@ -150,7 +205,9 @@
           <div class="project-list-heading">
             <div>
               <h2>Project Gallery</h2>
-              <p id="projectResultCount" aria-live="polite">Showing 7 projects</p>
+              <p id="projectResultCount" aria-live="polite">
+                Showing 7 projects
+              </p>
             </div>
 
             <button
@@ -196,7 +253,9 @@
                   aria-label="Add Student Management System to favorites"
                   aria-pressed="false"
                   data-favorite
-                >♡</button>
+                >
+                  ♡
+                </button>
               </div>
 
               <div class="project-content">
@@ -215,16 +274,38 @@
                 </div>
 
                 <div class="project-actions">
-                  <button type="button" class="project-preview-btn" data-preview>
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
                     Quick Preview ↗
                   </button>
 
-                  <a href="project.html?app=students" class="view-project">Project Page ↗</a>
+                  <a href="project.html?app=students" class="view-project"
+                    >Project Page ↗</a
+                  >
                 </div>
 
                 <div class="project-external-links">
-                  <a href="#" class="project-demo-link" data-demo-link target="_blank" rel="noopener noreferrer" hidden>Live Demo</a>
-                  <a href="#" class="project-github-link" data-github-link target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a>
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
                 </div>
               </div>
             </article>
@@ -259,7 +340,9 @@
                   aria-label="Add Workout Planner to favorites"
                   aria-pressed="false"
                   data-favorite
-                >♡</button>
+                >
+                  ♡
+                </button>
               </div>
 
               <div class="project-content">
@@ -278,16 +361,38 @@
                 </div>
 
                 <div class="project-actions">
-                  <button type="button" class="project-preview-btn" data-preview>
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
                     Quick Preview ↗
                   </button>
 
-                  <a href="project.html?app=workout" class="view-project">Project Page ↗</a>
+                  <a href="project.html?app=workout" class="view-project"
+                    >Project Page ↗</a
+                  >
                 </div>
 
                 <div class="project-external-links">
-                  <a href="#" class="project-demo-link" data-demo-link target="_blank" rel="noopener noreferrer" hidden>Live Demo</a>
-                  <a href="#" class="project-github-link" data-github-link target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a>
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
                 </div>
               </div>
             </article>
@@ -322,7 +427,9 @@
                   aria-label="Add Health Monitoring System to favorites"
                   aria-pressed="false"
                   data-favorite
-                >♡</button>
+                >
+                  ♡
+                </button>
               </div>
 
               <div class="project-content">
@@ -341,16 +448,38 @@
                 </div>
 
                 <div class="project-actions">
-                  <button type="button" class="project-preview-btn" data-preview>
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
                     Quick Preview ↗
                   </button>
 
-                  <a href="project.html?app=health" class="view-project">Project Page ↗</a>
+                  <a href="project.html?app=health" class="view-project"
+                    >Project Page ↗</a
+                  >
                 </div>
 
                 <div class="project-external-links">
-                  <a href="#" class="project-demo-link" data-demo-link target="_blank" rel="noopener noreferrer" hidden>Live Demo</a>
-                  <a href="#" class="project-github-link" data-github-link target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a>
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
                 </div>
               </div>
             </article>
@@ -385,7 +514,9 @@
                   aria-label="Add Grade Calculator to favorites"
                   aria-pressed="false"
                   data-favorite
-                >♡</button>
+                >
+                  ♡
+                </button>
               </div>
 
               <div class="project-content">
@@ -404,16 +535,38 @@
                 </div>
 
                 <div class="project-actions">
-                  <button type="button" class="project-preview-btn" data-preview>
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
                     Quick Preview ↗
                   </button>
 
-                  <a href="project.html?app=grade" class="view-project">Project Page ↗</a>
+                  <a href="project.html?app=grade" class="view-project"
+                    >Project Page ↗</a
+                  >
                 </div>
 
                 <div class="project-external-links">
-                  <a href="#" class="project-demo-link" data-demo-link target="_blank" rel="noopener noreferrer" hidden>Live Demo</a>
-                  <a href="#" class="project-github-link" data-github-link target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a>
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
                 </div>
               </div>
             </article>
@@ -448,7 +601,9 @@
                   aria-label="Add Scientific Calculator to favorites"
                   aria-pressed="false"
                   data-favorite
-                >♡</button>
+                >
+                  ♡
+                </button>
               </div>
 
               <div class="project-content">
@@ -467,16 +622,38 @@
                 </div>
 
                 <div class="project-actions">
-                  <button type="button" class="project-preview-btn" data-preview>
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
                     Quick Preview ↗
                   </button>
 
-                  <a href="project.html?app=calculator" class="view-project">Project Page ↗</a>
+                  <a href="project.html?app=calculator" class="view-project"
+                    >Project Page ↗</a
+                  >
                 </div>
 
                 <div class="project-external-links">
-                  <a href="#" class="project-demo-link" data-demo-link target="_blank" rel="noopener noreferrer" hidden>Live Demo</a>
-                  <a href="#" class="project-github-link" data-github-link target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a>
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
                 </div>
               </div>
             </article>
@@ -511,7 +688,9 @@
                   aria-label="Add Book Management System to favorites"
                   aria-pressed="false"
                   data-favorite
-                >♡</button>
+                >
+                  ♡
+                </button>
               </div>
 
               <div class="project-content">
@@ -530,16 +709,38 @@
                 </div>
 
                 <div class="project-actions">
-                  <button type="button" class="project-preview-btn" data-preview>
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
                     Quick Preview ↗
                   </button>
 
-                  <a href="project.html?app=books" class="view-project">Project Page ↗</a>
+                  <a href="project.html?app=books" class="view-project"
+                    >Project Page ↗</a
+                  >
                 </div>
 
                 <div class="project-external-links">
-                  <a href="#" class="project-demo-link" data-demo-link target="_blank" rel="noopener noreferrer" hidden>Live Demo</a>
-                  <a href="#" class="project-github-link" data-github-link target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a>
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="project-github-link"
+                    data-github-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >GitHub ↗</a
+                  >
                 </div>
               </div>
             </article>
@@ -574,7 +775,9 @@
                   aria-label="Add SysVision to favorites"
                   aria-pressed="false"
                   data-favorite
-                >♡</button>
+                >
+                  ♡
+                </button>
               </div>
 
               <div class="project-content">
@@ -597,15 +800,29 @@
                 </div>
 
                 <div class="project-actions">
-                  <button type="button" class="project-preview-btn" data-preview>
+                  <button
+                    type="button"
+                    class="project-preview-btn"
+                    data-preview
+                  >
                     Quick Preview ↗
                   </button>
 
-                  <a href="project.html?app=sysvision" class="view-project">Project Page ↗</a>
+                  <a href="project.html?app=sysvision" class="view-project"
+                    >Project Page ↗</a
+                  >
                 </div>
 
                 <div class="project-external-links">
-                  <a href="#" class="project-demo-link" data-demo-link target="_blank" rel="noopener noreferrer" hidden>Live Demo</a>
+                  <a
+                    href="#"
+                    class="project-demo-link"
+                    data-demo-link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                    >Live Demo</a
+                  >
                 </div>
               </div>
             </article>
@@ -617,7 +834,11 @@
             <h3>No projects found</h3>
             <p>Try another search term or change your filters.</p>
 
-            <button type="button" class="project-reset-btn" id="emptyResetFilters">
+            <button
+              type="button"
+              class="project-reset-btn"
+              id="emptyResetFilters"
+            >
               Clear Filters
             </button>
           </div>
@@ -638,7 +859,9 @@
             class="project-modal-close"
             id="closeProjectModal"
             aria-label="Close project details"
-          >×</button>
+          >
+            ×
+          </button>
 
           <div class="project-modal-image-wrap">
             <img src="" alt="" id="modalProjectImage" />
@@ -664,11 +887,29 @@
             <p id="modalProjectLearning"></p>
 
             <div class="project-modal-actions">
-              <a href="#" class="view-project" id="modalProjectPage">Open Project Page ↗</a>
+              <a href="#" class="view-project" id="modalProjectPage"
+                >Open Project Page ↗</a
+              >
 
-              <a href="#" class="project-demo-link" id="modalProjectDemo" target="_blank" rel="noopener noreferrer" hidden>Live Demo ↗</a>
+              <a
+                href="#"
+                class="project-demo-link"
+                id="modalProjectDemo"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+                >Live Demo ↗</a
+              >
 
-              <a href="#" class="project-github-link" id="modalProjectGithub" target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a>
+              <a
+                href="#"
+                class="project-github-link"
+                id="modalProjectGithub"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+                >GitHub ↗</a
+              >
             </div>
           </div>
         </section>
@@ -686,7 +927,11 @@
         <kbd>Ctrl K</kbd>
       </button>
 
-      <div class="quick-search-overlay" id="quickSearchOverlay" aria-hidden="true">
+      <div
+        class="quick-search-overlay"
+        id="quickSearchOverlay"
+        aria-hidden="true"
+      >
         <section
           class="quick-search-dialog"
           role="dialog"
@@ -707,7 +952,9 @@
             <kbd>ESC</kbd>
           </div>
 
-          <p class="quick-search-heading" id="quickSearchTitle">QUICK NAVIGATION</p>
+          <p class="quick-search-heading" id="quickSearchTitle">
+            QUICK NAVIGATION
+          </p>
 
           <div
             class="quick-search-results"

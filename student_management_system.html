@@ -13,14 +13,21 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="theme-customizer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
 
   <body>
-    <!-- HEADER / NAVIGATION -->
     <header class="header">
       <nav class="navbar container">
-        <a href="index.html" class="logo">
-          <img src="images/school-logo.jpg" alt="Colegio de Montalban Logo" />
+        <a href="index.html" class="logo" aria-label="Home">
+          <img
+            src="images/school-logo.jpg"
+            alt="School Logo"
+            class="navbar-school-logo"
+          />
           <span class="school-name">Shane Vincent Olavario</span>
         </a>
 
@@ -28,7 +35,7 @@
           class="menu-toggle"
           id="menuToggle"
           type="button"
-          aria-label="Toggle navigation"
+          aria-label="Open navigation menu"
           aria-expanded="false"
           aria-controls="navLinks"
         >
@@ -38,16 +45,47 @@
         </button>
 
         <ul class="nav-links" id="navLinks">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="skills.html">Skills</a></li>
           <li>
-            <a href="projects.html" class="active" aria-current="page"
-              >Projects</a
-            >
+            <a href="index.html" class="active" aria-label="Home">
+              <i class="fa-solid fa-house" aria-hidden="true"></i>
+              <span>Home</span>
+            </a>
           </li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="editor.html">IDE</a></li>
+
+          <li>
+            <a href="about.html" aria-label="About">
+              <i class="fa-solid fa-user-astronaut" aria-hidden="true"></i>
+              <span>About</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="skills.html" aria-label="Skills">
+              <i class="fa-solid fa-code" aria-hidden="true"></i>
+              <span>Skills</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="projects.html" aria-label="Projects">
+              <i class="fa-solid fa-cubes" aria-hidden="true"></i>
+              <span>Projects</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="contact.html" aria-label="Contact">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="editor.html" aria-label="IDE">
+              <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+              <span>IDE</span>
+            </a>
+          </li>
         </ul>
 
         <button
@@ -55,8 +93,11 @@
           id="themeToggle"
           type="button"
           aria-label="Switch to dark mode"
+          title="Toggle theme"
         >
-          <span id="themeIcon">🌙</span>
+          <span id="themeIcon">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+          </span>
         </button>
       </nav>
     </header>
