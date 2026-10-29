@@ -1,1616 +1,1882 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#05070d" />
-    <meta
-      name="description"
-      content="Project Omega secure portfolio access portal."
-    />
-    <title>Project Omega | Secure Access</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070d">
+  <title>Project OMEGA | Secure Access</title>
 
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #05070d;
-        --panel: rgba(12, 18, 32, 0.9);
-        --panel-light: rgba(20, 30, 49, 0.8);
-        --cyan: #38e8ff;
-        --purple: #8b5cf6;
-        --text: #f1f5ff;
-        --muted: #8594ad;
-        --border: rgba(125, 165, 210, 0.2);
-        --success: #58ffc5;
-        --danger: #ff5c8a;
-      }
+  <style>
+    :root {
+      --bg: #05070d;
+      --panel: #0c1220;
+      --cyan: #38e8ff;
+      --purple: #8b5cf6;
+      --text: #f1f5ff;
+      --muted: #8594ad;
+      --border: rgba(125,165,210,.22);
+      --success: #58ffc5;
+      --danger: #ff5c8a;
+    }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-      html {
-        min-height: 100%;
-        background: var(--bg);
-      }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(28,69,115,.2), transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(139,92,246,.1), transparent 40%),
+        var(--bg);
+    }
 
-      body {
-        min-height: 100vh;
-        min-height: 100dvh;
-        overflow-x: hidden;
-        font-family: Inter, "Segoe UI", Arial, sans-serif;
-        color: var(--text);
-        background:
-          radial-gradient(
-            ellipse at 50% 40%,
-            rgba(28, 69, 115, 0.17),
-            transparent 55%
-          ),
-          radial-gradient(
-            ellipse at 85% 15%,
-            rgba(139, 92, 246, 0.1),
-            transparent 40%
-          ),
-          var(--bg);
-      }
+    button, input {
+      font: inherit;
+    }
 
-      button,
-      input {
-        font: inherit;
-      }
-      button {
-        -webkit-tap-highlight-color: transparent;
-      }
-      button:focus-visible,
-      input:focus-visible {
-        outline: 2px solid var(--cyan);
-        outline-offset: 4px;
-      }
-      button:disabled {
-        opacity: 0.45;
-        cursor: not-allowed;
-      }
+    button {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-      .background-grid {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        opacity: 0.18;
-        background-image:
-          linear-gradient(rgba(56, 232, 255, 0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(56, 232, 255, 0.08) 1px, transparent 1px);
-        background-size: 46px 46px;
-        mask-image: linear-gradient(to bottom, black, transparent 95%);
-      }
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+    }
 
-      .ambient-glow {
-        position: fixed;
-        width: 360px;
-        height: 360px;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.12;
-        pointer-events: none;
-        z-index: 0;
-        animation: glowDrift 10s ease-in-out infinite alternate;
-      }
-      .glow-one {
-        top: 5%;
-        left: -180px;
-        background: var(--cyan);
-      }
-      .glow-two {
-        right: -180px;
-        bottom: 0;
-        background: var(--purple);
-        animation-delay: -4s;
-      }
-      #particles {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-      }
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
 
-      .topbar {
-        position: relative;
-        z-index: 3;
-        width: min(1120px, calc(100% - 40px));
-        margin: auto;
-        padding: 27px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-      }
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: 2.5px;
-      }
-      .brand-mark {
-        width: 36px;
-        height: 36px;
-        display: grid;
-        place-items: center;
-        border: 1px solid rgba(56, 232, 255, 0.55);
-        color: var(--cyan);
-        background: rgba(56, 232, 255, 0.06);
-        clip-path: polygon(
-          25% 0,
-          75% 0,
-          100% 25%,
-          100% 75%,
-          75% 100%,
-          25% 100%,
-          0 75%,
-          0 25%
-        );
-        font-size: 17px;
-      }
-      .brand small {
-        display: block;
-        margin-top: 4px;
-        color: var(--muted);
-        font-size: 9px;
-        font-weight: 500;
-        letter-spacing: 2px;
-      }
-      .topbar-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
+    .background-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .17;
+      background-image:
+        linear-gradient(rgba(56,232,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,232,255,.08) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
 
-      .status-pill {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 9px 12px;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        color: var(--muted);
-        font-size: 9px;
-        letter-spacing: 1.3px;
-      }
-      .status-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--success);
-        box-shadow: 0 0 12px rgba(88, 255, 197, 0.75);
-        animation: pulse 1.8s infinite;
-      }
+    .glow {
+      position: fixed;
+      z-index: 0;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .12;
+      pointer-events: none;
+      animation: glowMove 9s ease-in-out infinite alternate;
+    }
 
-      .icon-button {
-        width: 37px;
-        height: 37px;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.025);
-        color: var(--text);
-        cursor: pointer;
-        transition: 0.2s;
-      }
-      .icon-button:hover {
-        border-color: var(--cyan);
-        background: rgba(56, 232, 255, 0.08);
-      }
+    .glow.one {
+      top: 5%;
+      left: -150px;
+      background: var(--cyan);
+    }
 
+    .glow.two {
+      right: -150px;
+      bottom: 0;
+      background: var(--purple);
+      animation-delay: -4s;
+    }
+
+    .topbar,
+    main,
+    footer {
+      position: relative;
+      z-index: 2;
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 25px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(56,232,255,.6);
+      color: var(--cyan);
+      background: rgba(56,232,255,.06);
+      font-size: 19px;
+      transition: .25s;
+    }
+
+    .brand-mark:hover {
+      color: white;
+      background: rgba(56,232,255,.15);
+      box-shadow: 0 0 22px rgba(56,232,255,.3);
+      transform: rotate(10deg);
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 1.5s infinite;
+    }
+
+    .icon-button {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.025);
+      color: var(--text);
+      transition: .2s;
+    }
+
+    .icon-button:hover {
+      border-color: var(--cyan);
+      background: rgba(56,232,255,.08);
+    }
+
+    main {
+      min-height: calc(100vh - 130px);
+      display: grid;
+      grid-template-columns: 1fr minmax(320px, .8fr);
+      align-items: center;
+      gap: clamp(35px, 7vw, 95px);
+      padding: 25px 0 50px;
+    }
+
+    .intro-copy {
+      animation: fadeUp .8s both;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--cyan);
+    }
+
+    h1 {
+      margin: 24px 0 18px;
+      font-size: clamp(43px, 6vw, 78px);
+      font-weight: 850;
+      letter-spacing: -4px;
+      line-height: .98;
+    }
+
+    h1 span {
+      display: block;
+      margin-top: 9px;
+      color: transparent;
+      background: linear-gradient(95deg, var(--cyan), #a6b9ff 50%, var(--purple));
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .intro-description {
+      max-width: 450px;
+      color: #9ba9bf;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .system-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 460px;
+      margin-top: 35px;
+    }
+
+    .info-item {
+      padding: 15px 10px;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.025), transparent);
+    }
+
+    .info-item span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .info-item strong {
+      color: #dce8ff;
+      font-size: 10px;
+    }
+
+    .access-panel {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      justify-self: end;
+      padding: clamp(23px, 4vw, 36px);
+      border: 1px solid rgba(112,159,206,.25);
+      border-radius: 7px;
+      background: rgba(12,18,32,.93);
+      box-shadow: 0 25px 100px rgba(0,0,0,.35);
+      backdrop-filter: blur(20px);
+      animation: fadeUp .8s .15s both;
+    }
+
+    .access-panel::before,
+    .access-panel::after {
+      content: "";
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      pointer-events: none;
+    }
+
+    .access-panel::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid var(--cyan);
+      border-left: 2px solid var(--cyan);
+    }
+
+    .access-panel::after {
+      right: -1px;
+      bottom: -1px;
+      border-right: 2px solid var(--purple);
+      border-bottom: 2px solid var(--purple);
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 27px;
+    }
+
+    .panel-heading h2 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .panel-heading p {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .lock-symbol {
+      color: var(--cyan);
+      font-size: 25px;
+    }
+
+    .pin-label {
+      display: block;
+      margin-bottom: 13px;
+      color: #a9b7cc;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .pin-display {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 17px;
+    }
+
+    .pin-cell {
+      height: 56px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(125,165,210,.22);
+      border-radius: 4px;
+      background: rgba(3,8,18,.7);
+      color: var(--cyan);
+      font-size: 23px;
+      transition: .2s;
+    }
+
+    .pin-cell.filled {
+      border-color: rgba(56,232,255,.6);
+      background: rgba(56,232,255,.07);
+    }
+
+    .pin-cell.invalid {
+      border-color: var(--danger);
+      color: var(--danger);
+      animation: shake .35s;
+    }
+
+    .pin-cell.success {
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .key {
+      min-height: 44px;
+      border: 1px solid rgba(125,165,210,.17);
+      border-radius: 4px;
+      background: rgba(255,255,255,.025);
+      color: #dce7fa;
+      transition: .18s;
+    }
+
+    .key:hover:not(:disabled) {
+      border-color: var(--cyan);
+      background: rgba(56,232,255,.09);
+    }
+
+    .key.utility {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+    }
+
+    .message {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .message::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    .message.error {
+      color: var(--danger);
+    }
+
+    .message.error::before {
+      background: var(--danger);
+    }
+
+    .message.success {
+      color: var(--success);
+    }
+
+    .message.success::before {
+      background: var(--success);
+    }
+
+    .access-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .authenticate-button,
+    .guest-button,
+    .secret-submit {
+      width: 100%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 16px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      transition: .2s;
+    }
+
+    .authenticate-button {
+      border: 1px solid var(--cyan);
+      background: linear-gradient(105deg, rgba(56,232,255,.13), rgba(139,92,246,.13));
+      color: #e9fcff;
+    }
+
+    .authenticate-button:hover:not(:disabled) {
+      background: rgba(56,232,255,.2);
+      box-shadow: 0 0 22px rgba(56,232,255,.1);
+    }
+
+    .guest-button {
+      border: 1px solid rgba(139,92,246,.48);
+      background: rgba(139,92,246,.065);
+      color: #d7caff;
+    }
+
+    .guest-button:hover:not(:disabled) {
+      border-color: var(--purple);
+      background: rgba(139,92,246,.16);
+    }
+
+    .arrow {
+      font-size: 19px;
+      color: var(--cyan);
+    }
+
+    .guest-button .arrow {
+      color: var(--purple);
+    }
+
+    .access-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 5px 0;
+      color: #63748e;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    .access-divider::before,
+    .access-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(125,165,210,.16);
+    }
+
+    .panel-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(125,165,210,.12);
+      color: #65758d;
+      font-size: 8px;
+      letter-spacing: .6px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding-bottom: 20px;
+      color: #596a83;
+      font-size: 9px;
+      letter-spacing: .8px;
+    }
+
+    .startup {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      padding: 25px;
+      background: #03050a;
+      transition: opacity .65s ease, visibility .65s ease;
+    }
+
+    .startup.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .startup-content {
+      width: min(460px, 100%);
+      text-align: center;
+    }
+
+    .startup-logo {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 27px;
+      border: 1px solid rgba(56,232,255,.65);
+      color: var(--cyan);
+      font-size: 30px;
+      animation: pulse 2s infinite;
+    }
+
+    .startup-title {
+      margin-bottom: 12px;
+      font-size: clamp(24px, 5vw, 35px);
+      letter-spacing: 4px;
+    }
+
+    .startup-description {
+      margin-bottom: 35px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .loading-track {
+      width: 100%;
+      height: 3px;
+      overflow: hidden;
+      background: rgba(125,165,210,.12);
+    }
+
+    .loading-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      transition: width .12s linear;
+    }
+
+    .loading-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      color: #7d8da5;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .settings-overlay,
+    .qr-overlay,
+    .secret-overlay {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .settings-overlay { z-index: 11000; }
+    .qr-overlay { z-index: 12000; }
+    .secret-overlay { z-index: 13000; }
+
+    .settings-overlay[hidden],
+    .qr-overlay[hidden],
+    .secret-overlay[hidden] {
+      display: none;
+    }
+
+    .settings-panel,
+    .qr-panel,
+    .secret-panel {
+      width: min(100%, 390px);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 26px;
+      border: 1px solid var(--border);
+      background: #0b111e;
+      box-shadow: 0 20px 80px rgba(0,0,0,.5);
+      animation: fadeUp .25s both;
+    }
+
+    .settings-header,
+    .secret-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 23px;
+    }
+
+    .settings-header h2 {
+      font-size: 17px;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .setting-row strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    .setting-row small {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .toggle {
+      width: 42px;
+      height: 23px;
+      position: relative;
+      flex: 0 0 auto;
+      border: 1px solid #40516b;
+      border-radius: 20px;
+      background: #172236;
+    }
+
+    .toggle::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #8291aa;
+      transition: .2s;
+    }
+
+    .toggle[aria-pressed="true"] {
+      border-color: var(--cyan);
+      background: rgba(56,232,255,.12);
+    }
+
+    .toggle[aria-pressed="true"]::after {
+      transform: translateX(19px);
+      background: var(--cyan);
+    }
+
+    .volume-control {
+      width: 100%;
+      margin-top: 12px;
+      accent-color: var(--cyan);
+    }
+
+    .volume-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .settings-done {
+      width: 100%;
+      margin-top: 17px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: rgba(20,30,49,.8);
+      color: var(--text);
+    }
+
+    .qr-panel {
+      position: relative;
+      text-align: center;
+      border-color: rgba(56,232,255,.4);
+    }
+
+    .qr-close,
+    .secret-close {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: white;
+      font-size: 22px;
+    }
+
+    .qr-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      border: none;
+    }
+
+    .qr-status,
+    .secret-status {
+      margin-bottom: 10px;
+      color: var(--cyan);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .qr-panel h2 {
+      margin-bottom: 10px;
+      color: var(--cyan);
+    }
+
+    .qr-panel p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .qr-image-frame {
+      width: 220px;
+      max-width: 100%;
+      margin: 22px auto;
+      padding: 10px;
+      background: white;
+      border-radius: 5px;
+    }
+
+    .qr-image-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+    }
+
+    .qr-link {
+      color: #91a3bd;
+      font-size: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .secret-panel {
+      border-color: rgba(255,92,138,.45);
+      box-shadow: 0 0 45px rgba(255,92,138,.1);
+    }
+
+    .secret-status {
+      color: var(--danger);
+    }
+
+    .secret-header h2 {
+      margin-bottom: 9px;
+      font-size: 22px;
+    }
+
+    .secret-description {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .secret-label {
+      display: block;
+      margin-bottom: 10px;
+      color: #b3c0d4;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+    }
+
+    .secret-input {
+      width: 100%;
+      min-height: 49px;
+      padding: 0 13px;
+      border: 1px solid rgba(125,165,210,.3);
+      border-radius: 4px;
+      background: rgba(3,8,18,.8);
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .secret-input:focus {
+      border-color: var(--danger);
+      outline-color: var(--danger);
+    }
+
+    .secret-message {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .secret-message.error { color: var(--danger); }
+    .secret-message.success { color: var(--success); }
+
+    .secret-submit {
+      min-height: 48px;
+      border: 1px solid var(--danger);
+      background: rgba(255,92,138,.09);
+      color: #ffdce6;
+    }
+
+    .secret-submit:hover {
+      background: rgba(255,92,138,.17);
+    }
+
+    .secret-submit.bypass {
+      margin-top: 10px;
+      border-color: var(--cyan);
+      background: rgba(56,232,255,.08);
+      color: #dffcff;
+    }
+
+    .secret-submit.bypass:hover {
+      background: rgba(56,232,255,.16);
+    }
+
+    .secret-note {
+      margin-top: 15px;
+      color: #64748b;
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+    .slash-transition {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      overflow: hidden;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .slash-transition::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      opacity: 0;
+      transform: translateX(-130%) rotate(-25deg);
+      background: linear-gradient(
+        90deg,
+        transparent 35%,
+        rgba(56,232,255,.08) 44%,
+        rgba(56,232,255,.95) 49%,
+        white 50%,
+        rgba(139,92,246,.9) 51%,
+        rgba(139,92,246,.08) 56%,
+        transparent 65%
+      );
+    }
+
+    body.unlocking .slash-transition {
+      visibility: visible;
+    }
+
+    body.unlocking .slash-transition::before {
+      animation: slashOne 1.1s cubic-bezier(.7,0,.2,1) forwards;
+    }
+
+    body.unlocking main,
+    body.unlocking .topbar,
+    body.unlocking footer {
+      animation: portalExit 1.25s ease forwards;
+    }
+
+    body.reduce-motion *,
+    body.reduce-motion *::before,
+    body.reduce-motion *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: .45; }
+    }
+
+    @keyframes glowMove {
+      from { transform: translate(0,0) scale(1); }
+      to { transform: translate(30px,-20px) scale(1.15); }
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    @keyframes slashOne {
+      0% { opacity: 0; transform: translateX(-130%) rotate(-25deg); }
+      25%,65% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(130%) rotate(-25deg); }
+    }
+
+    @keyframes portalExit {
+      to { opacity: 0; transform: scale(1.025); }
+    }
+
+    @media (max-width: 800px) {
       main {
-        position: relative;
-        z-index: 2;
-        width: min(1120px, calc(100% - 40px));
-        min-height: calc(100vh - 115px);
-        min-height: calc(100dvh - 115px);
-        margin: auto;
-        padding: 30px 0 55px;
-        display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(330px, 0.8fr);
-        align-items: center;
-        gap: clamp(35px, 7vw, 100px);
+        grid-template-columns: 1fr;
+        gap: 38px;
+        padding-top: 25px;
       }
 
-      .intro-copy {
-        animation: fadeUp 0.9s both;
-      }
-      .eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 11px;
-        color: var(--cyan);
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-      }
-      .eyebrow::before {
-        content: "";
-        width: 28px;
-        height: 1px;
-        background: var(--cyan);
-        box-shadow: 0 0 8px var(--cyan);
-      }
+      .intro-copy { text-align: center; }
+      .eyebrow { justify-content: center; }
 
       h1 {
-        margin: 24px 0 18px;
-        font-size: clamp(43px, 6vw, 78px);
-        font-weight: 850;
-        letter-spacing: -4px;
-        line-height: 0.98;
-      }
-      h1 span {
-        display: block;
-        margin-top: 9px;
-        color: transparent;
-        background: linear-gradient(
-          95deg,
-          var(--cyan),
-          #a6b9ff 50%,
-          var(--purple)
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
+        font-size: clamp(43px, 10vw, 68px);
+        letter-spacing: -2.5px;
       }
 
-      .intro-description {
-        max-width: 450px;
-        color: #9ba9bf;
-        font-size: 14px;
-        line-height: 1.9;
+      .intro-description { margin-inline: auto; }
+      .system-info { margin-inline: auto; }
+      .access-panel { justify-self: center; }
+    }
+
+    @media (max-width: 480px) {
+      .topbar, main, footer {
+        width: calc(100% - 30px);
       }
 
-      .system-info {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-        max-width: 460px;
-        margin-top: 35px;
-      }
-      .info-item {
-        padding: 15px 12px;
-        border-top: 1px solid var(--border);
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.025),
-          transparent
-        );
-      }
-      .info-item span {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--muted);
-        font-size: 8px;
-        letter-spacing: 1.4px;
-        text-transform: uppercase;
-      }
-      .info-item strong {
-        color: #dce8ff;
-        font-size: 11px;
-        font-weight: 650;
-      }
+      .topbar { padding-top: 18px; }
+      .brand { gap: 8px; font-size: 10px; }
+      .brand-mark { width: 32px; height: 32px; }
+      .status-pill { padding: 8px; font-size: 8px; }
+      .access-panel { padding: 22px 17px; }
+      .pin-cell { height: 50px; }
+      .info-item { padding: 12px 5px; }
+      .info-item span { font-size: 7px; }
+      .info-item strong { font-size: 9px; }
+    }
+  </style>
+</head>
 
-      .access-panel {
-        position: relative;
-        width: 100%;
-        max-width: 440px;
-        justify-self: end;
-        padding: clamp(23px, 4vw, 36px);
-        border: 1px solid rgba(112, 159, 206, 0.25);
-        border-radius: 8px;
-        background: var(--panel);
-        box-shadow: 0 25px 100px rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(20px);
-        animation: fadeUp 0.9s 0.15s both;
-        transition:
-          box-shadow 0.3s,
-          border-color 0.3s;
-      }
-      .access-panel:focus-within {
-        border-color: rgba(56, 232, 255, 0.38);
-      }
-      .access-panel::before,
-      .access-panel::after {
-        content: "";
-        position: absolute;
-        width: 38px;
-        height: 38px;
-        pointer-events: none;
-      }
-      .access-panel::before {
-        top: -1px;
-        left: -1px;
-        border-top: 2px solid var(--cyan);
-        border-left: 2px solid var(--cyan);
-        border-top-left-radius: 8px;
-      }
-      .access-panel::after {
-        right: -1px;
-        bottom: -1px;
-        border-right: 2px solid var(--purple);
-        border-bottom: 2px solid var(--purple);
-        border-bottom-right-radius: 8px;
-      }
+<body>
+  <div class="background-grid" aria-hidden="true"></div>
+  <div class="glow one" aria-hidden="true"></div>
+  <div class="glow two" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="slash-transition" aria-hidden="true"></div>
 
-      .panel-heading {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 28px;
-      }
-      .panel-heading h2 {
-        margin-bottom: 8px;
-        font-size: 19px;
-        font-weight: 750;
-        letter-spacing: -0.5px;
-      }
-      .panel-heading p {
-        color: var(--muted);
-        font-size: 11px;
-        line-height: 1.6;
-      }
-      .lock-symbol {
-        color: var(--cyan);
-        font-size: 24px;
-        filter: drop-shadow(0 0 8px rgba(56, 232, 255, 0.4));
-      }
+  <section class="startup" id="startup">
+    <div class="startup-content">
+      <div class="startup-logo">Ω</div>
+      <h2 class="startup-title">PROJECT OMEGA</h2>
+      <p class="startup-description" id="startupDescription">INITIALIZING SECURE PORTAL</p>
+      <div class="loading-track">
+        <div class="loading-bar" id="loadingBar"></div>
+      </div>
+      <div class="loading-meta">
+        <span id="loadingStatus">BOOTING SYSTEM...</span>
+        <span id="loadingPercent">0%</span>
+      </div>
+    </div>
+  </section>
 
-      .pin-label {
-        display: block;
-        margin-bottom: 13px;
-        color: #a9b7cc;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 2px;
-      }
-      .pin-display {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin-bottom: 17px;
-      }
-      .pin-cell {
-        height: 58px;
-        display: grid;
-        place-items: center;
-        border: 1px solid rgba(125, 165, 210, 0.22);
-        border-radius: 4px;
-        background: rgba(3, 8, 18, 0.7);
-        color: var(--cyan);
-        font-size: 23px;
-        font-weight: 700;
-        transition:
-          border-color 0.2s,
-          background 0.2s,
-          transform 0.2s;
-      }
-      .pin-cell.filled {
-        border-color: rgba(56, 232, 255, 0.6);
-        background: rgba(56, 232, 255, 0.07);
-      }
-      .pin-cell.invalid {
-        border-color: var(--danger);
-        color: var(--danger);
-        animation: shake 0.35s;
-      }
-      .pin-cell.success {
-        border-color: var(--success);
-        color: var(--success);
-        background: rgba(88, 255, 197, 0.08);
-      }
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" id="omegaEasterEgg" aria-label="Hidden Omega access">Ω</div>
+      <div>
+        PROJECT OMEGA
+        <small>SECURE PORTAL SYSTEM</small>
+      </div>
+    </div>
 
-      .keypad {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-      }
-      .key {
-        min-height: 45px;
-        border: 1px solid rgba(125, 165, 210, 0.17);
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.025);
-        color: #dce7fa;
-        font-size: 15px;
-        cursor: pointer;
-        transition:
-          background 0.18s,
-          border-color 0.18s,
-          transform 0.18s;
-      }
-      .key:hover:not(:disabled) {
-        border-color: rgba(56, 232, 255, 0.55);
-        background: rgba(56, 232, 255, 0.09);
-      }
-      .key:active:not(:disabled) {
-        transform: scale(0.96);
-      }
-      .key.utility {
-        color: var(--muted);
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.8px;
-      }
+    <div class="topbar-actions">
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span id="systemStatus">SYSTEM ONLINE</span>
+      </div>
+      <button class="icon-button" id="settingsButton" type="button" aria-label="Open settings">⚙</button>
+    </div>
+  </header>
 
-      .message {
-        min-height: 35px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--muted);
-        font-size: 10px;
-        line-height: 1.5;
-      }
-      .message::before {
-        content: "";
-        flex: 0 0 auto;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: var(--cyan);
-      }
-      .message.error {
-        color: var(--danger);
-      }
-      .message.error::before {
-        background: var(--danger);
-      }
-      .message.success {
-        color: var(--success);
-      }
-      .message.success::before {
-        background: var(--success);
-      }
+  <main>
+    <section class="intro-copy">
+      <div class="eyebrow">Personal portfolio interface</div>
+      <h1>BEYOND THE<span>ORDINARY.</span></h1>
+      <p class="intro-description">
+        Every line of code opens a new possibility. Enter the portal to explore
+        my projects, technical skills, and journey into computer engineering.
+      </p>
 
-      .authenticate-button {
-        position: relative;
-        width: 100%;
-        min-height: 52px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 0 17px;
-        overflow: hidden;
-        border: 1px solid var(--cyan);
-        border-radius: 4px;
-        background: linear-gradient(
-          105deg,
-          rgba(56, 232, 255, 0.13),
-          rgba(139, 92, 246, 0.13)
-        );
-        color: #e9fcff;
-        font-size: 10px;
-        font-weight: 800;
-        letter-spacing: 1.4px;
-        cursor: pointer;
-        transition:
-          background 0.25s,
-          box-shadow 0.25s,
-          transform 0.2s;
-      }
-      .authenticate-button:hover:not(:disabled) {
-        background: linear-gradient(
-          105deg,
-          rgba(56, 232, 255, 0.24),
-          rgba(139, 92, 246, 0.2)
-        );
-        box-shadow: 0 0 25px rgba(56, 232, 255, 0.1);
-      }
-      .authenticate-button:active:not(:disabled) {
-        transform: scale(0.99);
-      }
-      .authenticate-button .arrow {
-        color: var(--cyan);
-        font-size: 19px;
-      }
-
-      .panel-footer {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-top: 20px;
-        padding-top: 15px;
-        border-top: 1px solid rgba(125, 165, 210, 0.12);
-        color: #65758d;
-        font-size: 8px;
-        letter-spacing: 0.8px;
-      }
-
-      .footer {
-        position: relative;
-        z-index: 2;
-        width: min(1120px, calc(100% - 40px));
-        margin: auto;
-        padding: 0 0 20px;
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        color: #596a83;
-        font-size: 9px;
-        letter-spacing: 0.8px;
-      }
-
-      .startup {
-        position: fixed;
-        inset: 0;
-        z-index: 10000;
-        display: grid;
-        place-items: center;
-        padding: 25px;
-        background: #03050a;
-        transition:
-          opacity 0.65s ease,
-          visibility 0.65s ease;
-      }
-      .startup.hidden {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-      }
-      .startup-content {
-        width: min(460px, 100%);
-        text-align: center;
-      }
-      .startup-logo {
-        width: 72px;
-        height: 72px;
-        display: grid;
-        place-items: center;
-        margin: 0 auto 27px;
-        border: 1px solid rgba(56, 232, 255, 0.65);
-        color: var(--cyan);
-        font-size: 30px;
-        box-shadow:
-          0 0 35px rgba(56, 232, 255, 0.1),
-          inset 0 0 20px rgba(56, 232, 255, 0.06);
-        animation: logoPulse 2s ease-in-out infinite;
-      }
-      .startup-title {
-        margin-bottom: 12px;
-        font-size: clamp(24px, 5vw, 35px);
-        font-weight: 850;
-        letter-spacing: 4px;
-      }
-      .startup-description {
-        margin-bottom: 35px;
-        color: var(--muted);
-        font-size: 10px;
-        letter-spacing: 2px;
-      }
-      .loading-track {
-        width: 100%;
-        height: 3px;
-        overflow: hidden;
-        background: rgba(125, 165, 210, 0.12);
-      }
-      .loading-bar {
-        width: 0;
-        height: 100%;
-        background: linear-gradient(90deg, var(--cyan), var(--purple));
-        box-shadow: 0 0 12px var(--cyan);
-        transition: width 0.12s linear;
-      }
-      .loading-meta {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-top: 12px;
-        color: #7d8da5;
-        font-size: 9px;
-        letter-spacing: 1px;
-      }
-
-      .settings-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 11000;
-        display: grid;
-        place-items: center;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.72);
-        backdrop-filter: blur(8px);
-      }
-      .settings-overlay[hidden] {
-        display: none;
-      }
-      .settings-panel {
-        width: min(390px, 100%);
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 25px;
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        background: #0b111e;
-        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
-      }
-      .settings-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 23px;
-      }
-      .settings-header h2 {
-        font-size: 17px;
-      }
-      .setting-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 15px;
-        padding: 15px 0;
-        border-top: 1px solid var(--border);
-      }
-      .setting-row strong {
-        display: block;
-        margin-bottom: 5px;
-        font-size: 12px;
-      }
-      .setting-row small {
-        color: var(--muted);
-        font-size: 10px;
-        line-height: 1.5;
-      }
-      .toggle {
-        width: 42px;
-        height: 23px;
-        position: relative;
-        flex: 0 0 auto;
-        border: 1px solid #40516b;
-        border-radius: 20px;
-        background: #172236;
-        cursor: pointer;
-      }
-      .toggle::after {
-        content: "";
-        position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background: #8291aa;
-        transition:
-          transform 0.2s,
-          background 0.2s;
-      }
-      .toggle[aria-pressed="true"] {
-        border-color: var(--cyan);
-        background: rgba(56, 232, 255, 0.12);
-      }
-      .toggle[aria-pressed="true"]::after {
-        transform: translateX(19px);
-        background: var(--cyan);
-      }
-      .volume-control {
-        width: 100%;
-        margin-top: 12px;
-        accent-color: var(--cyan);
-        cursor: pointer;
-      }
-      .volume-label {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        color: var(--muted);
-        font-size: 10px;
-      }
-      .settings-done {
-        width: 100%;
-        margin-top: 17px;
-        padding: 12px;
-        border: 1px solid var(--border);
-        border-radius: 3px;
-        background: var(--panel-light);
-        color: var(--text);
-        cursor: pointer;
-      }
-
-      .slash-transition {
-        position: fixed;
-        inset: 0;
-        z-index: 20000;
-        overflow: hidden;
-        pointer-events: none;
-        visibility: hidden;
-      }
-      .slash-transition::before,
-      .slash-transition::after {
-        content: "";
-        position: absolute;
-        inset: -50%;
-        opacity: 0;
-        transform: translateX(-130%) rotate(-25deg);
-      }
-      .slash-transition::before {
-        background: linear-gradient(
-          90deg,
-          transparent 35%,
-          rgba(56, 232, 255, 0.08) 44%,
-          rgba(56, 232, 255, 0.95) 49%,
-          #fff 50%,
-          rgba(139, 92, 246, 0.9) 51%,
-          rgba(139, 92, 246, 0.08) 56%,
-          transparent 65%
-        );
-      }
-      .slash-transition::after {
-        background: linear-gradient(
-          90deg,
-          transparent 45%,
-          rgba(255, 255, 255, 0.12) 49%,
-          #fff 50%,
-          rgba(56, 232, 255, 0.08) 52%,
-          transparent 57%
-        );
-      }
-      body.unlocking {
-        overflow: hidden;
-      }
-      body.unlocking .slash-transition {
-        visibility: visible;
-      }
-      body.unlocking .slash-transition::before {
-        animation: slashOne 1.15s cubic-bezier(0.7, 0, 0.2, 1) forwards;
-      }
-      body.unlocking .slash-transition::after {
-        animation: slashTwo 1.25s 0.1s cubic-bezier(0.7, 0, 0.2, 1) forwards;
-      }
-      body.unlocking main,
-      body.unlocking .topbar,
-      body.unlocking .footer {
-        animation: portalExit 1.4s ease forwards;
-      }
-      body.unlocking .access-panel {
-        box-shadow: 0 0 60px rgba(56, 232, 255, 0.25);
-      }
-
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.45;
-        }
-      }
-      @keyframes glowDrift {
-        from {
-          transform: translate(0, 0) scale(1);
-        }
-        to {
-          transform: translate(35px, -25px) scale(1.15);
-        }
-      }
-      @keyframes logoPulse {
-        0%,
-        100% {
-          box-shadow: 0 0 25px rgba(56, 232, 255, 0.08);
-        }
-        50% {
-          box-shadow: 0 0 45px rgba(56, 232, 255, 0.24);
-        }
-      }
-      @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        25% {
-          transform: translateX(-5px);
-        }
-        75% {
-          transform: translateX(5px);
-        }
-      }
-      @keyframes slashOne {
-        0% {
-          opacity: 0;
-          transform: translateX(-130%) rotate(-25deg);
-        }
-        25% {
-          opacity: 1;
-        }
-        65% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(130%) rotate(-25deg);
-        }
-      }
-      @keyframes slashTwo {
-        0% {
-          opacity: 0;
-          transform: translateX(-130%) rotate(-25deg);
-        }
-        30% {
-          opacity: 0.9;
-        }
-        70% {
-          opacity: 0.7;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(130%) rotate(-25deg);
-        }
-      }
-      @keyframes portalExit {
-        0% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        100% {
-          opacity: 0;
-          transform: scale(1.025);
-        }
-      }
-
-      @media (max-width: 800px) {
-        main {
-          grid-template-columns: 1fr;
-          gap: 38px;
-          padding-top: 28px;
-        }
-        .intro-copy {
-          text-align: center;
-        }
-        .eyebrow {
-          justify-content: center;
-        }
-        h1 {
-          font-size: clamp(43px, 10vw, 68px);
-          letter-spacing: -2.5px;
-        }
-        .intro-description {
-          margin-inline: auto;
-        }
-        .system-info {
-          margin-inline: auto;
-        }
-        .access-panel {
-          justify-self: center;
-          max-width: 460px;
-        }
-        .footer {
-          padding-top: 5px;
-        }
-      }
-      @media (max-width: 480px) {
-        .topbar,
-        main,
-        .footer {
-          width: calc(100% - 30px);
-        }
-        .topbar {
-          padding-top: 18px;
-        }
-        .brand {
-          gap: 8px;
-          font-size: 10px;
-          letter-spacing: 1.6px;
-        }
-        .brand-mark {
-          width: 32px;
-          height: 32px;
-        }
-        .status-pill {
-          padding: 8px;
-          font-size: 8px;
-        }
-        main {
-          padding-top: 24px;
-          gap: 32px;
-        }
-        .system-info {
-          gap: 5px;
-        }
-        .info-item {
-          padding: 12px 6px;
-        }
-        .info-item span {
-          font-size: 7px;
-          letter-spacing: 0.7px;
-        }
-        .info-item strong {
-          font-size: 10px;
-        }
-        .access-panel {
-          padding: 23px 18px;
-        }
-        .pin-cell {
-          height: 51px;
-        }
-        .key {
-          min-height: 43px;
-        }
-        .footer {
-          font-size: 8px;
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          scroll-behavior: auto !important;
-        }
-      }
-      body.reduce-motion *,
-      body.reduce-motion *::before,
-      body.reduce-motion *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="background-grid" aria-hidden="true"></div>
-    <div class="ambient-glow glow-one" aria-hidden="true"></div>
-    <div class="ambient-glow glow-two" aria-hidden="true"></div>
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div class="slash-transition" aria-hidden="true"></div>
-
-    <section class="startup" id="startup" aria-label="System startup">
-      <div class="startup-content">
-        <div class="startup-logo" aria-hidden="true">Ω</div>
-        <h2 class="startup-title">PROJECT OMEGA</h2>
-        <p class="startup-description" id="startupDescription">
-          INITIALIZING SECURE PORTAL
-        </p>
-        <div class="loading-track">
-          <div class="loading-bar" id="loadingBar"></div>
+      <div class="system-info">
+        <div class="info-item">
+          <span>System</span>
+          <strong>OMEGA-01</strong>
         </div>
-        <div class="loading-meta">
-          <span id="loadingStatus">BOOTING SYSTEM...</span>
-          <span id="loadingPercent">0%</span>
+        <div class="info-item">
+          <span>Security</span>
+          <strong>PIN PROTECTED</strong>
+        </div>
+        <div class="info-item">
+          <span>Destination</span>
+          <strong>PORTFOLIO</strong>
         </div>
       </div>
     </section>
 
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">Ω</div>
-        <div>PROJECT OMEGA<small>SECURE PORTAL SYSTEM</small></div>
+    <section class="access-panel" aria-labelledby="accessTitle">
+      <div class="panel-heading">
+        <div>
+          <h2 id="accessTitle">Choose Your Access</h2>
+          <p>Select how you want to enter the portfolio.</p>
+        </div>
+        <div class="lock-symbol" aria-hidden="true">⌑</div>
       </div>
-      <div class="topbar-actions">
-        <div class="status-pill">
-          <span class="status-dot"></span>
-          <span id="systemStatus">SYSTEM ONLINE</span>
-        </div>
-        <button
-          class="icon-button"
-          id="settingsButton"
-          type="button"
-          aria-label="Open settings"
-          title="Settings"
-        >
-          ⚙
-        </button>
+
+      <span class="pin-label">DEVELOPER ACCESS CODE</span>
+
+      <div class="pin-display" aria-label="PIN entry">
+        <div class="pin-cell" data-cell="0"></div>
+        <div class="pin-cell" data-cell="1"></div>
+        <div class="pin-cell" data-cell="2"></div>
+        <div class="pin-cell" data-cell="3"></div>
       </div>
-    </header>
 
-    <main>
-      <section class="intro-copy">
-        <div class="eyebrow">Personal portfolio interface</div>
-        <h1>BEYOND THE<span>ORDINARY.</span></h1>
-        <p class="intro-description">
-          Every line of code opens a new possibility. Enter the portal to
-          explore my projects, technical skills, and journey into computer
-          engineering.
-        </p>
-        <div class="system-info">
-          <div class="info-item">
-            <span>System</span><strong>OMEGA-01</strong>
-          </div>
-          <div class="info-item">
-            <span>Security</span><strong>PIN PROTECTED</strong>
-          </div>
-          <div class="info-item">
-            <span>Destination</span><strong>PORTFOLIO</strong>
-          </div>
-        </div>
-      </section>
+      <div class="keypad" id="keypad" aria-label="Number keypad">
+        <button class="key" type="button" data-digit="1">1</button>
+        <button class="key" type="button" data-digit="2">2</button>
+        <button class="key" type="button" data-digit="3">3</button>
+        <button class="key" type="button" data-digit="4">4</button>
+        <button class="key" type="button" data-digit="5">5</button>
+        <button class="key" type="button" data-digit="6">6</button>
+        <button class="key" type="button" data-digit="7">7</button>
+        <button class="key" type="button" data-digit="8">8</button>
+        <button class="key" type="button" data-digit="9">9</button>
+        <button class="key utility" id="clearPin" type="button">CLEAR</button>
+        <button class="key" type="button" data-digit="0">0</button>
+        <button class="key utility" id="deletePin" type="button">DELETE</button>
+      </div>
 
-      <section class="access-panel" aria-labelledby="accessTitle">
-        <div class="panel-heading">
-          <div>
-            <h2 id="accessTitle">Identity Verification</h2>
-            <p>Enter the four-digit access code to continue.</p>
-          </div>
-          <div class="lock-symbol" aria-hidden="true">⌑</div>
-        </div>
+      <p class="message" id="message" role="status" aria-live="polite">
+        Enter your developer PIN or choose another access method.
+      </p>
 
-        <span class="pin-label">ACCESS CODE</span>
-        <div class="pin-display" id="pinDisplay" aria-label="PIN entry">
-          <div class="pin-cell" data-cell="0"></div>
-          <div class="pin-cell" data-cell="1"></div>
-          <div class="pin-cell" data-cell="2"></div>
-          <div class="pin-cell" data-cell="3"></div>
-        </div>
-
-        <div class="keypad" id="keypad" aria-label="Number keypad">
-          <button class="key" type="button" data-digit="1">1</button>
-          <button class="key" type="button" data-digit="2">2</button>
-          <button class="key" type="button" data-digit="3">3</button>
-          <button class="key" type="button" data-digit="4">4</button>
-          <button class="key" type="button" data-digit="5">5</button>
-          <button class="key" type="button" data-digit="6">6</button>
-          <button class="key" type="button" data-digit="7">7</button>
-          <button class="key" type="button" data-digit="8">8</button>
-          <button class="key" type="button" data-digit="9">9</button>
-          <button class="key utility" id="clearPin" type="button">CLEAR</button>
-          <button class="key" type="button" data-digit="0">0</button>
-          <button class="key utility" id="deletePin" type="button">
-            DELETE
-          </button>
-        </div>
-
-        <p class="message" id="message" role="status" aria-live="polite">
-          Awaiting authentication credentials.
-        </p>
-
+      <div class="access-options">
         <button class="authenticate-button" id="unlockButton" type="button">
-          <span>AUTHENTICATE ACCESS ↗</span>
-          <span class="arrow" aria-hidden="true">→</span>
+          <span>DEVELOPER ACCESS</span>
+          <span class="arrow" aria-hidden="true">↗</span>
         </button>
 
-        <div class="panel-footer">
-          <span id="gatewayState">GATEWAY LOCKED</span>
-          <span>OMEGA SECURE CONNECTION</span>
-        </div>
-      </section>
-    </main>
+        <div class="access-divider">OR</div>
 
-    <footer class="footer">
-      <span>PROJECT OMEGA // PERSONAL PORTFOLIO</span>
-      <span id="footerTime">SYSTEM READY</span>
-    </footer>
-
-    <div class="settings-overlay" id="settingsOverlay" hidden>
-      <section
-        class="settings-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="settingsTitle"
-      >
-        <div class="settings-header">
-          <h2 id="settingsTitle">System Settings</h2>
-          <button
-            class="icon-button"
-            id="closeSettings"
-            type="button"
-            aria-label="Close settings"
-          >
-            ✕
-          </button>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <strong>Motion Effects</strong
-            ><small>Enable the portal and particle animations.</small>
-          </div>
-          <button
-            class="toggle"
-            id="motionToggle"
-            type="button"
-            aria-label="Toggle motion effects"
-            aria-pressed="true"
-          ></button>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <strong>Sound Effects</strong
-            ><small>Enable interface clicks and authentication sounds.</small>
-          </div>
-          <button
-            class="toggle"
-            id="soundToggle"
-            type="button"
-            aria-label="Toggle sound effects"
-            aria-pressed="false"
-          ></button>
-        </div>
-
-        <div class="setting-row">
-          <div style="width: 100%">
-            <div class="volume-label">
-              <span>Sound volume</span><span id="volumeValue">35%</span>
-            </div>
-            <input
-              class="volume-control"
-              id="volumeSlider"
-              type="range"
-              min="0"
-              max="100"
-              value="35"
-              aria-label="Sound volume"
-            />
-          </div>
-        </div>
-
-        <button class="settings-done" id="settingsDone" type="button">
-          SAVE SETTINGS
+        <button class="guest-button" id="guestButton" type="button">
+          <span>CONTINUE AS GUEST</span>
+          <span class="arrow" aria-hidden="true">↗</span>
         </button>
-      </section>
-    </div>
+      </div>
 
-    <script>
-      (() => {
-        "use strict";
+      <div class="panel-footer">
+        <span id="gatewayState">AWAITING ACCESS SELECTION</span>
+        <span>OMEGA SECURE CONNECTION</span>
+      </div>
+    </section>
+  </main>
 
-        const ACCESS_PIN = "0208";
-        const PORTFOLIO_URL = new URL("./index.html", window.location.href)
-          .href;
+  <footer>
+    <span>PROJECT OMEGA // PERSONAL PORTFOLIO</span>
+    <span id="footerTime">SYSTEM READY</span>
+  </footer>
 
-        const $ = (selector) => document.querySelector(selector);
-        const $$ = (selector) => [...document.querySelectorAll(selector)];
+  <div class="settings-overlay" id="settingsOverlay" hidden>
+    <section class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <div class="settings-header">
+        <h2 id="settingsTitle">System Settings</h2>
+        <button class="icon-button" id="closeSettings" type="button" aria-label="Close settings">✕</button>
+      </div>
 
-        const startup = $("#startup");
-        const loadingBar = $("#loadingBar");
-        const loadingPercent = $("#loadingPercent");
-        const loadingStatus = $("#loadingStatus");
-        const startupDescription = $("#startupDescription");
+      <div class="setting-row">
+        <div>
+          <strong>Motion Effects</strong>
+          <small>Enable portal and particle animations.</small>
+        </div>
+        <button class="toggle" id="motionToggle" type="button" aria-label="Toggle motion effects" aria-pressed="true"></button>
+      </div>
 
-        const pinCells = $$(".pin-cell");
-        const keypadButtons = $$("#keypad [data-digit]");
-        const unlockButton = $("#unlockButton");
-        const clearPinButton = $("#clearPin");
-        const deletePinButton = $("#deletePin");
+      <div class="setting-row">
+        <div>
+          <strong>Sound Effects</strong>
+          <small>Enable interface and authentication sounds.</small>
+        </div>
+        <button class="toggle" id="soundToggle" type="button" aria-label="Toggle sound effects" aria-pressed="false"></button>
+      </div>
 
-        const message = $("#message");
-        const systemStatus = $("#systemStatus");
-        const gatewayState = $("#gatewayState");
-        const footerTime = $("#footerTime");
+      <div class="setting-row">
+        <div style="width:100%">
+          <div class="volume-label">
+            <span>Sound volume</span>
+            <span id="volumeValue">35%</span>
+          </div>
+          <input class="volume-control" id="volumeSlider" type="range" min="0" max="100" value="35" aria-label="Sound volume">
+        </div>
+      </div>
 
-        const settingsButton = $("#settingsButton");
-        const settingsOverlay = $("#settingsOverlay");
-        const closeSettings = $("#closeSettings");
-        const settingsDone = $("#settingsDone");
-        const motionToggle = $("#motionToggle");
-        const soundToggle = $("#soundToggle");
-        const volumeSlider = $("#volumeSlider");
-        const volumeValue = $("#volumeValue");
+      <button class="settings-done" id="settingsDone" type="button">SAVE SETTINGS</button>
+    </section>
+  </div>
 
-        let pin = "";
-        let isNavigating = false;
-        let motionEnabled = !window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-        let soundEnabled = false;
-        let soundVolume = 0.35;
-        let introTimer = null;
-        let clockTimer = null;
-        let particleFrame = null;
-        let audioContext = null;
-        let lastSettingsFocus = null;
+  <div class="qr-overlay" id="qrOverlay" hidden>
+    <section class="qr-panel" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+      <button class="qr-close" id="qrClose" type="button" aria-label="Close QR code">×</button>
+      <div class="qr-status">OMEGA GUEST CONNECTION</div>
+      <h2 id="qrTitle">Guest Access</h2>
+      <p>Scan the QR code to open your portfolio, or continue directly below.</p>
 
-        function setMessage(text, type = "") {
-          message.textContent = text;
-          message.className = "message";
-          if (type) message.classList.add(type);
-        }
+      <div class="qr-image-frame">
+        <img src="./images/qr-code.png" alt="QR code to open the portfolio" onerror="this.style.display='none'">
+      </div>
 
-        function renderPin() {
-          pinCells.forEach((cell, index) => {
-            cell.textContent = index < pin.length ? "●" : "";
-            cell.classList.toggle("filled", index < pin.length);
-            cell.classList.remove("invalid", "success");
-          });
-        }
+      <div class="qr-link">GUEST CONNECTION // NO PIN REQUIRED</div>
+      <button class="settings-done" id="continueGuest" type="button">CONTINUE TO PORTFOLIO ↗</button>
+    </section>
+  </div>
 
-        function playTone(frequency = 600, duration = 0.06, level = 0.6) {
-          if (!soundEnabled || soundVolume <= 0) return;
+  <div class="secret-overlay" id="secretOverlay" hidden>
+    <section class="secret-panel" role="dialog" aria-modal="true" aria-labelledby="secretTitle">
+      <div class="secret-header">
+        <div>
+          <div class="secret-status">RESTRICTED OMEGA CHANNEL</div>
+          <h2 id="secretTitle">Secret Access</h2>
+          <p class="secret-description">
+            Enter the secret code or use the hidden bypass to continue directly
+            to the portfolio.
+          </p>
+        </div>
+        <button class="secret-close" id="secretClose" type="button" aria-label="Close secret access">×</button>
+      </div>
 
-          try {
-            const AudioContextClass =
-              window.AudioContext || window.webkitAudioContext;
-            if (!AudioContextClass) return;
-            if (!audioContext) audioContext = new AudioContextClass();
+      <form id="secretForm">
+        <label class="secret-label" for="secretCodeInput">SECRET ACCESS CODE</label>
+        <input
+          class="secret-input"
+          id="secretCodeInput"
+          name="secretCode"
+          type="password"
+          placeholder="Enter secret code"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          required
+        >
+        <p class="secret-message" id="secretMessage" role="status" aria-live="polite">
+          Awaiting secret code verification.
+        </p>
+        <button class="secret-submit" type="submit">
+          <span>VERIFY &amp; ACCESS</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+      </form>
 
-            if (audioContext.state === "suspended") {
-              audioContext.resume().catch(() => {});
-            }
+      <button class="secret-submit bypass" id="bypassSecret" type="button">
+        <span>BYPASS AUTHENTICATION</span>
+        <span aria-hidden="true">⚡</span>
+      </button>
 
-            const oscillator = audioContext.createOscillator();
-            const gain = audioContext.createGain();
-            const now = audioContext.currentTime;
-            const peak = Math.max(0.0001, soundVolume * 0.055 * level);
+      <p class="secret-note">
+        ALTERNATE ACCESS PROTOCOL // HIDDEN OMEGA CHANNEL
+      </p>
+    </section>
+  </div>
 
-            oscillator.type = "sine";
-            oscillator.frequency.setValueAtTime(frequency, now);
-            gain.gain.setValueAtTime(0.0001, now);
-            gain.gain.exponentialRampToValueAtTime(peak, now + 0.008);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-            oscillator.connect(gain);
-            gain.connect(audioContext.destination);
-            oscillator.start(now);
-            oscillator.stop(now + duration + 0.02);
-          } catch {
-            // Audio must never prevent authentication or navigation.
+  <script>
+    (() => {
+      "use strict";
+
+      const ACCESS_PIN = "0208";
+      const SECRET_ACCESS_CODE = "OMEGA-2026";
+
+      // This assumes intro.html and index.html are in the same folder.
+      const PORTFOLIO_URL = new URL("./index.html", window.location.href).href;
+
+      const $ = selector => document.querySelector(selector);
+      const $$ = selector => [...document.querySelectorAll(selector)];
+
+      const startup = $("#startup");
+      const loadingBar = $("#loadingBar");
+      const loadingPercent = $("#loadingPercent");
+      const loadingStatus = $("#loadingStatus");
+      const startupDescription = $("#startupDescription");
+
+      const pinCells = $$(".pin-cell");
+      const keypadButtons = $$("#keypad [data-digit]");
+      const unlockButton = $("#unlockButton");
+      const guestButton = $("#guestButton");
+      const clearPinButton = $("#clearPin");
+      const deletePinButton = $("#deletePin");
+      const message = $("#message");
+
+      const systemStatus = $("#systemStatus");
+      const gatewayState = $("#gatewayState");
+      const footerTime = $("#footerTime");
+
+      const settingsButton = $("#settingsButton");
+      const settingsOverlay = $("#settingsOverlay");
+      const closeSettings = $("#closeSettings");
+      const settingsDone = $("#settingsDone");
+      const motionToggle = $("#motionToggle");
+      const soundToggle = $("#soundToggle");
+      const volumeSlider = $("#volumeSlider");
+      const volumeValue = $("#volumeValue");
+
+      const qrOverlay = $("#qrOverlay");
+      const qrClose = $("#qrClose");
+      const continueGuest = $("#continueGuest");
+
+      const omegaEasterEgg = $("#omegaEasterEgg");
+      const secretOverlay = $("#secretOverlay");
+      const secretClose = $("#secretClose");
+      const secretForm = $("#secretForm");
+      const secretCodeInput = $("#secretCodeInput");
+      const secretMessage = $("#secretMessage");
+      const bypassSecret = $("#bypassSecret");
+
+      let pin = "";
+      let isNavigating = false;
+      let motionEnabled = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let soundEnabled = false;
+      let soundVolume = 0.35;
+      let introTimer = null;
+      let clockTimer = null;
+      let particleFrame = null;
+      let audioContext = null;
+      let lastSettingsFocus = null;
+      let lastQrFocus = null;
+      let lastSecretFocus = null;
+
+      // Declare the Easter egg variables only once.
+      let omegaClicks = 0;
+      let omegaClickTimer = null;
+
+      function setMessage(text, type = "") {
+        message.textContent = text;
+        message.className = "message" + (type ? " " + type : "");
+      }
+
+      function setSecretMessage(text, type = "") {
+        secretMessage.textContent = text;
+        secretMessage.className = "secret-message" + (type ? " " + type : "");
+      }
+
+      function renderPin() {
+        pinCells.forEach((cell, index) => {
+          cell.textContent = index < pin.length ? "●" : "";
+          cell.classList.toggle("filled", index < pin.length);
+          cell.classList.remove("invalid", "success");
+        });
+      }
+
+      function playTone(frequency = 600, duration = 0.06, level = 0.6) {
+        if (!soundEnabled || soundVolume <= 0) return;
+
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+
+          if (!audioContext) audioContext = new AudioContextClass();
+
+          if (audioContext.state === "suspended") {
+            audioContext.resume().catch(() => {});
           }
+
+          const oscillator = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          const now = audioContext.currentTime;
+          const peak = Math.max(0.0001, soundVolume * 0.055 * level);
+
+          oscillator.type = "sine";
+          oscillator.frequency.setValueAtTime(frequency, now);
+
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(peak, now + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+          oscillator.connect(gain);
+          gain.connect(audioContext.destination);
+
+          oscillator.start(now);
+          oscillator.stop(now + duration + 0.02);
+        } catch {}
+      }
+
+      function playSuccess() {
+        playTone(600, 0.12, 0.7);
+        window.setTimeout(() => playTone(850, 0.18, 0.7), 110);
+        window.setTimeout(() => playTone(1100, 0.2, 0.55), 230);
+      }
+
+      function addDigit(digit) {
+        if (isNavigating || pin.length >= 4) return;
+
+        pin += digit;
+        renderPin();
+        playTone(570, 0.045, 0.45);
+
+        setMessage(
+          pin.length === 4
+            ? "Code entered. Select Developer Access to continue."
+            : `${4 - pin.length} digits remaining.`
+        );
+      }
+
+      function clearPin() {
+        if (isNavigating) return;
+
+        pin = "";
+        renderPin();
+        setMessage("Access code cleared.");
+        playTone(500, 0.05, 0.4);
+      }
+
+      function deleteDigit() {
+        if (isNavigating || pin.length === 0) return;
+
+        pin = pin.slice(0, -1);
+        renderPin();
+        setMessage("Last digit removed.");
+        playTone(450, 0.05, 0.4);
+      }
+
+      function setControlsDisabled(disabled) {
+        [
+          ...keypadButtons,
+          unlockButton,
+          guestButton,
+          clearPinButton,
+          deletePinButton,
+          settingsButton,
+          continueGuest,
+          bypassSecret,
+          secretClose
+        ].forEach(button => {
+          button.disabled = disabled;
+        });
+
+        secretCodeInput.disabled = disabled;
+        secretForm.querySelector("button[type='submit']").disabled = disabled;
+      }
+
+      function stopBackgroundTasks() {
+        if (introTimer !== null) {
+          clearInterval(introTimer);
+          introTimer = null;
         }
 
-        function playTap() {
-          playTone(570, 0.045, 0.45);
-        }
-        function playError() {
-          playTone(190, 0.15, 0.8);
+        if (clockTimer !== null) {
+          clearInterval(clockTimer);
+          clockTimer = null;
         }
 
-        function playSuccess() {
-          playTone(600, 0.12, 0.7);
-          window.setTimeout(() => playTone(850, 0.18, 0.7), 110);
-          window.setTimeout(() => playTone(1100, 0.2, 0.55), 230);
+        if (particleFrame !== null) {
+          cancelAnimationFrame(particleFrame);
+          particleFrame = null;
         }
+      }
 
-        function addDigit(digit) {
-          if (isNavigating || pin.length >= 4) return;
-          pin += digit;
-          renderPin();
-          playTap();
+      function redirectToPortfolio(accessType) {
+        if (isNavigating) return;
 
-          setMessage(
-            pin.length === 4
-              ? "Access code entered. Authenticate to continue."
-              : `Enter access code. ${4 - pin.length} digits remaining.`,
-          );
-        }
+        isNavigating = true;
 
-        function clearPin() {
-          if (isNavigating) return;
-          pin = "";
-          renderPin();
-          setMessage("Access code cleared.");
-          playTap();
-        }
+        qrOverlay.hidden = true;
+        settingsOverlay.hidden = true;
+        secretOverlay.hidden = true;
 
-        function deleteDigit() {
-          if (isNavigating || pin.length === 0) return;
-          pin = pin.slice(0, -1);
-          renderPin();
-          setMessage("Last digit removed.");
-          playTap();
-        }
+        stopBackgroundTasks();
+        setControlsDisabled(true);
 
-        function setControlsDisabled(disabled) {
-          [
-            ...keypadButtons,
-            unlockButton,
-            clearPinButton,
-            deletePinButton,
-          ].forEach((button) => (button.disabled = disabled));
-        }
+        const statusText =
+          accessType === "developer"
+            ? "DEVELOPER ACCESS GRANTED"
+            : accessType === "secret"
+              ? "SECRET ACCESS GRANTED"
+              : "GUEST ACCESS GRANTED";
 
-        function stopBackgroundTasks() {
-          if (introTimer !== null) {
-            window.clearInterval(introTimer);
-            introTimer = null;
-          }
-          if (clockTimer !== null) {
-            window.clearInterval(clockTimer);
-            clockTimer = null;
-          }
-          if (particleFrame !== null) {
-            cancelAnimationFrame(particleFrame);
-            particleFrame = null;
-          }
-        }
+        systemStatus.textContent = statusText;
+        gatewayState.textContent = statusText;
 
-        function redirectToPortfolio() {
-          if (isNavigating) return;
+        setMessage("Access granted. Opening portfolio...", "success");
 
-          isNavigating = true;
-          stopBackgroundTasks();
-          setControlsDisabled(true);
-
-          systemStatus.textContent = "ACCESS GRANTED";
-          gatewayState.textContent = "ACCESS GRANTED";
-          unlockButton.querySelector("span").textContent = "ACCESS GRANTED";
-
-          pinCells.forEach((cell) => {
+        if (accessType === "developer") {
+          pinCells.forEach(cell => {
             cell.classList.remove("invalid");
             cell.classList.add("success");
           });
-
-          setMessage("Identity confirmed. Opening portfolio...", "success");
-          playSuccess();
-
-          sessionStorage.setItem("portfolioIntroComplete", "true");
-
-          if (motionEnabled) {
-            document.body.classList.add("unlocking");
-
-            window.setTimeout(() => {
-              window.location.replace("./index.html");
-            }, 1250);
-          } else {
-            window.location.replace("./index.html");
-          }
         }
-        function checkPin() {
-          if (isNavigating) return;
 
-          if (pin.length !== 4) {
-            setMessage("Enter all four digits before authenticating.", "error");
-            pinCells.forEach((cell, index) => {
-              if (index >= pin.length) cell.classList.add("invalid");
-            });
-            window.setTimeout(() => {
-              pinCells.forEach((cell) => cell.classList.remove("invalid"));
-            }, 450);
-            playError();
-            return;
-          }
+        playSuccess();
 
-          if (pin === ACCESS_PIN) {
-            redirectToPortfolio();
-            return;
-          }
+        try {
+          sessionStorage.setItem("portfolioIntroComplete", "true");
+          sessionStorage.setItem("portfolioAccessType", accessType);
+        } catch {}
 
-          setMessage("Access denied. Incorrect access code.", "error");
-          pinCells.forEach((cell) => cell.classList.add("invalid"));
-          playError();
+        if (motionEnabled) {
+          document.body.classList.add("unlocking");
+          window.setTimeout(() => {
+            window.location.replace(PORTFOLIO_URL);
+          }, 1250);
+        } else {
+          window.location.replace(PORTFOLIO_URL);
+        }
+      }
+
+      function checkPin() {
+        if (isNavigating) return;
+
+        if (pin.length !== 4) {
+          setMessage("Enter all four digits first.", "error");
+
+          pinCells.forEach((cell, index) => {
+            if (index >= pin.length) cell.classList.add("invalid");
+          });
 
           window.setTimeout(() => {
-            if (isNavigating) return;
-            pin = "";
-            renderPin();
-            setMessage("Try again. Enter the correct access code.");
-          }, 700);
+            pinCells.forEach(cell => cell.classList.remove("invalid"));
+          }, 450);
+
+          playTone(190, 0.15, 0.8);
+          return;
         }
 
-        function finishStartup() {
-          if (!startup || startup.classList.contains("hidden")) return;
-
-          if (introTimer !== null) {
-            window.clearInterval(introTimer);
-            introTimer = null;
-          }
-
-          loadingBar.style.width = "100%";
-          loadingPercent.textContent = "100%";
-          loadingStatus.textContent = "PORTAL READY";
-          startupDescription.textContent = "SYSTEM INITIALIZATION COMPLETE";
-          startup.classList.add("hidden");
-          playTap();
+        if (pin === ACCESS_PIN) {
+          redirectToPortfolio("developer");
+          return;
         }
 
-        function startStartup() {
-          let progress = 0;
-          let messageIndex = 0;
+        setMessage("Access denied. Incorrect developer PIN.", "error");
+        pinCells.forEach(cell => cell.classList.add("invalid"));
+        playTone(190, 0.15, 0.8);
 
-          const messages = [
-            "BOOTING SYSTEM...",
-            "LOADING INTERFACE MODULES...",
-            "VERIFYING SYSTEM STATUS...",
-            "ESTABLISHING CONNECTION...",
-            "PORTAL READY",
-          ];
-
-          introTimer = window.setInterval(
-            () => {
-              if (isNavigating || startup.classList.contains("hidden")) {
-                window.clearInterval(introTimer);
-                introTimer = null;
-                return;
-              }
-
-              progress = Math.min(
-                progress + Math.floor(Math.random() * 9) + 5,
-                100,
-              );
-              loadingBar.style.width = `${progress}%`;
-              loadingPercent.textContent = `${progress}%`;
-
-              const nextIndex = Math.min(
-                messages.length - 1,
-                Math.floor(progress / 20),
-              );
-              if (nextIndex !== messageIndex) {
-                messageIndex = nextIndex;
-                loadingStatus.textContent = messages[messageIndex];
-              }
-
-              if (progress >= 100) {
-                window.clearInterval(introTimer);
-                introTimer = null;
-                startupDescription.textContent = "WELCOME TO PROJECT OMEGA";
-
-                window.setTimeout(
-                  () => {
-                    if (!isNavigating) startup.classList.add("hidden");
-                  },
-                  motionEnabled ? 450 : 0,
-                );
-              }
-            },
-            motionEnabled ? 140 : 35,
-          );
-        }
-
-        function openSettings() {
+        window.setTimeout(() => {
           if (isNavigating) return;
-          lastSettingsFocus = document.activeElement;
-          settingsOverlay.hidden = false;
-          closeSettings.focus();
+          pin = "";
+          renderPin();
+          setMessage("Try again or choose another access method.");
+        }, 700);
+      }
+
+      function continueAsGuest() {
+        if (isNavigating) return;
+
+        lastQrFocus = document.activeElement;
+        qrOverlay.hidden = false;
+        qrClose.focus();
+        playTone(570, 0.045, 0.45);
+      }
+
+      function closeGuestQr() {
+        qrOverlay.hidden = true;
+
+        if (lastQrFocus && typeof lastQrFocus.focus === "function") {
+          lastQrFocus.focus();
+        } else {
+          guestButton.focus();
+        }
+      }
+
+      function openSecretAccess() {
+        if (isNavigating) return;
+
+        lastSecretFocus = document.activeElement;
+        secretOverlay.hidden = false;
+        secretCodeInput.value = "";
+
+        setSecretMessage(
+          "Hidden protocol discovered. Enter the code or use the bypass."
+        );
+
+        secretCodeInput.focus();
+        playTone(850, 0.15, 0.7);
+      }
+
+      function closeSecretAccess() {
+        secretOverlay.hidden = true;
+
+        if (lastSecretFocus && typeof lastSecretFocus.focus === "function") {
+          lastSecretFocus.focus();
+        } else {
+          omegaEasterEgg.focus();
+        }
+      }
+
+      function checkSecretCode(event) {
+        event.preventDefault();
+        if (isNavigating) return;
+
+        const enteredCode = secretCodeInput.value.trim().toUpperCase();
+
+        if (enteredCode === SECRET_ACCESS_CODE) {
+          setSecretMessage("Secret code accepted. Opening portfolio...", "success");
+          playSuccess();
+
+          window.setTimeout(() => {
+            redirectToPortfolio("secret");
+          }, motionEnabled ? 250 : 0);
+
+          return;
         }
 
-        function hideSettings() {
-          settingsOverlay.hidden = true;
-          if (
-            lastSettingsFocus &&
-            typeof lastSettingsFocus.focus === "function"
-          ) {
-            lastSettingsFocus.focus();
-          } else {
-            settingsButton.focus();
+        setSecretMessage("ACCESS DENIED // Invalid secret code.", "error");
+        secretCodeInput.value = "";
+        secretCodeInput.focus();
+        playTone(190, 0.15, 0.8);
+      }
+
+      // Hidden Easter egg: click the Omega symbol seven times within three seconds.
+      function activateOmegaEasterEgg() {
+        if (isNavigating || !secretOverlay.hidden) return;
+
+        omegaClicks++;
+
+        clearTimeout(omegaClickTimer);
+
+        omegaClickTimer = window.setTimeout(() => {
+          omegaClicks = 0;
+          omegaClickTimer = null;
+        }, 3000);
+
+        if (omegaClicks >= 7) {
+          omegaClicks = 0;
+          clearTimeout(omegaClickTimer);
+          omegaClickTimer = null;
+
+          openSecretAccess();
+
+          setSecretMessage(
+            "HIDDEN PROTOCOL DISCOVERED // BYPASS AVAILABLE.",
+            "success"
+          );
+
+          playTone(850, 0.15, 0.7);
+        }
+      }
+
+      omegaEasterEgg.setAttribute("role", "button");
+      omegaEasterEgg.setAttribute("tabindex", "0");
+      omegaEasterEgg.setAttribute("aria-label", "Project Omega hidden access");
+      omegaEasterEgg.style.cursor = "pointer";
+
+      omegaEasterEgg.addEventListener("click", activateOmegaEasterEgg);
+
+      omegaEasterEgg.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          activateOmegaEasterEgg();
+        }
+      });
+
+      // This button bypasses the secret code and opens the portfolio directly.
+      bypassSecret.addEventListener("click", () => {
+        if (isNavigating) return;
+
+        setSecretMessage(
+          "BYPASS ACCEPTED // INITIALIZING PORTFOLIO...",
+          "success"
+        );
+
+        playSuccess();
+
+        window.setTimeout(() => {
+          redirectToPortfolio("secret");
+        }, motionEnabled ? 250 : 0);
+      });
+
+      function startStartup() {
+        let progress = 0;
+        let messageIndex = 0;
+
+        const messages = [
+          "BOOTING SYSTEM...",
+          "LOADING INTERFACE MODULES...",
+          "VERIFYING SYSTEM STATUS...",
+          "ESTABLISHING CONNECTION...",
+          "PORTAL READY"
+        ];
+
+        introTimer = window.setInterval(() => {
+          if (isNavigating || startup.classList.contains("hidden")) {
+            clearInterval(introTimer);
+            introTimer = null;
+            return;
           }
-        }
 
-        function updateMotionSetting() {
-          motionEnabled = motionToggle.getAttribute("aria-pressed") !== "true";
-          motionToggle.setAttribute("aria-pressed", String(motionEnabled));
-          document.body.classList.toggle("reduce-motion", !motionEnabled);
-          playTap();
-        }
+          progress = Math.min(progress + Math.floor(Math.random() * 9) + 5, 100);
 
-        function updateSoundSetting() {
-          soundEnabled = soundToggle.getAttribute("aria-pressed") !== "true";
-          soundToggle.setAttribute("aria-pressed", String(soundEnabled));
-          if (soundEnabled) playTone(700, 0.1, 0.7);
-        }
+          loadingBar.style.width = `${progress}%`;
+          loadingPercent.textContent = `${progress}%`;
 
-        function updateVolume() {
-          soundVolume = Number(volumeSlider.value) / 100;
-          volumeValue.textContent = `${volumeSlider.value}%`;
-          playTone(720, 0.06, 0.6);
-        }
+          const nextIndex = Math.min(
+            messages.length - 1,
+            Math.floor(progress / 20)
+          );
 
-        function updateClock() {
-          footerTime.textContent = new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-          });
-        }
-
-        function setupParticles() {
-          const canvas = $("#particles");
-          const ctx = canvas.getContext("2d");
-          if (!ctx) return;
-
-          let width = 0;
-          let height = 0;
-          let particles = [];
-
-          function resizeCanvas() {
-            const ratio = Math.min(window.devicePixelRatio || 1, 2);
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width * ratio;
-            canvas.height = height * ratio;
-            canvas.style.width = `${width}px`;
-            canvas.style.height = `${height}px`;
-            ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-            const count = Math.min(65, Math.floor((width * height) / 18000));
-            particles = Array.from({ length: count }, () => ({
-              x: Math.random() * width,
-              y: Math.random() * height,
-              radius: Math.random() * 1.4 + 0.3,
-              speed: Math.random() * 0.25 + 0.08,
-              opacity: Math.random() * 0.45 + 0.12,
-            }));
+          if (nextIndex !== messageIndex) {
+            messageIndex = nextIndex;
+            loadingStatus.textContent = messages[messageIndex];
           }
 
-          function drawParticles() {
-            particleFrame = null;
-            if (isNavigating) return;
+          if (progress >= 100) {
+            clearInterval(introTimer);
+            introTimer = null;
 
-            ctx.clearRect(0, 0, width, height);
+            startupDescription.textContent = "WELCOME TO PROJECT OMEGA";
 
-            if (motionEnabled) {
-              for (const particle of particles) {
-                particle.y -= particle.speed;
-                if (particle.y < -5) {
-                  particle.y = height + 5;
-                  particle.x = Math.random() * width;
-                }
-                ctx.beginPath();
-                ctx.arc(
-                  particle.x,
-                  particle.y,
-                  particle.radius,
-                  0,
-                  Math.PI * 2,
-                );
-                ctx.fillStyle = `rgba(100,210,255,${particle.opacity})`;
-                ctx.fill();
+            window.setTimeout(() => {
+              if (!isNavigating) startup.classList.add("hidden");
+            }, motionEnabled ? 450 : 0);
+          }
+        }, motionEnabled ? 140 : 35);
+      }
+
+      function openSettings() {
+        if (isNavigating) return;
+
+        lastSettingsFocus = document.activeElement;
+        settingsOverlay.hidden = false;
+        closeSettings.focus();
+      }
+
+      function hideSettings() {
+        settingsOverlay.hidden = true;
+
+        if (lastSettingsFocus && typeof lastSettingsFocus.focus === "function") {
+          lastSettingsFocus.focus();
+        } else {
+          settingsButton.focus();
+        }
+      }
+
+      function updateMotionSetting() {
+        motionEnabled = motionToggle.getAttribute("aria-pressed") !== "true";
+
+        motionToggle.setAttribute("aria-pressed", String(motionEnabled));
+        document.body.classList.toggle("reduce-motion", !motionEnabled);
+
+        playTone(570, 0.045, 0.45);
+      }
+
+      function updateSoundSetting() {
+        soundEnabled = soundToggle.getAttribute("aria-pressed") !== "true";
+
+        soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+
+        if (soundEnabled) playTone(700, 0.1, 0.7);
+      }
+
+      function updateVolume() {
+        soundVolume = Number(volumeSlider.value) / 100;
+        volumeValue.textContent = `${volumeSlider.value}%`;
+        playTone(720, 0.06, 0.6);
+      }
+
+      function updateClock() {
+        footerTime.textContent = new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
+      }
+
+      function setupParticles() {
+        const canvas = $("#particles");
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) return;
+
+        let width = 0;
+        let height = 0;
+        let particles = [];
+
+        function resizeCanvas() {
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+          width = window.innerWidth;
+          height = window.innerHeight;
+
+          canvas.width = width * ratio;
+          canvas.height = height * ratio;
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+          const count = Math.min(65, Math.floor((width * height) / 18000));
+
+          particles = Array.from({ length: count }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.4 + 0.3,
+            speed: Math.random() * 0.25 + 0.08,
+            opacity: Math.random() * 0.45 + 0.12
+          }));
+        }
+
+        function drawParticles() {
+          particleFrame = null;
+
+          if (isNavigating) return;
+
+          ctx.clearRect(0, 0, width, height);
+
+          if (motionEnabled) {
+            for (const particle of particles) {
+              particle.y -= particle.speed;
+
+              if (particle.y < -5) {
+                particle.y = height + 5;
+                particle.x = Math.random() * width;
               }
-            }
 
-            particleFrame = requestAnimationFrame(drawParticles);
+              ctx.beginPath();
+              ctx.arc(
+                particle.x,
+                particle.y,
+                particle.radius,
+                0,
+                Math.PI * 2
+              );
+
+              ctx.fillStyle = `rgba(100,210,255,${particle.opacity})`;
+              ctx.fill();
+            }
           }
 
-          resizeCanvas();
-          window.addEventListener("resize", resizeCanvas);
           particleFrame = requestAnimationFrame(drawParticles);
         }
 
-        keypadButtons.forEach((button) => {
-          button.addEventListener("click", () =>
-            addDigit(button.dataset.digit),
-          );
-        });
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+        particleFrame = requestAnimationFrame(drawParticles);
+      }
 
-        clearPinButton.addEventListener("click", clearPin);
-        deletePinButton.addEventListener("click", deleteDigit);
-        unlockButton.addEventListener("click", checkPin);
+      keypadButtons.forEach(button => {
+        button.addEventListener("click", () => addDigit(button.dataset.digit));
+      });
 
-        document.addEventListener("keydown", (event) => {
-          if (!settingsOverlay.hidden) {
-            if (event.key === "Escape") hideSettings();
-            return;
-          }
+      clearPinButton.addEventListener("click", clearPin);
+      deletePinButton.addEventListener("click", deleteDigit);
+      unlockButton.addEventListener("click", checkPin);
+      guestButton.addEventListener("click", continueAsGuest);
 
-          if (isNavigating) return;
+      continueGuest.addEventListener("click", () => {
+        redirectToPortfolio("guest");
+      });
 
-          if (/^\d$/.test(event.key)) {
-            addDigit(event.key);
-          } else if (event.key === "Backspace") {
-            event.preventDefault();
-            deleteDigit();
-          } else if (event.key === "Escape") {
-            clearPin();
-          } else if (event.key === "Enter") {
-            checkPin();
-          }
-        });
+      qrClose.addEventListener("click", closeGuestQr);
 
-        settingsButton.addEventListener("click", openSettings);
-        closeSettings.addEventListener("click", hideSettings);
-        settingsDone.addEventListener("click", hideSettings);
+      qrOverlay.addEventListener("click", event => {
+        if (event.target === qrOverlay) closeGuestQr();
+      });
 
-        settingsOverlay.addEventListener("click", (event) => {
-          if (event.target === settingsOverlay) hideSettings();
-        });
+      secretClose.addEventListener("click", closeSecretAccess);
+      secretForm.addEventListener("submit", checkSecretCode);
 
-        motionToggle.addEventListener("click", updateMotionSetting);
-        soundToggle.addEventListener("click", updateSoundSetting);
-        volumeSlider.addEventListener("input", updateVolume);
+      secretOverlay.addEventListener("click", event => {
+        if (event.target === secretOverlay) closeSecretAccess();
+      });
 
-        motionToggle.setAttribute("aria-pressed", String(motionEnabled));
-        soundToggle.setAttribute("aria-pressed", "false");
-        document.body.classList.toggle("reduce-motion", !motionEnabled);
+      settingsButton.addEventListener("click", openSettings);
+      closeSettings.addEventListener("click", hideSettings);
+      settingsDone.addEventListener("click", hideSettings);
 
-        updateClock();
-        clockTimer = window.setInterval(updateClock, 1000);
-        setupParticles();
-        startStartup();
-      })();
-    </script>
-  </body>
+      settingsOverlay.addEventListener("click", event => {
+        if (event.target === settingsOverlay) hideSettings();
+      });
+
+      motionToggle.addEventListener("click", updateMotionSetting);
+      soundToggle.addEventListener("click", updateSoundSetting);
+      volumeSlider.addEventListener("input", updateVolume);
+
+      document.addEventListener("keydown", event => {
+        if (!secretOverlay.hidden) {
+          if (event.key === "Escape") closeSecretAccess();
+          return;
+        }
+
+        if (!qrOverlay.hidden) {
+          if (event.key === "Escape") closeGuestQr();
+          return;
+        }
+
+        if (!settingsOverlay.hidden) {
+          if (event.key === "Escape") hideSettings();
+          return;
+        }
+
+        if (isNavigating) return;
+
+        if (/^\d$/.test(event.key)) {
+          addDigit(event.key);
+        } else if (event.key === "Backspace") {
+          event.preventDefault();
+          deleteDigit();
+        } else if (event.key === "Escape") {
+          clearPin();
+        } else if (event.key === "Enter") {
+          checkPin();
+        }
+      });
+
+      motionToggle.setAttribute("aria-pressed", String(motionEnabled));
+      soundToggle.setAttribute("aria-pressed", "false");
+      document.body.classList.toggle("reduce-motion", !motionEnabled);
+
+      updateClock();
+      clockTimer = window.setInterval(updateClock, 1000);
+
+      setupParticles();
+      startStartup();
+    })();
+  </script>
+</body>
 </html>
