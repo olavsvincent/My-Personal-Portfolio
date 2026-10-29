@@ -91,12 +91,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
 
-  function updateThemeButton() {
-    const isDark = document.body.classList.contains("dark-mode");
+  
+function updateThemeButton() {
+  const isDark = document.body.classList.contains("dark-mode");
 
-    if (themeIcon) {
-      themeIcon.textContent = isDark ? "☀️" : "🌙";
-    }
+  if (themeIcon) {
+    themeIcon.innerHTML = isDark
+      ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
+      : '<i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>';
+
+    themeIcon.classList.toggle("eclipse-icon", !isDark);
+    themeIcon.classList.toggle("solar-icon", isDark);
+  }
 
     if (themeToggle) {
       themeToggle.setAttribute(
