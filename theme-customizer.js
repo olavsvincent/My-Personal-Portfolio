@@ -165,6 +165,7 @@
     const isDefault =
       !state.custom && state.mode === "auto" && state.accent === (PAGE_DEFAULTS[page] || null);
     write(KEY, isDefault ? null : state);
+    if (!isDefault && window.SiteStore) window.SiteStore.unlock("style_icon");
   }
 
   /* ---------- UI ---------- */

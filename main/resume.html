@@ -1,0 +1,214 @@
+<!doctype html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+
+    <meta
+      name="description"
+      content="Résumé of Shane Vincent Olavario, first-year Computer Engineering student."
+    />
+
+    <title>Résumé | Shane Vincent Olavario</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="theme-customizer.css" />
+    <link rel="stylesheet" href="features.css" />
+    <link rel="stylesheet" href="voice.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#0b0b14" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  </head>
+
+    <header class="header">
+      <nav class="navbar container" aria-label="Main navigation">
+        <!-- School Logo -->
+        <a href="index.html" class="logo">
+          <img
+            src="images/school-logo.jpg"
+            alt="Colegio De Montalban Logo"
+            class="navbar-school-logo"
+          />
+          <span class="school-name">Shane Vincent Olavario</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="editor.html">IDE</a></li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="resume-page">
+        <div class="container">
+          <div class="resume-bar">
+            <a class="btn btn-primary" id="resumePdf" href="Shane-Vincent-Olavario-Resume.pdf" download>Download PDF</a>
+            <button class="btn btn-outline" type="button" id="resumePrint">Print / Save as PDF</button>
+          </div>
+
+          <article class="resume-sheet" id="resumeSheet">
+            <h1>Shane Vincent <span>Olavario</span></h1>
+            <p class="r-sub">First-Year Computer Engineering Student</p>
+            <ul class="r-contact">
+              <li>✉ shanevincentolavario@gmail.com</li>
+              <li>GitHub: github.com/olavsvincent</li>
+            </ul>
+
+            <h2>Profile</h2>
+            <p>
+              First-year Computer Engineering student interested in technology,
+              computers, and problem-solving. I enjoy learning how things work,
+              building practical projects, and improving my programming skills one
+              step at a time.
+            </p>
+
+            <h2>Education</h2>
+            <div class="r-row">Bachelor of Science in Computer Engineering <span>Present</span></div>
+            <p>Colegio de Montalban &middot; First-year college student</p>
+
+            <h2>Technical Skills</h2>
+            <ul class="r-skills">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript (learning)</li>
+              <li>Python</li>
+              <li>Git &amp; GitHub</li>
+              <li>Database Management (beginner)</li>
+            </ul>
+
+            <h2>Projects</h2>
+            <div class="r-row">Personal Portfolio Website <span>HTML &middot; CSS &middot; JavaScript</span></div>
+            <p>Responsive portfolio with a code editor, interactive games, quiz, chatbot, theme customization, and achievements.</p>
+            <div class="r-row">Student Management System <span>Python</span></div>
+            <p>Command-line application for adding, viewing, and managing student records using classes and input validation.</p>
+            <div class="r-row">Workout Planner <span>HTML &middot; CSS &middot; JavaScript</span></div>
+            <p>Responsive website that organizes workouts by fitness goal, experience, and available equipment.</p>
+            <div class="r-row">SysVision <span>Python &middot; Flask &middot; Chart.js</span></div>
+            <p>System monitoring dashboard that visualizes performance, resource usage, and diagnostics.</p>
+            <div class="r-row">Health Monitoring System <span>IoT concept &middot; ESP32</span></div>
+            <p>Concept for monitoring heart rate and blood oxygen levels with real-time updates and alerts.</p>
+
+            <h2>Interests &amp; Goals</h2>
+            <ul>
+              <li>Basketball, technology, and programming.</li>
+              <li>Building a strong foundation in programming, electronics, and computer hardware.</li>
+              <li>Becoming a skilled engineer who uses technology creatively and responsibly.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- QUICK NAVIGATION SEARCH -->
+      <button
+        type="button"
+        class="quick-search-trigger"
+        id="quickSearchTrigger"
+        aria-label="Open quick navigation search"
+      >
+        <span aria-hidden="true">⌕</span>
+        <span>Search</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <div
+        class="quick-search-overlay"
+        id="quickSearchOverlay"
+        aria-hidden="true"
+      >
+        <section
+          class="quick-search-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quickSearchTitle"
+        >
+          <div class="quick-search-input-wrap">
+            <span aria-hidden="true">⌕</span>
+
+            <input
+              type="search"
+              id="quickSearchInput"
+              placeholder="Search pages and sections..."
+              autocomplete="off"
+              aria-label="Search portfolio navigation"
+            />
+
+            <kbd>ESC</kbd>
+          </div>
+
+          <p class="quick-search-heading" id="quickSearchTitle">
+            QUICK NAVIGATION
+          </p>
+
+          <div
+            class="quick-search-results"
+            id="quickSearchResults"
+            role="listbox"
+            aria-label="Navigation results"
+          ></div>
+
+          <div class="quick-search-footer">
+            <span>↑↓ Navigate</span>
+            <span>Enter Open</span>
+            <span>Esc Close</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          &copy; <span id="year"></span>
+          Shane Vincent Olavario. All rights reserved.
+        </p>
+
+        <a href="index.html">Back to Home ↑</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="theme-customizer.js"></script>
+    <script src="site-config.js"></script>
+    <script src="backend.js"></script>
+    <script src="i18n.js"></script>
+    <script src="features.js"></script>
+    <script src="voice.js"></script>
+    <script src="quick-search.js"></script>
+    <script src="music-player.js"></script>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+      <script src="resume.js"></script>
+  </body>
+</html>

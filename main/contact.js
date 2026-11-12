@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyEmailBtn = document.getElementById("copyEmailBtn");
   const copyEmailText = document.getElementById("copyEmailText");
   const contactEmail = "shanevincentolavario@gmail.com";
+  const recipientEmail = contactEmail;
 
   if (copyEmailBtn) {
     copyEmailBtn.addEventListener("click", async () => {
@@ -161,6 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCharacterCounter();
 
+  // Wording that matches how the form really works
+  if (window.SITE_CONFIG && window.SITE_CONFIG.formEndpoint) {
+    const label = contactForm.querySelector('button[type="submit"] span');
+    if (label) label.textContent = "Send Message";
+    if (formStatus) formStatus.textContent = "Your message is sent straight to my inbox.";
+  }
+
   // ==========================================
   // CLEAR ERRORS WHILE TYPING
   // ==========================================
@@ -209,6 +217,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const senderEmail = emailInput.value.trim();
     const subject = subjectInput.value;
     const message = messageInput.value.trim();
+
+    // Real delivery through a form service (Formspree etc.) when configured
+    const endpoint = (window.SITE_CONFIG && window.SITE_CONFIG.formEndpoint) || "";
+    if (endpoint) {
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      if (formStatus) {
+        formStatus.textContent = "Sending your message…";
+        formStatus.className = "form-status";
+      }
+
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: name,
+          email: senderEmail,
+          subject: subject,
+          message: message,
+          _subject: "Portfolio message: " + subject,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Request failed");
+          if (formStatus) {
+            formStatus.textContent = "Message sent! Thank you — I'll reply as soon as I can.";
+            formStatus.className = "form-status success";
+          }
+          contactForm.reset();
+          updateCharacterCounter();
+        })
+        .catch(() => {
+          if (formStatus) {
+            formStatus.textContent =
+              "Sorry, the message could not be sent. Please email me directly at " + recipientEmail + ".";
+            formStatus.className = "form-status error";
+          }
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+      return;
+    }
 
     const recipient = "shanevincentolavario@gmail.com";
 

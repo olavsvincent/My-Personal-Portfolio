@@ -13,6 +13,14 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="theme-customizer.css" />
+    <link rel="stylesheet" href="features.css" />
+    <link rel="stylesheet" href="voice.css" />
+    <link rel="stylesheet" href="projects-plus.css" />
+    <link rel="stylesheet" href="hud-projects.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#0b0b14" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
     <link rel="stylesheet" href="custom-cursor.css" />
     <link
       rel="stylesheet"
@@ -20,7 +28,7 @@
     />
   </head>
 
-  <body>
+  <body class="proj-hud">
     <header class="header">
       <nav class="navbar container">
         <a href="index.html" class="logo" aria-label="Home">
@@ -70,6 +78,13 @@
             <a href="projects.html" aria-label="Projects">
               <i class="fa-solid fa-cubes" aria-hidden="true"></i>
               <span>Projects</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="blog.html" aria-label="Blog">
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+              <span>Blog</span>
             </a>
           </li>
 
@@ -988,6 +1003,12 @@
     <!-- KEEP YOUR EXISTING SCRIPTS -->
     <script src="script.js"></script>
     <script src="theme-customizer.js"></script>
+    <script src="site-config.js"></script>
+    <script src="backend.js"></script>
+    <script src="i18n.js"></script>
+    <script src="features.js"></script>
+    <script src="voice.js"></script>
+    <script src="projects-plus.js"></script>
     <script src="quick-search.js"></script>
     <script src="music-player.js"></script>
     <script src="custom-cursor.js"></script>

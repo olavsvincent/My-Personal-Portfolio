@@ -73,6 +73,83 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "Explore the Skills page.",
       xp: 15,
     },
+    {
+      id: "guestbook_signer",
+      icon: "✍️",
+      title: "Guest of Honor",
+      description: "Sign the guestbook.",
+      xp: 20,
+    },
+    {
+      id: "challenge_solver",
+      icon: "🧪",
+      title: "Bug Squasher",
+      description: "Solve a coding challenge in the IDE.",
+      xp: 30,
+    },
+    {
+      id: "challenge_master",
+      icon: "🏆",
+      title: "Challenge Master",
+      description: "Solve all 10 coding challenges.",
+      xp: 60,
+    },
+    {
+      id: "polyglot",
+      icon: "🌐",
+      title: "Polyglot",
+      description: "Switch the site to Filipino.",
+      xp: 15,
+    },
+    {
+      id: "leaderboard_star",
+      icon: "⭐",
+      title: "On the Board",
+      description: "Save a score to the leaderboard.",
+      xp: 25,
+    },
+    {
+      id: "blog_reader",
+      icon: "📖",
+      title: "Bookworm",
+      description: "Read a blog post.",
+      xp: 15,
+    },
+    {
+      id: "style_icon",
+      icon: "🎨",
+      title: "Style Icon",
+      description: "Customize a page theme.",
+      xp: 15,
+    },
+    {
+      id: "resume_viewer",
+      icon: "📄",
+      title: "Recruiter's Pick",
+      description: "Open the résumé page.",
+      xp: 15,
+    },
+    {
+      id: "voice_commander",
+      icon: "🎙️",
+      title: "Voice Commander",
+      description: "Use a voice or typed command.",
+      xp: 20,
+    },
+    {
+      id: "lab_explorer",
+      icon: "🧪",
+      title: "Lab Explorer",
+      description: "Open the Project Lab.",
+      xp: 20,
+    },
+    {
+      id: "code_reader",
+      icon: "👨‍💻",
+      title: "Code Reader",
+      description: "Read a project's source code in the Project Lab.",
+      xp: 25,
+    },
   ];
 
   const pageName = location.pathname.split("/").pop().toLowerCase();
@@ -275,6 +352,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   unlockAchievement("first_visit");
+
+  // Achievements earned on other pages (guestbook, challenges, language, ...)
+  // arrive through this queue / event so they are never lost.
+  function drainPendingUnlocks() {
+    try {
+      const queue = JSON.parse(localStorage.getItem("portfolioPendingUnlocks") || "[]");
+      if (Array.isArray(queue) && queue.length) {
+        localStorage.removeItem("portfolioPendingUnlocks");
+        queue.forEach((id) => unlockAchievement(id));
+      }
+    } catch (error) {
+      // Ignore storage problems.
+    }
+  }
+  drainPendingUnlocks();
+  window.addEventListener("portfolio:unlock", drainPendingUnlocks);
+
+  if (pageName === "resume.html") {
+    unlockAchievement("resume_viewer");
+  }
 
   if (progress.pages.length >= 3) {
     unlockAchievement("page_explorer");

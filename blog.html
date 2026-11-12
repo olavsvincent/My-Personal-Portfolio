@@ -1,0 +1,225 @@
+<!doctype html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+
+    <meta
+      name="description"
+      content="Notes and reflections from a Computer Engineering student learning to code."
+    />
+
+    <title>Learning Journey | Shane Vincent Olavario</title>
+
+    <link rel="stylesheet" href="custom-cursor.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="theme-customizer.css" />
+    <link rel="stylesheet" href="features.css" />
+    <link rel="stylesheet" href="voice.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#0b0b14" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+/>
+  </head>
+
+    <header class="header">
+  <nav class="navbar container">
+    <a href="index.html" class="logo" aria-label="Home">
+      <img
+        src="images/school-logo.jpg"
+        alt="School Logo"
+        class="navbar-school-logo"
+      />
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="navLinks"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li>
+        <a href="index.html" class="active" aria-label="Home">
+          <i class="fa-solid fa-house" aria-hidden="true"></i>
+          <span>Home</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="about.html" aria-label="About">
+          <i class="fa-solid fa-user-astronaut" aria-hidden="true"></i>
+          <span>About</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="skills.html" aria-label="Skills">
+          <i class="fa-solid fa-code" aria-hidden="true"></i>
+          <span>Skills</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="projects.html" aria-label="Projects">
+          <i class="fa-solid fa-cubes" aria-hidden="true"></i>
+          <span>Projects</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="blog.html" aria-label="Blog">
+          <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+          <span>Blog</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="contact.html" aria-label="Contact">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="editor.html" aria-label="IDE">
+          <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+          <span>IDE</span>
+        </a>
+      </li>
+    </ul>
+
+    <button
+      class="theme-toggle"
+      id="themeToggle"
+      type="button"
+      aria-label="Switch to dark mode"
+      title="Toggle theme"
+    >
+      <span id="themeIcon">
+        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+      </span>
+    </button>
+  </nav>
+</header>
+    <main>
+      <section class="blog-hero">
+        <div class="container">
+          <p class="eyebrow">NOTES &amp; REFLECTIONS</p>
+          <h1>Learning <span>Journey</span></h1>
+          <p class="heading-description">
+            Short write-ups about what I am learning, building, and figuring out
+            as a Computer Engineering student.
+          </p>
+        </div>
+      </section>
+
+      <section class="container" aria-label="Blog posts">
+        <p class="blog-sample-note" id="blogSampleNote" hidden>
+          These are sample posts to get you started. Open
+          <strong>blog-posts.js</strong> to replace them with your own.
+        </p>
+        <div class="blog-tools">
+          <input type="search" id="blogSearch" class="blog-search" placeholder="Search posts…" aria-label="Search posts" />
+          <div class="blog-tags" id="blogTags" role="group" aria-label="Filter by tag"></div>
+        </div>
+        <div class="blog-list" id="blogList" aria-live="polite"></div>
+      </section>
+
+      <!-- QUICK NAVIGATION SEARCH -->
+      <button
+        type="button"
+        class="quick-search-trigger"
+        id="quickSearchTrigger"
+        aria-label="Open quick navigation search"
+      >
+        <span aria-hidden="true">⌕</span>
+        <span>Search</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <div
+        class="quick-search-overlay"
+        id="quickSearchOverlay"
+        aria-hidden="true"
+      >
+        <section
+          class="quick-search-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quickSearchTitle"
+        >
+          <div class="quick-search-input-wrap">
+            <span aria-hidden="true">⌕</span>
+
+            <input
+              type="search"
+              id="quickSearchInput"
+              placeholder="Search pages and sections..."
+              autocomplete="off"
+              aria-label="Search portfolio navigation"
+            />
+
+            <kbd>ESC</kbd>
+          </div>
+
+          <p class="quick-search-heading" id="quickSearchTitle">
+            QUICK NAVIGATION
+          </p>
+
+          <div
+            class="quick-search-results"
+            id="quickSearchResults"
+            role="listbox"
+            aria-label="Navigation results"
+          ></div>
+
+          <div class="quick-search-footer">
+            <span>↑↓ Navigate</span>
+            <span>Enter Open</span>
+            <span>Esc Close</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          &copy; <span id="year"></span>
+          Shane Vincent Olavario. All rights reserved.
+        </p>
+
+        <a href="index.html">Back to Home ↑</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="theme-customizer.js"></script>
+    <script src="site-config.js"></script>
+    <script src="backend.js"></script>
+    <script src="i18n.js"></script>
+    <script src="features.js"></script>
+    <script src="voice.js"></script>
+    <script src="blog-posts.js"></script>
+    <script src="blog.js"></script>
+    <script src="quick-search.js"></script>
+    <script src="music-player.js"></script>
+    <script src="custom-cursor.js"></script>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    </body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Makes the site scale correctly on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clark Guevara | Portfolio</title>
+  <meta name="description" content="Personal portfolio of Your Name, college student." />
+
+  <!-- Optional Google Font. If it fails to load, the browser uses a fallback font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Link to our CSS file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ 1. NAVIGATION BAR ============ -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">Clark Guevara</a>
+
+      <!-- The menu button only shows on mobile (see style.css) -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Each link jumps to the section whose id matches the href -->
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 2. HERO / HOME ============ -->
+    <section id="home" class="hero">
+      <div class="container hero-inner">
+        <p class="hero-small">Hi, I'm</p>
+        <h1>Clark Guevara</h1>
+        <p class="hero-role">Computer Engineering student at Colegio de Montalaban</p>
+        <p class="hero-text">
+          I'm learning to build things for the web. Write one or two sentences here
+          about what you enjoy making and what you're looking for, like an internship.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">View my projects</a>
+          <a href="#contact" class="btn btn-outline">Contact me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. ABOUT ME ============ -->
+    <!-- Elements with class "reveal" fade in when scrolled into view (see script.js) -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title reveal">About me</h2>
+        <div class="about-grid reveal">
+          <!-- Replace the initials with <img src="your-photo.jpg" alt="Your Name"> if you like -->
+          <div class="about-photo" aria-hidden="true">YN</div>
+          <div class="about-text">
+            <p>
+              Write a short story about yourself here: where you study, what you're
+              majoring in, and what got you interested in it.
+            </p>
+            <p>
+              Add a few words about what you do outside of class, such as clubs, sports,
+              hobbies, or volunteering.
+            </p>
+            <ul class="about-facts">
+              <li><strong>School:</strong> Colegio de Montalban</li>
+              <li><strong>Major:</strong> Computer Engineering</li>
+              <li><strong>Year Level:</strong> First Year</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. SKILLS ============ -->
+    <section id="skills" class="section section-light">
+      <div class="container">
+        <h2 class="section-title reveal">Skills</h2>
+        <div class="card-grid">
+          <!-- Copy one card to add a skill. Delete the ones you don't need. -->
+          <div class="card reveal">
+            <h3>HTML &amp; CSS</h3>
+            <p>Building page structure and styling responsive layouts.</p>
+          </div>
+          <div class="card reveal">
+            <h3>JavaScript</h3>
+            <p>Adding interactivity like menus, forms, and animations.</p>
+          </div>
+          <div class="card reveal">
+            <h3>Python</h3>
+            <p>Writing scripts and solving problems from my coursework.</p>
+          </div>
+          <div class="card reveal">
+            <h3>Git &amp; GitHub</h3>
+            <p>Tracking changes and sharing code with others.</p>
+          </div>
+          <div class="card reveal">
+            <h3>Teamwork</h3>
+            <p>Working on group projects and sharing the workload.</p>
+          </div>
+          <div class="card reveal">
+            <h3>Communication</h3>
+            <p>Explaining ideas clearly in writing and in presentations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. PROJECTS ============ -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Projects</h2>
+        <div class="card-grid">
+          <!-- Replace the titles, descriptions, tags, and links with your own work -->
+          <article class="card project-card reveal">
+            <div class="project-image" aria-hidden="true"></div>
+            <h3>Project One</h3>
+            <p>Describe what this project does and what problem it solves.</p>
+            <ul class="tags">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li>
+            </ul>
+            <a href="#" class="card-link">View project</a>
+          </article>
+
+          <article class="card project-card reveal">
+            <div class="project-image" aria-hidden="true"></div>
+            <h3>Project Two</h3>
+            <p>Describe what this project does and what you learned building it.</p>
+            <ul class="tags">
+              <li>Python</li><li>Data</li>
+            </ul>
+            <a href="#" class="card-link">View project</a>
+          </article>
+
+          <article class="card project-card reveal">
+            <div class="project-image" aria-hidden="true"></div>
+            <h3>Project Three</h3>
+            <p>Describe a class project, hackathon entry, or something you made for fun.</p>
+            <ul class="tags">
+              <li>Teamwork</li><li>Design</li>
+            </ul>
+            <a href="#" class="card-link">View project</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. CONTACT ============ -->
+    <section id="contact" class="section section-dark">
+      <div class="container contact-inner">
+        <h2 class="section-title reveal">Contact</h2>
+        <p class="contact-intro reveal">
+          Have a question or an opportunity? Send me a message.
+        </p>
+
+        <!-- novalidate lets our JavaScript show its own error messages.
+             This form doesn't send email by itself: see the note in script.js. -->
+        <form id="contactForm" class="contact-form reveal" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+            <span class="error" id="nameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+            <span class="error" id="emailError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <span class="error" id="messageError"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ 7. FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year">2026</span> Your Name. All rights reserved.</p>
+      <ul class="footer-links">
+        <!-- Replace each # with your real profile link -->
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="mailto:you@example.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Link to our JavaScript file (at the end so the page loads first) -->
+  <script src="script.js"></script>
+</body>
+</html>

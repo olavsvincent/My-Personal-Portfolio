@@ -454,7 +454,7 @@ function updateThemeButton() {
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
 
-  if (contactForm) {
+  if (contactForm && !document.querySelector('script[src*="contact.js"]')) {
     contactForm.addEventListener("submit", (event) => {
       event.preventDefault();
 

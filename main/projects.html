@@ -12,9 +12,18 @@
     <title>Projects | Shane Vincent Olavario</title>
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="theme-customizer.css" />
+    <link rel="stylesheet" href="features.css" />
+    <link rel="stylesheet" href="voice.css" />
+    <link rel="stylesheet" href="projects-plus.css" />
+    <link rel="stylesheet" href="hud-projects.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#0b0b14" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
   </head>
 
-  <body>
+  <body class="proj-hud">
     <!-- NAVBAR: PRESERVED -->
     <header class="header">
       <nav class="navbar container">
@@ -45,6 +54,8 @@
               >Projects</a
             >
           </li>
+          <li><a href="blog.html">Blog</a></li>
+
           <li><a href="contact.html">Contact</a></li>
           <li><a href="editor.html">IDE</a></li>
         </ul>
@@ -241,7 +252,7 @@
                     Quick Preview ↗
                   </button>
 
-                  <a href="student_management_system.html" class="view-project"
+                  <a href="project.html?app=students" class="view-project"
                     >Project Page ↗</a
                   >
                 </div>
@@ -330,7 +341,7 @@
                     Quick Preview ↗
                   </button>
 
-                  <a href="workout_planner.html" class="view-project">
+                  <a href="project.html?app=workout" class="view-project">
                     Project Page ↗
                   </a>
                 </div>
@@ -419,7 +430,7 @@
                     Quick Preview ↗
                   </button>
 
-                  <a href="health_monitoring_system.html" class="view-project"
+                  <a href="project.html?app=health" class="view-project"
                     >Project Page ↗</a
                   >
                 </div>
@@ -508,7 +519,7 @@
                     Quick Preview ↗
                   </button>
 
-                  <a href="grade_calculator.html" class="view-project">
+                  <a href="project.html?app=grade" class="view-project">
                     Project Page ↗
                   </a>
                 </div>
@@ -597,7 +608,7 @@
                     Quick Preview ↗
                   </button>
 
-                  <a href="calculator.html" class="view-project">
+                  <a href="project.html?app=calculator" class="view-project">
                     Project Page ↗
                   </a>
                 </div>
@@ -686,7 +697,7 @@
                     Quick Preview ↗
                   </button>
 
-                  <a href="book_management_system.html" class="view-project"
+                  <a href="project.html?app=books" class="view-project"
                     >Project Page ↗</a
                   >
                 </div>
@@ -780,7 +791,7 @@
                     Quick Preview ↗
                   </button>
 
-                  <a href="sysvision.html" class="view-project"
+                  <a href="project.html?app=sysvision" class="view-project"
                     >Project Page ↗</a
                   >
                 </div>
@@ -956,6 +967,13 @@
 
     <!-- KEEP YOUR EXISTING SCRIPTS -->
     <script src="script.js"></script>
+    <script src="theme-customizer.js"></script>
+    <script src="site-config.js"></script>
+    <script src="backend.js"></script>
+    <script src="i18n.js"></script>
+    <script src="features.js"></script>
+    <script src="voice.js"></script>
+    <script src="projects-plus.js"></script>
     <script src="quick-search.js"></script>
     <script src="music-player.js"></script>
   </body>

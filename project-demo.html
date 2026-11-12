@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08090d">
+  <title>Interactive Project Demo</title>
+  <link rel="stylesheet" href="project-demo.css">
+  <script src="project-demo.js" defer></script>
+</head>
+<body>
+  <header class="demo-nav">
+    <a href="index.html" class="brand">VINCENT<span>.DEV</span></a>
+    <a href="projects.html" class="back-link">← Back to Projects</a>
+  </header>
+
+  <main class="demo-container">
+    <p class="eyebrow"><span class="live-dot"></span> INTERACTIVE PROJECT</p>
+    <h1 id="demoTitle">Loading project...</h1>
+    <p id="demoDescription" class="description"></p>
+
+    <section id="demoApp" class="demo-app" aria-live="polite"></section>
+
+    <p class="notice" id="demoNotice">
+      This is an interactive portfolio demonstration. Information is stored
+      locally in this browser when supported.
+    </p>
+  </main>
+
+  <footer class="demo-footer">
+    <span>Student Developer Portfolio</span>
+    <a href="projects.html">Explore other projects ↗</a>
+  </footer>
+</body>
+</html>

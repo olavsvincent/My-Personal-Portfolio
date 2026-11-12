@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Lab | Shane Vincent Olavario</title>
+    <meta name="description" content="An interactive engineering workspace: run each project, read its real source code, trace its architecture and see the numbers." />
+    <meta name="theme-color" content="#04070f" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="project-lab.css" />
+  </head>
+  <body>
+    <a class="skip" href="#workspace">Skip to the workspace</a>
+    <div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-glow"></div><div class="bg-scan"></div></div>
+
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Back to the home page">VINCENT<span></span></a>
+      <div class="top-status" aria-hidden="true"><i></i>LAB ONLINE <span id="clock">--:--:--</span></div>
+      <nav class="top-actions" aria-label="Lab actions">
+        <button class="chip-btn" id="openPalette" type="button">Commands <kbd>Ctrl K</kbd></button>
+        <button class="chip-btn" id="openKeys" type="button">Shortcuts <kbd>?</kbd></button>
+        <a class="chip-btn" href="projects.html">← Projects</a>
+      </nav>
+    </header>
+
+    <main class="shell" id="top">
+      <section class="hero" aria-labelledby="labTitle">
+        <div>
+          <p class="eyebrow"><span class="pulse"></span>ENGINEERING WORKSPACE // SHANE VINCENT OLAVARIO</p>
+          <h1 id="labTitle"><span class="g" data-t="Project">Project</span> <em>Lab</em></h1>
+          <p class="lead">
+            Don’t just read about my projects. <b>Run them, read the real source code, trace the architecture</b>
+            and check the numbers. Every statistic below is counted from my actual files.
+          </p>
+          <div class="hero-cta">
+            <a class="btn" href="#lab" id="ctaStart">Enter the lab ▸</a>
+            <button class="btn ghost" id="ctaRandom" type="button">Surprise me</button>
+          </div>
+        </div>
+        <div class="terminal panel" role="group" aria-label="Boot log">
+          <div class="term-bar"><i></i><i></i><i></i><span>project-lab — boot</span></div>
+          <pre class="term-body" id="boot" aria-live="polite"></pre>
+        </div>
+      </section>
+
+      <section class="metrics" id="metrics" aria-label="Code metrics">
+        <div class="metric panel loading" data-m="modules"><small>Modules</small><b>07</b></div>
+        <div class="metric panel loading" data-m="files"><small>Source files</small><b>00</b></div>
+        <div class="metric panel loading" data-m="lines"><small>Lines of code</small><b>0000</b></div>
+        <div class="metric panel loading" data-m="langs"><small>Languages</small><b>0</b></div>
+        <div class="langbar panel" id="langbar">
+          <div class="langbar-top"><span>// LANGUAGE MIX (BY LINES)</span><span id="langTotal">COUNTING…</span></div>
+          <div class="bar" id="langBar" role="img" aria-label="Language mix"></div>
+          <ul class="legend" id="langLegend"></ul>
+        </div>
+      </section>
+
+      <section class="lab" id="lab">
+        <aside class="directory panel" aria-label="Module directory">
+          <div class="panel-head"><span>// MODULES</span><span id="modCount">07</span></div>
+          <label class="search-label" for="modFilter">FILTER <span style="opacity:.6">( / )</span></label>
+          <input id="modFilter" class="search" type="search" placeholder="name, language, stack…" autocomplete="off" />
+          <ul class="modules" id="modules" role="listbox" aria-label="Projects"></ul>
+          <div class="panel-foot"><span id="idxText">INDEXING SOURCES 0/0</span><div class="progress"><i id="idxBar"></i></div></div>
+        </aside>
+
+        <section class="workspace panel" id="workspace" aria-label="Project workspace">
+          <div class="ws-head">
+            <div>
+              <div class="tag" id="wsTag"></div>
+              <h2 id="wsTitle"></h2>
+              <p id="wsDesc"></p>
+              <div class="stack" id="wsStack"></div>
+            </div>
+            <div class="ws-actions">
+              <button class="icon-btn" id="btnPrev" type="button" aria-label="Previous module" title="Previous ( [ )">←</button>
+              <button class="icon-btn" id="btnNext" type="button" aria-label="Next module" title="Next ( ] )">→</button>
+              <button class="icon-btn" id="btnShare" type="button">Copy link</button>
+            </div>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Workspace views">
+            <button class="tab" role="tab" id="tab-preview" aria-controls="panel-preview" aria-selected="true" data-tab="preview">Preview <kbd>P</kbd></button>
+            <button class="tab" role="tab" id="tab-source" aria-controls="panel-source" aria-selected="false" tabindex="-1" data-tab="source">Source <kbd>S</kbd></button>
+            <button class="tab" role="tab" id="tab-arch" aria-controls="panel-arch" aria-selected="false" tabindex="-1" data-tab="arch">Architecture <kbd>A</kbd></button>
+            <button class="tab" role="tab" id="tab-details" aria-controls="panel-details" aria-selected="false" tabindex="-1" data-tab="details">Details <kbd>D</kbd></button>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="panel-preview" aria-labelledby="tab-preview"></div>
+          <div class="tabpanel" role="tabpanel" id="panel-source" aria-labelledby="tab-source" hidden></div>
+          <div class="tabpanel" role="tabpanel" id="panel-arch" aria-labelledby="tab-arch" hidden></div>
+          <div class="tabpanel" role="tabpanel" id="panel-details" aria-labelledby="tab-details" hidden></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="foot">BUILT BY SHANE VINCENT OLAVARIO // EVERY NUMBER ON THIS PAGE IS COMPUTED FROM THE REAL SOURCE FILES</footer>
+
+    <dialog id="palette" aria-label="Command palette">
+      <div class="dlg panel"><div class="dlg-in">
+        <h2>// COMMAND PALETTE</h2>
+        <input class="pal-input" id="palInput" type="text" placeholder="Type a project, tab or action…" autocomplete="off" aria-label="Search commands" />
+        <ul class="pal-list" id="palList" role="listbox"></ul>
+      </div></div>
+    </dialog>
+
+    <dialog id="keysDlg" aria-label="Keyboard shortcuts">
+      <div class="dlg panel"><div class="dlg-in">
+        <h2>// KEYBOARD SHORTCUTS</h2>
+        <ul class="keys">
+          <li>Command palette <kbd>Ctrl K</kbd></li><li>This help <kbd>?</kbd></li>
+          <li>Open module 1–7 <kbd>1…7</kbd></li><li>Previous / next module <kbd>[</kbd> <kbd>]</kbd></li>
+          <li>Preview tab <kbd>P</kbd></li><li>Source tab <kbd>S</kbd></li>
+          <li>Architecture tab <kbd>A</kbd></li><li>Details tab <kbd>D</kbd></li>
+          <li>Filter modules <kbd>/</kbd></li><li>Fullscreen preview <kbd>F</kbd></li>
+          <li>Desktop / tablet / mobile <kbd>8</kbd> <kbd>9</kbd> <kbd>0</kbd></li><li>Close dialogs <kbd>Esc</kbd></li>
+        </ul>
+      </div></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="site-config.js"></script>
+    <script src="backend.js"></script>
+    <script src="project-lab.js"></script>
+  </body>
+</html>

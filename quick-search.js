@@ -16,6 +16,12 @@
     { title: "Workout Planner", description: "Web development project details", url: "project-details.html?project=workout-planner", keywords: "html css javascript exercise" },
     { title: "Health Monitoring System", description: "Computer Engineering project details", url: "project-details.html?project=health-monitoring", keywords: "esp32 sensors heart rate spo2" },
     { title: "Contact", description: "Get in touch", url: "contact.html", keywords: "email message social" },
+    { title: "Blog", description: "Learning journey and notes", url: "blog.html", keywords: "posts articles writing journey notes" },
+    { title: "Résumé", description: "View or download my résumé", url: "resume.html", keywords: "cv resume pdf download hire" },
+    { title: "Guestbook", description: "Sign the guestbook", url: "contact.html#guestbook", keywords: "message sign visitors" },
+    { title: "GitHub Activity", description: "Latest repositories and commits", url: "index.html#github-feed", keywords: "github repos commits code" },
+    { title: "Coding Challenges", description: "Practice problems in the IDE", url: "editor.html#challenges", keywords: "practice algorithm tests javascript" },
+    { title: "Leaderboard", description: "Top quiz, memory and challenge scores", url: "index.html#leaderboard", keywords: "scores ranking hall of fame" },
     { title: "Interactive Terminal", description: "Explore commands on the homepage", url: "index.html#terminalForm", keywords: "command console coding terminal" },
     { title: "Memory Game", description: "Play the matching game", url: "index.html#memory-game", keywords: "game cards match memory" },
     { title: "Programming Quiz", description: "Test your programming knowledge", url: "index.html#programming-quiz", keywords: "quiz questions score html css python" }
